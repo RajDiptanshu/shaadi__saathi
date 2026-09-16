@@ -1,0 +1,754 @@
+<title>E-Invite Studio Launch Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Red+Hat+Mono:wght@400;500&family=Rozha+One&display=swap">
+<style>
+  :root {
+    --paper: #F4F2F5;
+    --surface: #FFFFFF;
+    --ink: #26192B;
+    --muted: #6B5E6F;
+    --rule: #E0D9E2;
+    --accent: #4F5E2B;
+    --accent-soft: #E4E9D2;
+    --marigold: #C97E0A;
+    --marigold-soft: #FAEBCB;
+    --code: #ECE7EE;
+    --display: "Rozha One", "Playfair Display", Georgia, serif;
+    --body: "Hind", "Segoe UI", system-ui, sans-serif;
+    --mono: "Red Hat Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #16111A;
+      --surface: #201A25;
+      --ink: #F0EAF2;
+      --muted: #A99DAE;
+      --rule: #372D3D;
+      --accent: #B3C47F;
+      --accent-soft: #2B3219;
+      --marigold: #F2B544;
+      --marigold-soft: #3A2B0E;
+      --code: #2A2230;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #16111A;
+    --surface: #201A25;
+    --ink: #F0EAF2;
+    --muted: #A99DAE;
+    --rule: #372D3D;
+    --accent: #B3C47F;
+    --accent-soft: #2B3219;
+    --marigold: #F2B544;
+    --marigold-soft: #3A2B0E;
+    --code: #2A2230;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding-inline: 20px;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 17px/1.58 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--marigold); outline-offset: 3px; border-radius: 2px; }
+  code { font-family: var(--mono); font-size: 0.86em; }
+
+  .wrap {
+    max-width: 1060px;
+    margin-inline: auto;
+    padding-block: 48px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  section { border-top: 1px solid var(--rule); padding-top: 44px; display: flex; flex-direction: column; gap: 24px; }
+
+  .eyebrow {
+    font: 500 12px/1.4 var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+  h1, h2 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+  h1 { font-size: clamp(2.4rem, 5.4vw, 3.6rem); line-height: 1.02; }
+  h2 { font-size: clamp(1.75rem, 3.4vw, 2.25rem); line-height: 1.1; }
+  h3 { font: 600 19px/1.3 var(--body); margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  .lede { max-width: 66ch; color: var(--muted); }
+  .measure { max-width: 68ch; }
+
+  /* Header */
+  header { display: flex; flex-direction: column; gap: 20px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 500 13px/1.5 var(--mono); padding: 0; margin: 4px 0 0; list-style: none; }
+  .summary {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 24px 26px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 36px;
+  }
+  .summary p { color: var(--muted); font-size: 16px; }
+  .summary strong { color: var(--ink); font-weight: 600; }
+
+  /* Sites strip */
+  .sites { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-block: 1px solid var(--rule); }
+  .site { padding: 18px 22px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .site + .site { border-left: 1px solid var(--rule); }
+  .site h3 { font-family: var(--display); font-weight: 400; font-size: 24px; }
+  .site p { color: var(--muted); font-size: 15.5px; }
+  .site .url { font: 400 12.5px/1.4 var(--mono); }
+
+  /* Price ladder */
+  .ladder { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 28px 14px 18px; }
+  .lrow { display: grid; grid-template-columns: 128px minmax(0, 1fr); align-items: center; gap: 12px; }
+  .lname { font: 600 15px/1.25 var(--body); }
+  .lname small { display: block; font: 400 12px/1.3 var(--mono); color: var(--muted); }
+  .lrow.ours .lname { color: var(--accent); }
+  .track { position: relative; height: 92px; }
+  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--rule); }
+  .grid-line { position: absolute; top: 0; bottom: 0; left: var(--x); border-left: 1px dashed var(--rule); opacity: 0.8; }
+  .mark { position: absolute; left: var(--x); top: 50%; width: 0; height: 0; }
+  .mark i { position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--ink); left: -5.5px; top: -5.5px; box-shadow: 0 0 0 3px var(--surface); }
+  .ours .mark i { background: var(--accent); }
+  .mark span { position: absolute; left: 0; transform: translateX(-50%); white-space: nowrap; text-align: center; display: flex; flex-direction: column; line-height: 1.15; }
+  .mark.top span { bottom: 11px; flex-direction: column-reverse; }
+  .mark.bottom span { top: 11px; }
+  .mark.start span { transform: translateX(-8px); text-align: left; }
+  .mark.end span { transform: translateX(calc(-100% + 8px)); text-align: right; }
+  .mark b { font: 500 12.5px/1.2 var(--mono); font-variant-numeric: tabular-nums; }
+  .mark em { font: 400 11.5px/1.25 var(--body); font-style: normal; color: var(--muted); }
+  .range { position: absolute; top: 50%; left: var(--from); width: calc(var(--to) - var(--from)); height: 0; border-top: 3px dotted var(--muted); transform: translateY(-1px); }
+  .band { position: absolute; top: calc(50% - 7px); height: 14px; left: var(--from); width: calc(var(--to) - var(--from)); background: var(--accent-soft); border-radius: 7px; }
+  .axis .track { height: 30px; }
+  .axis .track::before { display: none; }
+  .tick { position: absolute; left: var(--x); top: 4px; transform: translateX(-50%); font: 400 12px/1 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tick.start { transform: none; }
+  .note { font-size: 14.5px; color: var(--muted); max-width: 80ch; }
+
+  /* Comparison table */
+  .table-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 15px; line-height: 1.45; }
+  thead th { text-align: left; padding: 16px 16px 12px; vertical-align: bottom; font-family: var(--display); font-weight: 400; font-size: 21px; }
+  thead th:first-child { width: 150px; }
+  tbody th { text-align: left; vertical-align: top; padding: 13px 16px; font: 500 11.5px/1.5 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  tbody td { vertical-align: top; padding: 13px 16px; }
+  tbody tr { border-top: 1px solid var(--rule); }
+  td .num { font-family: var(--mono); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  /* Trends */
+  .trends { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 44px; }
+  .trend { display: flex; flex-direction: column; gap: 8px; }
+  .trend p { color: var(--muted); font-size: 16px; }
+  .seen { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .seen span { font: 500 11.5px/1 var(--mono); padding: 5px 9px; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); }
+
+  /* Fit */
+  .fit { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: start; }
+  .fit .thesis { font-family: var(--display); font-size: clamp(1.35rem, 2.4vw, 1.65rem); line-height: 1.28; text-wrap: balance; }
+  .fit .thesis mark { background: linear-gradient(transparent 58%, var(--marigold-soft) 58%); color: inherit; padding-inline: 2px; }
+  .edges { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .edges li { display: flex; flex-direction: column; gap: 3px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .edges li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .edges strong { font-weight: 600; }
+  .edges span { color: var(--muted); font-size: 16px; }
+
+  /* Skills */
+  .prereq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .prereq div { background: var(--marigold-soft); border-radius: 4px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+  .prereq p { font-size: 15.5px; }
+  .skills { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+  .skill { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 8px 28px; padding-block: 20px; border-bottom: 1px solid var(--rule); }
+  .skill .who { display: flex; flex-direction: column; gap: 2px; }
+  .skill .who small { font: 400 12.5px/1.4 var(--mono); color: var(--muted); }
+  .skill .what { display: flex; flex-direction: column; gap: 10px; }
+  .skill .what p { color: var(--muted); font-size: 16px; max-width: 70ch; }
+  .cmd { display: block; background: var(--code); color: var(--ink); border-radius: 4px; padding: 9px 12px; font: 400 13.5px/1.5 var(--mono); overflow-x: auto; white-space: pre; }
+  .aside-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+  .aside-cols div { display: flex; flex-direction: column; gap: 8px; }
+  .aside-cols p, .aside-cols li { color: var(--muted); font-size: 16px; }
+  .aside-cols ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+
+  /* Demos */
+  .every { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 28px; font-size: 15.5px; }
+  .every li { padding-left: 20px; position: relative; }
+  .every li::before { content: ""; position: absolute; left: 2px; top: 0.62em; width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--accent); }
+  .demos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .demo { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+  .strip { display: grid; grid-template-columns: repeat(4, 1fr); height: 12px; }
+  .demo-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .demo-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .demo-head h3 { font-family: var(--display); font-weight: 400; font-size: 27px; line-height: 1.1; }
+  .demo-head h3 small { font: 500 12px/1 var(--mono); color: var(--muted); letter-spacing: 0.04em; margin-right: 8px; vertical-align: 5px; }
+  .status { font: 500 11.5px/1 var(--mono); padding: 6px 9px; border-radius: 999px; white-space: nowrap; }
+  .status.built { background: var(--accent-soft); color: var(--accent); }
+  .status.new { background: var(--marigold-soft); color: var(--ink); }
+  .demo .for { color: var(--muted); font-size: 16px; }
+  .demo dl { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 9px 14px; margin: 0; }
+  .demo dt { font: 500 11px/1.9 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .demo dd { margin: 0; font-size: 15.5px; line-height: 1.5; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .sw { display: inline-flex; align-items: center; gap: 6px; font: 400 12.5px/1.6 var(--mono); }
+  .sw i { width: 15px; height: 15px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.14); flex: none; }
+  .later { color: var(--muted); font-size: 16px; }
+
+  /* Questions */
+  .questions { margin: 0; padding: 0; list-style: none; counter-reset: q; display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+  .questions li { counter-increment: q; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+  .questions li::before { content: counter(q); font-family: var(--display); font-size: 26px; line-height: 1.05; color: var(--accent); grid-row: span 2; }
+  .questions strong { font-weight: 600; }
+  .questions span { color: var(--muted); font-size: 16px; }
+  .questions em { font-style: normal; font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-right: 6px; color: var(--ink); }
+
+  footer { border-top: 1px solid var(--rule); padding-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  footer p, footer li { color: var(--muted); font-size: 15px; }
+  footer ul { margin: 8px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+
+  @media (max-width: 860px) {
+    .every { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fit { grid-template-columns: 1fr; gap: 24px; }
+    .skill { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .summary, .trends, .demos, .prereq, .aside-cols, footer { grid-template-columns: 1fr; }
+    .sites { grid-template-columns: 1fr; }
+    .site + .site { border-left: 0; border-top: 1px solid var(--rule); }
+    .site { padding-inline: 0; }
+    .lrow { grid-template-columns: 1fr; gap: 0; }
+    .lname { padding-top: 12px; }
+    .lname small { display: inline; margin-left: 6px; }
+    .ladder { padding: 6px 20px 12px 14px; }
+    .mark em { display: none; }
+    .track { height: 60px; }
+    .every { grid-template-columns: 1fr; }
+    .demo dl { grid-template-columns: 1fr; gap: 2px; }
+    .demo dd { margin-bottom: 8px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Research brief &middot; 16 September 2026</p>
+    <h1>E-invite studio launch brief</h1>
+    <p class="lede">I studied the two sites you sent, The Digital Yes and Webgency, plus invifest, the Indian site from your saved screenshots. This covers what they sell, what's trending, which Claude skills to install, and ten demo designs to approve before I build anything.</p>
+    <ul class="jump" aria-label="Jump to section">
+      <li><a href="#sites">The three sites</a></li>
+      <li><a href="#prices">Price ladder</a></li>
+      <li><a href="#compare">Side by side</a></li>
+      <li><a href="#trends">What's trending</a></li>
+      <li><a href="#fit">Where we fit</a></li>
+      <li><a href="#skills">Skills to install</a></li>
+      <li><a href="#demos">Ten demos</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ul>
+    <div class="summary">
+      <p><strong>The demo is the shop window.</strong> All three sites sell from live demo links shared on WhatsApp and Instagram. Invifest watermarks its demos and puts a "Buy now for yourself" button inside them.</p>
+      <p><strong>The first tap is the product.</strong> Wax-seal envelopes, velvet curtains and pearl curtains open on a tap, before any wedding details appear. That opening is what guests remember and forward.</p>
+      <p><strong>There's a gap in the middle.</strong> Invifest sells Indian templates at ₹2,499. The Digital Yes sells art-directed European designs from ₹19,377 to ₹1,07,960. Nobody sells that level of art for Haldi-to-Reception weddings at an Indian price.</p>
+      <p><strong>Art matters more than code.</strong> None of the three use 3D or video for the opening. They use layered illustrations with smooth animation, so our demos win on illustration, type and timing.</p>
+    </div>
+  </header>
+
+  <section id="sites" aria-labelledby="sites-h">
+    <h2 id="sites-h">The three sites</h2>
+    <div class="sites">
+      <div class="site">
+        <h3>invifest</h3>
+        <a class="url" href="https://invifest.com/">invifest.com</a>
+        <p>Indian invitation websites for every community: Hindu, South Indian, Nikah, Sikh and Christian weddings, plus baby showers and birthdays. Cheap, fast and ceremony-aware.</p>
+      </div>
+      <div class="site">
+        <h3>The Digital Yes</h3>
+        <a class="url" href="https://www.thedigitalyes.com/">thedigitalyes.com</a>
+        <p>A luxury European studio (the site started in Spanish) with lavish illustrated scenes: pearl curtains, swans, chandeliers, velvet theatres. It charges premium prices and backs them with guest tools.</p>
+      </div>
+      <div class="site">
+        <h3>Webgency</h3>
+        <a class="url" href="https://webgencyinvitations.com/">webgencyinvitations.com</a>
+        <p>A Europe-based studio selling in 35+ countries through Instagram and TikTok. It sells on speed and unlimited changes, for weddings and every other event, from birthdays to corporate parties.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices" aria-labelledby="prices-h">
+    <h2 id="prices-h">Price ladder</h2>
+    <p class="lede">Every plan's starting price on one scale. The gap between ₹4,000 and ₹25,000 is where Indian couples can get a premium design without paying European prices.</p>
+
+    <div class="ladder" role="img" aria-label="Log-scale price chart. invifest: ₹2,499 template, custom quotes ₹10,000 to ₹40,000+. Webgency: save the date about ₹3,900, template about ₹8,300, custom from about ₹17,200. The Digital Yes: save the date ₹8,305, Essential ₹19,377, Premium ₹63,669, Excellence ₹1,07,960. Suggested range for us: ₹4,999 to ₹24,999.">
+      <div class="lrow">
+        <div class="lname">invifest <small>India</small></div>
+        <div class="track">
+          <i class="grid-line" style="--x:0%"></i><i class="grid-line" style="--x:22.4%"></i><i class="grid-line" style="--x:39.3%"></i><i class="grid-line" style="--x:56.2%"></i><i class="grid-line" style="--x:78.6%"></i><i class="grid-line" style="--x:95.6%"></i>
+          <div class="mark top start" style="--x:5.4%"><i></i><span><b>₹2,499</b><em>Any template</em></span></div>
+          <div class="range" style="--from:39.3%;--to:73.2%"></div>
+          <div class="mark bottom" style="--x:56.2%"><span><b>₹10k–40k+</b><em>Custom, quoted</em></span></div>
+        </div>
+      </div>
+      <div class="lrow">
+        <div class="lname">Webgency <small>€ plans</small></div>
+        <div class="track">
+          <i class="grid-line" style="--x:0%"></i><i class="grid-line" style="--x:22.4%"></i><i class="grid-line" style="--x:39.3%"></i><i class="grid-line" style="--x:56.2%"></i><i class="grid-line" style="--x:78.6%"></i><i class="grid-line" style="--x:95.6%"></i>
+          <div class="mark top" style="--x:16.2%"><i></i><span><b>≈₹3.9k</b><em>Save the date</em></span></div>
+          <div class="mark bottom" style="--x:34.8%"><i></i><span><b>≈₹8.3k</b><em>Template</em></span></div>
+          <div class="mark top" style="--x:52.6%"><i></i><span><b>≈₹17.2k</b><em>Custom</em></span></div>
+        </div>
+      </div>
+      <div class="lrow">
+        <div class="lname">The Digital Yes <small>₹ on site</small></div>
+        <div class="track">
+          <i class="grid-line" style="--x:0%"></i><i class="grid-line" style="--x:22.4%"></i><i class="grid-line" style="--x:39.3%"></i><i class="grid-line" style="--x:56.2%"></i><i class="grid-line" style="--x:78.6%"></i><i class="grid-line" style="--x:95.6%"></i>
+          <div class="mark top" style="--x:34.8%"><i></i><span><b>₹8.3k</b><em>Save the date</em></span></div>
+          <div class="mark bottom" style="--x:55.5%"><i></i><span><b>₹19.4k</b><em>Essential</em></span></div>
+          <div class="mark top" style="--x:84.5%"><i></i><span><b>₹63.7k</b><em>Premium</em></span></div>
+          <div class="mark bottom end" style="--x:97.4%"><i></i><span><b>₹1.08L</b><em>Excellence</em></span></div>
+        </div>
+      </div>
+      <div class="lrow ours">
+        <div class="lname">Room for us <small>to discuss</small></div>
+        <div class="track">
+          <i class="grid-line" style="--x:0%"></i><i class="grid-line" style="--x:22.4%"></i><i class="grid-line" style="--x:39.3%"></i><i class="grid-line" style="--x:56.2%"></i><i class="grid-line" style="--x:78.6%"></i><i class="grid-line" style="--x:95.6%"></i>
+          <div class="band" style="--from:22.4%;--to:61.7%"></div>
+          <div class="mark top" style="--x:22.4%"><i></i><span><b>₹4,999</b><em>Template</em></span></div>
+          <div class="mark bottom" style="--x:45.7%"><i></i><span><b>₹12,999</b><em>Redesigned</em></span></div>
+          <div class="mark top" style="--x:61.7%"><i></i><span><b>₹24,999+</b><em>Bespoke</em></span></div>
+        </div>
+      </div>
+      <div class="lrow axis" aria-hidden="true">
+        <div class="lname"></div>
+        <div class="track">
+          <span class="tick start" style="--x:0%">₹2k</span>
+          <span class="tick" style="--x:22.4%">₹5k</span>
+          <span class="tick" style="--x:39.3%">₹10k</span>
+          <span class="tick" style="--x:56.2%">₹20k</span>
+          <span class="tick" style="--x:78.6%">₹50k</span>
+          <span class="tick" style="--x:95.6%">₹1L</span>
+        </div>
+      </div>
+    </div>
+    <p class="note">The scale is logarithmic, so each step multiplies the price. Webgency's euro prices (€35, €75, €155) are converted at The Digital Yes's own rate today: €175 = ₹19,377, about ₹111 to the euro. Invifest's ₹2,499 is a sale price (list price ₹4,299), and one template page read ₹4,100. The "Room for us" prices are a starting point, not a decision.</p>
+  </section>
+
+  <section id="compare" aria-labelledby="compare-h">
+    <h2 id="compare-h">Side by side</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th scope="col"><span class="eyebrow">Checked 16 Sep</span></th><th scope="col">invifest</th><th scope="col">The Digital Yes</th><th scope="col">Webgency</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Plans</th>
+            <td>Template <span class="num">₹2,499</span> (was <span class="num">₹4,299</span>). Custom quoted from under <span class="num">₹10,000</span> to over <span class="num">₹40,000</span>.</td>
+            <td>Save the date from <span class="num">₹8,305</span>. Essential <span class="num">₹19,377</span>, Premium <span class="num">₹63,669</span>, Excellence <span class="num">₹1,07,960</span>.</td>
+            <td>Save the date <span class="num">€35</span>, Template <span class="num">€75</span>, Custom from <span class="num">€155</span>, all shown with struck-out higher prices. Express <span class="num">+€30</span>.</td></tr>
+          <tr><th scope="row">Delivery</th>
+            <td>3 days</td>
+            <td>7–21 business days</td>
+            <td>4–7 days; 24–48 hours express</td></tr>
+          <tr><th scope="row">Revisions</th>
+            <td>2 rounds</td>
+            <td>2, 4 or 7 rounds by plan</td>
+            <td>Unlimited, until the event</td></tr>
+          <tr><th scope="row">Catalogue</th>
+            <td>About 25 designs in 7 collections, such as Bansuri, Vrindavan, Sindoori, Mehfil, Ik Onkar, Pattu</td>
+            <td>23+ invitations (Teatro, Maison Dorée, Villa Perlé, Day &amp; Night, Bridgerton…) and 4 save-the-dates</td>
+            <td>9 templates (Dolce Vita, Sacred Garden, Blossom &amp; Oud, Royal Gold…)</td></tr>
+          <tr><th scope="row">Opening</th>
+            <td>Textured envelope, initials wax seal, "Tap to reveal"</td>
+            <td>Animated envelope with initials seal; curtains, bows and scenes</td>
+            <td>Opening animation; scratch to reveal the date</td></tr>
+          <tr><th scope="row">Inside</th>
+            <td>Ganesha and shloka, blessings from late grandparents, families, a card for each ceremony, story, gallery, countdown, map, music</td>
+            <td>Illustrated venue, custom monogram, video, music, 4 content blocks (unlimited in Premium)</td>
+            <td>5 sections, 3 photos, schedule, dress code, map, music</td></tr>
+          <tr><th scope="row">Guest tools</th>
+            <td>RSVP form</td>
+            <td>RSVP dashboard, guest list manager, personalised guest links, seating plan (Premium and up)</td>
+            <td>RSVP into a Google Sheet, QR code</td></tr>
+          <tr><th scope="row">Languages</th>
+            <td>Hindi, Gujarati, English</td>
+            <td>2 included, up to 3, any language</td>
+            <td>Any language</td></tr>
+          <tr><th scope="row">Trust signals</th>
+            <td>"WhatsApp reply in 15 minutes", "15 invites a month", lifetime link</td>
+            <td>3,000+ couples, 4.9 from 223 reviews, "Coming soon in Vogue", "Only 1 spot available this month"</td>
+            <td>1,000+ invitations, 4.9 on Google, 35+ countries, "a real designer, not a chatbot"</td></tr>
+          <tr><th scope="row">How they sell</th>
+            <td>WhatsApp chat; watermarked demos with a buy button; guides on what to write in an invitation for search traffic</td>
+            <td>On-site checkout and WhatsApp; client portal after purchase</td>
+            <td>Instagram and TikTok link in bio, WhatsApp, order page; 10% commission for wedding planners</td></tr>
+          <tr><th scope="row">Built with</th>
+            <td>React; Cormorant Garamond, Playfair Display, Dancing Script, Poppins</td>
+            <td>React; layered artwork with CSS motion, no video or 3D on the Teatro demo; Cormorant Garamond, Montserrat, Jost</td>
+            <td>Tilda, a no-code site builder</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="trends" aria-labelledby="trends-h">
+    <h2 id="trends-h">What's trending</h2>
+    <p class="lede">Ten patterns that show up across the sites. Each one is a design decision we should make on purpose, not copy.</p>
+    <div class="trends">
+      <div class="trend">
+        <h3>A tap-to-open first screen</h3>
+        <p>An envelope with a wax seal, a velvet curtain or a pearl curtain hides the invitation until the guest taps. "Tap to reveal" is the whole first screen.</p>
+        <div class="seen"><span>invifest</span><span>Digital Yes</span><span>Webgency</span></div>
+      </div>
+      <div class="trend">
+        <h3>Painted covers</h3>
+        <p>Watercolour couples seen from behind, painted venues and garden scenes. The Digital Yes charges ₹4,983 extra for a venue illustration.</p>
+        <div class="seen"><span>invifest Bansuri</span><span>Digital Yes</span></div>
+      </div>
+      <div class="trend">
+        <h3>Initials as a crest</h3>
+        <p>The couple's initials on the wax seal and as a monogram, such as invifest's gold "AM" with a peacock feather and flute. The Digital Yes sells a custom monogram for ₹2,768.</p>
+        <div class="seen"><span>invifest</span><span>Digital Yes</span></div>
+      </div>
+      <div class="trend">
+        <h3>Gold script names, spaced capitals</h3>
+        <p>Names in flowing gold script, small labels in widely spaced capitals ("MARK YOUR CALENDAR"), and details in a classic serif. Cormorant Garamond appears on two of the three sites.</p>
+        <div class="seen"><span>invifest</span><span>Digital Yes</span></div>
+      </div>
+      <div class="trend">
+        <h3>Drifting petals and music</h3>
+        <p>Rose and marigold petals drift over every section, and a round button in the corner mutes the music. It's quiet motion that never stops.</p>
+        <div class="seen"><span>invifest</span><span>Webgency</span></div>
+      </div>
+      <div class="trend">
+        <h3>Every ceremony on one link</h3>
+        <p>Haldi, Mehendi, Sangeet, Baraat, Pheras and Reception each get a card, with a countdown and map. Family blessings name late grandparents, as a printed card would.</p>
+        <div class="seen"><span>invifest</span></div>
+      </div>
+      <div class="trend">
+        <h3>RSVP that feeds a dashboard</h3>
+        <p>Replies land in a guest list, not an inbox: a private dashboard with personalised guest links and a seating plan, or at least a Google Sheet and a QR code.</p>
+        <div class="seen"><span>Digital Yes</span><span>Webgency</span></div>
+      </div>
+      <div class="trend">
+        <h3>Playful reveals</h3>
+        <p>Scratch the card to reveal the date, scratch-off photo save-the-dates, and a design that turns from day to night as you scroll.</p>
+        <div class="seen"><span>Webgency Dolce Vita</span><span>Digital Yes</span></div>
+      </div>
+      <div class="trend">
+        <h3>Collections by community</h3>
+        <p>Separate ranges for Hindu, South Indian, Muslim, Sikh and Christian weddings, each with its own words and symbols, and regional languages next to English.</p>
+        <div class="seen"><span>invifest</span></div>
+      </div>
+      <div class="trend">
+        <h3>Scarcity and struck-out prices</h3>
+        <p>"15 invites a month", "Only 1 spot available this month", higher prices struck out, and a cheap save-the-date as the first purchase.</p>
+        <div class="seen"><span>invifest</span><span>Digital Yes</span><span>Webgency</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit" aria-labelledby="fit-h">
+    <h2 id="fit-h">Where we fit</h2>
+    <div class="fit">
+      <p class="thesis">Art direction as rich as The Digital Yes, built around Indian ceremonies, <mark>at an Indian price and delivered in 48 hours.</mark></p>
+      <ul class="edges">
+        <li><strong>We've already shipped two.</strong><span>Your RSVP invite (<a href="https://diptanshunidhi.vercel.app">diptanshunidhi.vercel.app</a>) and the Mandir Swarn family invite (<a href="https://diptanshuwedsnidhi.vercel.app">diptanshuwedsnidhi.vercel.app</a>) already have RSVP to Google Sheets, looping music, a Hindi switch and WhatsApp share images.</span></li>
+        <li><strong>One engine, many designs.</strong><span>If every demo reads the couple's details from one file, a new order is a form to fill, not a rebuild. That's how we beat invifest's 3 days without a 15-a-month cap.</span></li>
+        <li><strong>Every demo sells itself.</strong><span>A sample watermark and a "Get this design" WhatsApp button in each demo, so Instagram visitors land on the product itself.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills to install</h2>
+    <p class="lede">This PC has no Claude skills or plugins installed yet, and no Node.js or Git, which three of the installs below need. Start with those two.</p>
+    <div class="prereq">
+      <div><h3>Node.js (LTS)</h3><p>From <a href="https://nodejs.org/">nodejs.org</a>. Needed by the GSAP, Remotion and Playwright installs, and to preview the reels.</p></div>
+      <div><h3>Git for Windows</h3><p>From <a href="https://git-scm.com/">git-scm.com</a>. Needed to add skills from GitHub and to send demos to Vercel without dragging files into GitHub by hand.</p></div>
+    </div>
+
+    <div class="skills">
+      <div class="skill">
+        <div class="who"><h3>frontend-design</h3><small>Anthropic · official plugin</small></div>
+        <div class="what">
+          <p>Makes Claude commit to a distinct palette, font pairing and motion for each page, so ten demos don't come out looking like one template in ten colours.</p>
+          <code class="cmd">/plugin install frontend-design@claude-plugins-official</code>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="who"><h3>GSAP skills</h3><small>GreenSock · official</small></div>
+        <div class="what">
+          <p>Correct, current code for the GSAP animation library: timelines for envelopes, shutters, curtains and doors, reveals as you scroll, and petal loops that stay smooth on mid-range Android phones.</p>
+          <code class="cmd">/plugin marketplace add greensock/gsap-skills</code>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="who"><h3>Example skills</h3><small>Anthropic · 4 skills we'd use</small></div>
+        <div class="what">
+          <p><strong>canvas-design</strong> for posters and share images. <strong>algorithmic-art</strong> for generated kolam, alpona, rangoli and petal fields. <strong>theme-factory</strong> to fix one colour-and-font theme per demo. <strong>webapp-testing</strong> for automatic phone-size checks.</p>
+          <code class="cmd">/plugin marketplace add anthropics/skills
+/plugin install example-skills@anthropic-agent-skills</code>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="who"><h3>Playwright MCP</h3><small>Microsoft · browser control</small></div>
+        <div class="what">
+          <p>Lets Claude open each demo at phone size, tap through the opening, and save screenshots and screen recordings. Chrome froze on the animated demos today, and it froze on your own invites before.</p>
+          <code class="cmd">claude mcp add playwright npx @playwright/mcp@latest</code>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="who"><h3>Remotion skills</h3><small>Remotion · official</small></div>
+        <div class="what">
+          <p>Builds vertical 9:16 reels of each demo from code, swapping names, dates and music per video, for Instagram and WhatsApp status. Run it inside a Remotion project folder.</p>
+          <code class="cmd">npx skills add remotion-dev/skills</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="aside-cols">
+      <div>
+        <h3>Already here, nothing to install</h3>
+        <ul>
+          <li>Design canvas, for laying out mood boards and demo screens</li>
+          <li>Artifacts, for private preview links like this page</li>
+          <li>Adobe connector: font search, background removal, image cut-outs, video resizing</li>
+          <li>Figma connector</li>
+          <li>Canva connector, once you sign in to it in claude.ai connector settings</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Outside Claude</h3>
+        <ul>
+          <li><strong>Painted art.</strong> Claude draws line art and patterns, like the Ganesha in your family invite, but not watercolour paintings. Painted couples and venues need an image generator such as Adobe Firefly, Midjourney or ChatGPT images, on a plan that allows commercial use.</li>
+          <li><strong>Music.</strong> Pixabay, as used for your family invite: free for commercial use, no credit needed.</li>
+          <li><strong>Hosting.</strong> The GitHub and Vercel accounts you already have.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="demos" aria-labelledby="demos-h">
+    <h2 id="demos-h">Ten demos</h2>
+    <p class="lede">Each demo is a phone-first invitation website for a fictional couple, covering a different community or mood, with its own opening moment. Here's the plan to approve; nothing is built yet.</p>
+
+    <div class="measure"><h3>Built into every demo</h3></div>
+    <ul class="every">
+      <li>An opening moment designed for that theme</li>
+      <li>Background music with a mute button</li>
+      <li>A card per ceremony, with map and add-to-calendar</li>
+      <li>Countdown to the wedding</li>
+      <li>Families and blessings, late grandparents included</li>
+      <li>RSVP that lands in a Google Sheet</li>
+      <li>Optional photo gallery</li>
+      <li>English plus one regional language</li>
+      <li>WhatsApp preview image and 5 story images</li>
+      <li>Sample watermark and a WhatsApp "Get this design" button</li>
+      <li>Under 2 MB before music, for 4G phones</li>
+      <li>Details read from one file per couple</li>
+    </ul>
+
+    <div class="demos">
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#F6EFE2"></i><i style="background:#B08A3E"></i><i style="background:#E8A23A"></i><i style="background:#9E2A2B"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 1</small>Mandir Swarn</h3><span class="status built">Built · your family invite</span></div>
+          <p class="for">For North Indian Hindu families: the invite elders forward.</p>
+          <dl>
+            <dt>Sample</dt><dd>Aarav &amp; Ishita</dd>
+            <dt>Opening</dt><dd>Carved sandalwood temple doors open as bells ring; marigold petals fall.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#F6EFE2"></i>#F6EFE2</span><span class="sw"><i style="background:#B08A3E"></i>#B08A3E</span><span class="sw"><i style="background:#E8A23A"></i>#E8A23A</span><span class="sw"><i style="background:#9E2A2B"></i>#9E2A2B</span></dd>
+            <dt>Type</dt><dd>Kept from your live invite</dd>
+            <dt>Details</dt><dd>Line-art Ganesha drawn stroke by stroke, toran and bells, diyas that light along the ceremony timeline</dd>
+            <dt>Language</dt><dd>English + Hindi</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#4B1E2D"></i><i style="background:#A7707B"></i><i style="background:#BE9A6C"></i><i style="background:#FAF3F0"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 2</small>Gulabi Shaam</h3><span class="status built">Built · your RSVP invite</span></div>
+          <p class="for">For modern couples inviting friends, where the RSVP matters most.</p>
+          <dl>
+            <dt>Sample</dt><dd>Kabir &amp; Meher</dd>
+            <dt>Opening</dt><dd>An arched door glows open onto an evening sky of drifting golden lights.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#4B1E2D"></i>#4B1E2D</span><span class="sw"><i style="background:#A7707B"></i>#A7707B</span><span class="sw"><i style="background:#BE9A6C"></i>#BE9A6C</span><span class="sw"><i style="background:#FAF3F0"></i>#FAF3F0</span></dd>
+            <dt>Type</dt><dd>Bodoni Moda + Jost</dd>
+            <dt>Details</dt><dd>Interlocking initials in a gold ring, one couple photo, RSVP question cards with falling petals</dd>
+            <dt>Language</dt><dd>English + Hindi</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#E7B98C"></i><i style="background:#2F3A6E"></i><i style="background:#1F6F6B"></i><i style="background:#C9A13E"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 3</small>Haveli Jharokha</h3><span class="status new">New</span></div>
+          <p class="for">For Rajasthani and Marwari weddings, and destination weddings in Udaipur or Jaipur.</p>
+          <dl>
+            <dt>Sample</dt><dd>Vikram &amp; Rajnandini</dd>
+            <dt>Opening</dt><dd>Carved jharokha shutters fold back on a palace at dusk; paper kites cross the sky to a shehnai phrase.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#E7B98C"></i>#E7B98C</span><span class="sw"><i style="background:#2F3A6E"></i>#2F3A6E</span><span class="sw"><i style="background:#1F6F6B"></i>#1F6F6B</span><span class="sw"><i style="background:#C9A13E"></i>#C9A13E</span></dd>
+            <dt>Type</dt><dd>Yatra One + Marcellus</dd>
+            <dt>Details</dt><dd>Scalloped arches frame each ceremony, mirror-work sparkle on tap, elephant and camel line motifs</dd>
+            <dt>Language</dt><dd>English + Hindi</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#F5F1E8"></i><i style="background:#B3122E"></i><i style="background:#C8A04A"></i><i style="background:#6B7F3A"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 4</small>Shubho Bibaho</h3><span class="status new">New</span></div>
+          <p class="for">For Bengali weddings: Gaye Holud, Biye and Bou Bhaat.</p>
+          <dl>
+            <dt>Sample</dt><dd>Arnab &amp; Poulami</dd>
+            <dt>Opening</dt><dd>A white alpona blooms outward on alta red while a conch shell sounds.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#F5F1E8"></i>#F5F1E8</span><span class="sw"><i style="background:#B3122E"></i>#B3122E</span><span class="sw"><i style="background:#C8A04A"></i>#C8A04A</span><span class="sw"><i style="background:#6B7F3A"></i>#6B7F3A</span></dd>
+            <dt>Type</dt><dd>Tiro Bangla + Gilda Display</dd>
+            <dt>Details</dt><dd>Topor and mukut line art, fish motifs, shankha-pola bangles as section dividers</dd>
+            <dt>Language</dt><dd>English + Bengali</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#F3ECD8"></i><i style="background:#C6A04B"></i><i style="background:#3C6E3A"></i><i style="background:#8E1B1B"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 5</small>Kolam &amp; Kasavu</h3><span class="status new">New</span></div>
+          <p class="for">For Tamil, Telugu, Kannada and Malayali weddings.</p>
+          <dl>
+            <dt>Sample</dt><dd>Karthik &amp; Meenakshi</dd>
+            <dt>Opening</dt><dd>Kolam dots appear, then a single line loops around them; jasmine strands sway to nadaswaram.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#F3ECD8"></i>#F3ECD8</span><span class="sw"><i style="background:#C6A04B"></i>#C6A04B</span><span class="sw"><i style="background:#3C6E3A"></i>#3C6E3A</span><span class="sw"><i style="background:#8E1B1B"></i>#8E1B1B</span></dd>
+            <dt>Type</dt><dd>Tiro Tamil + Lora</dd>
+            <dt>Details</dt><dd>A kasavu gold border that draws down the page, a brass lamp that lights at the muhurtham card, muhurtham shown to the minute</dd>
+            <dt>Language</dt><dd>English + Tamil (swap per order)</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#0E3B36"></i><i style="background:#D4A94F"></i><i style="background:#F3ECDD"></i><i style="background:#B76E79"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 6</small>Noor</h3><span class="status new">New</span></div>
+          <p class="for">For Nikah, Walima and Mehendi.</p>
+          <dl>
+            <dt>Sample</dt><dd>Zayan &amp; Alina</dd>
+            <dt>Opening</dt><dd>A crescent moon rises behind a jaali arch and lanterns light one by one.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#0E3B36"></i>#0E3B36</span><span class="sw"><i style="background:#D4A94F"></i>#D4A94F</span><span class="sw"><i style="background:#F3ECDD"></i>#F3ECDD</span><span class="sw"><i style="background:#B76E79"></i>#B76E79</span></dd>
+            <dt>Type</dt><dd>Amiri + Cinzel</dd>
+            <dt>Details</dt><dd>Bismillah calligraphy, geometric star tiles as dividers, oud music</dd>
+            <dt>Language</dt><dd>English + Urdu</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#E2A52B"></i><i style="background:#C2266E"></i><i style="background:#3E8E41"></i><i style="background:#5A1A22"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 7</small>Dhaaga</h3><span class="status new">New</span></div>
+          <p class="for">For Sikh and Punjabi weddings: Anand Karaj, Jaggo and Chooda.</p>
+          <dl>
+            <dt>Sample</dt><dd>Harjot &amp; Simran</dd>
+            <dt>Opening</dt><dd>Phulkari thread stitches the couple's initials, and a dhol beat drops on tap.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#E2A52B"></i>#E2A52B</span><span class="sw"><i style="background:#C2266E"></i>#C2266E</span><span class="sw"><i style="background:#3E8E41"></i>#3E8E41</span><span class="sw"><i style="background:#5A1A22"></i>#5A1A22</span></dd>
+            <dt>Type</dt><dd>Tiro Gurmukhi + Abril Fatface</dd>
+            <dt>Details</dt><dd>Embroidered stitch borders, glowing Jaggo lamps, Ik Onkar at the top</dd>
+            <dt>Language</dt><dd>English + Punjabi</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#F8F6F1"></i><i style="background:#8CA38A"></i><i style="background:#E9C9C3"></i><i style="background:#C2A26B"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 8</small>Mogra &amp; Moti</h3><span class="status new">New</span></div>
+          <p class="for">For premium modern couples and reception nights: The Digital Yes's look, made for Indian weddings.</p>
+          <dl>
+            <dt>Sample</dt><dd>Rohan &amp; Anaya</dd>
+            <dt>Opening</dt><dd>Strings of pearls part like a curtain, an ivory silk bow unties, and mogra buds drift down.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#F8F6F1"></i>#F8F6F1</span><span class="sw"><i style="background:#8CA38A"></i>#8CA38A</span><span class="sw"><i style="background:#E9C9C3"></i>#E9C9C3</span><span class="sw"><i style="background:#C2A26B"></i>#C2A26B</span></dd>
+            <dt>Type</dt><dd>Italiana + Parisienne</dd>
+            <dt>Details</dt><dd>A white-flower mandap built in layers, a slot for a venue illustration, a timeline strung with pearls</dd>
+            <dt>Language</dt><dd>English</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#F4C21B"></i><i style="background:#5E7A2E"></i><i style="background:#E4508A"></i><i style="background:#6EC3E0"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 9</small>Rang Mela</h3><span class="status new">New</span></div>
+          <p class="for">For Haldi, Mehendi and Sangeet invites and save-the-dates; younger couples.</p>
+          <dl>
+            <dt>Sample</dt><dd>Dev &amp; Tara</dd>
+            <dt>Opening</dt><dd>Scratch a gulal-dusted card to reveal the date, and marigold confetti bursts out.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#F4C21B"></i>#F4C21B</span><span class="sw"><i style="background:#5E7A2E"></i>#5E7A2E</span><span class="sw"><i style="background:#E4508A"></i>#E4508A</span><span class="sw"><i style="background:#6EC3E0"></i>#6EC3E0</span></dd>
+            <dt>Type</dt><dd>Caprasimo + Baloo 2</dd>
+            <dt>Details</dt><dd>Doodle couple illustrations, a dress code per function ("yellow for Haldi"), a Sangeet playlist card</dd>
+            <dt>Language</dt><dd>Hinglish + Hindi</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="demo">
+        <div class="strip" aria-hidden="true"><i style="background:#111014"></i><i style="background:#F2C14E"></i><i style="background:#8C1C24"></i><i style="background:#F4E9D8"></i></div>
+        <div class="demo-body">
+          <div class="demo-head"><h3><small>No. 10</small>Premiere Night</h3><span class="status new">New</span></div>
+          <p class="for">For Bollywood-loving couples with a pre-wedding photo shoot.</p>
+          <dl>
+            <dt>Sample</dt><dd>Aditya &amp; Kiara</dd>
+            <dt>Opening</dt><dd>A velvet curtain lifts on a marquee whose bulbs spell the couple's names, then a ticket tears to let you in.</dd>
+            <dt>Palette</dt><dd class="swatches"><span class="sw"><i style="background:#111014"></i>#111014</span><span class="sw"><i style="background:#F2C14E"></i>#F2C14E</span><span class="sw"><i style="background:#8C1C24"></i>#8C1C24</span><span class="sw"><i style="background:#F4E9D8"></i>#F4E9D8</span></dd>
+            <dt>Type</dt><dd>Limelight + Oswald</dd>
+            <dt>Details</dt><dd>A film-strip photo gallery, each ceremony billed as a show with its timing, a countdown reading "In cinemas 12 Feb"</dd>
+            <dt>Language</dt><dd>English + Hindi</dd>
+          </dl>
+        </div>
+      </article>
+
+    </div>
+    <p class="later"><strong>Next batch, after these ten:</strong> Lace &amp; Lilies (Christian and Goan Catholic), Sandhya (a beach wedding that turns from day to night as you scroll), Paithani (Marathi), Kankotri (Gujarati), a Roka and engagement design, and Godh Bharai for baby showers.</p>
+  </section>
+
+  <section id="questions" aria-labelledby="questions-h">
+    <h2 id="questions-h">Questions before I build</h2>
+    <p class="lede">Reply with the numbers you want to change. Anything you skip, I'll go with the default.</p>
+    <ol class="questions">
+      <li><strong>Are these the right ten? Swap, drop or add any.</strong><span><em>Default</em>Build these ten; the next batch waits.</span></li>
+      <li><strong>Can demos 1 and 2 reuse your own invites, with sample names and none of your family's details?</strong><span><em>Default</em>Yes.</span></li>
+      <li><strong>Will you use an image generator for painted covers, or should the demos stick to drawn line art and patterns?</strong><span><em>Default</em>Line art for all ten; add painted covers to Mogra &amp; Moti, Haveli Jharokha and Premiere Night once you pick a tool.</span></li>
+      <li><strong>Is the regional language right for each demo?</strong><span><em>Default</em>As listed on each card.</span></li>
+      <li><strong>RSVP: Google Sheets through Apps Script like your invite, or a guest dashboard?</strong><span><em>Default</em>Google Sheets now; a dashboard later for a premium plan.</span></li>
+      <li><strong>Where should demos live until the brand has a domain?</strong><span><em>Default</em>One new Vercel project with a page per demo, such as <code>/demo/haveli-jharokha</code>.</span></li>
+      <li><strong>Do you have a brand name?</strong><span><em>Default</em>A neutral "Sample" watermark now, with the brand added before launch.</span></li>
+      <li><strong>How should we pace it?</strong><span><em>Default</em>I build 3 first (Haveli Jharokha, Mogra &amp; Moti, Premiere Night) for your review, then the other 7 to the same standard.</span></li>
+      <li><strong>Should I install the skills for you?</strong><span><em>Default</em>You install Node.js and Git; then I add the skills (downloads from GitHub, so I'll confirm with you first).</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <div>
+      <p class="eyebrow">After the demos</p>
+      <p style="margin-top:8px">Starting the Instagram page and growing it. Webgency gets its visitors from the link in its Instagram and TikTok bios, and your invifest screenshot was opened from Instagram, so each demo should double as a reel.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Sources</p>
+      <ul>
+        <li><a href="https://invifest.com/hindu-wedding-templates/">invifest Hindu templates</a> and <a href="https://invifest.com/template/vrindavan/">Vrindavan</a></li>
+        <li><a href="https://www.thedigitalyes.com/pricing">The Digital Yes pricing</a></li>
+        <li><a href="https://webgencyinvitations.com/order">Webgency order page</a></li>
+        <li><a href="https://claude.com/plugins/frontend-design">frontend-design plugin</a>, <a href="https://github.com/greensock/gsap-skills">GSAP skills</a>, <a href="https://github.com/anthropics/skills">Anthropic skills</a></li>
+        <li><a href="https://www.remotion.dev/docs/ai/skills">Remotion skills</a>, <a href="https://playwright.dev/mcp/clients/claude-code">Playwright MCP</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</div>

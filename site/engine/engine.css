@@ -1,0 +1,93 @@
+/* Invite Studio engine: behaviour styles every design shares. Colours and type live in each theme. */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+html.js:not(.is-open), html.js:not(.is-open) body { overflow: hidden; }
+html.is-still, html.is-still body { overflow: visible; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+img, svg { max-width: 100%; }
+
+/* Reveals: a fade with a small rise. Phones with reduced motion keep the fade and skip the rise. */
+[data-reveal] { transition: opacity 1s ease, transform 1.1s cubic-bezier(.16, 1, .3, 1); transition-delay: var(--d, 0s); }
+.can-reveal [data-reveal]:not(.is-in) { opacity: 0; transform: translate3d(0, 24px, 0); }
+@media (prefers-reduced-motion: reduce) { .can-reveal [data-reveal]:not(.is-in) { transform: none; } }
+
+/* Cover button covers the whole screen */
+.cover-open { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; background: transparent; border: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+/* Language switch and music button: position only; themes colour them. */
+.lang { position: fixed; top: calc(10px + env(safe-area-inset-top, 0px)); right: 10px; z-index: 70; display: flex; padding: 3px; border-radius: 999px; }
+.lang button { min-width: 58px; min-height: 36px; padding: 4px 12px; font: inherit; background: transparent; border: 0; border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.sound { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 45; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border-radius: 50%; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.sound .sound-bars { display: flex; align-items: flex-end; gap: 3px; height: 16px; }
+.sound .sound-bars i { width: 3px; height: 100%; background: currentColor; border-radius: 2px; transform-origin: bottom; animation: sound-bar 1s ease-in-out infinite alternate; }
+.sound .sound-bars i:nth-child(2) { animation-delay: -.4s; }
+.sound .sound-bars i:nth-child(3) { animation-delay: -.7s; }
+.sound .sound-bars i:nth-child(4) { animation-delay: -.2s; }
+.sound .sound-off { display: none; width: 20px; height: 20px; }
+.sound[aria-pressed="false"] .sound-bars { display: none; }
+.sound[aria-pressed="false"] .sound-off { display: block; }
+@keyframes sound-bar { from { transform: scaleY(.3); } to { transform: scaleY(1); } }
+
+/* RSVP behaviour */
+.rs-form { display: grid; gap: 14px; }
+.rs-pill, .rs-check { position: relative; display: block; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.rs-pill input, .rs-check input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.rs-pills { display: grid; gap: 10px; }
+.rs-checks { display: grid; gap: 10px; }
+.rs-tick { width: 14px; height: 14px; overflow: visible; }
+.rs-tick path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rs-pill .rs-tick { width: 0; margin-right: 0; opacity: 0; transition: width .3s, margin .3s, opacity .2s; }
+.rs-pill input:checked + .rs-pill-face .rs-tick { width: 14px; margin-right: 10px; opacity: 1; }
+.rs-box .rs-tick path { stroke-dasharray: 16; stroke-dashoffset: 16; transition: stroke-dashoffset .35s ease .05s; }
+.rs-check input:checked + .rs-check-face .rs-box .rs-tick path { stroke-dashoffset: 0; }
+.rs-stepper { display: flex; align-items: center; justify-content: center; gap: 22px; }
+.rs-step { width: 48px; height: 48px; font: inherit; font-size: 24px; line-height: 1; border-radius: 50%; cursor: pointer; }
+.rs-step:disabled { opacity: .35; cursor: default; }
+.rs-count { min-width: 2ch; text-align: center; font-variant-numeric: tabular-nums; }
+.rs-input, .rs-note { display: block; width: 100%; font: inherit; border-radius: 0; -webkit-appearance: none; appearance: none; }
+.rs-note { resize: none; }
+.rs-send { width: 100%; min-height: 56px; font: inherit; cursor: pointer; }
+.rs-send:disabled { cursor: progress; opacity: .8; }
+.rs-step-in { animation: rs-step-in .6s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes rs-step-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+
+/* Photographs: a swipeable strip, with any photo openable full size. */
+.gl-strip { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.gl-strip::-webkit-scrollbar { display: none; }
+.gl-item { flex: 0 0 76%; scroll-snap-align: center; padding: 0; background: none; border: 0; cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+.gl-item img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.gl-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
+.gl-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .22; transition: opacity .3s ease, transform .3s ease; }
+.gl-dot.is-on { opacity: .85; transform: scale(1.35); }
+.gl-viewer { position: fixed; inset: 0; z-index: 95; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 18px; background: rgba(12, 9, 16, .93); }
+.gl-big { max-width: 100%; max-height: 80vh; object-fit: contain; }
+.gl-close, .gl-arrow { display: grid; place-items: center; width: 44px; height: 44px; flex: none; font: inherit; font-size: 26px; line-height: 1; color: #fff; background: rgba(255, 255, 255, .14); border: 0; border-radius: 50%; cursor: pointer; }
+.gl-close { position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: 14px; font-size: 22px; }
+.gl-close:focus-visible, .gl-arrow:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+html.gl-open, html.gl-open body { overflow: hidden; }
+
+/* Scratch to reveal: the foil sits over whatever the couple is hiding. */
+/* The container overflows so the reveal button can sit below it; the foil itself takes the card's corners. */
+.scratch { position: relative; -webkit-tap-highlight-color: transparent; }
+.scratch-foil { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: inherit; cursor: grab; touch-action: none; transition: opacity .7s ease; }
+.scratch-foil:active { cursor: grabbing; }
+.scratch.is-revealed .scratch-foil { opacity: 0; pointer-events: none; }
+/* The reveal button sits under the foil, not on it, so it never reads as part of the artwork. */
+.scratch-reveal { position: absolute; z-index: 2; left: 50%; bottom: -34px; transform: translateX(-50%); min-height: 32px; padding: 4px 10px; font: inherit; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; color: inherit; background: transparent; border: 0; opacity: .5; cursor: pointer; }
+.scratch-reveal:hover { opacity: 1; }
+.scratch-reveal:focus-visible { opacity: 1; outline: 2px solid currentColor; outline-offset: 2px; }
+.is-still .scratch-reveal { display: none; }
+
+/* Sample tag and "Get this design" button */
+.studio-tag { position: fixed; left: 10px; top: calc(12px + env(safe-area-inset-top, 0px)); z-index: 69; padding: 5px 10px; font: 600 11px/1 system-ui, sans-serif; letter-spacing: .06em; color: #fff; background: rgba(20, 16, 30, .55); border-radius: 999px; pointer-events: none; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.studio-buy { position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 44; display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 11px 18px 11px 14px; font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif; color: #fff; text-decoration: none; white-space: nowrap; background: #128C4A; border-radius: 999px; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .6); opacity: 0; transform: translate3d(-50%, 20px, 0); pointer-events: none; transition: opacity .4s ease, transform .6s cubic-bezier(.16, 1, .3, 1); }
+.studio-buy svg { width: 20px; height: 20px; }
+.studio-buy.is-instagram { background: linear-gradient(64deg, #F9A03C 0%, #E1306C 48%, #A83AB0 100%); }
+.studio-buy.is-shown { opacity: 1; transform: translate3d(-50%, 0, 0); pointer-events: auto; }
+.studio-buy:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* Share-image modes hide the controls */
+.is-still .lang, .is-still .sound, .is-still .studio-tag, .is-still .studio-buy { display: none !important; }

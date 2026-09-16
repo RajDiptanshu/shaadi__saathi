@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dev &amp; Tara · Rang Mela</title>
+<meta name="description" content="A sample Indian wedding invitation you scratch open: three days of colour, dhol and far too much food in Jaipur.">
+<meta name="theme-color" content="#FFF7E6">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dev &amp; Tara · Rang Mela">
+<meta property="og:description" content="5 – 7 November 2027 · Jaipur. Scratch the gulal to see the date.">
+<meta property="og:image" content="og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFF7E6'/%3E%3Ccircle cx='24' cy='26' r='11' fill='%23F4C21B'/%3E%3Ccircle cx='40' cy='34' r='11' fill='%23E4508A' fill-opacity='.85'/%3E%3Ccircle cx='30' cy='44' r='8' fill='%235E7A2E' fill-opacity='.85'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Caprasimo&family=Tiro+Devanagari+Hindi&display=swap">
+<link rel="stylesheet" href="../../engine/engine.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div id="art-sprite"></div>
+
+<div class="lang" role="group" aria-label="Language / भाषा">
+  <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+  <button type="button" data-set-lang="hi" aria-pressed="false">हिन्दी</button>
+</div>
+
+<div class="cover" id="cover">
+  <div class="cover-gulal" data-art="gulal" aria-hidden="true"></div>
+  <div class="cover-inner">
+    <p class="cover-kicker" data-t="kicker"></p>
+    <p class="cover-names"><span data-t="couple.groom"></span><span class="amp">&amp;</span><span data-t="couple.bride"></span></p>
+    <div class="card-scratch scratch" data-scratch>
+      <div class="card-under">
+        <p class="card-dates" data-t="dates"></p>
+        <p class="card-place" data-t="place"></p>
+      </div>
+    </div>
+    <p class="cover-hint" data-t="scratchLead"></p>
+    <button class="cover-enter" id="open-invite" type="button" hidden>
+      <span data-t="ui.openInvite"></span>
+    </button>
+  </div>
+</div>
+
+<main id="invite">
+  <header class="hero">
+    <div class="bunting" data-art="bunting" aria-hidden="true"></div>
+    <p class="kicker" data-t="kicker"></p>
+    <h1 class="names">
+      <span class="name" data-t="couple.groom"></span>
+      <span class="amp" aria-hidden="true">&amp;</span>
+      <span class="name" data-t="couple.bride"></span>
+    </h1>
+    <p class="tagline" data-t="tagline"></p>
+    <p class="hero-when"><span data-t="dates"></span><span class="dot" aria-hidden="true"></span><span data-t="place"></span></p>
+    <div class="couple-doodle" data-art="couple" aria-hidden="true"></div>
+  </header>
+
+  <section class="welcome" aria-label="Welcome">
+    <span class="rangoli" data-art="rangoli" aria-hidden="true"></span>
+    <p class="welcome-line" data-t="welcome" data-reveal></p>
+    <p class="welcome-meaning" data-t="welcomeMeaning" data-reveal style="--d:.15s"></p>
+  </section>
+
+  <section class="invitation">
+    <article class="card" data-reveal>
+      <p class="hosts" data-t="hosts"></p>
+      <p class="hosts-line" data-t="hostsLine"></p>
+      <p class="couple-name" data-t="couple.groom"></p>
+      <span class="amp-rule" aria-hidden="true">&amp;</span>
+      <p class="couple-name" data-t="couple.bride"></p>
+      <p class="bride-parents" data-t="brideParents"></p>
+      <div class="blessings">
+        <p class="blessings-label" data-t="blessingsLabel"></p>
+        <p class="blessings-names" data-t="blessings"></p>
+      </div>
+    </article>
+  </section>
+
+  <section class="countdown" aria-label="Countdown">
+    <h2 class="section-title" data-t="scratchTitle" data-reveal></h2>
+    <div class="count-scratch scratch" data-scratch data-reveal>
+      <div class="tiles" data-countdown>
+        <p class="tile"><b data-count="days">00</b><span data-t="ui.days"></span></p>
+        <p class="tile"><b data-count="hours">00</b><span data-t="ui.hours"></span></p>
+        <p class="tile"><b data-count="minutes">00</b><span data-t="ui.minutes"></span></p>
+        <p class="tile"><b data-count="seconds">00</b><span data-t="ui.seconds"></span></p>
+      </div>
+    </div>
+    <p class="count-label" data-t="countdownLabel" data-reveal></p>
+  </section>
+
+  <section class="events" aria-labelledby="events-title">
+    <div class="garland" data-art="garland" aria-hidden="true"></div>
+    <h2 class="section-title" id="events-title" data-t="eventsTitle" data-reveal></h2>
+    <ol class="mela">
+      <template data-each="events">
+        <li class="do" data-reveal>
+          <span class="do-dot" aria-hidden="true"></span>
+          <div class="do-body">
+            <p class="do-when"><span data-date=".start" data-format="dayMonth"></span><span class="dot" aria-hidden="true"></span><span data-date=".start" data-format="time"></span></p>
+            <h3 data-t=".name"></h3>
+            <p class="do-note" data-t=".note"></p>
+            <p class="venue"><span class="venue-name" data-t=".venue.name"></span><span class="venue-address" data-t=".venue.address"></span></p>
+            <!-- The dress code lives in the wardrobe rack on this design, not on the card. -->
+            <div class="do-links">
+              <a class="link" data-map data-t="ui.directions"></a>
+              <a class="link" data-calendar data-t="ui.addToCalendar"></a>
+            </div>
+          </div>
+        </li>
+      </template>
+    </ol>
+  </section>
+
+  <section class="wardrobe" aria-labelledby="wardrobe-title">
+    <h2 class="section-title" id="wardrobe-title" data-t="wardrobeTitle" data-reveal></h2>
+    <p class="section-lead" data-t="wardrobeLead" data-reveal></p>
+    <ul class="rack">
+      <template data-each="events" data-filter="dress">
+        <li class="wear" data-reveal>
+          <span class="swatch" data-swatch aria-hidden="true"></span>
+          <div>
+            <p class="wear-for" data-t=".name"></p>
+            <p class="wear-colour" data-t=".dressName"></p>
+            <p class="wear-note" data-t=".dress"></p>
+          </div>
+        </li>
+      </template>
+    </ul>
+  </section>
+
+  <section class="gallery" aria-labelledby="gallery-title">
+    <h2 class="section-title" id="gallery-title" data-t="galleryTitle" data-reveal></h2>
+    <p class="section-lead" data-t="galleryLead" data-reveal></p>
+    <div data-gallery></div>
+  </section>
+
+  <section class="venue-section" aria-labelledby="venue-title">
+    <h2 class="section-title" id="venue-title" data-t="venueTitle" data-reveal></h2>
+    <div class="venue-card" data-reveal>
+      <p class="venue-name-big" data-t="venue.name"></p>
+      <p class="venue-address-big" data-t="venue.address"></p>
+      <p class="venue-blurb" data-t="venueBlurb"></p>
+      <div class="venue-map" data-map-embed></div>
+      <a class="live-location" data-venue-map target="_blank" rel="noopener" data-t="ui.openLocation"></a>
+    </div>
+  </section>
+
+  <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+    <h2 class="section-title" id="rsvp-title" data-t="rsvpTitle" data-reveal></h2>
+    <p class="section-lead" data-t="rsvpLead" data-reveal></p>
+    <div class="rsvp-box" data-rsvp></div>
+  </section>
+
+  <section class="contacts" aria-labelledby="contacts-title">
+    <h2 class="section-title" id="contacts-title" data-t="contactsTitle" data-reveal></h2>
+    <ul class="contact-list">
+      <template data-each="contacts">
+        <li class="contact" data-reveal>
+          <a class="contact-link" data-attr="href:.tel">
+            <span class="contact-name" data-t=".name"></span>
+            <span class="contact-role" data-t=".role"></span>
+            <span class="contact-num" data-t=".display"></span>
+          </a>
+        </li>
+      </template>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <span class="rangoli" data-art="rangoli" data-reveal aria-hidden="true"></span>
+    <p class="closing-line" data-t="closing" data-reveal></p>
+    <p class="closing-from" data-t="closingFrom" data-reveal style="--d:.2s"></p>
+    <div class="closing-actions" data-reveal style="--d:.3s">
+      <a class="closing-rsvp" href="#rsvp" data-t="rsvpTitle"></a>
+      <a class="closing-top" href="#invite" data-t="ui.backToTop"></a>
+    </div>
+  </footer>
+</main>
+
+<button class="sound" id="sound-toggle" type="button" aria-pressed="true" hidden>
+  <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <span class="sr-only" data-t="ui.music"></span>
+</button>
+
+<script src="details.js"></script>
+<script src="../../engine/strings.js"></script>
+<script src="../../engine/studio.js"></script>
+<script src="../../engine/core.js"></script>
+<script src="../../engine/events.js"></script>
+<script src="../../engine/scratch.js"></script>
+<script src="../../engine/gallery.js"></script>
+<script src="../../engine/rsvp.js"></script>
+<script src="../../engine/sound.js"></script>
+<script src="../../engine/sales.js"></script>
+<script src="art.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>

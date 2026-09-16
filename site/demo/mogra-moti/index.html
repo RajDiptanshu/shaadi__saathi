@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rohan &amp; Anaya · Mogra &amp; Moti</title>
+<meta name="description" content="A sample modern Indian wedding invitation: curtains of pearls part on a mandap of white mogra in Alibaug.">
+<meta name="theme-color" content="#F8F6F1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rohan &amp; Anaya · Mogra &amp; Moti">
+<meta property="og:description" content="12 – 14 March 2027 · Alibaug. Tap to open the invitation.">
+<meta property="og:image" content="og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F8F6F1'/%3E%3Cg fill='%23FFFFFF' stroke='%23C2A26B'%3E%3Ccircle cx='32' cy='20' r='8'/%3E%3Ccircle cx='21' cy='36' r='8'/%3E%3Ccircle cx='43' cy='36' r='8'/%3E%3C/g%3E%3Ccircle cx='32' cy='31' r='4' fill='%23C2A26B'/%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="../../engine/engine.css">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+<div id="art-sprite"></div>
+
+<div class="cover" id="cover">
+  <div class="cover-scene" aria-hidden="true">
+    <div class="curtain curtain-l" data-art="curtain-l"></div>
+    <div class="curtain curtain-r" data-art="curtain-r"></div>
+    <div class="bow" data-art="bow"></div>
+  </div>
+  <div class="cover-text">
+    <p class="cover-kicker" data-t="kicker"></p>
+    <p class="cover-names"><span data-t="couple.groom"></span><span class="amp">&amp;</span><span data-t="couple.bride"></span></p>
+    <p class="cover-date"><span data-t="dates"></span></p>
+  </div>
+  <p class="cover-hint" data-t="ui.tapToOpen"></p>
+  <button class="cover-open" id="open-invite" type="button"><span class="sr-only" data-t="ui.openInvite"></span></button>
+</div>
+
+<main id="invite">
+  <header class="hero">
+    <div class="mandap" data-art="mandap" aria-hidden="true"></div>
+    <div class="painting" aria-hidden="true"></div>
+    <div class="hero-text">
+      <h1 class="names">
+        <span class="name" data-t="couple.groom"></span>
+        <span class="amp" aria-hidden="true">&amp;</span>
+        <span class="name" data-t="couple.bride"></span>
+      </h1>
+      <p class="hero-when"><span data-t="dates"></span><span class="dot" aria-hidden="true"></span><span data-t="place"></span></p>
+    </div>
+  </header>
+
+  <section class="welcome" aria-label="Welcome">
+    <p class="welcome-line" data-t="welcome" data-reveal></p>
+    <p class="welcome-meaning" data-t="welcomeMeaning" data-reveal style="--d:.15s"></p>
+    <span class="sprig" data-art="sprig" data-reveal aria-hidden="true"></span>
+  </section>
+
+  <section class="invitation">
+    <article class="card" data-reveal>
+      <p class="hosts" data-t="hosts"></p>
+      <p class="hosts-line" data-t="hostsLine"></p>
+      <p class="couple-name" data-t="couple.groom"></p>
+      <span class="amp-rule" aria-hidden="true">&amp;</span>
+      <p class="couple-name" data-t="couple.bride"></p>
+      <p class="bride-parents" data-t="brideParents"></p>
+      <div class="blessings">
+        <p class="blessings-label" data-t="blessingsLabel"></p>
+        <p class="blessings-names" data-t="blessings"></p>
+      </div>
+    </article>
+  </section>
+
+  <section class="countdown" aria-label="Countdown">
+    <div class="tiles" data-countdown>
+      <p class="tile" data-reveal><b data-count="days">00</b><span data-t="ui.days"></span></p>
+      <p class="tile" data-reveal style="--d:.08s"><b data-count="hours">00</b><span data-t="ui.hours"></span></p>
+      <p class="tile" data-reveal style="--d:.16s"><b data-count="minutes">00</b><span data-t="ui.minutes"></span></p>
+      <p class="tile" data-reveal style="--d:.24s"><b data-count="seconds">00</b><span data-t="ui.seconds"></span></p>
+    </div>
+    <p class="count-label" data-t="countdownLabel" data-reveal style="--d:.3s"></p>
+  </section>
+
+  <section class="events" aria-labelledby="events-title">
+    <h2 class="section-title" id="events-title" data-t="eventsTitle" data-reveal></h2>
+    <ol class="rail">
+      <template data-each="events">
+        <li class="ev" data-reveal>
+          <span class="ev-node" aria-hidden="true"></span>
+          <div class="ev-body">
+            <p class="ev-date"><span data-date=".start" data-format="weekday"></span><b data-date=".start" data-format="dayMonth"></b></p>
+            <h3 data-t=".name"></h3>
+            <p class="ev-time" data-date=".start" data-format="time"></p>
+            <p class="venue"><span class="venue-name" data-t=".venue.name"></span><span class="venue-address" data-t=".venue.address"></span></p>
+            <p class="dress" data-if=".dress" data-t=".dress"></p>
+            <div class="ev-links">
+              <a class="link" data-map data-t="ui.directions"></a>
+              <a class="link" data-calendar data-t="ui.addToCalendar"></a>
+            </div>
+          </div>
+        </li>
+      </template>
+    </ol>
+  </section>
+
+  <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+    <h2 class="section-title" id="rsvp-title" data-t="rsvpTitle" data-reveal></h2>
+    <p class="rsvp-lead" data-t="rsvpLead" data-reveal></p>
+    <div class="rsvp-box" data-rsvp></div>
+  </section>
+
+  <section class="contacts" aria-labelledby="contacts-title">
+    <h2 class="section-title" id="contacts-title" data-t="contactsTitle" data-reveal></h2>
+    <ul class="contact-list">
+      <template data-each="contacts">
+        <li class="contact" data-reveal>
+          <a class="contact-link" data-attr="href:.tel">
+            <span class="contact-name" data-t=".name"></span>
+            <span class="contact-role" data-t=".role"></span>
+            <span class="contact-num" data-t=".display"></span>
+          </a>
+        </li>
+      </template>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <span class="sprig" data-art="sprig" data-reveal aria-hidden="true"></span>
+    <p class="closing-line" data-t="closing" data-reveal></p>
+    <p class="closing-from" data-t="closingFrom" data-reveal style="--d:.2s"></p>
+  </footer>
+</main>
+
+<button class="sound" id="sound-toggle" type="button" aria-pressed="true" hidden>
+  <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <span class="sr-only" data-t="ui.music"></span>
+</button>
+
+<script src="details.js"></script>
+<script src="../../engine/strings.js"></script>
+<script src="../../engine/studio.js"></script>
+<script src="../../engine/core.js"></script>
+<script src="../../engine/events.js"></script>
+<script src="../../engine/rsvp.js"></script>
+<script src="../../engine/sound.js"></script>
+<script src="../../engine/sales.js"></script>
+<script src="art.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>
