@@ -1,3 +1,11 @@
 node_modules/
 .DS_Store
 Thumbs.db
+
+# Downloaded stock originals are never committed (public repository; see wedding-image-direction)
+assets-src/
+
+# Playwright output
+test-results/
+playwright-report/
+tools/capture/out/

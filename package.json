@@ -1,0 +1,17 @@
+{
+  "name": "shaadi-saathi",
+  "private": true,
+  "description": "Development tooling for Shaadi Saathi invitations. Nothing here ships to guests.",
+  "type": "module",
+  "scripts": {
+    "serve": "node tools/serve.js site 8130",
+    "assets:render": "node tools/assets/render.mjs mogra-moti",
+    "assets:build": "node tools/assets/build.mjs mogra-moti",
+    "assets:check": "node tools/assets/check.mjs mogra-moti",
+    "assets:sheet": "node tools/assets/contact-sheet.mjs mogra-moti"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

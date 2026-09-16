@@ -1,0 +1,65 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Mogra & Moti monogram master (V02), rendered by tools/assets/render.mjs into pressed-paper layers.
+     R upper left, A lower right, bounding boxes overlapping, Imbue at optical size 100.
+     One thread passes behind the R's leg, in front of the A's crossbar, and ends in a small knot with two tails.
+     Weight 500: at 112 px on screen, lighter weights have hairlines thinner than the pressed-in rims. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,100..900&display=block">
+<style>
+  html, body { margin: 0; background: transparent; }
+  svg { display: block; }
+  .glyph { font-family: "Imbue"; font-weight: 500; font-variation-settings: "opsz" 100; }
+</style></head>
+<body>
+<svg id="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 448" width="448" height="448">
+  <defs>
+    <g id="letters" fill="#000">
+      <text class="glyph" x="92" y="292" font-size="290">R</text>
+      <text class="glyph" x="198" y="396" font-size="290">A</text>
+    </g>
+    <!-- Pressed in, lit from the top left: the recess's top-left walls fall into shadow,
+         its bottom-right walls catch the light. Offsets are ~1 px and ~0.6 px at 112 px on screen. -->
+    <filter id="shadowRim" x="-10%" y="-10%" width="120%" height="120%">
+      <feOffset in="SourceAlpha" dx="4" dy="4" result="shift"/>
+      <feComposite in="SourceAlpha" in2="shift" operator="out" result="rim"/>
+      <feGaussianBlur in="rim" stdDeviation="1.4" result="soft"/>
+      <feComposite in="soft" in2="SourceAlpha" operator="in" result="inside"/>
+      <feFlood flood-color="#2A2520" flood-opacity="0.42"/>
+      <feComposite in2="inside" operator="in"/>
+    </filter>
+    <filter id="highlightRim" x="-10%" y="-10%" width="120%" height="120%">
+      <feOffset in="SourceAlpha" dx="-2.5" dy="-2.5" result="shift"/>
+      <feComposite in="SourceAlpha" in2="shift" operator="out" result="rim"/>
+      <feGaussianBlur in="rim" stdDeviation="1" result="soft"/>
+      <feComposite in="soft" in2="SourceAlpha" operator="in" result="inside"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.9"/>
+      <feComposite in2="inside" operator="in"/>
+    </filter>
+    <filter id="occlusion" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.8" result="soft"/>
+      <feFlood flood-color="#2A2520" flood-opacity="0.07"/>
+      <feComposite in2="soft" operator="in"/>
+    </filter>
+    <mask id="behindR" maskUnits="userSpaceOnUse" x="0" y="0" width="448" height="448">
+      <rect width="448" height="448" fill="#fff"/>
+      <text class="glyph" x="92" y="292" font-size="290" fill="#000" stroke="#000" stroke-width="7">R</text>
+    </mask>
+    <path id="loop" d="M40,238 C104,236 150,258 196,290 C236,318 272,330 300,346 C326,362 330,392 306,406 C290,415 274,408 278,396 C282,384 300,388 302,400 C305,414 322,430 348,436"/>
+    <path id="tail" d="M300,404 C296,420 284,432 266,440"/>
+  </defs>
+
+  <g data-layer="occlusion"><use href="#letters" filter="url(#occlusion)"/></g>
+  <g data-layer="shadow"><use href="#letters" filter="url(#shadowRim)"/></g>
+  <g data-layer="highlight"><use href="#letters" filter="url(#highlightRim)"/></g>
+  <g data-layer="foil" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g mask="url(#behindR)">
+      <use href="#loop" stroke="#2A2520" stroke-opacity="0.16" stroke-width="4.2" transform="translate(2.4 2.4)"/>
+      <use href="#loop" stroke="#B89A6A" stroke-width="4.6"/>
+      <use href="#loop" stroke="#E2CFA6" stroke-width="1.8" transform="translate(-1.1 -1.1)"/>
+      <use href="#tail" stroke="#2A2520" stroke-opacity="0.16" stroke-width="4.2" transform="translate(2.4 2.4)"/>
+      <use href="#tail" stroke="#B89A6A" stroke-width="4.6"/>
+      <use href="#tail" stroke="#E2CFA6" stroke-width="1.8" transform="translate(-1.1 -1.1)"/>
+    </g>
+  </g>
+</svg>
+</body></html>
