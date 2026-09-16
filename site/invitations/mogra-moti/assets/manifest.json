@@ -1,0 +1,656 @@
+{
+  "design": "mogra-moti",
+  "updated": "2026-09-17",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. External assets are only downloaded after the user approves the list (wedding-image-direction §4). status: built | awaiting-download-approval | planned.",
+  "licences": {
+    "pexels": {
+      "name": "Pexels License",
+      "url": "https://www.pexels.com/license/",
+      "checkedOn": "2026-09-17",
+      "summary": "Free commercial use and modification, attribution not required; no selling unaltered copies, no redistribution on stock platforms, no implied endorsement by people or brands, not as a trademark."
+    },
+    "unsplash": {
+      "name": "Unsplash License",
+      "url": "https://unsplash.com/license",
+      "checkedOn": "2026-09-17",
+      "summary": "Free commercial use and modification, attribution not required; no selling without significant modification, no compiling images into a similar or competing service. Unsplash+ images are excluded."
+    },
+    "pixabay": {
+      "name": "Pixabay Content License",
+      "url": "https://pixabay.com/service/license-summary/",
+      "checkedOn": "2026-09-17",
+      "summary": "Free use and modification, attribution not required; no standalone redistribution, no misleading use, no trademark use, care with recognisable people."
+    },
+    "ofl": {
+      "name": "SIL Open Font License 1.1",
+      "url": "https://openfontlicense.org",
+      "checkedOn": "2026-09-17",
+      "summary": "Free to use, embed and subset; fonts may not be sold by themselves; the licence travels with the font files."
+    },
+    "in-house": {
+      "name": "Original work for Shaadi Saathi",
+      "url": null,
+      "checkedOn": "2026-09-17",
+      "summary": "Drawn or rendered for this project; no third-party rights."
+    }
+  },
+  "assets": [
+    {
+      "id": "V01",
+      "status": "built",
+      "scene": "opening",
+      "kind": "vector",
+      "category": "ornaments",
+      "description": "The opening thread: taut and slack paths with core, highlight and contact-shadow strokes",
+      "alt": "",
+      "files": {
+        "svg": "ornaments/thread-opening.svg"
+      },
+      "opening": true,
+      "ceilingKB": 2,
+      "source": {
+        "site": "in-house",
+        "master": "tools/assets/sources/mogra-moti/thread-opening.svg",
+        "licence": "in-house"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 thread; geometry reused by the Draws",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null,
+      "bytes": 714
+    },
+    {
+      "id": "V02",
+      "status": "built",
+      "scene": "opening",
+      "kind": "render",
+      "category": "ornaments",
+      "description": "R·A monogram blind-debossed into paper: occlusion, shadow and highlight layers plus the foil loop",
+      "alt": "",
+      "files": {
+        "occlusion": {
+          "avif": "ornaments/monogram-occlusion.avif",
+          "webp": "ornaments/monogram-occlusion.webp"
+        },
+        "shadow": {
+          "avif": "ornaments/monogram-shadow.avif",
+          "webp": "ornaments/monogram-shadow.webp"
+        },
+        "highlight": {
+          "avif": "ornaments/monogram-highlight.avif",
+          "webp": "ornaments/monogram-highlight.webp"
+        },
+        "foil": {
+          "avif": "ornaments/monogram-foil.avif",
+          "webp": "ornaments/monogram-foil.webp"
+        }
+      },
+      "opening": true,
+      "ceilingKB": 20,
+      "source": {
+        "site": "in-house",
+        "master": "tools/assets/sources/mogra-moti/monogram.html",
+        "licence": "in-house",
+        "fontUsed": "Imbue (OFL) via Google Fonts at render time"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 relief revealed by raking light; 112 px on screen, rendered at 4x",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null,
+      "bytes": 9281,
+      "width": 448,
+      "height": 448
+    },
+    {
+      "id": "V03",
+      "status": "built",
+      "scene": "opening",
+      "kind": "render",
+      "category": "ornaments",
+      "description": "Chikankari shadow-work sprite: phool, murri vine and jaali motifs as a soft ink shadow",
+      "alt": "",
+      "files": {
+        "avif": "ornaments/chikan-shadow.avif",
+        "webp": "ornaments/chikan-shadow.webp"
+      },
+      "opening": true,
+      "ceilingKB": 4,
+      "source": {
+        "site": "in-house",
+        "master": "tools/assets/sources/mogra-moti/chikan-motifs.svg",
+        "licence": "in-house"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Beneath the sheer fabric in Scene 01; celebration info blocks later",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null,
+      "bytes": 692,
+      "width": 360,
+      "height": 160
+    },
+    {
+      "id": "T01",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "texture",
+      "category": "textures",
+      "description": "Cotton-rag paper texture, seamless 1024 px tile, desaturated and warmed to --paper-dawn",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 30,
+      "grade": "dawn",
+      "candidate": {
+        "site": "pexels",
+        "page": "https://www.pexels.com/photo/20899958/",
+        "creator": "Артем Дворецкий (Artem Dvoretsky)",
+        "originalSize": "4000x3000",
+        "originalMB": 2,
+        "licence": "pexels",
+        "inspection": "Real cold-press fibre with even light; tiny coloured specks at 100% will be removed by desaturation and a warm tint.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/BcGoZXjyPzA",
+          "reason": "clean but no visible fibre; reads as printer paper"
+        },
+        {
+          "page": "https://www.pexels.com/photo/5993561/",
+          "reason": "recycled paper with coloured inclusions; too rustic"
+        },
+        {
+          "page": "https://unsplash.com/photos/2nKcZGDHpEs",
+          "reason": "mulberry fibres too coarse and grey-green"
+        },
+        {
+          "page": "https://unsplash.com/photos/NxbuURLQqp8",
+          "reason": "crumpled — crumpled paper is banned"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 card surface; Scene 07 reply card",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "T02",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "texture",
+      "category": "textures",
+      "description": "Deckled paper edge strip with alpha, extracted from a real deckle-edge card, flipped so its shadow falls bottom right",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 12,
+      "candidate": {
+        "site": "pexels",
+        "page": "https://www.pexels.com/photo/7371983/",
+        "creator": "Elisabeth Ende",
+        "originalSize": "2592x3577",
+        "originalMB": 0.6,
+        "licence": "pexels",
+        "inspection": "Genuine deckled edges with a thickness shadow; shadow falls left, so the extract is mirrored to match the top-left key light.",
+        "scores": {
+          "authenticity": 5,
+          "light": 3,
+          "gradeability": 4,
+          "composition": 3,
+          "culture": 4
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://www.pexels.com/photo/5993557/",
+          "reason": "deckle is real but the paper is speckled beige"
+        },
+        {
+          "page": "https://www.pexels.com/photo/8680458/",
+          "reason": "mock-up with hydrangeas; tinted lilac"
+        }
+      ],
+      "fallback": "If extraction is not clean, derive a deckle mask procedurally from T01's own fibres.",
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 card edge; Scene 07 reply card edge",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "T03",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "texture",
+      "category": "textures",
+      "description": "Honed white marble with faint warm-grey veins, cropped to the strip visible beyond the card",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 20,
+      "grade": "dawn",
+      "candidate": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/li0iC0rjvvg",
+        "creator": "Augustine Wong",
+        "originalSize": "3456x5184",
+        "originalMB": 0.7,
+        "licence": "unsplash",
+        "inspection": "Soft honed surface, fine veins, no gloss or gold; closest to Makrana-type marble in the search.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/8LT2mY6gxLY",
+          "reason": "green veins"
+        },
+        {
+          "page": "https://unsplash.com/photos/2yp6ICVr2VM",
+          "reason": "dramatic veining competes with the card"
+        },
+        {
+          "page": "https://unsplash.com/photos/ONnKNBzGWJw",
+          "reason": "a countertop edge, not a surface"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 surface beyond the card's deckled corner",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "T04",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "texture",
+      "category": "silk",
+      "description": "Sheer ivory fabric caught in a breeze, luminance keyed to alpha, mirrored so light comes from the left",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 40,
+      "candidate": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/xnppIJt_3-I",
+        "creator": "Olivia Harper",
+        "originalSize": "2232x2689",
+        "originalMB": 0.3,
+        "licence": "unsplash",
+        "inspection": "A real curtain lifting in window light: translucent layers, sheen, light stripes — exactly the breeze beat. Soft focus suits a foreground layer; resolution is enough for a 1.32x camera push at phone width.",
+        "scores": {
+          "authenticity": 5,
+          "light": 5,
+          "gradeability": 4,
+          "composition": 4,
+          "culture": 3
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/xbS2dQ0L3O8",
+          "reason": "a lily trapped under the fabric and a green cast"
+        },
+        {
+          "page": "https://unsplash.com/photos/mkMSXR86kYY",
+          "reason": "crinkled organza with dark outline edges"
+        },
+        {
+          "page": "https://unsplash.com/photos/SlpsgiZsSNk",
+          "reason": "a whole room, not a fabric layer"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 breeze and the tap's sweep (chanderi stand-in; real chikankari appears only as the V03 shadow)",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "O01",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "cutout",
+      "category": "pearls",
+      "description": "Hero pearl, near-round freshwater pearl with visible orient, circular cut-out, highlight top left",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 8,
+      "candidate": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/QMBar9xvhMU",
+        "creator": "Paige Johnson",
+        "originalSize": "4752x3168",
+        "originalMB": 1.2,
+        "licence": "unsplash",
+        "inspection": "Real freshwater pearls with pink-green orient and soft top-left light; the front pearls are ~280 px across in the original, enough for a 96 px cut-out.",
+        "scores": {
+          "authenticity": 5,
+          "light": 5,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/Sy56U7LL8xE",
+          "reason": "plastic craft beads, identical and glossy"
+        },
+        {
+          "page": "https://unsplash.com/photos/09bKHOZ29us",
+          "reason": "teal bokeh contaminates the pearls' colour"
+        },
+        {
+          "page": "https://unsplash.com/photos/tY8aGe7_Ok0",
+          "reason": "orange cast"
+        },
+        {
+          "page": "https://unsplash.com/photos/2zHQhfEpisc",
+          "reason": "catalogue shot in a jewellery box"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 hero pearl (20 px, ~24 px at the push); music control reference",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "O02",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "cutout",
+      "category": "pearls",
+      "description": "Three strand pearls, circular cut-outs from the same photograph as O01 so light and orient match",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 12,
+      "candidate": {
+        "sameAs": "O01"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 strand beads (16 px)",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "O03",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "cutout",
+      "category": "flowers",
+      "description": "Four closed mogra buds with calyx, keyed from a black background",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 32,
+      "candidate": {
+        "site": "pexels",
+        "page": "https://www.pexels.com/photo/36666888/",
+        "creator": "Saravanan Narayanan",
+        "originalSize": "5184x3456",
+        "originalMB": 0.4,
+        "licence": "pexels",
+        "inspection": "Sharp closed Jasminum sambac buds with calyx on pure black — clean keys and the right bloom state for dawn.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 4,
+          "composition": 5,
+          "culture": 5
+        },
+        "companion": {
+          "site": "unsplash",
+          "page": "https://unsplash.com/photos/1b85pJ8sETI",
+          "creator": "Saravanan Narayanan",
+          "originalSize": "5184x3456",
+          "originalMB": 1.2,
+          "note": "same photographer and series; two more isolated buds for variety"
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/TGzVxmmpyts",
+          "reason": "beautiful bud pile but buds overlap — no clean silhouettes (kept as a gallery candidate)"
+        },
+        {
+          "page": "https://unsplash.com/photos/OxK7xfG3Ms0",
+          "reason": "black and white"
+        },
+        {
+          "page": "https://unsplash.com/photos/eCAAqQOqtAw",
+          "reason": "yellowed bud"
+        },
+        {
+          "page": "https://www.pexels.com/photo/35249115/",
+          "reason": "star jasmine, wrong species"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 strand buds (20 px) and loose buds (36–60 px)",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "O06",
+      "status": "planned",
+      "scene": "opening",
+      "kind": "render",
+      "category": "flowers",
+      "description": "Defocused bud for the bloom pass and the two small foreground passes, pre-blurred from an O03 bud",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 20,
+      "source": {
+        "site": "in-house",
+        "derivedFrom": "O03",
+        "licence": "pexels"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 foreground passes and the entry's bloom pass",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "P01",
+      "status": "awaiting-download-approval",
+      "scene": "welcome",
+      "kind": "photo",
+      "category": "photography",
+      "description": "Hands stringing closed jasmine buds onto a thread, close, shallow depth of field",
+      "alt": "Weathered hands threading closed jasmine buds onto a fine string",
+      "files": {},
+      "opening": false,
+      "ceilingKB": 120,
+      "grade": "dawn",
+      "candidate": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/N92ZPJUDiQ8",
+        "creator": "Tahamie Farooqui",
+        "originalSize": "9504x6336",
+        "originalMB": 8.8,
+        "licence": "unsplash",
+        "inspection": "Authentic: real skin texture and believable hands mid-gesture, a foreground blur of flowers for depth, no face. It is warm market light, so the Dawn grade must cool it without greying the skin; a tall 2:3 crop on the hands and thread.",
+        "scores": {
+          "authenticity": 5,
+          "light": 3,
+          "gradeability": 3,
+          "composition": 4,
+          "culture": 5
+        }
+      },
+      "rejected": [
+        {
+          "page": "https://unsplash.com/photos/KvkFuCCZar4",
+          "reason": "marigolds and a face; wrong palette"
+        },
+        {
+          "page": "https://unsplash.com/photos/k-imgmB_zFs",
+          "reason": "documentary market scene with a face"
+        },
+        {
+          "page": "https://unsplash.com/photos/68M9wxld7Cs",
+          "reason": "not stringing; tile background"
+        }
+      ],
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 02 Welcome, bleeding right; revealed behind the bloom pass at the end of the entry",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "F01",
+      "status": "awaiting-download-approval",
+      "scene": "all",
+      "kind": "font",
+      "category": "fonts",
+      "description": "Imbue variable (opsz, wght), subset to Latin, WOFF2",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 30,
+      "candidate": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/imbue",
+        "creator": "Tyler Finck",
+        "file": "Imbue[opsz,wght].ttf",
+        "originalMB": 0.2,
+        "licence": "ofl"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Names, titles, event names, lines, figures",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "F02",
+      "status": "awaiting-download-approval",
+      "scene": "all",
+      "kind": "font",
+      "category": "fonts",
+      "description": "Archivo variable (wdth, wght), subset to Latin, WOFF2",
+      "alt": "",
+      "files": {},
+      "opening": true,
+      "ceilingKB": 30,
+      "candidate": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/archivo",
+        "creator": "Omnibus-Type",
+        "file": "Archivo[wdth,wght].ttf",
+        "originalMB": 0.6,
+        "licence": "ofl"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Labels, information, body, interface",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "F03",
+      "status": "awaiting-download-approval",
+      "scene": "all",
+      "kind": "font",
+      "category": "fonts",
+      "description": "Noto Serif Devanagari variable (wdth, wght), subset to numerals, danda and invocation glyphs, WOFF2",
+      "alt": "",
+      "files": {},
+      "opening": false,
+      "ceilingKB": 8,
+      "candidate": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/notoserifdevanagari",
+        "creator": "Google",
+        "file": "NotoSerifDevanagari[wdth,wght].ttf",
+        "originalMB": 0.7,
+        "licence": "ofl"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Chapter numerals; optional invocation",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    },
+    {
+      "id": "A02",
+      "status": "awaiting-download-approval",
+      "scene": "opening",
+      "kind": "audio",
+      "category": "audio",
+      "description": "Pearl click for the opening tap, trimmed to under 0.4 s",
+      "alt": "",
+      "files": {},
+      "opening": false,
+      "ceilingKB": 20,
+      "candidates": [
+        {
+          "site": "pixabay",
+          "page": "https://pixabay.com/sound-effects/film-special-effects-pearls-rubbing-together-26928/",
+          "creator": "freesound_community",
+          "duration": "0:26",
+          "note": "source for a single soft pearl contact"
+        },
+        {
+          "site": "pixabay",
+          "page": "https://pixabay.com/sound-effects/film-special-effects-collar-de-bolas-01-238240/",
+          "creator": "freesound_community",
+          "note": "bead necklace handling"
+        },
+        {
+          "site": "pixabay",
+          "page": "https://pixabay.com/sound-effects/household-rosary-25489/",
+          "creator": "freesound_community",
+          "note": "rosary beads"
+        }
+      ],
+      "selectionNote": "Timbre cannot be judged without listening; the user previews and picks.",
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "The first sound after the tap",
+      "replaceBeforeLaunch": false,
+      "replaceReason": null
+    }
+  ]
+}
