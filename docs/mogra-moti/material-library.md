@@ -78,8 +78,8 @@ its highlight never rotates with it. Idle lustre: the highlight drifts ±2 px ov
 **Reduced motion:** no rolling; pearls appear in place with one glint (highlight opacity 0.6 → 1 → 0.8 over
 400 ms). Idle lustre off.
 
-**Cost:** hero pearl ≤25 KB (AVIF with alpha; 20 px on screen, about 24 px at the peak of the camera push, so a
-96 px file covers 4× displays); strand pearls ≤6 KB each.
+**Cost:** hero pearl ≤8 KB (AVIF with alpha; 20 px on screen, about 24 px at the peak of the camera push, so a
+96 px file covers 4× displays); strand pearls ≤4 KB each.
 
 **Never:** rainbow iridescence, holographic gradients, sparkles, glowing halos, perfect CG spheres.
 
@@ -113,7 +113,7 @@ light and a thin shadow on edges facing it (pressed in, so the lit side is the f
 
 **Reduced motion:** the light still rises and the deboss still emerges, over 600–800 ms.
 
-**Cost:** texture ≤40 KB; deboss layers ≤30 KB total; edge ≤20 KB.
+**Cost:** texture ≤30 KB; deboss layers ≤20 KB total; edge ≤12 KB.
 
 **Never:** crumpled paper, parchment, torn edges, visible bevel/emboss CSS effects, printed ink monograms.
 
@@ -146,7 +146,7 @@ shadow lags 120 ms behind the fabric; edges settle last.
 **Reduced motion:** the fabric is placed in its final position and fades to 0.55 opacity over 400 ms; no drift,
 no sweep. On the tap, it fades out instead of sweeping.
 
-**Cost:** fabric ≤60 KB (it is large and soft; low detail compresses well); motif sprites ≤8 KB total.
+**Cost:** fabric ≤40 KB (it is large and soft; low detail compresses well); motif sprites ≤4 KB total.
 
 **Never:** satin gloss, fluttering flags, waving loops, printed chikan patterns as fills.
 
@@ -211,7 +211,7 @@ air that moves them; they never fall like rain.
 
 **Reduced motion:** no tumbling; the bloom cross-fade in the closing takes 600 ms instead of 2.4 s.
 
-**Cost:** each cut-out ≤12 KB (AVIF alpha, 2× display size); the foreground pass bud ≤35 KB (large but soft).
+**Cost:** each cut-out ≤8 KB (AVIF alpha, 2× display size); each foreground pass bud ≤20 KB (large but soft).
 
 **Never:** drawn flowers, petal showers, confetti-like falling buds, marigolds, roses.
 
@@ -230,7 +230,7 @@ Scene 01, darkened by the light falloff. ≤15% of that frame.
 
 **Reduced motion:** unchanged.
 
-**Cost:** ≤35 KB (only a strip is visible; crop the file accordingly).
+**Cost:** ≤20 KB (only a strip is visible; crop the file accordingly).
 
 **Never:** polished glossy marble, gold veins, marble as a section background.
 

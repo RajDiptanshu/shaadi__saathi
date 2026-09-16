@@ -164,8 +164,8 @@ what makes a phone screen feel like an editorial cover rather than a card. Spec 
 
 **Graded to the hour, bleeding off one edge, settling into place.** Every photograph is colour-graded to its
 chapter's light (cool dawn to lamp-warm night), shares the paper's grain, bleeds off exactly one screen edge
-(never floats with equal margins), and enters by a mask opening from that edge while the image inside settles
-from slightly large to rest.
+(never floats with equal margins; the few declared full-screen moments are listed in `visual-dna.md` §3), and
+enters by a mask opening from that edge while the image inside settles from slightly large to rest.
 
 *Why:* consistency of light makes photos from different sources feel like one shoot; one-edge bleed is an
 editorial layout habit that breaks the centred-card template; the settle gives images weight without the

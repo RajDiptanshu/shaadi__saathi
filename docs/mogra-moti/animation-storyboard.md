@@ -23,7 +23,7 @@ removed.
 | # | Rule | Why |
 |---|---|---|
 | 1 | **Lead → follow → settle.** Every moment has one lead motion; followers start when the lead reaches them (≥80 ms later); everything ends in `e-settle`. | cause and effect is what separates choreography from animation |
-| 2 | **At most three things move at once**, and light counts as one. | the eye can follow three; more reads as busy |
+| 2 | **At most three things move at once.** Counting: light counts as one; a group moving together (a strand of beads, a pair of tumbling buds, a fabric and its shadow) counts as one; camera moves don't count, because they move the frame rather than an object. | the eye can follow three; more reads as busy |
 | 3 | **Staggers:** beads 40–60 ms; lines of text 180 ms; never letter by letter. | beads are physical chains; letters animated one by one look like a template effect |
 | 4 | **Exit in the direction of the cause.** Pulled things leave toward the pull; swept things leave with the sweep. | spatial continuity |
 | 5 | **Stillness while reading.** Once a scene has entered, only light and at most one slow ambient element move, and never over text. | premium pages let you read |
@@ -88,7 +88,7 @@ Rules:
   `blur()`.
 - **No rotation, roll, shake or handheld wobble.**
 - **Parallax only in Welcome and Story**, photos and cut-outs only, never text, at most ±24 px per viewport of
-  scroll.
+  scroll. The one other exception is the gallery: images shift ±12 px inside their frames against a swipe.
 - **Reduced motion:** camera locked; depth kept as static layering; no parallax.
 
 ---
@@ -107,9 +107,10 @@ Rules:
 **Banned transitions:** fade-up, slide-in from the side without a cause, scale-in, flip, rotate, blur-in,
 curtains, doors, page-turns, wipes with hard straight edges, glitches.
 
-**Budget:** total pinned scroll is 240 svh (3 × 80). The venue's sticky section adds 80 svh beyond its own
-height. *Why:* the whole page is about 18 screens on a phone; more pinning would make it feel like a
-scroll-jacked marketing site.
+**Budget (phone):** pinned scroll for the three Draws is 240 svh (3 × 80); the venue's sticky letterbox adds
+80 svh beyond its own height; **all scroll-linked distance together is ≤320 svh.** The desktop-only gallery pin
+is outside this phone budget. *Why:* the whole page is about 18 screens on a phone; more pinning would make it
+feel like a scroll-jacked marketing site.
 
 ---
 
@@ -329,8 +330,8 @@ waving continuously; gold glows; any curtain-like centred split.
 
 The families and the words, left-aligned in columns 1–5: optional invocation line (`type-mark`, only if
 provided); "Together with their families" (label); "Nandini & Arvind Malhotra" and "Ritu & Ashwin Kapoor" (info
-lines); a hairline; the welcome line in `type-line` (placeholder: "Three days in February, and a strand of mogra
-for every one of them.").
+lines); a hairline; the welcome line in `type-line` (placeholder, 10 words: "Three days in February, and mogra
+for every one.").
 
 | Beat | Normal | Reduced |
 |---|---|---|
@@ -381,7 +382,7 @@ Arrives with the Draw.
 
 | | |
 |---|---|
-| Composition | P06 (hennaed hands, 4:5) bleeds left, x 0–78%; "Mehendi" in `type-display`, `--mehendi` colour, right-aligned at 372 px, baseline 24 px below the photo; info block below, columns 2–6; one chikan bud shadow motif faint behind the info block |
+| Composition | P06 (hennaed hands, 4:5, Afternoon grade) bleeds left, x 0–78%; "Mehendi" in `type-display`, `--mehendi` colour, right-aligned at 372 px (opposite the bleed), baseline 20 px below the photo; info block below, columns 2–6; one chikan bud shadow motif faint behind the info block |
 | Why | the henna colour enters as the page's only warm accent; hands are the ceremony |
 | Motion | print settle from the left; name set by light; info lines set by light 180 ms apart |
 | Reduced | shorter, no scale |
@@ -390,7 +391,7 @@ Arrives with the Draw.
 
 | | |
 |---|---|
-| Composition | P07 (dancing feet with anklets, motion blur, 3:2, Afternoon→evening grade) bleeds right, x 22–100%; "Sangeet" set **vertically** (rotated −90°, reading upward) along the left margin in `type-display`, from y 70% to 20% of the composition; info block to the right of the vertical word, under the photo |
+| Composition | P07 (dancing feet with anklets, motion blur, 3:2, Godhuli grade) bleeds right, x 22–100%; "Sangeet" set **vertically** (rotated −90°, reading upward) along the left margin in `type-display`, from y 70% to 20% of the composition; info block to the right of the vertical word, under the photo |
 | Why | rhythm: the one vertical word breaks the horizontal repetition like a beat; motion blur is the only movement captured in a photograph |
 | Motion | print settle from the right; inside its mask the image pans 3% horizontally over 2 s (film pan); vertical word set by light along its length |
 | Reduced | no pan |
@@ -399,7 +400,7 @@ Arrives with the Draw.
 
 | | |
 |---|---|
-| Composition | **the only centred, symmetrical composition in the invitation.** A thread descends from the top centre and ties the gathbandhan knot at y 18%; below it P08 (two fabrics knotted, or hands with sacred thread; night grade) centred at 70% width, 4:5; "15" in `type-figure`, `--zari-ink`, centred behind the lower edge of the photo; "The Wedding" in `type-title` centred; info block centred |
+| Composition | **the only centred, symmetrical composition in the invitation.** A thread descends from the top centre and ties the gathbandhan knot at y 18%; below it P08 (two fabrics knotted, or hands with sacred thread; Lamp grade) centred at 70% width, 4:5; "THE WEDDING" in `type-label` centred directly above "15" in `type-figure`, `--zari-ink`, which sits centred behind the lower edge of the photo; info block centred (the figure is this scene's one display size — `typography-system.md` §3, rule 13) |
 | Why | the pheras are the sacred centre; symmetry reserved for it gives it weight; the thread that has run through the invitation becomes the knot that marries them |
 | Motion | knot tied over 1.4 s (two paths drawn in sequence, `e-silk`, ending in a small `e-release` cinch); photo settles from the top; "15" set by light |
 | Reduced | knot drawn in 400 ms; photo mask 360 ms |
@@ -408,7 +409,7 @@ Arrives with the Draw.
 
 | | |
 |---|---|
-| Composition | P09 (pearl jewellery against dark fabric, low key, 9:16) full bleed; a bottom scrim to `#15110E` at 70%; "Reception" in `type-display`, `--pearl`, bottom left over the scrim; info block below the photo on a `--night` band |
+| Composition | P09 (pearl jewellery against dark fabric, low key, 9:16, Lamp grade) full bleed; a bottom scrim to `#15110E` at 70%; "Reception" in `type-display`, `--pearl`, bottom left over the scrim; info block below the photo on a `--night` band |
 | Why | the first taste of night, previewing the page's ending; pearls return at their most luminous |
 | Motion | print settle from the bottom; one nacre light pass across "Reception" (1.2 s) |
 | Reduced | no light pass; the word is set by light in 500 ms |
@@ -466,11 +467,14 @@ returns, echoing the opening). A thread runs across the card's top with one pear
 1. `०७` mark + label "KINDLY REPLY BY 15 JANUARY 2027"
 2. "Will you join us?" in `type-title`
 3. "YOUR NAME" label + ruled input
-4. Two choice words with pearl markers: "Joyfully accepts" / "Regretfully declines"
-5. If accepting: "WHICH CELEBRATIONS" + four choice words (Mehendi, Sangeet, Wedding, Reception); "HOW MANY OF YOU" + stepper "−  2  +" with the number in Imbue
-6. "A WISH FOR THEM" (optional) + two ruled lines
-7. "Send reply" — the page's one filled button
-8. In the sample: a caption "This is a sample invitation, so replies aren't saved."
+4. Two choice words with pearl markers, in `type-info`: "Joyfully accepts" / "Regretfully declines"
+5. If accepting: "WHICH CELEBRATIONS" + four choice words in `type-info` (Mehendi, Sangeet, Wedding, Reception);
+   "HOW MANY OF YOU" + stepper "−  2  +" with the number in `type-info`
+6. "A WISH FOR THEM" (optional) + two ruled lines (`type-input`)
+7. "Send reply" — the page's one filled button (label type)
+8. In the sample: a note in `type-body`, `--ink-soft`: "This is a sample invitation, so replies aren't saved."
+
+Type sizes on the card: 44 (title), 16 (reading tier: choices, inputs, note), 11 (labels) — three.
 
 | Beat | Normal | Reduced |
 |---|---|---|
@@ -506,14 +510,14 @@ top left. **Height:** about 140 svh.
 │      ✿            ⌘ knot ●✿          │  lying in a loose loop across y 58–78%
 │        ✿●✿●✿●✿●✿●                    │
 │ 15 · 02 · 2027                       │  label in --zari, y 84%
-│ Mogra is strung in the morning and   │  type-line, --pearl, y 88%
-│ opens by night. Be there for both.   │
+│ Strung at dawn, open by night.       │  type-line, --pearl, y 88% (placeholder, 10 words)
+│ Be there for both.                   │
 └──────────────────────────────────────┘
 ```
 
 Below, after 40 svh of night: "WITH LOVE, THE MALHOTRA AND KAPOOR FAMILIES" (label); "QUESTIONS? KABIR MALHOTRA ·
-+91 98••• •••••" (placeholder, masked); a hairline; "Sample invitation by Shaadi Saathi" (caption) and the thread
-link "MAKE THIS INVITATION YOURS".
++91 98••• •••••" (placeholder, masked); a hairline; "Sample invitation by Shaadi Saathi" (`type-body`) and the
+thread link "MAKE THIS INVITATION YOURS".
 
 | t | Beat | Normal | Reduced |
 |---|---|---|---|

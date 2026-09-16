@@ -172,10 +172,13 @@ from cutting off hands or knots.
 **Graded to the hour. One edge bleeds. It settles into place.**
 
 1. **Graded to the hour** — the recipe of its scene (§2.3).
-2. **One edge bleeds.** Every photograph touches exactly one screen edge: left, right, top or bottom. Never
-   equal margins on all sides.
-   Exceptions, deliberate and only three: the Wedding photo is centred (sacred symmetry); Reception and the
-   closing are full bleed (night scenes that fill the frame).
+2. **One edge bleeds.** An inline photograph touches exactly one screen edge: left, right, top or bottom.
+   Never equal margins on all sides.
+   Declared exceptions, and no others:
+   - **centred:** the Wedding photo (sacred symmetry — the one centred composition);
+   - **full screen** (touching both sides): Story spread C, Reception, the Venue once its letterbox has opened,
+     and the gallery's full-screen view;
+   - **film strip:** gallery frames sit in a strip that starts at the left margin and runs off the right edge.
 3. **Settles into place.** Entrance = a mask opening from the bleeding edge (0 → 100% over 900 ms,
    `e-settle`) while the image inside scales from 1.06 to 1.00 over 1400 ms. Reduced motion: mask opens over
    360 ms, no scale.
@@ -221,9 +224,25 @@ is on screen, it is a photograph.
 |---|---|---|
 | Side margins | 20 px (plus safe-area insets) | wide enough for thumbs, narrow enough for masthead names |
 | Columns | 6, gutter 10 px, column 50 px | 6 divides into halves and thirds for asymmetric splits |
-| Baseline | 4 px | aligns Archivo's 15 px / 23 px rhythm with larger Imbue sizes |
+| Baseline | 4 px | every type line height is a multiple of 4 (`typography-system.md` §2), so text and spacing share one rhythm |
 | Spacing scale | 4 · 8 · 12 · 20 · 32 · 52 · 84 · 136 | a ~1.6× progression, like beads on a strand; nothing arbitrary |
 | Full-screen units | `svh`, never `vh` | in-app browsers (WhatsApp, Instagram) resize the toolbar |
+
+**What each spacing step is for** (the gutter of 10 px is a grid value, not a spacing step):
+
+| Step | Use |
+|---|---|
+| 4 | a label to the value directly beneath it; a hairline to the text it underlines |
+| 8 | lines inside one grouped fact (time → venue → area) |
+| 12 | Devanagari numeral to its chapter label; a name's baseline to its surname; caption to its photo |
+| 20 | side margins; between separate fact groups (when → where → wear); between two thread links |
+| 32 | chapter mark to the top safe area; heading to the content it introduces |
+| 52 | photograph to its text block; between blocks inside one composition |
+| 84 | between compositions inside a scene (story spreads, celebrations) |
+| 136 | breathing room at the start and end of a scene, around a transition |
+
+Values outside the scale are defects. Touch targets (44 px) and the button height (52 px) are sizes, not
+spacing.
 
 Other widths: 393 and 412 keep the 390 composition (margins stay 20; columns widen). 768: 8 columns,
 32 px margins. ≥1024: 12 columns, 64 px margins, 1280 px maximum; scenes become two-page spreads, names cap at
@@ -238,15 +257,19 @@ In order, one of each (`creative-concept.md` §4.9):
 3. **Action** — one text link or button, in the lower 40% of the screen
 4. **Detail** — time, place, dress note, caption
 
-At most **three type sizes** and **three competing elements** in any viewport.
+At most **three type sizes** (counted as in `typography-system.md` §3, rule 1) and **three competing
+elements** in any viewport.
 
 ### 5.3 Placement rules
 
-- **Text aligns left** by default; right alignment is reserved for the second name in the signature treatment
-  and occasional captions; centring is reserved for the Wedding. *Why:* left-aligned editorial rags read
-  faster on phones and break the centred-template habit.
-- **Text never sits on a photograph** except Reception and the closing, where the image is dark and a scrim
-  guarantees ≥4.5:1. *Why:* light photographs under text fail contrast and look like stock banners.
+- **Text aligns left** by default. Right alignment is allowed only for (a) the second name in the signature
+  treatment and (b) a single display-size word placed on the side opposite a photograph's bleed, to balance it
+  (e.g. "Mehendi" under a photo bleeding left). Centring is reserved for the Wedding. *Why:* left-aligned
+  editorial rags read faster on phones and break the centred-template habit; the two exceptions exist only to
+  counterweight a diagonal or a bleed.
+- **Text never sits on a photograph** except in Reception, where the image is dark and a bottom scrim
+  guarantees ≥4.5:1. *Why:* light photographs under text fail contrast and look like stock banners. (The
+  closing's names sit on the night ground and cut-outs, not on a photograph.)
 - **Actions sit low.** Links and the RSVP button live in the lower 40% of their viewport. *Why:* thumb reach.
 - **Chrome is fixed and small.** Only two fixed elements: the Sample mark (top left) and the music pearl
   (bottom right). Nothing else floats. *Why:* fixed UI over art is the template tell.
@@ -262,7 +285,7 @@ There are no cards, pills, icons or gradients.
 | **Thread link** (Directions, Add to calendar, Open in Maps, Make this yours) | label type (Archivo, expanded caps, 11–12 px, `--ink`); 44 px tall tap area; underline is a 1 px `--zari` thread that draws in on focus and tightens (scaleX 0.96 → 1) on press | links as words, underlined by the concept's own object |
 | **Primary button** (only "Send reply") | full-width rectangle, `--ink` fill, `--pearl` label type, 52 px tall, no radius | one strong action on the page; square corners match paper |
 | **Opening button** | the whole cover is a `<button>` labelled "Open the invitation from Rohan and Anaya"; the pearl is its visual affordance | a big target without a visible button |
-| **Text inputs** | ruled line: 1 px `--ink-soft` at 40%, label above in label type, input text Archivo 18 px | a reply card, not a SaaS form; 18 px stops iOS zooming |
+| **Text inputs** | ruled line: 1 px `--ink-soft` at 40%, label above in label type, input text `type-input` (Archivo 16 px) | a reply card, not a SaaS form; 16 px is the smallest size that stops iOS zooming |
 | **Choices** | words with a 12 px pearl marker that fills with nacre when chosen; the whole word row is the target | the pearl says "this one" without a checkbox |
 | **Focus** | 2 px `--zari-ink` outline, 3 px offset (on night: `--zari`) | visible and on palette |
 | **Music control** | a 28 px pearl in a 44 px target, bottom right; playing: a nacre highlight slowly travels across it; muted: pearl desaturates with a hairline strike; labelled "Music, playing" / "Music, muted" | replaces generic equaliser bars with the design's object |

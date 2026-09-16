@@ -32,7 +32,7 @@ sprites), delivered at 2–4× display size, AVIF + WebP with alpha.
 | O03 | Mogra closed buds | 4 | 20 px on the strand; 36–60 px loose | free stock ("jasmine buds", "Jasminum sambac buds", "mogra flowers") | P0 |
 | O04 | Mogra loosening / half open | 2 + 2 | 20 px | same searches | P1 |
 | O05 | Mogra full bloom | 3 | 24 px on the strand | same searches ("jasmine sambac flower") | P1 |
-| O06 | Defocused bud for passes | 3 (two small passes, one bloom pass) | 180–600 px | derived from O03 in the pipeline (pre-blurred) | P0 |
+| O06 | Defocused bud for passes | 1 (the bloom pass; reused, scaled, for the two small passes) | 180–600 px | derived from O03 in the pipeline (pre-blurred) | P0 |
 
 ### 1.3 Vectors and pre-rendered layers (V) — made in-house
 
@@ -225,7 +225,7 @@ Dev-only tools; nothing here ships to guests.
 
 | Budget | Limit | Why |
 |---|---|---|
-| Opening, transferred before the first frame animates | ≤350 KB including HTML, CSS, engine and scene JS, GSAP, fonts, T01–T04, O01–O03, V01–V02 | guests open links on mobile data inside WhatsApp |
+| Opening, transferred before the first frame animates | ≤350 KB including HTML, CSS, engine and scene JS, GSAP, fonts, T01–T04, O01–O03, O06, V01–V03 (breakdown below) | guests open links on mobile data inside WhatsApp |
 | GSAP (core + ScrollTrigger + MotionPath), gzipped | ≈50 KB | the only third-party code |
 | Each later scene's images | ≤400 KB, lazy-loaded one scene ahead | smooth scrolling without a huge initial load |
 | Whole page without music | ≤2.8 MB | |
@@ -233,7 +233,26 @@ Dev-only tools; nothing here ships to guests.
 | All sound effects | ≤150 KB | |
 | Largest Contentful Paint (mid-range phone, 4G) | ≤2.5 s | |
 | Cumulative Layout Shift | ≤0.05 | fonts and images are sized in advance |
+| Interaction to Next Paint | ≤200 ms | the pearl tap and RSVP choices must answer instantly |
 | Frame rate during the opening | 60 fps on a recent iPhone and Pixel 6a-class Android; ≥45 fps on a budget Android | |
+
+**Opening budget breakdown** (ceilings from `material-library.md`; they must sum to ≤350 KB):
+
+| Item | Ceiling |
+|---|---|
+| T01 paper texture | 30 KB |
+| T02 deckled edge | 12 KB |
+| T03 marble strip | 20 KB |
+| T04 sheer fabric | 40 KB |
+| O01 hero pearl | 8 KB |
+| O02 strand pearls (3 × 4) | 12 KB |
+| O03 closed buds (4 × 8) | 32 KB |
+| O06 passing buds (the bloom-pass bud; the two small ones reuse it scaled) | 20 KB |
+| V02 deboss layers + V03 shadow-work sprite | 24 KB |
+| Imbue + Archivo subsets | 60 KB |
+| GSAP core + ScrollTrigger + MotionPath (gzipped) | 50 KB |
+| HTML, CSS, engine and scene JS (gzipped) | 40 KB |
+| **Total** | **348 KB** |
 
 ---
 

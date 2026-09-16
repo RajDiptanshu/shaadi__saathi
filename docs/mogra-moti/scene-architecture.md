@@ -25,7 +25,8 @@ Constraints carried from Phase 0 (`docs/repository-audit.md`): static site, no f
 | — | `draw-3` | The Draw | — | 80 svh pinned | — | yes |
 | 08 | `closing` | Closing | night-deep | ~140 svh | T1 The Draw → knot | no |
 
-Total ≈ 18 phone screens, of which 240 svh are pinned. With reduced motion, nothing is pinned and the Draw
+Total ≈ 18 phone screens, of which 240 svh are pinned (the Draws) and 80 svh more are the venue's sticky
+extension — 320 svh of scroll-linked distance in all. With reduced motion, nothing is pinned and the Draw
 sections collapse to 12 svh spacers.
 
 ---
@@ -101,7 +102,7 @@ Every scene is a `<section class="scene" data-scene="<id>">` containing depth la
 | `events.js` | calendar and map links via `[data-calendar]` / `[data-map]` inside `[data-from="events"]` | none | none |
 | `rsvp.js` | validation, stored reply, submission, simulated preview | **opt-in** `[data-rsvp-template]`: build the form from a `<template>` in the page, keeping the same ids and class hooks; send event **ids** (already sent) as the matching key | none |
 | `apps-script/Code.gs` | the couple's sheet | `EVENTS` accepts `{ id, name }` objects and matches by id, falling back to names for old invitations | none for existing sheets |
-| `sound.js` | tap unlock, gapless loop, fades, iOS playback, mute memory | **additive** `Invite.sound.fx(id)` effects on the same audio context; `Invite.sound.fadeTo(level, seconds)`; `music.fetchAfter: 'opening'` | none |
+| `sound.js` | tap unlock, gapless loop, fades, iOS playback, mute memory | **additive** `Invite.sound.fx(id)` effects on the same audio context; `Invite.sound.fadeTo(level, seconds)`; `music.volume` (target gain, default 1); `music.fetchAfter: 'opening'` (`music.delay` already exists) | none |
 | `sales.js` | Sample mark and studio link | **opt-in** `sales: { placement: 'slot' }`: render into `[data-sales-slot]` elements instead of the floating pill; mark text "Sample invitation", readable by screen readers | none |
 | `strings.js`, `studio.js` | interface words; Instagram handle | none (the flagship overrides words through `ui` in its data) | none |
 | `engine.css` | `[hidden]`, `.sr-only`, form mechanics | none; the flagship never uses `data-reveal`, so the fade-up rules never apply | none |
@@ -132,7 +133,8 @@ Scenes use only these primitives and GSAP. No scene reads `prefers-reduced-motio
 `01-opening.js` builds two timelines — `opening` (before the tap) and `entry` (after) — from the storyboard
 (`animation-storyboard.md` §7), and:
 
-1. waits for `motion.ready(['T01','T02','T03','O01','O02','O03'])` and fonts (max 1.8 s);
+1. waits for `motion.ready(['T01','T02','T03','T04','O01','O02','O03','O06'])` and fonts (max 1.8 s) — every
+   image that appears before or during the entry, so nothing decodes mid-sequence;
 2. plays `opening`; enables the tap at 1.2 s (earlier taps are queued);
 3. on tap: `Invite.emit('open')` (sound unlock), fast-forwards `opening` if unfinished, plays `entry`;
 4. at the cut (1150 ms): swaps the cover for the welcome scene; at 2200 ms calls `Invite.completeOpening()`,
@@ -251,12 +253,12 @@ window.INVITE = {
 
   copy: {
     welcomeLead: 'are getting married',
-    welcomeLine: 'Three days in February, and a strand of mogra for every one of them.',
+    welcomeLine: 'Three days in February, and mogra for every one.',
     celebrationsLine: 'Four celebrations. We’d love you at every one.',
     rsvpTitle: 'Will you join us?',
     rsvpThanksTitle: 'Thank you, {name}.',
     rsvpThanksLine: 'Your reply is with the family.',
-    closingLine: 'Mogra is strung in the morning and opens by night. Be there for both.',
+    closingLine: 'Strung at dawn, open by night. Be there for both.',
     studioLine: 'Sample invitation by Shaadi Saathi',
     studioLink: 'Make this invitation yours'
   },
@@ -370,7 +372,7 @@ window.INVITE = {
   },
 
   sales: { placement: 'slot' },
-  music: null, // A01 once licensed: { src, loopStart: 0.5, loopLength, fetchAfter: 'opening' }
+  music: null, // A01 once licensed: { src, loopStart: 0.5, loopLength, delay: 400, volume: 0.55, fetchAfter: 'opening' }
   sfx: { click: 'A02', roll: 'A03', pull: 'A04', silk: 'A05', bead: 'A06', knot: 'A07' },
   assets: 'assets/manifest.json'
 };
