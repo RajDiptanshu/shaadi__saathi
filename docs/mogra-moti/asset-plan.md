@@ -208,16 +208,24 @@ record `"site": "in-house"`; fonts record the OFL and the foundry repository.
 
 Dev-only tools; nothing here ships to guests.
 
+Built in Phase 3 (2026-09-17). Commands run from the repository root after reloading PATH.
+
 | Step | Tool | Output |
 |---|---|---|
-| 1. Collect | manual download after approval | `assets-src/mogra-moti/<id>-original.*` (gitignored) |
-| 2. Cut out | Adobe connector background removal, or manual masks | `<id>-cutout.png` |
-| 3. Grade | recipe applied in an editor or scripted (decided in Phase 3 after testing both on 3 photos) | `<id>-graded.tif/png` |
-| 4. Derive | `sharp` in `tools/images/` | widths 480 / 780 / 1170 / 1600 (photos); 2× and 4× display (cut-outs); AVIF (q≈50), WebP (q≈72), JPEG (q≈78) for opaque images; AVIF + WebP with alpha for cut-outs; 16 px LQIP |
-| 5. Pre-render | Playwright + Chromium for V02 deboss layers and O06 blurs; S01/S02 share images | transparent PNG → AVIF/WebP |
-| 6. Fonts | `subset-font` (npm) | subsetted variable WOFF2 |
-| 7. Audio | trim, loop wraparound, encode (tool chosen in Phase 3; ffmpeg is not installed, so either a small npm-packaged encoder or the Windows transcoder used for the family invite) | MP3 |
-| 8. Verify | `tools/images/check` | fails if a file is missing from the manifest, a manifest entry lacks licence fields, an identifiable person lacks a replace flag, or a budget (§6) is exceeded |
+| 1. Collect | manual download after approval | `assets-src/mogra-moti/originals/` (gitignored) |
+| 2. Recipe | `tools/assets/mogra-moti.recipes.json`, written after looking at each original | crop, mirror, desaturate, grade, tint, seamless tile, grain, luminance key, circular cut-outs, extracted cut-outs, output widths |
+| 3. Build | `npm run assets:build` (`tools/assets/build.mjs`, sharp) | widths 480 / 780 / 1170 / 1600 (photos); 2–4× display (cut-outs); AVIF (q≈50), WebP (q≈72), JPEG (q≈78) for opaque images; AVIF + WebP with alpha for cut-outs; 16 px LQIP; manifest updated |
+| 4. Render in-house | `npm run assets:render` (`tools/assets/render.mjs`, Playwright + sharp) | thread SVG; monogram occlusion/shadow/highlight/foil layers; chikankari shadow sprite |
+| 5. Fonts | subsetting added when the font downloads are approved (`subset-font`) | subsetted variable WOFF2 |
+| 6. Audio | trim and encode, tool chosen when a sound is approved (ffmpeg is not installed) | MP3 |
+| 7. Verify | `npm run assets:check` (`tools/assets/check.mjs`) | fails on missing or unlisted files, missing licence fields, unflagged identifiable people, files over their ceiling, or opening ceilings over 350 KB |
+| 8. Inspect | `npm run assets:sheet` (`tools/assets/contact-sheet.mjs`) | every built asset on paper-dawn and night grounds in one image |
+
+Grading is scripted first (approximations of the recipes in `visual-dna.md` §2.3); any image the scripted grade
+doesn't serve — skin especially — is graded by hand and the manifest's `edits` says so.
+
+The build was self-tested on synthetic originals: seamless tiles reduce edge mismatch from ~40 to ~2 levels,
+luminance keys produce clean alpha, circular cut-outs are opaque at the centre and transparent at the corners.
 
 ---
 

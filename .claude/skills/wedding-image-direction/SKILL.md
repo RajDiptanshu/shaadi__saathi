@@ -133,7 +133,10 @@ subset fonts → encode audio → verify.
   shadow-work sprite 4.
 - Verification fails on: unlisted files, missing licence fields, unflagged identifiable people, over-ceiling files.
 
-Status: the pipeline and its commands are built in Phase 3; update this section with the real commands then.
+Commands (built 2026-09-17; reload PATH first): `npm run assets:render` (in-house ornaments) ·
+`npm run assets:build` (approved originals via `tools/assets/<slug>.recipes.json`) · `npm run assets:check`
+(manifest, files, licences, ceilings, opening budget) · `npm run assets:sheet` (contact sheet in
+`tools/capture/out/`). Always run the check and look at the contact sheet before calling assets done.
 
 ## 10. Audio rules
 

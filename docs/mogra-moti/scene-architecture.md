@@ -53,11 +53,19 @@ site/
       main.js                         boots the policy, registers scenes in order, wires test hooks
       assets/
         manifest.json                 (asset-plan.md §4)
-        img/  tex/  svg/  audio/  fonts/
-tools/                                dev only (Phase 3)
-  serve.js   images/   capture/
-tests/                                Playwright specs (Phase 3 onwards)
-docs/mogra-moti/                      this direction; evaluations later
+        photography/  flowers/  pearls/  silk/  textures/  ornaments/  video/  audio/  fonts/
+package.json                          dev tooling only: @playwright/test, sharp
+tools/                                dev only (built in Phase 3)
+  serve.js                            local static server
+  assets/
+    sources/mogra-moti/               in-house masters: thread, monogram, chikankari motifs
+    render.mjs                        in-house renders (Playwright + sharp)
+    build.mjs                         approved originals → web files via <slug>.recipes.json
+    check.mjs                         manifest, files, licences, ceilings, opening budget
+    contact-sheet.mjs                 every built asset on its grounds, for inspecting the collection
+  capture/out/                        renders and sheets (gitignored)
+tests/                                Playwright specs (from Phase 4)
+docs/mogra-moti/                      this direction; asset candidates; evaluations later
 assets-src/                           gitignored originals
 ```
 
@@ -135,7 +143,9 @@ Scenes use only these primitives and GSAP. No scene reads `prefers-reduced-motio
 
 1. waits for `motion.ready(['T01','T02','T03','T04','O01','O02','O03','O06'])` and fonts (max 1.8 s) — every
    image that appears before or during the entry, so nothing decodes mid-sequence;
-2. plays `opening`; enables the tap at 1.2 s (earlier taps are queued);
+2. plays `opening`; enables the tap at 1.2 s (earlier taps are queued); meanwhile preloads and decodes the Welcome
+   photograph (P01, outside the 350 KB first-frame budget) so it is ready at the cut — if it isn't, the welcome shows
+   its LQIP under the bloom pass and settles when decoded;
 3. on tap: `Invite.emit('open')` (sound unlock), fast-forwards `opening` if unfinished, plays `entry`;
 4. at the cut (1150 ms): swaps the cover for the welcome scene; at 2200 ms calls `Invite.completeOpening()`,
    unlocks scroll and focuses the `<h1>`.

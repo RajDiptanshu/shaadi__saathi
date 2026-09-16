@@ -86,8 +86,9 @@ something from this list.
 
 ## 7. How to measure
 
-Status: measurement tooling is built in Phase 3 (Playwright under `tests/` and `tools/capture/`). Until it exists,
-report budgets as **unmeasured**, never as passing.
+Status: Playwright 1.63 with Chromium and sharp are installed (2026-09-17); `npm run assets:check` enforces per-file
+ceilings and the opening's planned total. Page-level measurement (transfer sizes, Web Vitals, frame rate) is built
+with the first scene in Phase 4. Until then, report page budgets as **unmeasured**, never as passing.
 
 When it exists:
 - **Transfer sizes:** Playwright network log of a cold load at 390×844, split into "before the first opening frame"

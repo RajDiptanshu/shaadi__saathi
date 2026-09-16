@@ -28,8 +28,9 @@ frames); `docs/legacy-audit.md` (calibration score).
 
 ## 2. Capture protocol
 
-Status: Playwright capture tooling arrives in Phase 3 (`tools/capture/`). Until then, captures can't be trusted from
-the Browser preview pane (no rAF or observers) or from headless Edge for animated states.
+Status: Playwright 1.63 with Chromium is installed; scene capture scripts are written with the opening in Phase 4
+(`tools/capture/`). Captures can't be trusted from the Browser preview pane (no rAF or observers) or from headless
+Edge for animated states.
 
 1. Serve over http and open with `?test`.
 2. **Seek, don't guess:** `?test&tl=<timeline>&t=<s>` for time-based frames; `?test&scene=<id>&p=<0–1>` for

@@ -12,8 +12,8 @@ fail (with the reason) or not run (with the reason). "Looks fine" is not a resul
 §5–9 (hooks, markup contract, accessibility, performance), `docs/repository-audit.md` (engine contracts),
 `docs/legacy-audit.md` (freeze policy).
 
-Status: Playwright, `tools/serve.js` and `tools/capture/` are built in Phase 3. Until then, list the checks that
-could not run instead of assuming they pass.
+Status: Playwright 1.63 (Chromium) and `tools/serve.js` exist since Phase 3; test specs under `tests/` arrive with the
+first scene. Until a check has a spec or a manual run, list it as not run instead of assuming it passes.
 
 ---
 

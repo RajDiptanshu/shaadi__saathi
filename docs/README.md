@@ -22,6 +22,7 @@ Everything written for the flagship programme, in the order it was produced. Wor
 | [mogra-moti/asset-plan.md](mogra-moti/asset-plan.md) | every asset needed, acceptance criteria, sourcing and licences, the manifest, pipeline, budgets |
 | [mogra-moti/scene-architecture.md](mogra-moti/scene-architecture.md) | scene map, files, layers, engine integration, motion primitives, test hooks, the placeholder data model |
 | [mogra-moti/mogra-moti-creative-direction.pdf](mogra-moti/mogra-moti-creative-direction.pdf) | the direction board as a 10-page A4 PDF |
+| [mogra-moti/asset-candidates.md](mogra-moti/asset-candidates.md) | Phase 3: opening asset shortlist, rejections, approval list, processing risks |
 | [mogra-moti/mogra-moti-creative-direction.html](mogra-moti/mogra-moti-creative-direction.html) | the direction board's source page (download and open in a browser to view it rendered) |
 
 ## Phase 2 — Project skills (the design and engineering constitution)
