@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mogra & Moti Creative Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Imbue:opsz,wght@10..100,100..900&family=Archivo:wdth,wght@62..125,100..900&family=Noto+Serif+Devanagari:wdth,wght@62.5..100,100..900&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --paper-dawn: #ECEAE4; --paper: #F3EEE5; --paper-warm: #F2E8D9; --dusk: #E8DAC4; --night: #1E1915; --night-deep: #15110E;
+    --ink: #2A2520; --ink-soft: #675E55; --zari-ink: #76603C; --zari: #B89A6A; --zari-light: #E2CFA6;
+    --pearl: #ECE6DF; --pearl-shade: #D4C9BD; --orient-blush: #E6CBC1; --orient-sage: #D3DBD0; --sage: #8C9885; --mogra: #FAF8F2; --lamp: #F0C987;
+    --mehendi: #7E4128; --night-soft: #A89C8F; --marble: #D9D5CD; --rule: rgba(118, 96, 60, .32);
+    --display: "Imbue", "Didot", Georgia, serif;
+    --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --deva: "Noto Serif Devanagari", "Nirmala UI", serif;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; padding-inline: 20px; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--sans); font-synthesis: none; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  p { margin: 0; }
+  .label { font: 520 11px/1.3 var(--sans); font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .deva { font-family: var(--deva); font-stretch: 75%; letter-spacing: 0; text-transform: none; color: var(--zari-ink); }
+  h2 { margin: 0; font: 300 clamp(36px, 7vw, 60px)/1 var(--display); font-variation-settings: "opsz" 60; letter-spacing: 0; text-wrap: balance; }
+  h3 { margin: 0; font: 300 28px/1.05 var(--display); font-variation-settings: "opsz" 40; }
+  section { padding-block: 72px; border-top: 1px solid var(--rule); }
+  .head { display: grid; gap: 14px; margin-bottom: 36px; max-width: 62ch; }
+  .lede { font-size: 17px; color: var(--ink-soft); max-width: 60ch; text-wrap: pretty; }
+
+  /* Hero: the signature treatment, applied to the design's own name */
+  .hero { padding-block: 40px 64px; }
+  .hero-top { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; }
+  .sig { position: relative; margin-top: 28px; display: grid; grid-template-rows: auto clamp(40px, 9vw, 90px) auto; }
+  .sig p { font: 300 clamp(104px, 27vw, 250px)/.82 var(--display); font-variation-settings: "opsz" 100; letter-spacing: -.01em; }
+  .sig .a { grid-row: 3; justify-self: end; }
+  .sig svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; margin-top: 12px; }
+  .hero-line { margin-top: 40px; max-width: 24ch; font: 300 clamp(28px, 4.4vw, 40px)/1.08 var(--display); font-variation-settings: "opsz" 32; text-wrap: balance; }
+  .facts { display: flex; flex-wrap: wrap; gap: 10px 32px; margin-top: 28px; }
+  .facts div { display: grid; gap: 2px; }
+  .facts b { font-weight: 420; }
+
+  /* The ten answers */
+  .answers { display: grid; gap: 0; margin: 0; }
+  .answers div { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 8px 32px; padding-block: 18px; border-top: 1px solid var(--rule); }
+  .answers dt { font: 300 22px/1.15 var(--display); font-variation-settings: "opsz" 32; }
+  .answers dd { margin: 0; color: var(--ink-soft); max-width: 62ch; }
+  .answers dd strong { color: var(--ink); font-weight: 500; }
+
+  /* The clock: the page as a strip, to scale */
+  .clock { display: grid; grid-template-columns: 72px minmax(0, 1fr); column-gap: 20px; }
+  .clock .row { display: contents; }
+  .clock .band { background: var(--g); border-inline: 1px solid rgba(42,37,32,.12); min-height: calc(var(--h) * .3px); position: relative; }
+  .clock .row:first-child .band { border-top: 1px solid rgba(42,37,32,.12); }
+  .clock .row:last-child .band { border-bottom: 1px solid rgba(42,37,32,.12); }
+  .clock .draw .band::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 1.5px; background: var(--zari); transform: rotate(-8deg); }
+  .clock .text { display: flex; align-items: center; gap: 12px; padding-block: 3px; border-top: 1px solid rgba(118,96,60,.14); min-width: 0; }
+  .clock .text .n { font: 450 14px/1 var(--deva); font-stretch: 75%; color: var(--zari-ink); width: 22px; flex: none; }
+  .clock .text .s { font: 300 20px/1.1 var(--display); font-variation-settings: "opsz" 32; }
+  .clock .text .m { color: var(--ink-soft); font-size: 13px; }
+  .clock .draw .text .s { font-family: var(--sans); font-size: 11px; font-weight: 520; font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--zari-ink); }
+  .clock-note { margin-top: 16px; font-size: 13px; color: var(--ink-soft); }
+
+  /* Palette */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 24px 16px; }
+  .sw { display: grid; gap: 8px; align-content: start; }
+  .sw i { display: block; height: 64px; background: var(--c); border: 1px solid rgba(42,37,32,.12); }
+  .sw b { font: 300 20px/1 var(--display); font-variation-settings: "opsz" 32; }
+  .sw span { font-size: 13px; color: var(--ink-soft); line-height: 1.35; }
+  .sw code { font: 500 12px/1 var(--sans); letter-spacing: .04em; color: var(--ink); }
+  .group-label { margin: 36px 0 14px; }
+  .group-label:first-of-type { margin-top: 0; }
+
+  /* Type */
+  .spec { display: grid; gap: 0; }
+  .spec div { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 6px 28px; align-items: baseline; padding-block: 16px; border-top: 1px solid var(--rule); }
+  .spec .meta { font-size: 13px; color: var(--ink-soft); }
+  .spec .meta b { display: block; color: var(--ink); font-weight: 500; }
+  .t-masthead { font: 300 clamp(72px, 14vw, 132px)/.82 var(--display); font-variation-settings: "opsz" 100; letter-spacing: -.01em; }
+  .t-display { font: 300 clamp(52px, 10vw, 72px)/.9 var(--display); font-variation-settings: "opsz" 90; }
+  .t-title { font: 300 clamp(36px, 7vw, 44px)/1 var(--display); font-variation-settings: "opsz" 60; }
+  .t-line { font: 300 28px/1.1 var(--display); font-variation-settings: "opsz" 32; }
+  .t-info { font: 440 16px/20px var(--sans); }
+  .t-body { font: 400 16px/24px var(--sans); max-width: 38ch; }
+  .t-mark { font: 450 17px/1 var(--deva); font-stretch: 75%; color: var(--zari-ink); }
+  .verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px 40px; margin-top: 28px; }
+  .verdict p { color: var(--ink-soft); font-size: 15px; }
+  .verdict b { color: var(--ink); font-weight: 500; }
+
+  /* Beat chart, drawn to one time scale (0–7.5 s) */
+  .beats { display: grid; gap: 6px; }
+  .beat { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 14px; align-items: center; }
+  .beat .track { position: relative; height: 16px; background: linear-gradient(90deg, rgba(118,96,60,.14) 1px, transparent 1px) 0 0 / calc(100% / 7.5) 100%; }
+  .beat .bar { position: absolute; top: 3px; bottom: 3px; left: calc(var(--s) / 7.5 * 100%); width: max(3px, calc((var(--e) - var(--s)) / 7.5 * 100%)); background: var(--ink); }
+  .beat .bar.rm { background: var(--zari); }
+  .beat .name { font-size: 13px; }
+  .axis { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 14px; }
+  .axis .ticks { position: relative; height: 18px; }
+  .axis .ticks span { position: absolute; transform: translateX(-50%); font: 500 11px/1 var(--sans); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .chart-title { margin: 28px 0 10px; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; }
+  .chart-title:first-child { margin-top: 0; }
+  .key { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
+  .key i { width: 22px; height: 8px; background: var(--ink); }
+  .key i.rm { background: var(--zari); }
+
+  /* Storyboard frames: schematic phones at 390 × 844 */
+  .note { display: inline-block; margin-top: 4px; font-size: 13px; color: var(--ink-soft); border-left: 2px solid var(--zari); padding-left: 10px; }
+  .frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 28px 18px; }
+  .frames + .label { margin-top: 44px; }
+  figure { margin: 0; display: grid; gap: 10px; align-content: start; }
+  figcaption { display: grid; gap: 3px; font-size: 13px; line-height: 1.4; color: var(--ink-soft); }
+  figcaption b { font: 500 12px/1.2 var(--sans); letter-spacing: .06em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .ph { position: relative; aspect-ratio: 390 / 844; container-type: inline-size; overflow: hidden; background: var(--marble); border: 1px solid rgba(42,37,32,.18); border-radius: 12px; }
+  .ph > * { position: absolute; margin: 0; }
+  .ph .card { left: 6%; top: 7%; right: -3%; bottom: -3%; background: radial-gradient(120% 90% at 0% 0%, #F6F3EC 0%, var(--paper-dawn) 55%, #DEDBD3 100%); box-shadow: -1px -1px 0 rgba(255,255,255,.6), 2px 3px 8px rgba(42,37,32,.12); }
+  .ph .dark { inset: 0; background: radial-gradient(90% 55% at 0% 0%, rgba(21,17,14,.55), var(--night-deep) 70%); opacity: var(--o, 1); }
+  .ph .tag { left: 4%; top: 1.6%; font: 520 2.5cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); background: rgba(243,238,229,.8); padding: 1cqw 2cqw; }
+  .ph .mono { left: 50%; top: 17%; transform: translate(-50%, -50%); font: 200 20cqw/.8 var(--display); font-variation-settings: "opsz" 100; color: var(--paper-dawn); text-shadow: -.5px -.5px 0 rgba(255,255,255,.95), .8px .8px 0 rgba(42,37,32,.22); white-space: nowrap; opacity: var(--mo, 1); }
+  .ph .mono span { display: inline-block; transform: translate(-4cqw, 7cqw); }
+  .ph svg { inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ph .name { font: 300 33.8cqw/.82 var(--display); font-variation-settings: "opsz" 100; letter-spacing: -.01em; color: var(--ink); }
+  .ph .r { left: 4.6%; bottom: 61.5%; }
+  .ph .a { right: 4.6%; bottom: 39.5%; }
+  .ph .sur { font: 520 2.8cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .ph .sr1 { left: 5.6%; top: 40.5%; } .ph .sr2 { right: 5.6%; top: 62.4%; }
+  .ph .date { left: 5.2%; top: 82%; display: grid; gap: 1.2cqw; }
+  .ph .date .l { font: 520 2.8cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .ph .date .v { font: 420 4.1cqw/1.2 var(--sans); color: var(--ink); }
+  .ph .hint { left: 5.2%; top: 92%; font: 520 2.8cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+  .ph .veil { left: -10%; right: -10%; top: 0; bottom: 0; background: linear-gradient(115deg, transparent 38%, rgba(236,234,228,.96) 52%); }
+  .ph .chanderi { right: -14%; top: -5%; width: 72%; height: 33%; background: radial-gradient(70% 60% at 45% 55%, rgba(250,248,242,.78), rgba(250,248,242,.38) 60%, rgba(250,248,242,0) 75%), repeating-linear-gradient(118deg, rgba(255,255,255,.35) 0 3cqw, rgba(212,201,189,.25) 3cqw 6cqw); border-radius: 46% 20% 50% 30%; transform: rotate(-8deg); filter: blur(.6px); }
+  .ph .fg { border-radius: 50%; background: radial-gradient(circle at 40% 35%, rgba(250,248,242,.95), rgba(236,230,223,.7) 55%, rgba(236,230,223,0) 72%); filter: blur(2px); }
+  .ph .photo { left: 44%; right: 0; top: 10%; height: 39%; background: repeating-linear-gradient(135deg, #DAD5CB 0 2.2cqw, #E4E0D8 2.2cqw 4.4cqw); display: grid; place-items: end start; padding: 3cqw; font: 520 2.6cqw/1.2 var(--sans); font-stretch: 112%; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+  .ph .mark { left: 5.2%; top: 10%; display: flex; gap: 2.5cqw; align-items: baseline; font: 520 2.8cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .16em; color: var(--zari-ink); }
+  .ph .mark em { font: 450 3.6cqw/1 var(--deva); font-stretch: 75%; font-style: normal; }
+  .ph .h1 { left: 5.2%; right: 5%; top: 56%; display: grid; gap: 0; }
+  .ph .h1 .t { font: 300 11.3cqw/1 var(--display); font-variation-settings: "opsz" 60; }
+  .ph .h1 .line { font: 300 7.2cqw/1.1 var(--display); font-variation-settings: "opsz" 32; color: var(--ink-soft); margin-top: 2cqw; }
+  .ph .h1 svg { position: static; width: 100%; height: 7cqw; }
+  .ph .foot { left: 5.2%; top: 90%; font: 520 2.8cqw/1 var(--sans); font-stretch: 118%; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .ph.welcome { background: var(--paper-dawn); }
+  .masked { -webkit-mask-image: linear-gradient(118deg, #000 30%, transparent 62%); mask-image: linear-gradient(118deg, #000 30%, transparent 62%); }
+
+  /* Materials and structure lists */
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0 40px; }
+  .item { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding-block: 16px; border-top: 1px solid var(--rule); }
+  .item p { font-size: 15px; color: var(--ink-soft); }
+  .item h3 { font-size: 24px; margin-bottom: 4px; }
+  .dot { width: 30px; height: 30px; border-radius: 50%; margin-top: 2px; }
+  .nacre { background: radial-gradient(circle at 34% 30%, var(--mogra) 0 12%, var(--orient-blush) 20%, var(--pearl) 42%, var(--pearl-shade) 78%, #B8AC9F); }
+  .thread-s { height: 30px; background: linear-gradient(160deg, transparent 47%, var(--zari) 48% 52%, transparent 53%); }
+  .paper-s { border-radius: 0; background: radial-gradient(90% 90% at 0 0, #FBF9F4, var(--paper) 60%, #E6E0D5); border: 1px solid rgba(42,37,32,.12); }
+  .chanderi-s { border-radius: 0; background: repeating-linear-gradient(118deg, rgba(250,248,242,.9) 0 5px, rgba(212,201,189,.55) 5px 10px); border: 1px solid rgba(42,37,32,.12); }
+  .mogra-s { background: radial-gradient(circle at 50% 50%, #E9E0B8 0 12%, var(--mogra) 14% 55%, #E7E3D6 70%, transparent 72%); border: 1px solid rgba(42,37,32,.08); }
+  .lamp-s { background: radial-gradient(circle at 30% 30%, var(--lamp), var(--night) 72%); }
+
+  /* Night section */
+  .night { margin-inline: -20px; padding-inline: 20px; background: var(--night); color: var(--pearl); border-top: 0; }
+  .night .label { color: var(--night-soft); }
+  .night .lede, .night .item p { color: var(--night-soft); }
+  .night .item { border-top-color: rgba(184,154,106,.28); }
+  .night h2 { color: var(--pearl); }
+  .never { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 40px; }
+  .never ul { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .never li { font-size: 15px; color: var(--night-soft); padding-left: 18px; position: relative; }
+  .never li::before { content: ""; position: absolute; left: 0; top: .72em; width: 9px; height: 1px; background: var(--zari); }
+  .closing { padding-block: 80px 96px; }
+  .closing .hero-line { color: var(--pearl); max-width: 22ch; }
+  .next { margin-top: 36px; display: grid; gap: 10px; max-width: 64ch; }
+  .next p { color: var(--night-soft); font-size: 15px; }
+  .next b { color: var(--pearl); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .answers div, .spec div { grid-template-columns: minmax(0, 1fr); }
+    .beat, .axis { grid-template-columns: 5.2rem minmax(0, 1fr); gap: 10px; }
+    .clock { grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; }
+    .clock .text .m { display: none; }
+  }
+</style>
+<style>
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #F3EEE5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { padding-inline: 15mm; }
+    .hero { padding-block: 16mm 12mm; }
+    section { break-before: page; padding-block: 15mm; border-top: 0; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+    .head { break-after: avoid; margin-bottom: 22px; }
+    .answers div, .spec div, .sw, .beat, .axis, figure, .item, .never > div, .verdict p, .chart-title, .group-label { break-inside: avoid; }
+    .group-label, .chart-title { break-after: avoid; }
+    .swatches { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px 12px; }
+    .sw { gap: 5px; }
+    .sw i { height: 46px; }
+    .sw b { font-size: 17px; }
+    .sw span { font-size: 11.5px; }
+    .group-label { margin: 22px 0 10px; }
+    .spec div { padding-block: 9px; }
+    .t-masthead { font-size: 100px; }
+    .t-display { font-size: 58px; }
+    .verdict { margin-top: 16px; }
+    figcaption { font-size: 12px; }
+    .beats + p.label { margin-top: 26px !important; }
+    .frames { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 14px; }
+    .ph .dark { background: #15110E; }
+    .ph .photo { background: #DAD5CB; }
+    .thread-s { background: none; height: 0; border-top: 2px solid #B89A6A; transform: rotate(-20deg); margin-top: 16px; }
+    .spec div { padding-block: 6px; }
+    .t-masthead { font-size: 86px; }
+    .t-display { font-size: 50px; }
+    .t-title { font-size: 38px; }
+    .verdict { margin-top: 12px; gap: 10px 32px; }
+    .verdict p { font-size: 13px; }
+    .ph.welcome .fg { background: #E7E3D6 !important; }
+    .night-page { break-before: page; margin-inline: -15mm; padding-inline: 15mm; min-height: 297mm; background: #1E1915; }
+    .night-page .night { break-before: auto; margin-inline: 0; padding-inline: 0; background: transparent; }
+    .night-page .closing { padding-block: 10mm 15mm; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-top">
+    <p class="label"><span class="deva">मोती पिरोना</span>&nbsp;&nbsp;Shaadi Saathi · Flagship</p>
+    <p class="label">Phase 1 · Creative direction · 16 September 2026</p>
+  </div>
+  <div class="sig" aria-label="Mogra and Moti">
+    <p aria-hidden="true">Mogra</p>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-2,86 C30,74 58,38 102,20" fill="none" stroke="#E2CFA6" stroke-width="1" vector-effect="non-scaling-stroke" transform="translate(0,-0.35)"/>
+      <path d="M-2,86 C30,74 58,38 102,20" fill="none" stroke="#B89A6A" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <p class="a" aria-hidden="true">Moti</p>
+  </div>
+  <div class="sub"><p class="label">Mogra · jasmine, strung as buds</p><p class="label">Moti · pearl</p></div>
+  <p class="hero-line">One strand being made, from dawn to night: bud by bud, pearl by pearl, until the knot is tied and every flower has opened.</p>
+  <div class="facts">
+    <div><p class="label">Demo couple</p><p><b>Rohan Malhotra &amp; Anaya Kapoor</b></p></div>
+    <div><p class="label">Wedding</p><p><b>Monday 15 February 2027</b></p></div>
+    <div><p class="label">Everything else</p><p>Flagged placeholders in one data file</p></div>
+  </div>
+</header>
+
+<section>
+  <div class="head">
+    <p class="label">The creative system in ten answers</p>
+    <h2>What Mogra &amp; Moti is</h2>
+  </div>
+  <dl class="answers">
+    <div><dt>Recognisable by</dt><dd><strong>The strand</strong> — one champagne thread of alternating pearls and closed mogra buds, lying across cotton paper in raking morning light — and two tall names held apart by that thread.</dd></div>
+    <div><dt>Signature opening</dt><dd><strong>The light finds their names.</strong> Light rakes across a blind-debossed card; a pearl rolls in and stops; its thread pulls taut; the strand is strung bead by bead; the names are uncovered by the same light. Touch the pearl and the thread is pulled away.</dd></div>
+    <div><dt>Signature material</dt><dd><strong>Nacre</strong>, the lustre of pearl: a soft travelling highlight with blush and sage overtones. It replaces gold as the luxury cue and appears only in highlights.</dd></div>
+    <div><dt>Signature transition</dt><dd><strong>The Draw.</strong> A thread tightens and draws the next scene up like a new sheet of paper, beads riding along. Used three times: into Celebrations, into the reply, into the closing knot.</dd></div>
+    <div><dt>Signature type</dt><dd><strong>No ampersand.</strong> Rohan high and left, Anaya low and right, in condensed Imbue at masthead scale, with the thread running through the gap. Three appearances only.</dd></div>
+    <div><dt>Signature image</dt><dd><strong>Graded to the hour, bleeding off one edge, settling into place.</strong> Every photo matches its chapter's light, touches one screen edge (bar a few declared full-screen moments), and opens from that edge.</dd></div>
+    <div><dt>Indian, not "Indian wedding"</dt><dd>Mogra strung as buds that bloom at night, the mangalsutra's thread, the gathbandhan knot, chikankari shadow work, real henna colour, Devanagari chapter numerals, santoor. No mandalas, paisleys, red-and-gold or palace silhouettes.</dd></div>
+    <div><dt>Premium, not template</dt><dd>A composition per scene, one consistent light, big scale contrast, three elements per screen, choreography with causes, written copy, no cards, pills or icons, and a first screen that holds 60 fps.</dd></div>
+    <div><dt>Hierarchy at 390 px</dt><dd><strong>Moment → fact → action → detail.</strong> One image or the names, one large fact, one action in the thumb zone, then small grouped details. Two tiny fixed controls only.</dd></div>
+    <div><dt>Remembered</dt><dd>"The light found their names, a pearl rolled across the card, and by the end every flower had opened." The last frame: a knotted strand in full bloom under one lamp.</dd></div>
+  </dl>
+</section>
+
+<section>
+  <div class="head">
+    <p class="label">Scene architecture</p>
+    <h2>The page is one day</h2>
+    <p class="lede">The strip is the phone page to scale (about 18 screens). The ground follows the clock from dawn to night; the gold marks are the three Draws. The mogra opens as the page goes on.</p>
+  </div>
+  <div class="clock">
+    <div class="row" style="--g:#15110E;--h:100"><div class="band"></div><div class="text"><span class="n">०१</span><span class="s">Opening</span><span class="m">Dawn · light, pearl, strand, names · tap</span></div></div>
+    <div class="row" style="--g:#ECEAE4;--h:190"><div class="band"></div><div class="text"><span class="n">०२</span><span class="s">Welcome</span><span class="m">Morning · names held by the thread, hands stringing mogra</span></div></div>
+    <div class="row" style="--g:#F3EEE5;--h:300"><div class="band"></div><div class="text"><span class="n">०३</span><span class="s">Our Story</span><span class="m">Midday · three magazine spreads, overlapping photographs</span></div></div>
+    <div class="row draw" style="--g:#F3EEE5;--h:80"><div class="band"></div><div class="text"><span class="n"></span><span class="s">The Draw</span></div></div>
+    <div class="row" style="--g:#F2E8D9;--h:460"><div class="band"></div><div class="text"><span class="n">०४</span><span class="s">Celebrations</span><span class="m">Afternoon · Mehendi bleeds left, Sangeet stands vertical, the Wedding is centred on a knot, Reception goes full-bleed night</span></div></div>
+    <div class="row" style="--g:#E8DAC4;--h:280"><div class="band"></div><div class="text"><span class="n">०५</span><span class="s">Venue</span><span class="m">Dusk · a letterbox band opens to the full frame</span></div></div>
+    <div class="row" style="--g:#1E1915;--h:110"><div class="band"></div><div class="text"><span class="n">०६</span><span class="s">Gallery</span><span class="m">Night · a film strip you swipe</span></div></div>
+    <div class="row draw" style="--g:#1E1915;--h:80"><div class="band"></div><div class="text"><span class="n"></span><span class="s">The Draw</span></div></div>
+    <div class="row" style="--g:#1E1915;--h:150"><div class="band"></div><div class="text"><span class="n">०७</span><span class="s">RSVP</span><span class="m">Night · a lamp-lit reply card; saying yes adds a pearl</span></div></div>
+    <div class="row draw" style="--g:#15110E;--h:80"><div class="band"></div><div class="text"><span class="n"></span><span class="s">The Draw</span></div></div>
+    <div class="row" style="--g:#15110E;--h:140"><div class="band"></div><div class="text"><span class="n">०८</span><span class="s">Closing</span><span class="m">Late night · the knot, full bloom, the music settles</span></div></div>
+  </div>
+  <p class="clock-note">Reduced motion keeps every scene and transition, but nothing is pinned or scrubbed and durations drop to about a third.</p>
+</section>
+
+<section>
+  <div class="head">
+    <p class="label">Colour system</p>
+    <h2>Every colour comes from a material</h2>
+    <p class="lede">No wedding palette was consulted. Gold becomes readable text only at night; blush and sage live inside pearls and flowers, never as fills.</p>
+  </div>
+  <p class="label group-label">Grounds · the clock</p>
+  <div class="swatches">
+    <div class="sw"><i style="--c:#15110E"></i><b>Night deep</b><code>#15110E</code><span>before the light; the last hour</span></div>
+    <div class="sw"><i style="--c:#ECEAE4"></i><b>Paper, dawn</b><code>#ECEAE4</code><span>cotton rag in cool first light</span></div>
+    <div class="sw"><i style="--c:#F3EEE5"></i><b>Paper</b><code>#F3EEE5</code><span>midday; the reply card</span></div>
+    <div class="sw"><i style="--c:#F2E8D9"></i><b>Paper, warm</b><code>#F2E8D9</code><span>afternoon sun</span></div>
+    <div class="sw"><i style="--c:#E8DAC4"></i><b>Dusk</b><code>#E8DAC4</code><span>godhuli light</span></div>
+    <div class="sw"><i style="--c:#1E1915"></i><b>Night</b><code>#1E1915</code><span>a lamp-lit room, not black</span></div>
+  </div>
+  <p class="label group-label">Text · contrast on its ground</p>
+  <div class="swatches">
+    <div class="sw"><i style="--c:#2A2520"></i><b>Ink</b><code>#2A2520</code><span>13.1:1 on paper</span></div>
+    <div class="sw"><i style="--c:#675E55"></i><b>Ink soft</b><code>#675E55</code><span>5.5:1 on paper · 4.6:1 at dusk</span></div>
+    <div class="sw"><i style="--c:#76603C"></i><b>Zari ink</b><code>#76603C</code><span>5.2:1 · chapter marks, the Wedding's 15</span></div>
+    <div class="sw"><i style="--c:#7E4128"></i><b>Mehendi</b><code>#7E4128</code><span>6.5:1 · the word "Mehendi" only</span></div>
+    <div class="sw"><i style="--c:#ECE6DF"></i><b>Pearl</b><code>#ECE6DF</code><span>14.1:1 at night</span></div>
+    <div class="sw"><i style="--c:#B89A6A"></i><b>Zari</b><code>#B89A6A</code><span>6.5:1 at night · 2.3:1 on paper, decorative</span></div>
+  </div>
+  <p class="label group-label">Materials · never text on light grounds</p>
+  <div class="swatches">
+    <div class="sw"><i style="--c:#E2CFA6"></i><b>Zari light</b><code>#E2CFA6</code><span>the thread's highlight</span></div>
+    <div class="sw"><i style="--c:#D4C9BD"></i><b>Pearl shade</b><code>#D4C9BD</code><span>the pearl's shadow side</span></div>
+    <div class="sw"><i style="--c:#E6CBC1"></i><b>Orient blush</b><code>#E6CBC1</code><span>pearl overtone</span></div>
+    <div class="sw"><i style="--c:#D3DBD0"></i><b>Orient sage</b><code>#D3DBD0</code><span>pearl overtone</span></div>
+    <div class="sw"><i style="--c:#8C9885"></i><b>Sage</b><code>#8C9885</code><span>mogra calyx, inside photographs</span></div>
+    <div class="sw"><i style="--c:#F0C987"></i><b>Lamp</b><code>#F0C987</code><span>night light, at most 22%</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <p class="label">Typography</p>
+    <h2>Tall and narrow, like strands</h2>
+    <p class="lede">Three families, each with a width axis. Imbue was chosen over Bodoni Moda after rendering both at 390 px: at 132 px it reads as a masthead, while Bodoni Moda has to drop to 86 px and looks like a standard wedding card.</p>
+  </div>
+  <div class="spec">
+    <div><p class="meta"><b>Masthead</b>Imbue 300 · opsz 100 · 132 px<br>first names only</p><p class="t-masthead">Anaya</p></div>
+    <div><p class="meta"><b>Display</b>Imbue 300 · opsz 90 · 72 px<br>event and venue names</p><p class="t-display">Sangeet</p></div>
+    <div><p class="meta"><b>Title</b>Imbue 300 · opsz 60 · 44 px</p><p class="t-title">Will you join us?</p></div>
+    <div><p class="meta"><b>Line</b>Imbue 300 · opsz 32 · 28 px<br>at most 12 words</p><p class="t-line">Mogra is strung in the morning and opens by night.</p></div>
+    <div><p class="meta"><b>Label</b>Archivo 520 · width 118 · 11 px caps</p><p class="label" style="color:var(--ink)">Sunday 14 February · Jubilee Hills</p></div>
+    <div><p class="meta"><b>Information</b>Archivo 440 · 16 px</p><p class="t-info">1:00 pm · The Jasmine Courtyard, Kapoor residence</p></div>
+    <div><p class="meta"><b>Body</b>Archivo 400 · 16 px · at most 45 words</p><p class="t-body">A delayed flight, a crowded airport café, and a conversation that outlasted the delay.</p></div>
+    <div><p class="meta"><b>Chapter mark</b>Noto Serif Devanagari · width 75</p><p><span class="t-mark">०४</span>&nbsp;&nbsp;<span class="label" style="color:var(--zari-ink)">Celebrations</span></p></div>
+  </div>
+  <div class="verdict">
+    <p><b>Never:</b> script faces, an ampersand between the names, fake italics, letter-by-letter animation, tracking on Devanagari, more than three sizes on one screen.</p>
+    <p><b>Placeholder copy</b> shown here is demo content from the data file, flagged for replacement.</p>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <p class="label">Opening storyboard</p>
+    <h2>The light finds their names</h2>
+    <p class="lede">Each beat has one cause. The chart is drawn to scale; ink bars are the full film, gold bars the reduced-motion cut.</p>
+  </div>
+
+  <div class="chart-title"><p class="label">Before the tap · seconds</p><span class="key"><i></i>Normal, 6.4 s to ready</span><span class="key"><i class="rm"></i>Reduced, 2.2 s</span></div>
+  <div class="beats" role="img" aria-label="Opening beats on a 0 to 7.5 second scale. Normal: light 0 to 1.6, relief 0.9 to 2.1, pearl 1.8 to 3.1, tension 3.0 to 3.5, strand 3.4 to 4.5, names 4.2 to 5.2, breeze 5.0 to 7.4, date 5.8 to 6.4, ready at 6.4. Reduced: light 0 to 0.8, relief 0.4 to 1.0, pearl and strand in place 0.9 to 1.3, names 1.3 to 1.8, date and fabric 1.8 to 2.2, ready at 2.2.">
+    <div class="beat"><span class="name">Light rises</span><span class="track"><i class="bar" style="--s:0;--e:1.6"></i><i class="bar rm" style="--s:0;--e:.8;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Relief emerges</span><span class="track"><i class="bar" style="--s:.9;--e:2.1"></i><i class="bar rm" style="--s:.4;--e:1;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Pearl rolls in</span><span class="track"><i class="bar" style="--s:1.8;--e:3.1"></i><i class="bar rm" style="--s:.9;--e:1.2;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Thread tightens</span><span class="track"><i class="bar" style="--s:3;--e:3.5"></i><i class="bar rm" style="--s:.9;--e:1.3;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Strand strung</span><span class="track"><i class="bar" style="--s:3.4;--e:4.5"></i><i class="bar rm" style="--s:.9;--e:1.2;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Names by light</span><span class="track"><i class="bar" style="--s:4.2;--e:5.2"></i><i class="bar rm" style="--s:1.3;--e:1.8;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Breeze, fabric</span><span class="track"><i class="bar" style="--s:5;--e:7.4"></i><i class="bar rm" style="--s:1.8;--e:2.2;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Date</span><span class="track"><i class="bar" style="--s:5.8;--e:6.4"></i><i class="bar rm" style="--s:1.8;--e:2.2;top:9px;bottom:1px"></i></span></div>
+    <div class="beat"><span class="name">Ready to touch</span><span class="track"><i class="bar" style="--s:6.4;--e:6.45"></i><i class="bar rm" style="--s:2.2;--e:2.25;top:9px;bottom:1px"></i></span></div>
+    <div class="axis" aria-hidden="true"><span></span><span class="ticks"><span style="left:0%;transform:none">0</span><span style="left:13.33%">1</span><span style="left:26.67%">2</span><span style="left:40%">3</span><span style="left:53.33%">4</span><span style="left:66.67%">5</span><span style="left:80%">6</span><span style="left:93.33%">7</span></span></div>
+  </div>
+
+  <p class="label" style="margin-top:48px">Frames · normal motion · 390 × 844</p>
+  <p class="note">Schematic frames: they fix layout, timing and cause. Textures, pearls and flowers will be photographed material, not these shapes.</p>
+  <div class="frames" style="margin-top:22px">
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><div class="dark" style="--o:.97"></div></div>
+      <figcaption><b>0.0 s · Dark</b>A warm near-black. The first light is about to reach the corner.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p><div class="dark" style="--o:.25"></div></div>
+      <figcaption><b>1.5 s · Relief</b>Raking light lifts the blind-debossed R·A out of the paper. No ink.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M390,496 C340,497 300,496 262,496" stroke="#B89A6A" stroke-width="1.2" stroke-dasharray="2 5" fill="none"/><ellipse cx="258" cy="499" rx="9" ry="4" fill="rgba(42,37,32,.14)"/><circle cx="255" cy="494" r="8" fill="url(#pearlg)"/>
+          <defs><radialGradient id="pearlg" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#FAF8F2"/><stop offset=".25" stop-color="#E6CBC1"/><stop offset=".5" stop-color="#ECE6DF"/><stop offset="1" stop-color="#C9BCAE"/></radialGradient></defs></svg>
+      </div>
+      <figcaption><b>2.5 s · Pearl</b>One pearl rolls in from the right, highlight fixed to the light, slowing to rest.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/><circle cx="150" cy="496" r="8" fill="url(#pearlg)"/></svg>
+      </div>
+      <figcaption><b>3.2 s · Tension</b>Its stop pulls the thread taut, edge to edge, through the pearl.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="41" cy="601" r="6.5"/><circle cx="81" cy="569" r="6.5"/><circle cx="120" cy="530" r="6.5"/><circle cx="150" cy="496" r="8"/></g>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="61" cy="585" rx="8" ry="4.5" transform="rotate(-38 61 585)"/><ellipse cx="100" cy="550" rx="8" ry="4.5" transform="rotate(-43 100 550)"/><ellipse cx="21" cy="613" rx="8" ry="4.5" transform="rotate(-32 21 613)"/><ellipse cx="136" cy="513" rx="8" ry="4.5" transform="rotate(-48 136 513)"/></g></svg>
+      </div>
+      <figcaption><b>4.0 s · Strand</b>Tension draws pearls and closed buds along the thread, bead by bead.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="41" cy="601" r="6.5"/><circle cx="81" cy="569" r="6.5"/><circle cx="120" cy="530" r="6.5"/><circle cx="150" cy="496" r="8"/></g>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="61" cy="585" rx="8" ry="4.5" transform="rotate(-38 61 585)"/><ellipse cx="100" cy="550" rx="8" ry="4.5" transform="rotate(-43 100 550)"/><ellipse cx="21" cy="613" rx="8" ry="4.5" transform="rotate(-32 21 613)"/><ellipse cx="136" cy="513" rx="8" ry="4.5" transform="rotate(-48 136 513)"/></g></svg>
+        <p class="name r">Rohan</p><p class="sur sr1">Malhotra</p><p class="name a masked">Anaya</p>
+      </div>
+      <figcaption><b>4.8 s · Names</b>A brighter band of light sweeps along the thread and sets the names on either side of it.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="41" cy="601" r="6.5"/><circle cx="81" cy="569" r="6.5"/><circle cx="120" cy="530" r="6.5"/><circle cx="150" cy="496" r="8"/></g>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="61" cy="585" rx="8" ry="4.5" transform="rotate(-38 61 585)"/><ellipse cx="100" cy="550" rx="8" ry="4.5" transform="rotate(-43 100 550)"/><ellipse cx="21" cy="613" rx="8" ry="4.5" transform="rotate(-32 21 613)"/><ellipse cx="136" cy="513" rx="8" ry="4.5" transform="rotate(-48 136 513)"/></g></svg>
+        <p class="name r">Rohan</p><p class="sur sr1">Malhotra</p><p class="name a">Anaya</p><p class="sur sr2">Kapoor</p>
+        <div class="chanderi"></div><div class="fg" style="left:70%;top:74%;width:22%;aspect-ratio:1"></div><div class="fg" style="left:84%;top:86%;width:12%;aspect-ratio:1"></div>
+      </div>
+      <figcaption><b>5.6 s · Breeze</b>Sheer chanderi drifts over the corner; two buds tumble past, out of focus.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="tag">Sample invitation</p><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="41" cy="601" r="6.5"/><circle cx="81" cy="569" r="6.5"/><circle cx="120" cy="530" r="6.5"/><circle cx="150" cy="496" r="8"/></g>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="61" cy="585" rx="8" ry="4.5" transform="rotate(-38 61 585)"/><ellipse cx="100" cy="550" rx="8" ry="4.5" transform="rotate(-43 100 550)"/><ellipse cx="21" cy="613" rx="8" ry="4.5" transform="rotate(-32 21 613)"/><ellipse cx="136" cy="513" rx="8" ry="4.5" transform="rotate(-48 136 513)"/></g></svg>
+        <p class="name r">Rohan</p><p class="sur sr1">Malhotra</p><p class="name a">Anaya</p><p class="sur sr2">Kapoor</p>
+        <div class="chanderi"></div>
+        <div class="date"><span class="l">Monday</span><span class="v">15 February 2027 · Hyderabad</span></div>
+        <p class="hint">Touch the pearl</p>
+      </div>
+      <figcaption><b>6.5 s · Ready</b>The date, then an object to touch. Only the pearl's highlight moves.</figcaption>
+    </figure>
+  </div>
+
+  <p class="label">Frames · after the tap</p>
+  <div class="frames" style="margin-top:22px">
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="41" cy="601" r="6.5"/><circle cx="81" cy="569" r="6.5"/><circle cx="120" cy="530" r="6.5"/></g>
+          <circle cx="150" cy="496" r="15" fill="none" stroke="#B89A6A" stroke-opacity=".45" stroke-width="1.2"/><circle cx="150" cy="496" r="7.5" fill="url(#pearlg)"/>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="61" cy="585" rx="8" ry="4.5" transform="rotate(-38 61 585)"/><ellipse cx="100" cy="550" rx="8" ry="4.5" transform="rotate(-43 100 550)"/><ellipse cx="21" cy="613" rx="8" ry="4.5" transform="rotate(-32 21 613)"/><ellipse cx="136" cy="513" rx="8" ry="4.5" transform="rotate(-48 136 513)"/></g></svg>
+        <p class="name r">Rohan</p><p class="sur sr1">Malhotra</p><p class="name a">Anaya</p><p class="sur sr2">Kapoor</p><div class="chanderi"></div>
+        <div class="date"><span class="l">Monday</span><span class="v">15 February 2027 · Hyderabad</span></div>
+      </div>
+      <figcaption><b>+0.12 s · Touch</b>The pearl presses and brightens at once; a soft click. Music is queued.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div><p class="mono">R<span>A</span></p>
+        <svg viewBox="0 0 390 844"><path d="M0,625 C140,560 250,330 390,236" stroke="#B89A6A" stroke-width="1.4" fill="none"/><path d="M262,380 C300,330 340,290 390,262" stroke="#B89A6A" stroke-width="1" stroke-dasharray="2 5" fill="none"/>
+          <g fill="url(#pearlg)"><circle cx="262" cy="365" r="6.5"/><circle cx="305" cy="318" r="6.5"/><circle cx="350" cy="276" r="8"/></g>
+          <g fill="#FAF8F2" stroke="#CFC8B6" stroke-width=".8"><ellipse cx="284" cy="341" rx="8" ry="4.5" transform="rotate(-44 284 341)"/><ellipse cx="327" cy="297" rx="8" ry="4.5" transform="rotate(-40 327 297)"/></g></svg>
+        <p class="name r">Rohan</p><p class="sur sr1">Malhotra</p><p class="name a">Anaya</p><p class="sur sr2">Kapoor</p>
+        <div class="chanderi" style="right:-2%;top:10%;width:90%;height:44%;transform:rotate(-20deg)"></div>
+      </div>
+      <figcaption><b>+0.6 s · Pull</b>The thread is pulled; the strand leaves through the gap and drags the fabric with it.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph" aria-hidden="true"><div class="card"></div>
+        <p class="name r">Rohan</p><p class="name a">Anaya</p>
+        <div class="fg" style="left:-18%;top:26%;width:136%;height:50%;filter:blur(7px)"></div>
+      </div>
+      <figcaption><b>+1.15 s · Bloom pass</b>A bud passes the camera and covers the cut while the camera pushes into the paper.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="ph welcome" aria-hidden="true">
+        <p class="mark"><em>०२</em>WELCOME</p>
+        <p class="photo">P01 · hands stringing mogra</p>
+        <div class="fg" style="left:13%;top:41%;width:10%;aspect-ratio:1;filter:none;background:radial-gradient(circle at 40% 35%,#FAF8F2,#E7E3D6 70%,transparent 72%)"></div>
+        <div class="h1"><p class="t">Rohan Malhotra</p>
+          <svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,7 C30,6 60,3 100,2" stroke="#B89A6A" stroke-width="1.2" fill="none" vector-effect="non-scaling-stroke"/></svg>
+          <p class="t">Anaya Kapoor</p><p class="line">are getting married</p></div>
+        <p class="foot">14–16 February 2027 · Hyderabad</p>
+      </div>
+      <figcaption><b>+2.2 s · Welcome</b>The scene settles from the push; the monogram's thread becomes the heading's thread. Scrolling unlocks.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="head">
+    <p class="label">Materials</p>
+    <h2>White on white, told apart by light</h2>
+    <p class="lede">One key light from the top left in every scene. Expensive looks are rendered once in the pipeline; at runtime only position, opacity and small masks move.</p>
+  </div>
+  <div class="cols">
+    <div class="item"><i class="dot nacre"></i><div><h3>Nacre</h3><p>The signature. Photographed pearls, a highlight that never rotates, blush and sage fringes. Replaces gold.</p></div></div>
+    <div class="item"><i class="dot paper-s"></i><div><h3>Cotton-rag paper</h3><p>The invitation itself. Fibres visible only in raking light; the monogram is blind-debossed and appears when light touches it.</p></div></div>
+    <div class="item"><i class="dot thread-s" style="border-radius:0"></i><div><h3>Champagne thread</h3><p>The concept's object. Tension, one tiny release overshoot, beads that bunch then space. Never a divider or a timeline.</p></div></div>
+    <div class="item"><i class="dot mogra-s"></i><div><h3>Mogra, bud to bloom</h3><p>Closed at dawn, open at night, following the page's clock. Always photographed, never drawn.</p></div></div>
+    <div class="item"><i class="dot chanderi-s"></i><div><h3>Chanderi, chikankari</h3><p>Sheer silk-cotton; its embroidery shows only as a soft shadow on the paper beneath.</p></div></div>
+    <div class="item"><i class="dot lamp-s"></i><div><h3>Lamp light</h3><p>The only light at night. It makes pearl text and gold legible and the final strand glow.</p></div></div>
+  </div>
+</section>
+
+<div class="night-page"><section class="night">
+  <div class="head">
+    <p class="label">Anti-patterns</p>
+    <h2>Never in Mogra &amp; Moti</h2>
+  </div>
+  <div class="never">
+    <div><p class="label">Openings</p><ul><li>Curtains, envelopes, wax seals, doors, scratch foil</li><li>A centred hero with names, date and a scroll cue</li><li>Pulsing "tap to open"</li></ul></div>
+    <div><p class="label">Layout</p><ul><li>Bordered cards, identical event cards, timelines with dots</li><li>Countdown tiles</li><li>A floating gradient "Get this design" pill</li></ul></div>
+    <div><p class="label">Imagery</p><ul><li>Stock couples smiling at the camera; AI faces</li><li>Drawn flowers, mandalas, paisleys, palace silhouettes</li><li>Red-and-gold, HDR, gold gradient fills</li></ul></div>
+    <div><p class="label">Motion</p><ul><li>Fade-up on scroll, bounce, scale-in, blur-in</li><li>Petal showers, confetti, sparkles, floating hearts</li><li>Things that move with no visible cause</li></ul></div>
+  </div>
+</section>
+
+<section class="night closing">
+  <p class="label">After Phase 1</p>
+  <p class="hero-line">Mogra is strung in the morning and opens by night.</p>
+  <div class="next">
+    <p><b>Written in the repository:</b> seven documents in <code>docs/mogra-moti/</code> — concept, visual DNA, typography, materials, storyboard, asset plan, scene architecture — plus the placeholder data model.</p>
+    <p><b>Next, when you say so:</b> Phase 2, project skills that turn these rules into checklists; then Phase 3, Playwright, the asset pipeline and sourcing, with every download listed for your approval first.</p>
+    <p><b>Open questions:</b> keep Hyderabad as the demo city? Show an invocation line in the demo?</p>
+  </div>
+</section></div>
+
+</div>
+</body>
+</html>
