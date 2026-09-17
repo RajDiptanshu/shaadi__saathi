@@ -72,7 +72,7 @@ image 1.06 → 1.00 over 1400 ms (reduced: mask 360 ms, no scale); Light shift 1
 
 ## 5. Transition rules
 
-**Vocabulary:** The Draw (signature; ×3: into Celebrations, RSVP, Closing) · Bloom pass (opening entry only) ·
+**Vocabulary:** The Draw (signature; ×4: the opening's entry into Welcome, time-based from the tap; into Celebrations, RSVP and Closing, scroll-scrubbed) · ~~Bloom pass~~ (retired 2026-09-17) ·
 Light shift (02→03, between celebrations, 05→06) · Set by light (type) · Print settle (photos) · Letterbox open
 (venue).
 
@@ -118,11 +118,14 @@ Test with `?rm=1`. Scenes read tokens from the motion policy; they never branch 
 4. **Animate only `transform`, `opacity` and small masks.** Never width/height/top/left, box-shadow, filters,
    backdrop-filter or blend modes. `will-change` only while a tween runs. Moving cut-outs carry pre-blurred shadow
    sprites, not `drop-shadow()`.
-5. **GSAP is vendored and pinned** in `site/vendor/gsap/<version>/` (core, ScrollTrigger, MotionPathPlugin). No CDN.
+5. **GSAP is vendored and pinned** in `site/vendor/gsap/<version>/` (core, ScrollTrigger, MotionPathPlugin) once its download is
+   approved. No CDN. Until then (and for the Phase 3.5 opening) timelines use `engine/motion/timeline.js`: each
+   timeline is a pure `render(t)` with the same easing tokens, seekable by construction.
 6. **Rebind on `render`:** language switches rebuild `data-each` nodes; kill tweens and ScrollTriggers bound to them
    and rebuild.
 7. **The opening** opts in with `<html data-opening="theme">`, waits for fonts and every image it shows before or
-   during the entry (T01–T04, O01–O03, O06; max 1.8 s behind a dark first frame) and ends with
+   during the entry (T01, T03, O01–O03, the monogram layers, and P01 for Welcome; max 1.8 s behind a dark first
+   frame; T02 is drawn procedurally, T04 and O06 are deferred) and ends with
    `Invite.completeOpening()`.
 8. **Measure layout before tweening, never inside `onUpdate`.**
 9. Use `svh` and ScrollTrigger's `ignoreMobileResize` so in-app browser toolbars don't make pins jump; don't use

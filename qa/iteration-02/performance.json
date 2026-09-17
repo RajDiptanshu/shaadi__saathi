@@ -1,0 +1,181 @@
+{
+  "measuredOn": "2026-09-17T07:12:42.600Z",
+  "setup": "Playwright Chromium headless, 390×844 at DPR 3, CPU throttled 4×, local server without compression",
+  "opening": {
+    "requests": 31,
+    "rawKB": 185,
+    "textGzipKB": 27.8,
+    "imagesKB": 51.5,
+    "fontsKB": 48.3,
+    "byFile": [
+      {
+        "url": "styles/tokens.css",
+        "type": "stylesheet",
+        "KB": 2.3
+      },
+      {
+        "url": "styles/base.css",
+        "type": "stylesheet",
+        "KB": 2.9
+      },
+      {
+        "url": "styles/scenes.css",
+        "type": "stylesheet",
+        "KB": 9.6
+      },
+      {
+        "url": "assets/fonts/imbue.woff2",
+        "type": "font",
+        "KB": 19.9
+      },
+      {
+        "url": "assets/fonts/archivo.woff2",
+        "type": "font",
+        "KB": 26.3
+      },
+      {
+        "url": "",
+        "type": "document",
+        "KB": 7.7
+      },
+      {
+        "url": "details.js",
+        "type": "script",
+        "KB": 6.2
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/core.js",
+        "type": "script",
+        "KB": 10.5
+      },
+      {
+        "url": "assets/photography/p01-hands-720.avif",
+        "type": "image",
+        "KB": 14.8
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/policy.js",
+        "type": "script",
+        "KB": 2.1
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/media.js",
+        "type": "script",
+        "KB": 2.5
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/timeline.js",
+        "type": "script",
+        "KB": 4
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/paper.js",
+        "type": "script",
+        "KB": 3.2
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/thread.js",
+        "type": "script",
+        "KB": 4.8
+      },
+      {
+        "url": "http://127.0.0.1:64127/engine/motion/reveal.js",
+        "type": "script",
+        "KB": 1.1
+      },
+      {
+        "url": "scenes/02-welcome.js",
+        "type": "script",
+        "KB": 2.6
+      },
+      {
+        "url": "main.js",
+        "type": "script",
+        "KB": 0.6
+      },
+      {
+        "url": "scenes/01-opening.js",
+        "type": "script",
+        "KB": 25.1
+      },
+      {
+        "url": "assets/fonts/noto-serif-devanagari.woff2",
+        "type": "font",
+        "KB": 2.2
+      },
+      {
+        "url": "assets/ornaments/monogram-occlusion.avif",
+        "type": "image",
+        "KB": 0.9
+      },
+      {
+        "url": "assets/ornaments/monogram-shadow.avif",
+        "type": "image",
+        "KB": 2.7
+      },
+      {
+        "url": "assets/ornaments/monogram-highlight.avif",
+        "type": "image",
+        "KB": 2
+      },
+      {
+        "url": "assets/ornaments/monogram-foil.avif",
+        "type": "image",
+        "KB": 3.5
+      },
+      {
+        "url": "assets/pearls/o01-hero-96.avif",
+        "type": "image",
+        "KB": 1.9
+      },
+      {
+        "url": "assets/pearls/o02-strand-a-64.avif",
+        "type": "image",
+        "KB": 1.6
+      },
+      {
+        "url": "assets/pearls/o02-strand-c-64.avif",
+        "type": "image",
+        "KB": 1.4
+      },
+      {
+        "url": "assets/flowers/o03-bud-tall-160.avif",
+        "type": "image",
+        "KB": 3.2
+      },
+      {
+        "url": "assets/flowers/o03-bud-small-160.avif",
+        "type": "image",
+        "KB": 1.6
+      },
+      {
+        "url": "assets/textures/t01-paper-768.avif",
+        "type": "image",
+        "KB": 4.2
+      },
+      {
+        "url": "assets/textures/t03-marble-1200.avif",
+        "type": "image",
+        "KB": 10.2
+      },
+      {
+        "url": "assets/ornaments/monogram-foil.avif",
+        "type": "image",
+        "KB": 3.5
+      }
+    ],
+    "estimatedTransferKB": 127.6
+  },
+  "afterTap": [],
+  "lcpMs": 880,
+  "cls": 0,
+  "longTasks": 3,
+  "frames": {
+    "count": 678,
+    "medianMs": 16.7,
+    "p95Ms": 16.8,
+    "maxMs": 33.4,
+    "over34ms": 0
+  },
+  "tapFeedbackMs": 46
+}

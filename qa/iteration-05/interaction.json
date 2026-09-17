@@ -1,0 +1,97 @@
+{
+  "results": [
+    {
+      "name": "still: invitation visible without motion",
+      "ok": true,
+      "detail": {
+        "covered": true,
+        "motion": false,
+        "inert": true,
+        "focus": "BODY",
+        "scrollable": false
+      }
+    },
+    {
+      "name": "still: tap opens Welcome instantly",
+      "ok": true,
+      "detail": {
+        "covered": false,
+        "motion": false,
+        "inert": false,
+        "focus": "welcome-title",
+        "scrollable": true
+      }
+    },
+    {
+      "name": "open: Welcome shown, opening skipped",
+      "ok": true,
+      "detail": {
+        "covered": false,
+        "motion": false,
+        "inert": false,
+        "focus": "BODY",
+        "scrollable": true
+      }
+    },
+    {
+      "name": "keyboard: Tab focuses the cover button",
+      "ok": true,
+      "detail": {
+        "focused": "open-invitation"
+      }
+    },
+    {
+      "name": "keyboard: Enter enters; focus on the heading; scroll unlocked",
+      "ok": true,
+      "detail": {
+        "covered": false,
+        "motion": true,
+        "inert": false,
+        "focus": "welcome-title",
+        "scrollable": true,
+        "ms": 3212
+      }
+    },
+    {
+      "name": "keyboard: Escape does not open",
+      "ok": true,
+      "detail": {
+        "covered": true,
+        "motion": true,
+        "inert": true,
+        "focus": "BODY",
+        "scrollable": false
+      }
+    },
+    {
+      "name": "tap at 2 s: opening fast-forwards at 4×",
+      "ok": true,
+      "detail": {
+        "speed": 4
+      }
+    },
+    {
+      "name": "tap at 2 s: Draw completes, Welcome active",
+      "ok": true,
+      "detail": {
+        "covered": false,
+        "motion": true,
+        "inert": false,
+        "focus": "welcome-title",
+        "scrollable": true
+      }
+    },
+    {
+      "name": "tap at 0 s: queued, then enters",
+      "ok": true,
+      "detail": {
+        "covered": false,
+        "motion": true,
+        "inert": false,
+        "focus": "welcome-title",
+        "scrollable": true
+      }
+    }
+  ],
+  "errors": []
+}

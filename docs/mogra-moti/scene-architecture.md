@@ -121,6 +121,13 @@ mid-page) at 390×844. After every engine change the captures are repeated and c
 
 ### 4.2 New motion primitives (`site/engine/motion/`)
 
+**Built in Phase 3.5:** `policy.js`, `timeline.js` (in-house, GSAP-free: timelines are pure functions of time),
+`media.js` (AVIF/WebP choice, decode-before-play), `paper.js` (new: deckled sheets and the drawn sheet's edge),
+`thread.js` (chord-and-bow curves, arc-length beads, SVG thread), `reveal.js` (Set by light). **Not yet built:**
+`scene.js`, `draw.js` (the scroll-scrubbed Draws), `depth.js`. The opening's Draw lives in its scene file because it is
+time-based and specific to the cover. `core.js` is used unchanged for binding; the flagship does not use `#cover`,
+so no engine change was needed.
+
 Plain scripts that register on `Invite.motion`, consistent with the engine's style. Each has one job.
 
 | File | Primitive | Responsibility | Key API |

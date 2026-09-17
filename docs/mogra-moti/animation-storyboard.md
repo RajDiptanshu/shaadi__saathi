@@ -97,8 +97,8 @@ Rules:
 
 | ID | Name | Where | What happens | Normal | Reduced |
 |---|---|---|---|---|---|
-| **T1** | **The Draw** (signature) | into 04 Celebrations, into 07 RSVP, into 08 Closing | pinned; a thread enters from the left, tightens (`e-tension`), and draws the next scene up over the current one like a new sheet: the incoming sheet translates from 100% to 0 with a soft curved top edge carrying the thread; 3 beads ride the thread; the outgoing scene scales to 0.98 and darkens 8% | scrubbed across 80 svh; beads lag the sheet by 6% of progress | not pinned or scrubbed: at the threshold the thread line draws across (300 ms) and the new scene cross-fades in (450 ms); no translation |
-| **T2** | **Bloom pass** | the opening's entry | a large defocused mogra bud crosses the frame bottom to top, covering 70% of the screen for about 250 ms; the scene is swapped behind it | 600 ms crossing | not used; cross-fade 450 ms |
+| **T1** | **The Draw** (signature) | the opening's entry into 02 Welcome (time-based, from the tap; §7.0), into 04 Celebrations, into 07 RSVP, into 08 Closing | pinned; a thread enters from the left, tightens (`e-tension`), and draws the next scene up over the current one like a new sheet: the incoming sheet translates from 100% to 0 with a soft curved top edge carrying the thread; 3 beads ride the thread; the outgoing scene scales to 0.98 and darkens 8% | scrubbed across 80 svh; beads lag the sheet by 6% of progress | not pinned or scrubbed: at the threshold the thread line draws across (300 ms) and the new scene cross-fades in (450 ms); no translation |
+| ~~T2~~ | ~~Bloom pass~~ | retired 2026-09-17 | the Phase 3.5 brief makes the thread the cause of entering Welcome, so the opening enters through the Draw (§7.0) | — | — |
 | **T3** | **Light shift** | 02 → 03, between celebrations, 05 → 06 | the ground colour and photo grade change as a scene's top passes 50% of the viewport | 1200 ms, time-based | 600 ms |
 | **T4** | **Set by light** (type reveal) | names, titles, lines | a soft diagonal light band (gradient mask, 30% wide) sweeps across the text in the key light's direction; the text is fully present behind it | 1000 ms per line, 180 ms stagger | 500 ms, 100 ms stagger |
 | **T5** | **Print settle** (image reveal) | every photograph | a mask opens from the photo's bleeding edge while the image inside scales 1.06 → 1.00 | mask 900 ms, scale 1400 ms | mask 360 ms, no scale |
@@ -186,7 +186,7 @@ the same audio context and a closing fade (`scene-architecture.md` §4).
 | Chanderi | drifts, then sweeps on the tap | static at 0.55 opacity; fades out on the tap |
 | Foreground buds | tumble past | removed |
 | Camera push on entry | yes | removed |
-| Bloom pass | yes | replaced by a 450 ms cross-fade |
+| The opening's Draw | the thread lifts the Welcome sheet in by its corner | thread tightens in place; the strand fades while moving ≤12 px toward the pull; Welcome cross-fades in 450 ms |
 | The Draw | pinned and scrubbed | threshold-triggered: thread line draws, new scene cross-fades |
 | Letterbox open | scrubbed | 400 ms cross-fade to the full frame |
 | Light shift | 1200 ms | 600 ms |
@@ -204,6 +204,47 @@ media query themselves (`scene-architecture.md` §4). `?rm=1` forces the reduced
 ---
 
 ## 7. Scene 01 — Opening (dawn)
+
+### 7.0 As built in Phase 3.5 (supersedes §7.2–7.5 where they differ)
+
+The Phase 3.5 brief (2026-09-17) fixed the order of the opening and made the thread the mechanism for entering
+Welcome. The prototype in `site/invitations/mogra-moti/scenes/01-opening.js` follows this score; the tables below
+it (§7.3–7.5) remain as the Phase 1 design record. Scored in `design-evaluation.md`.
+
+**Removed from the opening:** the chanderi breeze and sweep (no fabric beat in the brief's order), the passing
+defocused buds and the Bloom pass. The camera push is replaced by the Draw's push-back of the card (0.98).
+
+| t (s) | Beat | Lead (cause) | What the guest sees |
+|---|---|---|---|
+| 0–0.3 | Near-darkness | — | a dark frame; the paper's edge barely there |
+| 0.25–2.55 | Morning light | a light front crosses from the top-left corner (a soft diagonal edge with a warm leading band, moved by transform) | marble, deckled card and paper fibre are found by the light; the cool shade at the lower right clears last |
+| 0.95–2.35 | Blind deboss | the light's front passes the top of the card | R·A rises out of the paper; the foil knot glints once (2.05–2.95) |
+| 2.1–3.35 | A pearl rolls in | its own momentum, from the right edge along the slack thread | one object crosses the lit card and comes to rest (`settle`) |
+| 3.42–4.0 | The thread responds | the pearl's stop | slack → taut (`tension` 220 ms, then the thread's one `release` overshoot) |
+| 3.78–5.1 | The thread draws | the pull at the upper right | the pearl is drawn into the gap between the names; three strand pearls follow in (60 ms apart) |
+| 3.95–5.95 | Names | a brighter band of light travelling along the thread | "Rohan" (4.15), "Anaya" (4.33), surnames (4.51) set by light, 1000 ms each |
+| 4.7–5.95 | Mogra | the strand's tail, still being drawn | three closed buds arrive last on the thread |
+| 5.5–6.7 | Facts | the light settles | the weekday, then date and city, set by light |
+| 6.25–7.25 | Invitation | — | "Touch the pearl" set by light; from 6.4 s the pearl's lustre drifts (the only ambient motion) |
+
+**The Draw into Welcome (after the tap, ~1.8 s to hand-over):**
+
+| t (ms) | Beat | Lead | What the guest sees |
+|---|---|---|---|
+| 0–120 | Touch | the guest | the pearl presses (0.94) and brightens; haptic on Android |
+| 100–400 | Tension | the pull at the upper right | the thread straightens |
+| 140–1180 | Strand leaves | the pull | pearl, pearls and buds run off the upper right, 40 ms apart |
+| 260–1760 | The sheet | the thread, tied by a zari knot at the Welcome sheet's held corner | Welcome rises over the card from below; its held corner leads the free side by up to 9% of the height; deckled lit edge with soft contact shade; the card beneath pushes back to 0.98 and darkens 10% |
+| 1780–2280 | Release | the pull continues | the thread slips its knot and leaves |
+| 1600–2600 | Welcome | light | the heading's lines set by light 180 ms apart; its thread draws across and carries its pearl to 40% |
+| 1780 | Hand-over | — | scrolling unlocks, focus moves to the `<h1>` |
+
+**Reduced cut:** light by opacity (0–0.8 s) → deboss (0.4–0.86) → the pearl appears in place with a glint (0.9) →
+the thread draws along its length (1.0–1.4) → strand pearls (1.15+) → names (1.3, 1.45, 1.6; 500 ms) → buds (1.75+)
+→ facts (1.85–2.45) → hint (2.2). After the tap: press (0–120 ms), the thread tightens in place and the strand fades
+while moving ≤12 px toward the pull (120–420 ms), Welcome cross-fades in (420–870 ms), its heading set by light;
+hand-over at 950 ms.
+
 
 **Purpose:** create curiosity, establish materials and light, and turn a tap into entering.
 **Shot:** top-down still life. **Ground:** `--night-deep` → `--paper-dawn`.

@@ -25,6 +25,13 @@ Everything written for the flagship programme, in the order it was produced. Wor
 | [mogra-moti/asset-candidates.md](mogra-moti/asset-candidates.md) | Phase 3: opening asset shortlist, rejections, approval list, processing risks |
 | [mogra-moti/mogra-moti-creative-direction.html](mogra-moti/mogra-moti-creative-direction.html) | the direction board's source page (download and open in a browser to view it rendered) |
 
+## Phase 3.5 — Opening prototype and visual gate
+
+| Document | What it covers |
+|---|---|
+| [mogra-moti/design-evaluation.md](mogra-moti/design-evaluation.md) | five scored iterations of Scene 01 and the Draw into Welcome, performance, interaction checks, the gate decision |
+| [../qa/](../qa/) | evidence per iteration: contact sheets, stills, filmstrips from real-time recordings, `performance.json` |
+
 ## Phase 2 — Project skills (the design and engineering constitution)
 
 Claude Code loads these automatically in sessions opened in this repository.
