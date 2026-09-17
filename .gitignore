@@ -9,3 +9,9 @@ assets-src/
 test-results/
 playwright-report/
 tools/capture/out/
+
+# Screen recordings from the evaluation loop stay local (large; stills and filmstrips are the committed evidence)
+qa/**/*.webm
+# Iterations 1-4 keep only their contact sheets and measurements in git; iteration 5 keeps every still
+qa/iteration-0[1-4]/phone*.jpg
+qa/iteration-0[1-4]/desktop*.jpg
