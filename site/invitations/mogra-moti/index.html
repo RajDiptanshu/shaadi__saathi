@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" class="no-js is-covered">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mogra &amp; Moti · Sample invitation</title>
+  <meta name="description" content="A sample wedding invitation by Shaadi Saathi.">
+  <meta name="theme-color" content="#15110E">
+  <meta name="robots" content="noindex">
+  <link rel="preload" href="assets/fonts/imbue.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/scenes.css">
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  <script src="details.js" defer></script>
+  <script src="../../engine/core.js" defer></script>
+  <script src="../../engine/motion/policy.js" defer></script>
+  <script src="../../engine/motion/timeline.js" defer></script>
+  <script src="../../engine/motion/media.js" defer></script>
+  <script src="../../engine/motion/paper.js" defer></script>
+  <script src="../../engine/motion/thread.js" defer></script>
+  <script src="../../engine/motion/reveal.js" defer></script>
+  <script src="scenes/01-opening.js" defer></script>
+  <script src="scenes/02-welcome.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <!-- Scene 01 · Opening. A top-down still life: the light finds their names. Decorative; the button carries the meaning. -->
+  <div class="opening" id="opening" data-scene="opening">
+    <div class="stage" aria-hidden="true">
+      <div class="surface"></div>
+      <svg class="card" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="paper-tile" patternUnits="userSpaceOnUse" width="384" height="384">
+            <image class="paper-image" width="384" height="384" preserveAspectRatio="none"/>
+          </pattern>
+          <filter id="card-shadow-blur" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="2.4"/></filter>
+        </defs>
+        <path class="card-shadow" filter="url(#card-shadow-blur)"/>
+        <path class="card-paper" fill="url(#paper-tile)"/>
+        <path class="card-rim"/>
+      </svg>
+      <div class="card-light"></div>
+
+      <div class="monogram">
+        <img class="mono mono-occlusion" alt="" data-asset="ornaments/monogram-occlusion" decoding="async">
+        <img class="mono mono-shadow" alt="" data-asset="ornaments/monogram-shadow" decoding="async">
+        <img class="mono mono-highlight" alt="" data-asset="ornaments/monogram-highlight" decoding="async">
+        <img class="mono mono-foil" alt="" data-asset="ornaments/monogram-foil" decoding="async">
+        <i class="mono foil-glint"></i>
+      </div>
+
+      <div class="name name--first">
+        <span class="name-word lit"><span data-t="couple.groom"></span><i class="probe"></i></span>
+        <span class="surname label lit" data-t="couple.groomSurname"></span>
+      </div>
+      <div class="name name--second">
+        <span class="name-word lit"><span class="bride-word" data-t="couple.bride"></span><i class="probe"></i></span>
+        <span class="surname label lit" data-t="couple.brideSurname"></span>
+      </div>
+
+      <p class="facts">
+        <span class="label lit" data-date="wedding.date" data-format="weekday"></span>
+        <span class="info lit"><span data-date="wedding.date" data-format="date"></span> · <span data-t="wedding.city"></span></span>
+      </p>
+
+      <div class="sweep"></div>
+      <div class="shade"></div>
+      <div class="glow"></div>
+      <div class="front"></div>
+    </div>
+
+    <div class="dark" aria-hidden="true"></div>
+    <div class="dim" aria-hidden="true"></div>
+
+    <p class="sample-mark label" data-t="ui.sampleMark"></p>
+    <p class="hint label lit" aria-hidden="true" data-t="ui.tapToOpen"></p>
+    <button class="opening-button" id="open-invitation" type="button" data-attr="aria-label:ui.openInvite"></button>
+  </div>
+
+  <!-- The strand sits in its own layer so the thread can pull above the Welcome sheet during the Draw. -->
+  <div class="strand" aria-hidden="true">
+    <svg class="thread" xmlns="http://www.w3.org/2000/svg">
+      <path class="thread-shadow"/>
+      <path class="thread-core"/>
+      <path class="thread-light"/>
+    </svg>
+    <span class="weave lit"></span>
+    <i class="knot"></i>
+    <div class="beads"></div>
+  </div>
+
+
+  <main class="invitation" id="invitation">
+
+    <!-- Scene 02 · Welcome -->
+    <section class="scene s02" data-scene="welcome" aria-labelledby="welcome-title">
+      <svg class="sheet-edge" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="sheet-tile" patternUnits="userSpaceOnUse" width="384" height="384" patternTransform="translate(0 24)">
+            <image class="paper-image" width="384" height="384" preserveAspectRatio="none"/>
+          </pattern>
+        </defs>
+        <path class="edge-ao edge-ao-3"/>
+        <path class="edge-ao edge-ao-2"/>
+        <path class="edge-ao edge-ao-1"/>
+        <path class="edge-paper" fill="url(#sheet-tile)"/>
+        <path class="edge-rim"/>
+      </svg>
+
+      <div class="welcome-first">
+        <h2 class="chapter" data-attr="aria-label:ui.chapterWelcome.aria">
+          <span class="chapter-numeral" lang="hi" aria-hidden="true" data-t="ui.chapterWelcome.numeral"></span>
+          <span class="label" aria-hidden="true" data-t="ui.chapterWelcome.label"></span>
+        </h2>
+
+        <figure class="welcome-photo">
+          <picture>
+            <source type="image/avif" srcset="assets/photography/p01-hands-480.avif 480w, assets/photography/p01-hands-720.avif 720w, assets/photography/p01-hands-1080.avif 1080w" sizes="(min-width: 1024px) 34vw, 56vw">
+            <source type="image/webp" srcset="assets/photography/p01-hands-480.webp 480w, assets/photography/p01-hands-720.webp 720w, assets/photography/p01-hands-1080.webp 1080w" sizes="(min-width: 1024px) 34vw, 56vw">
+            <img src="assets/photography/p01-hands-720.jpg" width="720" height="1080" alt="Weathered hands threading closed jasmine buds onto a fine string" decoding="async" fetchpriority="low">
+          </picture>
+        </figure>
+
+        <div class="welcome-words">
+        <h1 class="couple" id="welcome-title" tabindex="-1">
+          <span class="sr-only"><span data-t="couple.groomFull"></span> <span data-t="ui.and"></span> <span data-t="couple.brideFull"></span></span>
+          <span class="couple-line lit" aria-hidden="true" data-t="couple.groomFull"></span>
+          <span class="couple-thread" aria-hidden="true">
+            <svg class="couple-thread-svg" xmlns="http://www.w3.org/2000/svg"><path class="thread-shadow"/><path class="thread-core"/><path class="thread-light"/></svg>
+            <img class="couple-pearl" alt="" data-asset="pearls/o02-strand-a-64">
+          </span>
+          <span class="couple-line lit" aria-hidden="true" data-t="couple.brideFull"></span>
+        </h1>
+        <p class="welcome-lead lit" data-t="copy.welcomeLead"></p>
+        </div>
+        <p class="welcome-dates label"><span data-t="wedding.datesLabel"></span> · <span data-t="wedding.city"></span></p>
+      </div>
+
+      <div class="welcome-second">
+        <p class="label" data-t="families.together"></p>
+        <p class="info"><span data-t="families.groom.parents"></span><br><span class="soft" data-t="families.groom.from"></span></p>
+        <p class="info"><span data-t="families.bride.parents"></span><br><span class="soft" data-t="families.bride.from"></span></p>
+        <hr class="hairline">
+        <p class="welcome-line" data-t="copy.welcomeLine"></p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

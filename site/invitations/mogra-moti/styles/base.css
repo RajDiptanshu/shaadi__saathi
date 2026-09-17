@@ -1,0 +1,78 @@
+/* Mogra & Moti · base: page, type roles, shared material pieces (thread, beads), set-by-light masks. */
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-synthesis: none; background: var(--paper-dawn); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper-dawn);
+  font: 440 16px/20px var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.js.is-covered, html.js.is-covered body { overflow: hidden; background: var(--night-deep); }
+img, svg { max-width: none; }
+p, h1, h2, figure { margin: 0; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Type roles (typography-system.md §2). */
+.label {
+  font-family: var(--f-text);
+  font-size: var(--label);
+  line-height: 16px;
+  font-weight: 520;
+  font-stretch: 118%;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.info { font-family: var(--f-text); font-size: var(--info); line-height: 20px; font-weight: 440; color: var(--ink); }
+.soft { color: var(--ink-soft); }
+
+/* The thread: contact shadow, champagne core, highlight (material-library.md, thread). */
+.thread path, .couple-thread-svg path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.thread-shadow { stroke: var(--ink); stroke-opacity: .2; stroke-width: .8; transform: translate(.9px, 1px); }
+.thread-core { stroke: var(--zari); stroke-width: 1.3; }
+.thread-light { stroke: var(--zari-light); stroke-width: .5; transform: translate(-.3px, -.3px); }
+
+/* Beads on a strand: a photographed pearl or bud and a soft contact shadow that travels with it. */
+.bead { position: absolute; left: 0; top: 0; pointer-events: none; }
+.bead img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bead-shadow {
+  position: absolute; left: 14%; top: 26%; width: 100%; height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(42, 37, 32, .34), rgba(42, 37, 32, .12) 60%, rgba(42, 37, 32, 0));
+}
+.bead--bud .bead-shadow { left: 12%; top: 18%; width: 84%; height: 86%; opacity: .7; }
+.bead-glint {
+  position: absolute; left: 18%; top: 12%; width: 44%; height: 40%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(250, 248, 242, .95), rgba(250, 248, 242, 0));
+  opacity: 0;
+}
+/* The invitation to touch (storyboard §7.3, t 6.4 s): the pearl's lustre drifts about 2 px over 6 s as the morning
+   light breathes. The only ambient motion in the frame; never in the reduced cut. */
+@keyframes pearl-lustre {
+  from { transform: translate3d(-1px, -.5px, 0); opacity: .18; }
+  to { transform: translate3d(1.5px, 1px, 0); opacity: .62; }
+}
+html.motion-ok.is-inviting:not(.motion-reduced) .bead--hero .bead-glint {
+  animation: pearl-lustre 3s cubic-bezier(.37, 0, .63, 1) infinite alternate;
+}
+
+/* Set by light (T4): text is always present; once motion is proven to run, a soft diagonal mask
+   uncovers it in the key light's direction. Scenes move the mask; content never waits on it. */
+html.motion-ok .lit:not(.is-lit) {
+  -webkit-mask-image: linear-gradient(100deg, #000 38%, rgba(0, 0, 0, 0) 62%);
+  mask-image: linear-gradient(100deg, #000 38%, rgba(0, 0, 0, 0) 62%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+}

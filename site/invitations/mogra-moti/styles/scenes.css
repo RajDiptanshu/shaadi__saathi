@@ -1,0 +1,225 @@
+/* Mogra & Moti · scenes. Positions for the opening's still life are computed in scenes/01-opening.js from the
+   art-direction table there (phone and wide); the values below are the no-measurement fallbacks. */
+
+/* ───────────── Scene 01 · Opening ───────────── */
+
+.opening { display: none; }
+html.js.is-covered .opening {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  background: var(--night-deep);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.stage { position: absolute; inset: 0; transform-origin: 50% 40%; }
+.surface {
+  position: absolute; inset: 0;
+  background-color: #D9D6CF;
+  background-size: cover;
+  background-position: 30% 40%;
+}
+/* The marble sits a stop below the card and a touch cooler, so the paper reads as the lit object. */
+.surface::after { content: ''; position: absolute; inset: 0; background: rgba(58, 47, 36, .15); }
+.card { position: absolute; left: 0; top: 0; overflow: visible; }
+.card-shadow { fill: rgba(42, 37, 32, .30); transform: translate(1.6px, 2.4px); }
+.card-paper { stroke: none; }
+.card-rim { fill: none; stroke: rgba(250, 248, 242, .85); stroke-width: .9; }
+/* Morning light from the top left, falling off across the card (a static grade, not an animation). */
+.card-light {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(130% 80% at 0% 0%, rgba(255, 250, 240, .30), rgba(255, 250, 240, 0) 62%),
+    linear-gradient(142deg, rgba(42, 37, 32, 0) 38%, rgba(42, 37, 32, .09) 100%);
+}
+
+.monogram { position: absolute; left: calc(50% - 56px); top: calc(17% - 56px); width: 112px; height: 112px; }
+.mono { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mono-occlusion { opacity: .45; }
+.foil-glint {
+  display: block;
+  background: linear-gradient(118deg, rgba(250, 248, 242, 0) 42%, rgba(250, 248, 242, .95) 50%, rgba(250, 248, 242, 0) 58%) no-repeat;
+  background-size: 320% 100%;
+  background-position: 100% 0;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  opacity: 0;
+}
+
+.name { position: absolute; left: 16px; top: 22%; white-space: nowrap; }
+.name--second { left: auto; right: 18px; top: 44%; text-align: right; }
+.name-word {
+  display: block;
+  font-family: var(--f-display);
+  font-size: var(--masthead);
+  line-height: 1;
+  font-weight: 300;
+  font-variation-settings: 'opsz' 100;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  /* the impression: letterpress ink sits slightly into the paper; the lower wall catches the light */
+  text-shadow: 0 1px 0 rgba(250, 248, 242, .55), 0 -.5px 0 rgba(42, 37, 32, .10);
+}
+.probe { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+.surname { position: absolute; left: 6px; top: 100%; }
+.name--second .surname { left: auto; right: 4px; }
+
+.facts { position: absolute; left: var(--margin); top: 83%; display: grid; gap: var(--s1); }
+.facts .label, .facts .info { display: block; }
+
+.hint { position: absolute; left: var(--margin); top: 92%; color: var(--ink-soft); }
+.sample-mark {
+  position: absolute; left: var(--margin); top: calc(20px + env(safe-area-inset-top, 0px));
+  font-size: 10px; line-height: 16px; color: var(--ink-soft); z-index: 3;
+}
+
+.sweep {
+  position: absolute; left: 0; top: 0; width: 140vmax; height: 90vmax; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgba(255, 249, 236, .34), rgba(255, 249, 236, .12) 55%, rgba(255, 249, 236, 0));
+}
+.shade {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(138deg, rgba(21, 17, 14, 0) 12%, rgba(21, 17, 14, .55) 48%, rgba(21, 17, 14, .92) 88%);
+}
+.glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(90% 60% at 6% 2%, rgba(255, 238, 208, .18), rgba(255, 238, 208, 0) 70%);
+}
+
+/* The morning light's front: a small gradient scaled up by the scene, so moving it is a cheap transform. Its
+   warm edge leads the light; behind it, shade. Final state: gone. */
+.front {
+  position: absolute; left: 0; top: 0; width: 100px; height: 100px; transform-origin: 0 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(135deg, rgba(21, 17, 14, 0) 38%, rgba(255, 228, 188, .09) 43%, rgba(21, 17, 14, .46) 50%, rgba(21, 17, 14, .9) 58%, rgba(21, 17, 14, .94) 62%);
+}
+
+.strand { display: none; }
+html.js.is-covered .strand, html.js.is-threading .strand { display: block; position: fixed; inset: 0; z-index: 6; pointer-events: none; }
+html.js.is-covered:not(.is-laid-out) .stage, html.js.is-covered:not(.is-laid-out) .strand { visibility: hidden; }
+.thread { position: absolute; left: 0; top: 0; overflow: visible; }
+.weave {
+  position: absolute; left: 0; top: 0;
+  font-family: var(--f-display); font-weight: 300; font-variation-settings: 'opsz' 100;
+  line-height: 1; letter-spacing: -.01em; color: var(--ink); white-space: pre;
+}
+.beads { position: absolute; inset: 0; }
+/* The knot that ties the thread to the Welcome sheet's held corner during the Draw. */
+.knot {
+  position: absolute; left: 0; top: 0; width: 7px; height: 7px; border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle at 35% 35%, var(--zari-light), var(--zari) 55%, var(--zari-ink));
+  box-shadow: .8px 1px 1.5px rgba(42, 37, 32, .3);
+}
+
+.dark, .dim { position: absolute; inset: 0; background: var(--night-deep); pointer-events: none; opacity: 0; }
+
+.opening-button {
+  position: absolute; inset: 0; z-index: 5; width: 100%; height: 100%;
+  margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.opening-button:focus { outline: none; }
+/* Keyboard focus shows on the hint it activates, not as a frame around the whole still life. */
+.opening:has(.opening-button:focus-visible) .hint { text-decoration: underline; text-decoration-color: var(--zari); text-underline-offset: 6px; text-decoration-thickness: 1px; }
+
+@media (min-width: 1024px) and (min-aspect-ratio: 11/10) {
+  .monogram { left: calc(50% - 68px); top: calc(19% - 68px); width: 136px; height: 136px; }
+  .thread-core { stroke-width: 1.6; }
+  .thread-light { stroke-width: .6; }
+  .thread-shadow { stroke-width: 1; }
+  .hint { left: auto; right: var(--margin); top: 88%; }
+  .facts { top: 85%; }
+}
+
+/* ───────────── Scene 02 · Welcome ───────────── */
+
+.invitation { position: relative; }
+/* While the opening holds the screen, Welcome waits below as the sheet the thread will draw up. */
+html.js.is-covered.motion-ok.motion-reduced .invitation { transform: none; opacity: 0; }
+html.js.is-covered.motion-ok .invitation {
+  position: fixed; left: 0; right: 0; top: 0; height: 100%; z-index: 5;
+  transform: translate3d(0, 120%, 0);
+}
+
+.s02 { position: relative; }
+.s02::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background-color: var(--paper-dawn);
+  background-image: var(--paper-tile, none);
+  background-size: 384px 384px;
+}
+html.is-drawing .s02::before { top: 96px; background-position: 0 -96px; }
+.sheet-edge { display: none; position: absolute; left: 0; top: -24px; width: 100%; height: 122px; overflow: visible; z-index: 1; }
+html.is-drawing .sheet-edge { display: block; }
+.edge-paper { stroke: none; }
+.edge-rim { fill: none; stroke: rgba(250, 248, 242, .95); stroke-width: 1.2; transform: translate(0, .6px); }
+.edge-ao { fill: none; stroke: var(--ink); }
+.edge-ao-1 { stroke-opacity: .07; stroke-width: 2; transform: translate(0, -1px); }
+.edge-ao-2 { stroke-opacity: .03; stroke-width: 6; transform: translate(0, -3px); }
+.edge-ao-3 { stroke-opacity: .012; stroke-width: 12; transform: translate(0, -6px); }
+
+.welcome-first { position: relative; z-index: 1; height: 100svh; min-height: 620px; }
+.chapter {
+  position: absolute; left: var(--margin); top: calc(var(--s5) + env(safe-area-inset-top, 0px));
+  display: flex; align-items: baseline; gap: var(--s3); font-weight: normal;
+}
+.chapter-numeral {
+  font-family: var(--f-deva); font-size: var(--mark); line-height: 16px; font-weight: 450; font-stretch: 75%;
+  color: var(--zari-ink);
+}
+.chapter .label { color: var(--zari-ink); }
+
+.welcome-photo { position: absolute; left: 44%; right: 0; top: 10%; height: 39%; overflow: hidden; background: #2A2520; }
+.welcome-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 46% 47%; }
+
+.welcome-words { position: absolute; left: var(--margin); right: var(--margin); top: 57%; }
+.couple { font-weight: 300; }
+.couple-line {
+  display: block;
+  font-family: var(--f-display); font-size: var(--title); line-height: 48px; font-weight: 300;
+  font-variation-settings: 'opsz' 60; color: var(--ink); white-space: nowrap;
+}
+.couple-thread { position: relative; display: block; height: 24px; }
+.couple-thread-svg { position: absolute; left: 0; top: 0; width: 100%; height: 24px; overflow: visible; }
+.couple-pearl { position: absolute; left: 40%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; }
+.welcome-lead {
+  text-wrap: balance;
+  margin-top: var(--s2);
+  font-family: var(--f-display); font-size: var(--line); line-height: 32px; font-weight: 300;
+  font-variation-settings: 'opsz' 32; color: var(--ink-soft);
+}
+.welcome-dates { position: absolute; left: var(--margin); top: 88%; color: var(--ink-soft); }
+
+.welcome-second {
+  position: relative; z-index: 1;
+  display: grid; gap: var(--s4); justify-items: start;
+  padding: var(--s7) var(--margin) var(--s8);
+  max-width: 34rem;
+}
+.hairline { width: var(--s7); height: 1px; margin: 0; border: 0; background: var(--zari); }
+.welcome-line {
+  text-wrap: balance;
+  font-family: var(--f-display); font-size: var(--line); line-height: 32px; font-weight: 300;
+  font-variation-settings: 'opsz' 32; color: var(--ink);
+}
+
+/* Wide screens read as a two-page spread (visual-dna §5.1): the left page carries the names, the dates, the
+   families and the welcome line; the photograph is the right page, bleeding off the right edge. */
+@media (min-width: 1024px) and (min-aspect-ratio: 11/10) {
+  .s02 { min-height: 100svh; }
+  .welcome-first { min-height: 680px; }
+  .welcome-photo { left: 56%; top: 12%; height: 76%; }
+  .welcome-words { right: 48%; top: 14%; }
+  .couple-line { line-height: 88px; }
+  .couple-thread { height: 32px; }
+  .couple-thread-svg { height: 32px; }
+  .couple-pearl { width: 20px; height: 20px; margin: -10px 0 0 -10px; }
+  .welcome-lead { line-height: 48px; margin-top: var(--s3); }
+  .welcome-dates { top: calc(14% + 324px); }
+  .welcome-second {
+    position: absolute; left: 0; bottom: 12%; z-index: 1;
+    width: 44%; max-width: none; padding: 0 0 0 var(--margin); gap: var(--s3);
+  }
+  .welcome-second .hairline { margin-block: var(--s2); }
+}
