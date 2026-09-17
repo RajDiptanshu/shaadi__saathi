@@ -1,0 +1,54 @@
+/* Haveli · base: page, type roles, the jali (jharokha lattice) material shared by Scene 01 and Scene 03. */
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-synthesis: none; background: var(--plaster); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--plaster);
+  font: 440 16px/22px var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.js body { overflow: hidden; }
+html.js.is-open body { overflow-x: hidden; overflow-y: auto; }
+img, svg { max-width: none; }
+p, h1, h2, figure { margin: 0; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Type roles. */
+.label {
+  font-family: var(--f-text);
+  font-size: var(--label);
+  line-height: 16px;
+  font-weight: 520;
+  font-stretch: 118%;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.info { font-family: var(--f-text); font-size: var(--info); line-height: 24px; font-weight: 440; color: var(--ink); }
+.soft { color: var(--ink-soft); }
+.display { font-family: var(--f-display); font-optical-sizing: auto; font-weight: 360; color: var(--ink); }
+
+/* The sprite holds shared defs (the jali clip path and lattice pattern) used by more than one scene. It is
+   never shown itself. */
+.defs-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* A single reusable jharokha window (#jharokha-arch, an ogee arch over a rectangular body; see
+   assets/ornaments/jali.svg for the same shape recorded in the manifest). Scene 01 and Scene 03 each stack
+   three <use> instances of it: a dark interior, a lit lattice, and a carved rim. */
+.jharokha-shadow { fill: var(--shadow); }
+.jharokha-lattice { fill: url(#jali-pattern); opacity: .55; }
+.jharokha-rim { fill: none; stroke: var(--sand-light); stroke-width: 2; }
+
+/* Reveal-on-view: content is always present and readable (core.js reveals everything immediately if
+   IntersectionObserver is unsupported, or under ?still). Motion only adds a fade and small rise. */
+[data-reveal] { transition: opacity 1s ease, transform 1.1s var(--e-settle); transition-delay: var(--d, 0s); }
+.can-reveal [data-reveal]:not(.is-in) { opacity: 0; transform: translate3d(0, 22px, 0); }
+html.motion-reduced [data-reveal] { transition-duration: .4s; transform: none; }

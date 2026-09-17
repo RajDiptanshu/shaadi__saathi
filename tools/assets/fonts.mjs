@@ -15,12 +15,19 @@ const LATIN = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^
   ' ·–—‘’“”•…₹×é';
 const DEVANAGARI = '०१२३४५६७८९।॥';
 
-// Axis ranges come from typography-system.md §2 (the type tokens), so nothing unused ships.
-const FONTS = {
-  F01: { file: 'Imbue[opsz,wght].ttf', ofl: 'Imbue-OFL.txt', out: 'imbue', text: LATIN, axes: { wght: 300, opsz: { min: 32, max: 100 } } },
-  F02: { file: 'Archivo[wdth,wght].ttf', ofl: 'Archivo-OFL.txt', out: 'archivo', text: LATIN, axes: { wdth: { min: 100, max: 118 }, wght: { min: 400, max: 520 } } },
-  F03: { file: 'NotoSerifDevanagari[wdth,wght].ttf', ofl: 'NotoSerifDevanagari-OFL.txt', out: 'noto-serif-devanagari', text: DEVANAGARI, axes: { wdth: 75, wght: 450 } },
+// Axis ranges come from each design's own type tokens, so nothing unused ships.
+const FONT_SETS = {
+  'mogra-moti': {
+    F01: { file: 'Imbue[opsz,wght].ttf', ofl: 'Imbue-OFL.txt', out: 'imbue', text: LATIN, axes: { wght: 300, opsz: { min: 32, max: 100 } } },
+    F02: { file: 'Archivo[wdth,wght].ttf', ofl: 'Archivo-OFL.txt', out: 'archivo', text: LATIN, axes: { wdth: { min: 100, max: 118 }, wght: { min: 400, max: 520 } } },
+    F03: { file: 'NotoSerifDevanagari[wdth,wght].ttf', ofl: 'NotoSerifDevanagari-OFL.txt', out: 'noto-serif-devanagari', text: DEVANAGARI, axes: { wdth: 75, wght: 450 } },
+  },
+  // Haveli's sans (Archivo) is a copy of Mogra & Moti's already-built file, not resubset here.
+  haveli: {
+    F01: { file: 'Fraunces[SOFT,WONK,opsz,wght].ttf', ofl: 'Fraunces-OFL.txt', out: 'fraunces', text: LATIN, axes: { wght: { min: 340, max: 480 }, opsz: { min: 14, max: 144 }, SOFT: 0, WONK: 0 } },
+  },
 };
+const FONTS = FONT_SETS[slug];
 
 const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
 for (const [id, f] of Object.entries(FONTS)) {

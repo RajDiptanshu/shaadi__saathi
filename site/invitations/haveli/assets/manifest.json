@@ -1,0 +1,89 @@
+{
+  "design": "haveli",
+  "updated": "2026-09-18",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. Phase 4 exploratory concept: photography deferred by the user's decision, so this pass ships with in-house/procedural art only besides the two fonts.",
+  "licences": {
+    "ofl": {
+      "name": "SIL Open Font License 1.1",
+      "url": "https://openfontlicense.org",
+      "checkedOn": "2026-09-18",
+      "summary": "Free to use, embed and subset; fonts may not be sold by themselves; the licence travels with the font files."
+    },
+    "in-house": {
+      "name": "Original work for Shaadi Saathi",
+      "url": null,
+      "checkedOn": "2026-09-18",
+      "summary": "Drawn or rendered for this project; no third-party rights."
+    }
+  },
+  "assets": [
+    {
+      "id": "F01",
+      "status": "built",
+      "kind": "font",
+      "description": "Display serif: Fraunces (SOFT, WONK, opsz, wght axes), subset to Latin and the label/title optical range",
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/fraunces",
+        "creator": "Google Fonts (undercase, Kevin King, Alex Slobzheninov, Erik Vorhes, and Irene Vlachou)",
+        "downloaded": "2026-09-18",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Display type: opening names, Welcome couple line, Venue heading",
+      "files": {
+        "woff2": "fonts/fraunces.woff2",
+        "licence": "fonts/Fraunces-OFL.txt"
+      },
+      "bytes": 39616,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to wght 340–480, opsz 14–144, SOFT 0, WONK 0",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F02",
+      "status": "built",
+      "kind": "font",
+      "description": "Body/label sans: Archivo, the same subsetted WOFF2 already built and licensed for Mogra & Moti (site/invitations/mogra-moti/assets/fonts/archivo.woff2), copied here so this concept stays self-contained",
+      "files": {
+        "woff2": "fonts/archivo.woff2",
+        "licence": "fonts/Archivo-OFL.txt"
+      },
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/archivo",
+        "downloaded": "2026-09-17",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-17"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Body copy, labels, info lines"
+    },
+    {
+      "id": "V01",
+      "status": "built",
+      "kind": "vector",
+      "description": "Jali lattice: a restrained geometric jharokha pattern, drawn as SVG paths (arches over a diamond lattice)",
+      "files": {
+        "svg": "ornaments/jali.svg"
+      },
+      "source": {
+        "site": "in-house",
+        "licence": "in-house"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 opening silhouette; Scene 03 venue window mask"
+    }
+  ]
+}

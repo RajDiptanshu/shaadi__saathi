@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 320">
+  <!-- The jharokha window: an ogee arch over a rectangular body. The same path is inlined as
+       #jharokha-arch in index.html (Scene 01 and Scene 03 each stack a shadow, a lattice-filled and a
+       rimmed <use> of it); this file is the on-disk record for the manifest. -->
+  <path d="M0,90 C0,58 22,30 58,22 C84,16 104,4 120,0 C136,4 156,16 182,22 C218,30 240,58 240,90 L240,300 L0,300 Z"/>
+</svg>

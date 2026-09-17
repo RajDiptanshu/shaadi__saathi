@@ -1,6 +1,6 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const root = path.resolve(process.argv[2] || '.');
 const port = +process.argv[3] || 8123;

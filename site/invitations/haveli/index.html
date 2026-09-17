@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Haveli · Sample invitation</title>
+  <meta name="description" content="A sample wedding invitation by Shaadi Saathi.">
+  <meta name="theme-color" content="#1B120B">
+  <meta name="robots" content="noindex">
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/scenes.css">
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  <script src="details.js" defer></script>
+  <script src="../../engine/core.js" defer></script>
+  <script src="../../engine/motion/policy.js" defer></script>
+  <script src="../../engine/motion/paper.js" defer></script>
+  <script src="scenes/03-venue.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <!-- Shared architectural motif: an ogee jharokha window. Scene 01 and Scene 03 both instance it. -->
+  <svg class="defs-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="jharokha-arch" viewBox="0 0 240 320">
+        <path d="M0,90 C0,58 22,30 58,22 C84,16 104,4 120,0 C136,4 156,16 182,22 C218,30 240,58 240,90 L240,300 L0,300 Z"/>
+      </symbol>
+      <pattern id="jali-pattern" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="13" y1="0" x2="13" y2="26" stroke="var(--sand-light)" stroke-width="1"/>
+        <line x1="0" y1="13" x2="26" y2="13" stroke="var(--sand-light)" stroke-width="1"/>
+      </pattern>
+      <filter id="plaster-texture" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" stitchTiles="stitch" result="grain"/>
+        <feColorMatrix in="grain" type="matrix" values="
+          0 0 0 0 0.16
+          0 0 0 0 0.09
+          0 0 0 0 0.04
+          0.7 0.7 0.7 0 -0.28" result="grainTinted"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01 0.014" numOctaves="3" seed="4" stitchTiles="stitch" result="patina"/>
+        <feColorMatrix in="patina" type="matrix" values="
+          0 0 0 0 0.30
+          0 0 0 0 0.19
+          0 0 0 0 0.09
+          0.8 0.8 0.8 0 -0.42" result="patinaTinted"/>
+        <feMerge>
+          <feMergeNode in="patinaTinted"/>
+          <feMergeNode in="grainTinted"/>
+        </feMerge>
+      </filter>
+      <radialGradient id="wall-light" cx="18%" cy="10%" r="85%">
+        <stop offset="0%" stop-color="#FFF3D8" stop-opacity=".38"/>
+        <stop offset="55%" stop-color="#FFF3D8" stop-opacity=".08"/>
+        <stop offset="100%" stop-color="#1B120B" stop-opacity=".22"/>
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- Scene 01 · Opening. The facade establishes the world; the couple's names sit quietly on the lit wall. -->
+  <div class="opening" id="cover" data-attr="aria-label:ui.openInvite" role="button" tabindex="-1">
+    <div class="opening-frame">
+      <svg class="facade" viewBox="0 0 390 780" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect class="wall-base" width="390" height="780"/>
+        <rect class="wall-grain" width="390" height="780" filter="url(#plaster-texture)"/>
+        <rect class="wall-light" width="390" height="780" fill="url(#wall-light)"/>
+        <g class="window" transform="translate(63,54) scale(1.1)">
+          <use class="jharokha-shadow" href="#jharokha-arch" width="240" height="320"/>
+          <use class="jharokha-lattice" href="#jharokha-arch" width="240" height="320"/>
+          <use class="jharokha-rim" href="#jharokha-arch" width="240" height="320"/>
+        </g>
+        <rect class="cornice" x="55" y="46" width="280" height="4"/>
+      </svg>
+
+      <div class="sun-band" aria-hidden="true"></div>
+
+      <div class="opening-words">
+        <p class="opening-name opening-name--groom display" data-t="couple.groom"></p>
+        <p class="opening-name opening-name--bride display" data-t="couple.bride"></p>
+        <p class="opening-facts">
+          <span class="label" data-date="wedding.date" data-format="weekday"></span>
+          <span class="info soft"><span data-date="wedding.date" data-format="date"></span> · <span data-t="wedding.city"></span></span>
+        </p>
+      </div>
+
+      <p class="sample-mark label" data-t="ui.sampleMark"></p>
+      <button class="opening-hint label" id="open-invite" type="button" data-t="ui.tapToOpen"></button>
+    </div>
+  </div>
+
+  <main class="invitation" id="invite">
+
+    <!-- Scene 02 · Welcome -->
+    <section class="scene s02" aria-labelledby="welcome-title">
+      <p class="chapter label" data-reveal data-t="ui.chapterWelcome"></p>
+
+      <h1 class="couple" id="welcome-title" tabindex="-1">
+        <span class="couple-line display" data-reveal data-t="couple.groomFull"></span>
+        <span class="couple-rule" data-reveal aria-hidden="true"></span>
+        <span class="couple-line display" data-reveal data-t="couple.brideFull"></span>
+      </h1>
+      <p class="welcome-lead display" data-reveal data-t="copy.welcomeLead"></p>
+      <p class="welcome-dates label" data-reveal><span data-date="wedding.date" data-format="full"></span> · <span data-t="wedding.city"></span></p>
+
+      <div class="welcome-second">
+        <p class="label" data-reveal data-t="families.together"></p>
+        <p class="info" data-reveal><span data-t="families.groom.parents"></span><br><span class="soft" data-t="families.groom.from"></span></p>
+        <p class="info" data-reveal><span data-t="families.bride.parents"></span><br><span class="soft" data-t="families.bride.from"></span></p>
+        <hr class="hairline" data-reveal>
+        <p class="welcome-line display" data-reveal data-t="copy.welcomeLine"></p>
+      </div>
+    </section>
+
+    <!-- Scene 03 · Venue: the one representative content section, seen through the jharokha. -->
+    <section class="scene s03" aria-labelledby="venue-title">
+      <p class="chapter label" data-reveal data-t="ui.chapterVenue"></p>
+
+      <svg class="venue-window" data-reveal viewBox="0 0 240 320" aria-hidden="true">
+        <use class="jharokha-shadow" href="#jharokha-arch" width="240" height="320"/>
+        <use class="jharokha-lattice" href="#jharokha-arch" width="240" height="320"/>
+        <use class="jharokha-rim" href="#jharokha-arch" width="240" height="320"/>
+      </svg>
+
+      <div class="venue-words">
+        <h2 class="venue-name display" id="venue-title" data-reveal data-t="event.venue.name"></h2>
+        <p class="venue-area info soft" data-reveal data-t="event.venue.area"></p>
+      </div>
+
+      <div class="venue-card" data-reveal>
+        <svg class="venue-card-edge" aria-hidden="true">
+          <path class="venue-card-paper"/>
+          <path class="venue-card-rim"/>
+        </svg>
+        <p class="label" data-date="event.start" data-format="full"></p>
+        <p class="info" data-date="event.start" data-format="time"></p>
+        <p class="venue-note info soft" data-t="copy.venueLine"></p>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="scene s04">
+      <p class="closing-line display" data-reveal data-t="copy.closingLine"></p>
+      <p class="rsvp-note label" data-reveal data-t="ui.rsvpNote"></p>
+      <p class="sample-mark-inline label" data-t="copy.studioLine"></p>
+    </section>
+
+  </main>
+</body>
+</html>
