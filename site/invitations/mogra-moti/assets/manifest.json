@@ -1,7 +1,7 @@
 {
   "design": "mogra-moti",
   "updated": "2026-09-17",
-  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. External assets are only downloaded after the user approves the list (wedding-image-direction §4). status: built | awaiting-download-approval | planned.",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. External assets are only downloaded after the user approves the list (wedding-image-direction §4). status: built | deferred | awaiting-download-approval | planned. gate: the Phase 3.5 image-quality inspection of the built file at its display size.",
   "licences": {
     "pexels": {
       "name": "Pexels License",
@@ -127,7 +127,7 @@
       "identifiablePeople": false,
       "modelRelease": null,
       "aiGenerated": false,
-      "usage": "Beneath the sheer fabric in Scene 01; celebration info blocks later",
+      "usage": "Reserved for a sheer-fabric shadow and later celebration info blocks; not shown in the Phase 3.5 opening",
       "replaceBeforeLaunch": false,
       "replaceReason": null,
       "bytes": 692,
@@ -136,13 +136,22 @@
     },
     {
       "id": "T01",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
       "kind": "texture",
       "category": "textures",
       "description": "Cotton-rag paper texture, seamless 1024 px tile, desaturated and warmed to --paper-dawn",
       "alt": "",
-      "files": {},
+      "files": {
+        "paper": {
+          "avif": [
+            "textures/t01-paper-768.avif"
+          ],
+          "webp": [
+            "textures/t01-paper-768.webp"
+          ]
+        }
+      },
       "opening": true,
       "ceilingKB": 30,
       "grade": "dawn",
@@ -185,36 +194,57 @@
       "aiGenerated": false,
       "usage": "Scene 01 card surface; Scene 07 reply card",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 4284,
+      "width": 768,
+      "height": 768,
+      "edits": [
+        "crop 2000x2000",
+        "saturation ×0",
+        "levels ×0.3 +170",
+        "tint #EFE9DF",
+        "seamless 768px tile"
+      ],
+      "lqip": "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoQABAAA4BaJaQAA3AA/vKAAAA=",
+      "source": {
+        "site": "pexels",
+        "page": "https://www.pexels.com/photo/20899958/",
+        "creator": "Артем Дворецкий (Artem Dvoretsky)",
+        "originalSize": "4000x3000",
+        "originalMB": 2,
+        "licence": "pexels",
+        "inspection": "Real cold-press fibre with even light; tiny coloured specks at 100% will be removed by desaturation and a warm tint.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        },
+        "downloaded": "2026-09-17"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "Re-graded after the first render: at ×0.55 contrast it read as grey recycled board; at ×0.3 it reads as cotton fibre under dawn light."
+      }
     },
     {
       "id": "T02",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
-      "kind": "texture",
+      "kind": "procedural",
       "category": "textures",
-      "description": "Deckled paper edge strip with alpha, extracted from a real deckle-edge card, flipped so its shadow falls bottom right",
+      "description": "Deckled paper edges drawn as SVG paths at render size (seeded two-scale noise, about ±1.3 px), with a lit rim",
       "alt": "",
       "files": {},
       "opening": true,
-      "ceilingKB": 12,
-      "candidate": {
-        "site": "pexels",
-        "page": "https://www.pexels.com/photo/7371983/",
-        "creator": "Elisabeth Ende",
-        "originalSize": "2592x3577",
-        "originalMB": 0.6,
-        "licence": "pexels",
-        "inspection": "Genuine deckled edges with a thickness shadow; shadow falls left, so the extract is mirrored to match the top-left key light.",
-        "scores": {
-          "authenticity": 5,
-          "light": 3,
-          "gradeability": 4,
-          "composition": 3,
-          "culture": 4
-        }
-      },
+      "ceilingKB": 0,
       "rejected": [
+        {
+          "page": "https://www.pexels.com/photo/7371983/",
+          "reason": "image gate: white card on a white ground with a hard cast shadow and a dried flower overlapping; no clean key for the edge (downloaded, not used)"
+        },
         {
           "page": "https://www.pexels.com/photo/5993557/",
           "reason": "deckle is real but the paper is speckled beige"
@@ -224,23 +254,43 @@
           "reason": "mock-up with hydrangeas; tinted lilac"
         }
       ],
-      "fallback": "If extraction is not clean, derive a deckle mask procedurally from T01's own fibres.",
       "identifiablePeople": false,
       "modelRelease": null,
       "aiGenerated": false,
-      "usage": "Scene 01 card edge; Scene 07 reply card edge",
+      "usage": "Scene 01 card edges (top and left on phones; top, left and right on wide screens); the Welcome sheet edge during the Draw",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "source": {
+        "site": "in-house",
+        "master": "site/engine/motion/paper.js",
+        "licence": "in-house"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "Crisp at every width and density because it is drawn at the real pixel size; costs no image bytes."
+      }
     },
     {
       "id": "T03",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
       "kind": "texture",
       "category": "textures",
       "description": "Honed white marble with faint warm-grey veins, cropped to the strip visible beyond the card",
       "alt": "",
-      "files": {},
+      "files": {
+        "marble": {
+          "avif": [
+            "textures/t03-marble-1200.avif",
+            "textures/t03-marble-1920.avif"
+          ],
+          "webp": [
+            "textures/t03-marble-1200.webp",
+            "textures/t03-marble-1920.webp"
+          ]
+        }
+      },
       "opening": true,
       "ceilingKB": 20,
       "grade": "dawn",
@@ -277,13 +327,44 @@
       "identifiablePeople": false,
       "modelRelease": null,
       "aiGenerated": false,
-      "usage": "Scene 01 surface beyond the card's deckled corner",
+      "usage": "Scene 01 surface: a strip beyond the card on phones, the table around the card on wide screens",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 10873,
+      "width": 2000,
+      "height": 2000,
+      "edits": [
+        "crop 2000x2000",
+        "saturation ×0",
+        "levels ×1.3 -70"
+      ],
+      "lqip": "data:image/webp;base64,UklGRiYAAABXRUJQVlA4IBoAAAAwAQCdASoQABAAA4BaJaQAA3AA/vQ6W0dAAA==",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/li0iC0rjvvg",
+        "creator": "Augustine Wong",
+        "originalSize": "3456x5184",
+        "originalMB": 0.7,
+        "licence": "unsplash",
+        "inspection": "Soft honed surface, fine veins, no gloss or gold; closest to Makrana-type marble in the search.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        },
+        "downloaded": "2026-09-17"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "Blue cast removed (fully desaturated; the warm shade comes from the scene). 1920 px added for wide screens where marble fills half the frame."
+      }
     },
     {
       "id": "T04",
-      "status": "awaiting-download-approval",
+      "status": "deferred",
       "scene": "opening",
       "kind": "texture",
       "category": "silk",
@@ -327,17 +408,27 @@
       "aiGenerated": false,
       "usage": "Scene 01 breeze and the tap's sweep (chanderi stand-in; real chikankari appears only as the V03 shadow)",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "deferredReason": "Phase 3.5 opening order has no fabric beat; downloaded but not built or shipped. Revisit if a later scene needs a sheer foreground."
     },
     {
       "id": "O01",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
       "kind": "cutout",
       "category": "pearls",
       "description": "Hero pearl, near-round freshwater pearl with visible orient, circular cut-out, highlight top left",
       "alt": "",
-      "files": {},
+      "files": {
+        "hero": {
+          "avif": [
+            "pearls/o01-hero-96.avif"
+          ],
+          "webp": [
+            "pearls/o01-hero-96.webp"
+          ]
+        }
+      },
       "opening": true,
       "ceilingKB": 8,
       "candidate": {
@@ -379,17 +470,70 @@
       "aiGenerated": false,
       "usage": "Scene 01 hero pearl (20 px, ~24 px at the push); music control reference",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 1935,
+      "width": 296,
+      "height": 296,
+      "edits": [
+        "1 circular cut-out(s)"
+      ],
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/QMBar9xvhMU",
+        "creator": "Paige Johnson",
+        "originalSize": "4752x3168",
+        "originalMB": 1.2,
+        "licence": "unsplash",
+        "inspection": "Real freshwater pearls with pink-green orient and soft top-left light; the front pearls are ~280 px across in the original, enough for a 96 px cut-out.",
+        "scores": {
+          "authenticity": 5,
+          "light": 5,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        },
+        "downloaded": "2026-09-17"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "Real nacre with pink-green orient at 20–26 px on paper; the camera reflection in the centre reads as depth, not a defect."
+      }
     },
     {
       "id": "O02",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
       "kind": "cutout",
       "category": "pearls",
       "description": "Three strand pearls, circular cut-outs from the same photograph as O01 so light and orient match",
       "alt": "",
-      "files": {},
+      "files": {
+        "strand-a": {
+          "avif": [
+            "pearls/o02-strand-a-64.avif"
+          ],
+          "webp": [
+            "pearls/o02-strand-a-64.webp"
+          ]
+        },
+        "strand-b": {
+          "avif": [
+            "pearls/o02-strand-b-64.avif"
+          ],
+          "webp": [
+            "pearls/o02-strand-b-64.webp"
+          ]
+        },
+        "strand-c": {
+          "avif": [
+            "pearls/o02-strand-c-64.avif"
+          ],
+          "webp": [
+            "pearls/o02-strand-c-64.webp"
+          ]
+        }
+      },
       "opening": true,
       "ceilingKB": 12,
       "candidate": {
@@ -400,17 +544,71 @@
       "aiGenerated": false,
       "usage": "Scene 01 strand beads (16 px)",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 4582,
+      "width": 288,
+      "height": 288,
+      "edits": [
+        "3 circular cut-out(s)"
+      ],
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/QMBar9xvhMU",
+        "creator": "Paige Johnson",
+        "originalSize": "4752x3168",
+        "originalMB": 1.2,
+        "licence": "unsplash",
+        "inspection": "Real freshwater pearls with pink-green orient and soft top-left light; the front pearls are ~280 px across in the original, enough for a 96 px cut-out.",
+        "scores": {
+          "authenticity": 5,
+          "light": 5,
+          "gradeability": 5,
+          "composition": 4,
+          "culture": 4
+        },
+        "downloaded": "2026-09-17",
+        "note": "same photograph as O01, so light and orient match"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "strand-a and strand-c used; strand-b built but unused (its lower half carries the beige cloth reflection)."
+      }
     },
     {
       "id": "O03",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "opening",
       "kind": "cutout",
       "category": "flowers",
       "description": "Four closed mogra buds with calyx, keyed from a black background",
       "alt": "",
-      "files": {},
+      "files": {
+        "bud-tall": {
+          "avif": [
+            "flowers/o03-bud-tall-160.avif"
+          ],
+          "webp": [
+            "flowers/o03-bud-tall-160.webp"
+          ]
+        },
+        "bud-round": {
+          "avif": [
+            "flowers/o03-bud-round-160.avif"
+          ],
+          "webp": [
+            "flowers/o03-bud-round-160.webp"
+          ]
+        },
+        "bud-small": {
+          "avif": [
+            "flowers/o03-bud-small-160.avif"
+          ],
+          "webp": [
+            "flowers/o03-bud-small-160.webp"
+          ]
+        }
+      },
       "opening": true,
       "ceilingKB": 32,
       "candidate": {
@@ -427,14 +625,6 @@
           "gradeability": 4,
           "composition": 5,
           "culture": 5
-        },
-        "companion": {
-          "site": "unsplash",
-          "page": "https://unsplash.com/photos/1b85pJ8sETI",
-          "creator": "Saravanan Narayanan",
-          "originalSize": "5184x3456",
-          "originalMB": 1.2,
-          "note": "same photographer and series; two more isolated buds for variety"
         }
       },
       "rejected": [
@@ -453,18 +643,53 @@
         {
           "page": "https://www.pexels.com/photo/35249115/",
           "reason": "star jasmine, wrong species"
+        },
+        {
+          "page": "https://unsplash.com/photos/1b85pJ8sETI",
+          "reason": "image gate: clipped whites with no petal detail and heavy colour noise at 100% (downloaded, not used)"
         }
       ],
       "identifiablePeople": false,
       "modelRelease": null,
       "aiGenerated": false,
-      "usage": "Scene 01 strand buds (20 px) and loose buds (36–60 px)",
+      "usage": "Scene 01 strand buds (23 px phone, 30 px desktop). Not for sizes above 30 px.",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 8483,
+      "width": 260,
+      "height": 262,
+      "edits": [
+        "crop 1600x1020",
+        "scaled ×0.5 before keying",
+        "value/saturation matte, smoothed (drops dark ground and green sepals)",
+        "3 extracted cut-out(s)"
+      ],
+      "source": {
+        "site": "pexels",
+        "page": "https://www.pexels.com/photo/36666888/",
+        "creator": "Saravanan Narayanan",
+        "originalSize": "5184x3456",
+        "originalMB": 0.4,
+        "licence": "pexels",
+        "inspection": "Sharp closed Jasminum sambac buds with calyx on pure black — clean keys and the right bloom state for dawn.",
+        "scores": {
+          "authenticity": 5,
+          "light": 4,
+          "gradeability": 4,
+          "composition": 5,
+          "culture": 5
+        },
+        "downloaded": "2026-09-17"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass at strand size only",
+        "notes": "Green-lit, noisy, shaded buds: a plain key ate the shaded halves. Built with a value/saturation matte, an ellipse hull and a neutral tone lift; reads as closed white buds at 23–30 px, soft and processed above that. Replace with a sharper, evenly lit bud photograph before any larger use."
+      }
     },
     {
       "id": "O06",
-      "status": "planned",
+      "status": "deferred",
       "scene": "opening",
       "kind": "render",
       "category": "flowers",
@@ -483,20 +708,39 @@
       "aiGenerated": false,
       "usage": "Scene 01 foreground passes and the entry's bloom pass",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "deferredReason": "The entry is the Draw, not the Bloom pass, so no defocused bud is needed."
     },
     {
       "id": "P01",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "welcome",
       "kind": "photo",
       "category": "photography",
       "description": "Hands stringing closed jasmine buds onto a thread, close, shallow depth of field",
       "alt": "Weathered hands threading closed jasmine buds onto a fine string",
-      "files": {},
+      "files": {
+        "hands": {
+          "avif": [
+            "photography/p01-hands-480.avif",
+            "photography/p01-hands-720.avif",
+            "photography/p01-hands-1080.avif"
+          ],
+          "webp": [
+            "photography/p01-hands-480.webp",
+            "photography/p01-hands-720.webp",
+            "photography/p01-hands-1080.webp"
+          ],
+          "jpg": [
+            "photography/p01-hands-480.jpg",
+            "photography/p01-hands-720.jpg",
+            "photography/p01-hands-1080.jpg"
+          ]
+        }
+      },
       "opening": false,
       "ceilingKB": 120,
-      "grade": "dawn",
+      "grade": "dawn-warm-source",
       "candidate": {
         "site": "unsplash",
         "page": "https://unsplash.com/photos/N92ZPJUDiQ8",
@@ -532,17 +776,54 @@
       "aiGenerated": false,
       "usage": "Scene 02 Welcome, bleeding right; revealed behind the bloom pass at the end of the entry",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 14374,
+      "width": 2000,
+      "height": 3000,
+      "edits": [
+        "crop 2000x3000",
+        "grade dawn-warm-source"
+      ],
+      "lqip": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JZgCdMoMjbC+tIrF6Q+H0L19uwAD+LcpplpJlSXqVIHAGhQIr+Lh5vW18m8PfPypcgoYHCuVpxGyWc/elWedkmf7LQSrEu5mwtYvm+0+HdwO0PoK3Dj4LXFXB5WaaeJ+d6np3TBQgPGnwJkBsZdT71MhJfhIg9uAAAA==",
+      "focal": {
+        "x": 0.46,
+        "y": 0.47
+      },
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/N92ZPJUDiQ8",
+        "creator": "Tahamie Farooqui",
+        "originalSize": "9504x6336",
+        "originalMB": 8.8,
+        "licence": "unsplash",
+        "inspection": "Authentic: real skin texture and believable hands mid-gesture, a foreground blur of flowers for depth, no face. It is warm market light, so the Dawn grade must cool it without greying the skin; a tall 2:3 crop on the hands and thread.",
+        "scores": {
+          "authenticity": 5,
+          "light": 3,
+          "gradeability": 3,
+          "composition": 4,
+          "culture": 5
+        },
+        "downloaded": "2026-09-17"
+      },
+      "gate": {
+        "date": "2026-09-17",
+        "result": "pass",
+        "notes": "Authentic hands stringing mogra. The scripted dawn grade left the market light orange; a cooler, quieter grade (dawn-warm-source) keeps skin warm and sits on the dawn page."
+      }
     },
     {
       "id": "F01",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "all",
       "kind": "font",
       "category": "fonts",
       "description": "Imbue variable (opsz, wght), subset to Latin, WOFF2",
       "alt": "",
-      "files": {},
+      "files": {
+        "woff2": "fonts/imbue.woff2",
+        "licence": "fonts/Imbue-OFL.txt"
+      },
       "opening": true,
       "ceilingKB": 30,
       "candidate": {
@@ -558,17 +839,35 @@
       "aiGenerated": false,
       "usage": "Names, titles, event names, lines, figures",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 20344,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to wght 300, opsz 32–100",
+        "WOFF2"
+      ],
+      "source": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/imbue",
+        "creator": "Tyler Finck",
+        "file": "Imbue[opsz,wght].ttf",
+        "originalMB": 0.2,
+        "licence": "ofl",
+        "downloaded": "2026-09-17"
+      }
     },
     {
       "id": "F02",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "all",
       "kind": "font",
       "category": "fonts",
       "description": "Archivo variable (wdth, wght), subset to Latin, WOFF2",
       "alt": "",
-      "files": {},
+      "files": {
+        "woff2": "fonts/archivo.woff2",
+        "licence": "fonts/Archivo-OFL.txt"
+      },
       "opening": true,
       "ceilingKB": 30,
       "candidate": {
@@ -584,17 +883,35 @@
       "aiGenerated": false,
       "usage": "Labels, information, body, interface",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 26888,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to wdth 100–118, wght 400–520",
+        "WOFF2"
+      ],
+      "source": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/archivo",
+        "creator": "Omnibus-Type",
+        "file": "Archivo[wdth,wght].ttf",
+        "originalMB": 0.6,
+        "licence": "ofl",
+        "downloaded": "2026-09-17"
+      }
     },
     {
       "id": "F03",
-      "status": "awaiting-download-approval",
+      "status": "built",
       "scene": "all",
       "kind": "font",
       "category": "fonts",
       "description": "Noto Serif Devanagari variable (wdth, wght), subset to numerals, danda and invocation glyphs, WOFF2",
       "alt": "",
-      "files": {},
+      "files": {
+        "woff2": "fonts/noto-serif-devanagari.woff2",
+        "licence": "fonts/NotoSerifDevanagari-OFL.txt"
+      },
       "opening": false,
       "ceilingKB": 8,
       "candidate": {
@@ -610,7 +927,22 @@
       "aiGenerated": false,
       "usage": "Chapter numerals; optional invocation",
       "replaceBeforeLaunch": false,
-      "replaceReason": null
+      "replaceReason": null,
+      "bytes": 2228,
+      "edits": [
+        "subset to 12 characters",
+        "axes limited to wdth 75, wght 450",
+        "WOFF2"
+      ],
+      "source": {
+        "site": "google-fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/notoserifdevanagari",
+        "creator": "Google",
+        "file": "NotoSerifDevanagari[wdth,wght].ttf",
+        "originalMB": 0.7,
+        "licence": "ofl",
+        "downloaded": "2026-09-17"
+      }
     },
     {
       "id": "A02",

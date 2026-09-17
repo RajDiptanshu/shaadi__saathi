@@ -8,10 +8,14 @@
     "assets:render": "node tools/assets/render.mjs mogra-moti",
     "assets:build": "node tools/assets/build.mjs mogra-moti",
     "assets:check": "node tools/assets/check.mjs mogra-moti",
-    "assets:sheet": "node tools/assets/contact-sheet.mjs mogra-moti"
+    "assets:sheet": "node tools/assets/contact-sheet.mjs mogra-moti",
+    "assets:fonts": "node tools/assets/fonts.mjs mogra-moti",
+    "capture:opening": "node tools/capture/opening.mjs",
+    "capture:interaction": "node tools/capture/interaction.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "subset-font": "^2.7.0"
   }
 }

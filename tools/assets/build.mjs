@@ -19,6 +19,8 @@ const only = opt('only') ? opt('only').split(',') : null;
 // black and white points). Checked visually on the contact sheet; hand grading may replace them per image.
 const GRADES = {
   dawn:      { warm: -0.02, contrast: -0.15, saturation: 0.75, black: 18, white: 250 },
+  // Dawn for photographs shot in warm market light: cooler and quieter, black lifted less so skin keeps its depth.
+  'dawn-warm-source': { warm: -0.06, contrast: -0.1, saturation: 0.62, black: 14, white: 246 },
   midday:    { warm: 0.00,  contrast: -0.10, saturation: 0.80, black: 18, white: 250 },
   afternoon: { warm: 0.035, contrast: -0.10, saturation: 0.85, black: 18, white: 250 },
   godhuli:   { warm: 0.07,  contrast: -0.08, saturation: 0.85, black: 18, white: 248 },
@@ -89,6 +91,55 @@ async function lumaKey(buffer, { black = 20, white = 90, gamma = 1, invert = fal
   return sharp(data, { raw: info }).joinChannel(alpha, { raw: { width: info.width, height: info.height, channels: 1 } }).png().toBuffer();
 }
 
+// Matte for pale petals on a dark ground with green leaves: keep bright AND unsaturated pixels, then
+// blur and re-threshold the matte so sensor noise and small creases don't eat into the silhouette.
+const smooth = (x, a, b) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+async function matteKey(buffer, { vLow = 35, vHigh = 80, sLow = 0.3, sHigh = 0.52, blur = 2.5, edge = 0.14, despill = 0.9, brightness = 1, saturation = 1 }) {
+  const { data, info } = await sharp(buffer).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const W = info.width, H = info.height;
+  const matte = Buffer.alloc(W * H);
+  for (let p = 0, n = 0; p < data.length; p += 3, n++) {
+    const r = data[p], g = data[p + 1], b = data[p + 2];
+    const v = Math.max(r, g, b), s = v ? (v - Math.min(r, g, b)) / v : 0;
+    matte[n] = Math.round(255 * smooth(v, vLow, vHigh) * (1 - smooth(s, sLow, sHigh)));
+    const limit = (r + b) / 2 + 6;
+    if (g > limit) data[p + 1] = Math.round(g - (g - limit) * despill);
+  }
+  const soft = await sharp(matte, { raw: { width: W, height: H, channels: 1 } }).blur(blur).extractChannel(0).raw().toBuffer();
+  const alpha = Buffer.alloc(W * H);
+  for (let n = 0; n < alpha.length; n++) alpha[n] = Math.round(255 * smooth(soft[n] / 255, 0.5 - edge, 0.5 + edge));
+  let rgb = { data, info };
+  if (brightness !== 1 || saturation !== 1) rgb = await sharp(data, { raw: info }).modulate({ brightness, saturation }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  return sharp(rgb.data, { raw: rgb.info }).joinChannel(alpha, { raw: { width: W, height: H, channels: 1 } }).png().toBuffer();
+}
+
+// Hull for a keyed subject: solid inside the core ellipse (shaded areas the key would eat), key-decided in the
+// ring between core and edge (so the real outline survives), nothing outside the ellipse.
+async function ellipseHull(buffer, { cx, cy, rx, ry, core = 0.8, feather = 4 }) {
+  const { data, info } = await sharp(buffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const m = Math.min(rx, ry);
+  for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
+    const d = Math.hypot((x + 0.5 - cx) / rx, (y + 0.5 - cy) / ry);
+    const outer = Math.max(0, Math.min(1, (1 - d) * m / feather + 0.5));
+    const inner = Math.max(0, Math.min(1, (core - d) * m / feather + 0.5));
+    const i = (y * info.width + x) * 4 + 3;
+    data[i] = Math.round(Math.max(data[i], 255 * inner) * outer);
+  }
+  return sharp(data, { raw: info }).png().toBuffer();
+}
+
+// Keeps only the pixels inside an ellipse (feathered), for isolating one subject from its neighbours.
+async function ellipseMask(buffer, { cx, cy, rx, ry, feather = 6 }) {
+  const { data, info } = await sharp(buffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
+    const d = Math.hypot((x + 0.5 - cx) / rx, (y + 0.5 - cy) / ry);
+    const k = Math.max(0, Math.min(1, (1 - d) * Math.min(rx, ry) / feather + 0.5));
+    const i = (y * info.width + x) * 4 + 3;
+    data[i] = Math.round(data[i] * k);
+  }
+  return sharp(data, { raw: info }).png().toBuffer();
+}
+
 // Circular cut-out with a 1.5 px feather (pearls).
 async function circleCutout(buffer, { cx, cy, r }) {
   const size = Math.ceil(r * 2) + 4;
@@ -138,8 +189,10 @@ async function buildOne(id, recipe) {
   const stage = async (fn, label) => { buffer = await fn(sharp(buffer).rotate()); edits.push(label); };
 
   if (recipe.crop) await stage((s) => s.extract(recipe.crop).png().toBuffer(), `crop ${recipe.crop.width}x${recipe.crop.height}`);
+  if (recipe.scale) await stage(async (s) => s.resize({ width: Math.round((await s.metadata()).width * recipe.scale) }).png().toBuffer(), `scaled ×${recipe.scale} before keying`);
   if (recipe.flop) await stage((s) => s.flop().png().toBuffer(), 'mirrored horizontally to match the top-left key light');
   if (recipe.desaturate != null) await stage((s) => s.modulate({ saturation: recipe.desaturate }).png().toBuffer(), `saturation ×${recipe.desaturate}`);
+  if (recipe.linear) await stage((s) => s.linear(recipe.linear[0], recipe.linear[1]).png().toBuffer(), `levels ×${recipe.linear[0]} ${recipe.linear[1] >= 0 ? '+' : ''}${recipe.linear[1]}`);
   if (recipe.grade) { buffer = await (await grade(sharp(buffer), recipe.grade)).png().toBuffer(); edits.push(`grade ${recipe.grade}`); }
   if (recipe.tint) await stage((s) => s.tint(recipe.tint).png().toBuffer(), `tint ${recipe.tint}`);
   if (recipe.tile) { buffer = await seamless(buffer, recipe.tile); edits.push(`seamless ${recipe.tile}px tile`); }
@@ -147,16 +200,35 @@ async function buildOne(id, recipe) {
 
   let variants = [{ name: recipe.name, buffer }];
   if (recipe.lumaKey) { variants[0].buffer = await lumaKey(buffer, recipe.lumaKey); edits.push('luminance key to alpha'); }
+  if (recipe.matteKey) { variants[0].buffer = await matteKey(buffer, recipe.matteKey); edits.push('value/saturation matte, smoothed (drops dark ground and green sepals)'); }
   if (recipe.circles) {
     variants = await Promise.all(recipe.circles.map(async (c, i) => ({ name: c.name || `${recipe.name}-${i + 1}`, buffer: await circleCutout(buffer, c) })));
     edits.push(`${recipe.circles.length} circular cut-out(s)`);
   }
   if (recipe.crops) {
-    variants = await Promise.all(recipe.crops.map(async (c) => ({ name: c.name, buffer: await sharp(variants[0].buffer).extract(c).png().toBuffer() })));
+    variants = await Promise.all(recipe.crops.map(async (c) => {
+      let b = await sharp(variants[0].buffer).extract({ left: c.left, top: c.top, width: c.width, height: c.height }).png().toBuffer();
+      if (c.ellipse) b = await ellipseMask(b, c.ellipse);
+      if (c.hull) b = await ellipseHull(b, c.hull);
+      if (c.tone) {
+        // Tone the colour only; the alpha channel is kept exactly as keyed.
+        const a = await sharp(b).extractChannel(3).raw().toBuffer({ resolveWithObject: true });
+        let rgb = sharp(b).removeAlpha();
+        if (c.tone.saturation != null) rgb = sharp(await rgb.modulate({ saturation: c.tone.saturation }).png().toBuffer());
+        if (c.tone.linear) rgb = sharp(await rgb.linear(c.tone.linear[0], c.tone.linear[1]).png().toBuffer());
+        if (c.tone.tint) rgb = sharp(await rgb.tint(c.tone.tint).png().toBuffer());
+        // Join from raw pixels: joinChannel on a tinted pipeline silently drops the extra band.
+        const raw = await rgb.removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+        b = await sharp(raw.data, { raw: raw.info }).joinChannel(a.data, { raw: { width: a.info.width, height: a.info.height, channels: 1 } }).png().toBuffer();
+      }
+      if (c.rotate) b = await sharp(b).rotate(c.rotate, { background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+      if (c.trim) b = await sharp(b).trim({ threshold: 1 }).png().toBuffer();
+      return { name: c.name, buffer: b };
+    }));
     edits.push(`${recipe.crops.length} extracted cut-out(s)`);
   }
 
-  const alpha = !!(recipe.lumaKey || recipe.circles || recipe.alpha);
+  const alpha = !!(recipe.lumaKey || recipe.matteKey || recipe.circles || recipe.alpha);
   const files = {};
   let bytes = 0;
   for (const v of variants) {

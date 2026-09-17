@@ -88,6 +88,22 @@ The pearl click (A02) can't be judged without listening. Preview and pick one (o
 | T04 | light comes from the right | mirrored in the pipeline |
 | T01 | tiny coloured specks | desaturation and tint remove them |
 
+## Phase 3.5 image gate (2026-09-17)
+
+The approved files were downloaded, inspected at 100% and at their display size, and built with
+`tools/assets/mogra-moti.recipes.json`. Results per asset are recorded as `gate` in the manifest.
+
+| Asset | Result | Why |
+|---|---|---|
+| O01/O02 pearls | pass | real nacre and orient at 12–26 px; one strand pearl (b) unused for its beige reflection |
+| T01 paper | pass after re-grade | at ×0.55 contrast it read as grey recycled board; now ×0.3 |
+| T03 marble | pass after re-grade | blue cast removed; 1920 px added for wide screens |
+| P01 hands | pass after re-grade | orange market light cooled with a gentler dawn grade that keeps skin warm |
+| O03 buds (Pexels) | pass at strand size only | green-lit, noisy, shaded; built with a value/saturation matte, an ellipse hull and a tone lift; soft above 30 px — **a better bud photograph is the top image request** |
+| O03 buds (Unsplash companion) | rejected | clipped whites without petal detail, heavy colour noise |
+| T02 deckle card | rejected | white on white with a hard shadow and an overlapping flower; the deckle is drawn procedurally instead |
+| T04 sheer fabric | deferred | no fabric beat in the Phase 3.5 opening order |
+
 ## Gallery and story candidates found along the way (not requested yet)
 
 - [Jasmine garland with pearls on a marble table](https://unsplash.com/photos/3lUv0ZynLLE) — Vidit Goswami (on-concept: mogra + moti)
