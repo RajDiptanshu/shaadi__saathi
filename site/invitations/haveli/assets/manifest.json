@@ -1,7 +1,7 @@
 {
   "design": "haveli",
   "updated": "2026-09-18",
-  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. Phase 4 exploratory concept: photography deferred by the user's decision, so this pass ships with in-house/procedural art only besides the two fonts.",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. Two Unsplash photographs (approved 2026-09-18), two fonts and one in-house vector; the sandstone wall itself is an SVG filter, not a file.",
   "licences": {
     "ofl": {
       "name": "SIL Open Font License 1.1",
@@ -14,6 +14,12 @@
       "url": null,
       "checkedOn": "2026-09-18",
       "summary": "Drawn or rendered for this project; no third-party rights."
+    },
+    "unsplash": {
+      "name": "Unsplash License",
+      "url": "https://unsplash.com/license",
+      "checkedOn": "2026-09-18",
+      "summary": "Free commercial use and modification, attribution not required; no selling without significant modification, no compiling images into a similar or competing service. Unsplash+ images are excluded."
     }
   },
   "assets": [
@@ -67,6 +73,110 @@
       "modelRelease": null,
       "aiGenerated": false,
       "usage": "Body copy, labels, info lines"
+    },
+    {
+      "id": "P01",
+      "status": "built",
+      "scene": "opening",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "A sandstone corridor lined with carved jali screens; afternoon sun through the lattice dapples the wall and floor (Raja Mahal, Orchha)",
+      "alt": "A sandstone palace corridor, sunlight through carved lattice screens scattering across the wall and floor",
+      "opening": true,
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/xivTs5DCSsQ",
+        "creator": "Shruti Singh (https://unsplash.com/@halyzia)",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01: the interior revealed when the shutters open; Scene 02 Welcome: bleeds off the top edge",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "corridor": {
+          "avif": [
+            "photography/p01-corridor-1080.avif",
+            "photography/p01-corridor-1440.avif",
+            "photography/p01-corridor-1920.avif"
+          ],
+          "webp": [
+            "photography/p01-corridor-1080.webp",
+            "photography/p01-corridor-1440.webp",
+            "photography/p01-corridor-1920.webp"
+          ],
+          "jpg": [
+            "photography/p01-corridor-1080.jpg",
+            "photography/p01-corridor-1440.jpg",
+            "photography/p01-corridor-1920.jpg"
+          ]
+        }
+      },
+      "bytes": 89121,
+      "width": 2400,
+      "height": 3600,
+      "edits": [
+        "grade afternoon"
+      ],
+      "lqip": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JQBUeg8NnpKFnIPWJbmwUwAD+vZ85RlpXA1mnxJ0s/azQfgPZ7Aq5tOgz4s37o0m7Rlsj21/qBJS0iEFUUUaAjHyJZHRA/GSQmng9v6E00uqvPTS2AsApkqVGMrb5Sa/RgAAA",
+      "focal": {
+        "x": 0.5,
+        "y": 0.52
+      }
+    },
+    {
+      "id": "P02",
+      "status": "built",
+      "scene": "venue",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "Golden sandstone jharokha balconies of Jaisalmer Fort in afternoon light",
+      "alt": "Carved golden sandstone balconies of a Jaisalmer haveli in afternoon light",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/UFmZ6u8rn4s",
+        "creator": "Ranjini Hemanth (https://unsplash.com/@armastus)",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 03 Venue: seen through the jharokha, with a slow camera drift on scroll",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "jaisalmer": {
+          "avif": [
+            "photography/p02-jaisalmer-1080.avif",
+            "photography/p02-jaisalmer-1440.avif"
+          ],
+          "webp": [
+            "photography/p02-jaisalmer-1080.webp",
+            "photography/p02-jaisalmer-1440.webp"
+          ],
+          "jpg": [
+            "photography/p02-jaisalmer-1080.jpg",
+            "photography/p02-jaisalmer-1440.jpg"
+          ]
+        }
+      },
+      "bytes": 81483,
+      "width": 2400,
+      "height": 3600,
+      "edits": [
+        "grade afternoon"
+      ],
+      "lqip": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAADwAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JQBOgMY7RAZMCMenSFecAAPzXAYDHC4+Ll0XaWnrXVWEJ9uOpzykczB+i83shXMlie5kpPFwLhuXzPEWoN7oHzlP6kM4kxmU6ZtNw0aUwI5Frh0bVwTX07ufJ4EgI/ChrIFeRNYUw1pXET+ocAAAA",
+      "focal": {
+        "x": 0.5,
+        "y": 0.42
+      }
     },
     {
       "id": "V01",

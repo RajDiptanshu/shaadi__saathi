@@ -1,0 +1,31 @@
+{
+  "design": "haveli",
+  "notes": "How each approved original becomes web files. Both photographs get the same warm afternoon grade so they read as one light. Originals are 2400x3600 (Unsplash, fetched at w=2400).",
+  "assets": {
+    "P01": {
+      "original": "p01-corridor-unsplash-xivTs5DCSsQ.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "corridor",
+      "grade": "afternoon",
+      "focal": { "x": 0.5, "y": 0.52 },
+      "outputs": [
+        { "width": 1080, "primary": true, "avif": 48, "webp": 70, "jpg": 76 },
+        { "width": 1440, "avif": 44, "webp": 66, "jpg": 74 },
+        { "width": 1920, "avif": 40, "webp": 62, "jpg": 72 }
+      ]
+    },
+    "P02": {
+      "original": "p02-jaisalmer-unsplash-UFmZ6u8rn4s.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "jaisalmer",
+      "grade": "afternoon",
+      "focal": { "x": 0.5, "y": 0.42 },
+      "outputs": [
+        { "width": 1080, "primary": true, "avif": 48, "webp": 70, "jpg": 76 },
+        { "width": 1440, "avif": 44, "webp": 66, "jpg": 74 }
+      ]
+    }
+  }
+}

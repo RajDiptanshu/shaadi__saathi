@@ -17,20 +17,38 @@
   <script src="../../engine/core.js" defer></script>
   <script src="../../engine/motion/policy.js" defer></script>
   <script src="../../engine/motion/paper.js" defer></script>
+  <script src="scenes/01-opening.js" defer></script>
+  <script src="scenes/02-welcome.js" defer></script>
   <script src="scenes/03-venue.js" defer></script>
   <script src="main.js" defer></script>
 </head>
 <body>
 
-  <!-- Shared architectural motif: an ogee jharokha window. Scene 01 and Scene 03 both instance it. -->
+  <!-- Shared defs: the ogee jharokha window as a symbol (user units), as a clip (fractions of a box) and as a
+       hole in the facade (facade viewBox units); the lattice of holes the shutters are pierced with. -->
   <svg class="defs-sprite" aria-hidden="true" focusable="false">
     <defs>
       <symbol id="jharokha-arch" viewBox="0 0 240 320">
         <path d="M0,90 C0,58 22,30 58,22 C84,16 104,4 120,0 C136,4 156,16 182,22 C218,30 240,58 240,90 L240,300 L0,300 Z"/>
       </symbol>
-      <pattern id="jali-pattern" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-        <line x1="13" y1="0" x2="13" y2="26" stroke="var(--sand-light)" stroke-width="1"/>
-        <line x1="0" y1="13" x2="26" y2="13" stroke="var(--sand-light)" stroke-width="1"/>
+      <clipPath id="window-clip" clipPathUnits="objectBoundingBox">
+        <path d="M0,0.28125 C0,0.18125 0.09167,0.09375 0.24167,0.06875 C0.35,0.05 0.43333,0.0125 0.5,0 C0.56667,0.0125 0.65,0.05 0.75833,0.06875 C0.90833,0.09375 1,0.18125 1,0.28125 L1,0.9375 L0,0.9375 Z"/>
+      </clipPath>
+      <mask id="wall-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="390" height="780">
+        <rect width="390" height="780" fill="#fff"/>
+        <use href="#jharokha-arch" width="240" height="320" transform="translate(63 54) scale(1.1)" fill="#000"/>
+      </mask>
+      <pattern id="jali-holes" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect x="9.5" y="9.5" width="7" height="7" rx="1" fill="#000"/>
+      </pattern>
+      <mask id="shutter-mask" maskUnits="objectBoundingBox" maskContentUnits="userSpaceOnUse" x="0" y="0" width="1" height="1">
+        <rect width="1000" height="1000" fill="#fff"/>
+        <rect width="1000" height="1000" fill="url(#jali-holes)"/>
+      </mask>
+      <pattern id="planks" width="22" height="10" patternUnits="userSpaceOnUse">
+        <rect width="22" height="10" fill="#3A2314"/>
+        <rect width="1" height="10" fill="#2A180D"/>
+        <rect x="12" width="1" height="10" fill="#452C1B" opacity=".6"/>
       </pattern>
       <filter id="plaster-texture" x="-20%" y="-20%" width="140%" height="140%">
         <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" stitchTiles="stitch" result="grain"/>
@@ -51,39 +69,75 @@
         </feMerge>
       </filter>
       <radialGradient id="wall-light" cx="18%" cy="10%" r="85%">
-        <stop offset="0%" stop-color="#FFF3D8" stop-opacity=".38"/>
+        <stop offset="0%" stop-color="#FFF3D8" stop-opacity=".42"/>
         <stop offset="55%" stop-color="#FFF3D8" stop-opacity=".08"/>
-        <stop offset="100%" stop-color="#1B120B" stop-opacity=".22"/>
+        <stop offset="100%" stop-color="#1B120B" stop-opacity=".24"/>
       </radialGradient>
     </defs>
   </svg>
 
-  <!-- Scene 01 · Opening. The facade establishes the world; the couple's names sit quietly on the lit wall. -->
+  <!-- Scene 01 · Opening. A jharokha with its carved shutters closed; the afternoon sun is behind them.
+       Light seeps through the lattice, its spots fall on the sandstone below and drift as the sun moves,
+       dust turns in the beam, and the names are lit where the light lands. The touch opens the shutters. -->
   <div class="opening" id="cover" data-attr="aria-label:ui.openInvite" role="button" tabindex="-1">
     <div class="opening-frame">
-      <svg class="facade" viewBox="0 0 390 780" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <rect class="wall-base" width="390" height="780"/>
-        <rect class="wall-grain" width="390" height="780" filter="url(#plaster-texture)"/>
-        <rect class="wall-light" width="390" height="780" fill="url(#wall-light)"/>
-        <g class="window" transform="translate(63,54) scale(1.1)">
-          <use class="jharokha-shadow" href="#jharokha-arch" width="240" height="320"/>
-          <use class="jharokha-lattice" href="#jharokha-arch" width="240" height="320"/>
-          <use class="jharokha-rim" href="#jharokha-arch" width="240" height="320"/>
-        </g>
-        <rect class="cornice" x="55" y="46" width="280" height="4"/>
-      </svg>
 
-      <div class="sun-band" aria-hidden="true"></div>
-
-      <div class="opening-words">
-        <p class="opening-name opening-name--groom display" data-t="couple.groom"></p>
-        <p class="opening-name opening-name--bride display" data-t="couple.bride"></p>
-        <p class="opening-facts">
-          <span class="label" data-date="wedding.date" data-format="weekday"></span>
-          <span class="info soft"><span data-date="wedding.date" data-format="date"></span> · <span data-t="wedding.city"></span></span>
-        </p>
+      <div class="beyond" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="assets/photography/p01-corridor-1080.avif 1080w, assets/photography/p01-corridor-1440.avif 1440w, assets/photography/p01-corridor-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/photography/p01-corridor-1080.webp 1080w, assets/photography/p01-corridor-1440.webp 1440w, assets/photography/p01-corridor-1920.webp 1920w" sizes="100vw">
+          <img class="beyond-img" src="assets/photography/p01-corridor-1080.jpg" width="1080" height="1620" alt="" decoding="async" fetchpriority="high">
+        </picture>
+        <div class="beyond-haze"></div>
       </div>
 
+      <div class="facade-layer">
+        <div class="window" aria-hidden="true">
+          <div class="room-dark"></div>
+          <div class="window-glow"></div>
+          <div class="shutter shutter-l">
+            <svg class="shutter-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <rect class="shutter-wood" width="100%" height="100%" fill="url(#planks)" mask="url(#shutter-mask)"/>
+            </svg>
+            <i class="shutter-frame"></i>
+            <i class="shutter-shade"></i>
+          </div>
+          <div class="shutter shutter-r">
+            <svg class="shutter-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <rect class="shutter-wood" width="100%" height="100%" fill="url(#planks)" mask="url(#shutter-mask)"/>
+            </svg>
+            <i class="shutter-frame"></i>
+            <i class="shutter-shade"></i>
+          </div>
+        </div>
+
+        <svg class="facade" viewBox="0 0 390 780" preserveAspectRatio="none" aria-hidden="true">
+          <g mask="url(#wall-mask)">
+            <rect class="wall-base" width="390" height="780"/>
+            <rect class="wall-grain" width="390" height="780" filter="url(#plaster-texture)"/>
+            <rect class="wall-light" width="390" height="780" fill="url(#wall-light)"/>
+          </g>
+        </svg>
+        <svg class="window-rim" viewBox="0 0 240 320" preserveAspectRatio="none" aria-hidden="true">
+          <use href="#jharokha-arch" width="240" height="320"/>
+        </svg>
+        <i class="cornice" aria-hidden="true"></i>
+
+        <div class="cast" aria-hidden="true"><i class="cast-dots"></i></div>
+        <canvas class="dust" aria-hidden="true"></canvas>
+        <div class="night" aria-hidden="true"></div>
+
+        <div class="opening-words">
+          <p class="opening-name opening-name--groom display" data-t="couple.groom"></p>
+          <p class="opening-name opening-name--bride display" data-t="couple.bride"></p>
+          <p class="opening-facts">
+            <span class="label" data-date="wedding.date" data-format="weekday"></span>
+            <span class="info soft"><span data-date="wedding.date" data-format="date"></span> · <span data-t="wedding.city"></span></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="bloom" aria-hidden="true"></div>
       <p class="sample-mark label" data-t="ui.sampleMark"></p>
       <button class="opening-hint label" id="open-invite" type="button" data-t="ui.tapToOpen"></button>
     </div>
@@ -91,18 +145,31 @@
 
   <main class="invitation" id="invite">
 
-    <!-- Scene 02 · Welcome -->
-    <section class="scene s02" aria-labelledby="welcome-title">
-      <p class="chapter label" data-reveal data-t="ui.chapterWelcome"></p>
+    <!-- Scene 02 · Welcome: the corridor the shutters opened onto, and the names rising from its floor. -->
+    <section class="scene hero" aria-labelledby="welcome-title">
+      <div class="hero-photo" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="assets/photography/p01-corridor-1080.avif 1080w, assets/photography/p01-corridor-1440.avif 1440w, assets/photography/p01-corridor-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/photography/p01-corridor-1080.webp 1080w, assets/photography/p01-corridor-1440.webp 1440w, assets/photography/p01-corridor-1920.webp 1920w" sizes="100vw">
+          <img src="assets/photography/p01-corridor-1080.jpg" width="1080" height="1620" alt="" decoding="async">
+        </picture>
+        <div class="hero-sun"></div>
+        <div class="hero-shade"></div>
+      </div>
+      <div class="hero-words">
+        <p class="chapter label" data-t="ui.chapterWelcome"></p>
+        <h1 class="couple" id="welcome-title" tabindex="-1">
+          <span class="couple-line display" data-split data-t="couple.groomFull"></span>
+          <span class="couple-line display" data-split data-t="couple.brideFull"></span>
+        </h1>
+        <p class="welcome-lead display" data-t="copy.welcomeLead"></p>
+        <p class="welcome-dates label"><span data-date="wedding.date" data-format="full"></span> · <span data-t="wedding.city"></span></p>
+      </div>
+    </section>
 
-      <h1 class="couple" id="welcome-title" tabindex="-1">
-        <span class="couple-line display" data-reveal data-t="couple.groomFull"></span>
-        <span class="couple-rule" data-reveal aria-hidden="true"></span>
-        <span class="couple-line display" data-reveal data-t="couple.brideFull"></span>
-      </h1>
-      <p class="welcome-lead display" data-reveal data-t="copy.welcomeLead"></p>
-      <p class="welcome-dates label" data-reveal><span data-date="wedding.date" data-format="full"></span> · <span data-t="wedding.city"></span></p>
-
+    <section class="scene s02 sheet" aria-label="The families">
+      <svg class="sheet-edge" aria-hidden="true"><path class="sheet-edge-paper"/><path class="sheet-edge-rim"/></svg>
+      <div class="jali-shadow" aria-hidden="true"><i></i></div>
       <div class="welcome-second">
         <p class="label" data-reveal data-t="families.together"></p>
         <p class="info" data-reveal><span data-t="families.groom.parents"></span><br><span class="soft" data-t="families.groom.from"></span></p>
@@ -112,15 +179,22 @@
       </div>
     </section>
 
-    <!-- Scene 03 · Venue: the one representative content section, seen through the jharokha. -->
+    <!-- Scene 03 · Venue: Jaisalmer seen through the jharokha; the camera drifts as the guest scrolls. -->
     <section class="scene s03" aria-labelledby="venue-title">
       <p class="chapter label" data-reveal data-t="ui.chapterVenue"></p>
 
-      <svg class="venue-window" data-reveal viewBox="0 0 240 320" aria-hidden="true">
-        <use class="jharokha-shadow" href="#jharokha-arch" width="240" height="320"/>
-        <use class="jharokha-lattice" href="#jharokha-arch" width="240" height="320"/>
-        <use class="jharokha-rim" href="#jharokha-arch" width="240" height="320"/>
-      </svg>
+      <div class="venue-window" data-reveal>
+        <div class="venue-photo">
+          <picture>
+            <source type="image/avif" srcset="assets/photography/p02-jaisalmer-1080.avif 1080w, assets/photography/p02-jaisalmer-1440.avif 1440w" sizes="(min-width: 640px) 320px, 66vw">
+            <source type="image/webp" srcset="assets/photography/p02-jaisalmer-1080.webp 1080w, assets/photography/p02-jaisalmer-1440.webp 1440w" sizes="(min-width: 640px) 320px, 66vw">
+            <img src="assets/photography/p02-jaisalmer-1080.jpg" width="1080" height="1620" alt="Carved golden sandstone balconies of a Jaisalmer haveli in afternoon light" decoding="async" loading="lazy">
+          </picture>
+        </div>
+        <svg class="venue-rim" viewBox="0 0 240 320" preserveAspectRatio="none" aria-hidden="true">
+          <use href="#jharokha-arch" width="240" height="320"/>
+        </svg>
+      </div>
 
       <div class="venue-words">
         <h2 class="venue-name display" id="venue-title" data-reveal data-t="event.venue.name"></h2>

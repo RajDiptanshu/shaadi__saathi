@@ -55,7 +55,7 @@ window.INVITE = {
 
   ui: {
     openInvite: 'Open the invitation from Aarav and Meera',
-    tapToOpen: 'Touch the light',
+    tapToOpen: 'Open the shutters',
     sampleMark: 'Sample invitation',
     and: 'and',
     chapterWelcome: 'Welcome',

@@ -1,4 +1,4 @@
-/* Haveli · base: page, type roles, the jali (jharokha lattice) material shared by Scene 01 and Scene 03. */
+/* Haveli · base: page, type roles, reveals. */
 
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 html.js body { overflow: hidden; }
-html.js.is-open body { overflow-x: hidden; overflow-y: auto; }
+html.js.is-open body, html.js.is-still body { overflow-x: hidden; overflow-y: auto; }
 img, svg { max-width: none; }
 p, h1, h2, figure { margin: 0; }
 
@@ -36,16 +36,8 @@ p, h1, h2, figure { margin: 0; }
 .soft { color: var(--ink-soft); }
 .display { font-family: var(--f-display); font-optical-sizing: auto; font-weight: 360; color: var(--ink); }
 
-/* The sprite holds shared defs (the jali clip path and lattice pattern) used by more than one scene. It is
-   never shown itself. */
+/* The sprite holds shared defs; it is never shown itself. */
 .defs-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
-
-/* A single reusable jharokha window (#jharokha-arch, an ogee arch over a rectangular body; see
-   assets/ornaments/jali.svg for the same shape recorded in the manifest). Scene 01 and Scene 03 each stack
-   three <use> instances of it: a dark interior, a lit lattice, and a carved rim. */
-.jharokha-shadow { fill: var(--shadow); }
-.jharokha-lattice { fill: url(#jali-pattern); opacity: .55; }
-.jharokha-rim { fill: none; stroke: var(--sand-light); stroke-width: 2; }
 
 /* Reveal-on-view: content is always present and readable (core.js reveals everything immediately if
    IntersectionObserver is unsupported, or under ?still). Motion only adds a fade and small rise. */
