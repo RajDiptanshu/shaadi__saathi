@@ -23,6 +23,7 @@
   <script src="../../engine/motion/timeline.js" defer></script>
   <script src="../../engine/scratch.js" defer></script>
   <script src="../../engine/events.js" defer></script>
+  <script src="../../engine/sound.js" defer></script>
   <script src="../../engine/sales.js" defer></script>
   <script src="scenes/kolam.js" defer></script>
   <script src="scenes/01-opening.js" defer></script>
@@ -49,9 +50,9 @@
 
       <div class="beyond" aria-hidden="true">
         <picture>
-          <source type="image/avif" data-srcset="assets/photography/p01-jasmine-hair-1080.avif 1080w, assets/photography/p01-jasmine-hair-1440.avif 1440w" sizes="100vw">
-          <source type="image/webp" data-srcset="assets/photography/p01-jasmine-hair-1080.webp 1080w, assets/photography/p01-jasmine-hair-1440.webp 1440w" sizes="100vw">
-          <img data-src="assets/photography/p01-jasmine-hair-1080.jpg" width="1080" height="1620" alt="" decoding="async">
+          <source type="image/avif" data-srcset="assets/photography/p01-garlands-hands-1080.avif 1080w, assets/photography/p01-garlands-hands-1440.avif 1440w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p01-garlands-hands-1080.webp 1080w, assets/photography/p01-garlands-hands-1440.webp 1440w" sizes="100vw">
+          <img data-src="assets/photography/p01-garlands-hands-1080.jpg" width="1080" height="1619" alt="" decoding="async">
         </picture>
         <div class="beyond-dark"></div>
       </div>
@@ -90,15 +91,20 @@
     </div>
   </div>
 
+  <button class="sound" id="sound-toggle" type="button" aria-pressed="false" data-attr="aria-label:ui.music" hidden>
+    <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+
   <main class="invitation" id="invite">
 
     <!-- Scene 02 · Welcome: inside the house. -->
     <section class="scene hero" aria-labelledby="welcome-title">
       <div class="hero-photo" aria-hidden="true">
         <picture>
-          <source type="image/avif" data-srcset="assets/photography/p01-jasmine-hair-1080.avif 1080w, assets/photography/p01-jasmine-hair-1440.avif 1440w, assets/photography/p01-jasmine-hair-1920.avif 1920w" sizes="100vw">
-          <source type="image/webp" data-srcset="assets/photography/p01-jasmine-hair-1080.webp 1080w, assets/photography/p01-jasmine-hair-1440.webp 1440w, assets/photography/p01-jasmine-hair-1920.webp 1920w" sizes="100vw">
-          <img data-src="assets/photography/p01-jasmine-hair-1080.jpg" width="1080" height="1620" alt="" decoding="async">
+          <source type="image/avif" data-srcset="assets/photography/p01-garlands-hands-1080.avif 1080w, assets/photography/p01-garlands-hands-1440.avif 1440w, assets/photography/p01-garlands-hands-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p01-garlands-hands-1080.webp 1080w, assets/photography/p01-garlands-hands-1440.webp 1440w, assets/photography/p01-garlands-hands-1920.webp 1920w" sizes="100vw">
+          <img data-src="assets/photography/p01-garlands-hands-1080.jpg" width="1080" height="1620" alt="" decoding="async">
         </picture>
         <div class="hero-sun"></div>
         <div class="hero-shade"></div>
@@ -172,15 +178,9 @@
     <!-- Scene 06 · Three days in Kanchipuram. -->
     <section class="scene paper ceremonies" aria-labelledby="ceremonies-title">
       <i class="kasavu" data-kasavu aria-hidden="true"></i>
+      <svg class="kolam-divider" data-kolam="3,4" aria-hidden="true"></svg>
       <p class="chapter label" data-reveal data-t="ui.chapterCeremonies"></p>
       <h2 class="section-title display" id="ceremonies-title" data-reveal data-t="copy.ceremoniesTitle"></h2>
-      <figure class="garland-photo" data-reveal>
-        <picture>
-          <source type="image/avif" data-srcset="assets/photography/p04-garlands-1080.avif" sizes="(min-width: 640px) 640px, 100vw">
-          <source type="image/webp" data-srcset="assets/photography/p04-garlands-1080.webp" sizes="(min-width: 640px) 640px, 100vw">
-          <img data-src="assets/photography/p04-garlands-1080.jpg" width="1080" height="1923" alt="White jasmine garlands hanging in a row" decoding="async" loading="lazy" fetchpriority="low">
-        </picture>
-      </figure>
       <div class="ritual-list">
         <template data-each="events">
           <article class="ritual-card" data-reveal>
@@ -195,8 +195,27 @@
       </div>
     </section>
 
+    <!-- Scene 06b · Interlude. One full-bleed frame and one line, pushed slowly by the scroll. -->
+    <section class="scene interlude" aria-label="A Kanchipuram morning">
+      <div class="interlude-photo" aria-hidden="true">
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p04-garlands-1080.avif" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p04-garlands-1080.webp" sizes="100vw">
+          <img data-src="assets/photography/p04-garlands-1080.jpg" width="1080" height="1923" alt="" decoding="async" loading="lazy" fetchpriority="low">
+        </picture>
+        <div class="interlude-shade"></div>
+      </div>
+      <div class="interlude-copy" data-reveal>
+        <p class="chapter label" data-t="ui.chapterInterlude"></p>
+        <p class="interlude-tamil tamil" data-t="tamil.jasmine"></p>
+        <h2 class="interlude-title display" data-t="copy.interludeTitle"></h2>
+        <p class="interlude-line display italic" data-t="copy.interludeLine"></p>
+      </div>
+    </section>
+
     <!-- Scene 07 · Pattu for the day. -->
     <section class="scene paper wardrobe" aria-labelledby="wardrobe-title">
+      <svg class="kolam-divider" data-kolam="3,4" aria-hidden="true"></svg>
       <p class="chapter label" data-reveal data-t="ui.chapterWardrobe"></p>
       <h2 class="section-title display" id="wardrobe-title" data-reveal data-t="copy.wardrobeTitle"></h2>
       <div class="wardrobe-list">
@@ -238,6 +257,8 @@
       <p class="tamil closing-tamil" data-reveal data-t="tamil.mangalam"></p>
       <p class="rsvp-pill label" data-reveal data-t="ui.rsvpLabel"></p>
       <p class="rsvp-note info soft" data-reveal data-t="ui.rsvpNote"></p>
+      <p class="closing-note info soft" data-reveal data-t="copy.sampleNote"></p>
+      <button class="back-top label" type="button" data-t="ui.backToTop"></button>
       <p class="sample-mark-inline label" data-t="copy.studioLine"></p>
     </section>
 

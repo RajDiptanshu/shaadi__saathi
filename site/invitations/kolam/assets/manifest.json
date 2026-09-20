@@ -20,6 +20,12 @@
       "url": null,
       "checkedOn": "2026-09-18",
       "summary": "Drawn or rendered for this project; no third-party rights."
+    },
+    "pixabay": {
+      "name": "Pixabay Content License",
+      "url": "https://pixabay.com/service/license-summary/",
+      "checkedOn": "2026-09-20",
+      "summary": "Free use and modification, attribution not required; no standalone redistribution, no misleading use, no trademark use, care with recognisable people."
     }
   },
   "assets": [
@@ -138,52 +144,52 @@
       "scene": "welcome",
       "kind": "photograph",
       "category": "photography",
-      "description": "Long dark hair strung with jasmine, seen from behind",
-      "alt": "A long plait seen from behind, strung with fresh jasmine",
+      "description": "Garlands and clasped henna hands at a South Indian wedding",
+      "alt": "A couple’s jasmine and rose garlands over clasped hands at a wedding",
       "opening": true,
       "source": {
         "site": "unsplash",
-        "page": "https://unsplash.com/photos/oLeO8eLkuEs",
-        "creator": "Thilina Alagiyawanna",
-        "downloaded": "2026-09-18",
+        "page": "https://unsplash.com/photos/8GgBhKhmXBE",
+        "creator": "Sabesh Photography LTD",
+        "downloaded": "2026-09-20",
         "licence": "Unsplash License",
         "licenceUrl": "https://unsplash.com/license",
-        "licenceCheckedOn": "2026-09-18"
+        "licenceCheckedOn": "2026-09-20"
       },
       "identifiablePeople": false,
       "modelRelease": null,
       "aiGenerated": false,
-      "usage": "Scene 02 hero, revealed as the guest steps over the kolam",
+      "usage": "Scene 02 hero, revealed as the guest steps over the kolam; also the room beyond the threshold",
       "replaceBeforeLaunch": false,
       "files": {
-        "jasmine-hair": {
+        "garlands-hands": {
           "avif": [
-            "photography/p01-jasmine-hair-1080.avif",
-            "photography/p01-jasmine-hair-1440.avif",
-            "photography/p01-jasmine-hair-1920.avif"
+            "photography/p01-garlands-hands-1080.avif",
+            "photography/p01-garlands-hands-1440.avif",
+            "photography/p01-garlands-hands-1920.avif"
           ],
           "webp": [
-            "photography/p01-jasmine-hair-1080.webp",
-            "photography/p01-jasmine-hair-1440.webp",
-            "photography/p01-jasmine-hair-1920.webp"
+            "photography/p01-garlands-hands-1080.webp",
+            "photography/p01-garlands-hands-1440.webp",
+            "photography/p01-garlands-hands-1920.webp"
           ],
           "jpg": [
-            "photography/p01-jasmine-hair-1080.jpg",
-            "photography/p01-jasmine-hair-1440.jpg",
-            "photography/p01-jasmine-hair-1920.jpg"
+            "photography/p01-garlands-hands-1080.jpg",
+            "photography/p01-garlands-hands-1440.jpg",
+            "photography/p01-garlands-hands-1920.jpg"
           ]
         }
       },
-      "bytes": 64519,
+      "bytes": 111098,
       "width": 2400,
-      "height": 3600,
+      "height": 3598,
       "edits": [
         "grade midday"
       ],
-      "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADQAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdACBSrshe657hUHAA+PLIM8pfuR1X9RUUrE8RFBBTphWR7S/XdEHwTEmkTAX/YJJIkmE9Nb/PzKmziVO8+7oCKRd1WuB3P9UdzjEQmrUY0JkBOOCEqF/gDpbBkfdeFLAZOUFQI07plLf8zww7Wc0AAA==",
+      "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JYgCw7CBe9h6+EhYyNysPwAD+1yT0uha+wwwFy7S5CR8HqNpftKRPYlsqoL3PQ+N/bvf3ogg0VtWPG9cgihhhMFIaP97WQmjct/RLzVwyBQLvUx1gxg3ajjumA1GouU7SwY1wPeuYu+bBvtvU54dxR+1dQ/NgwkWQCt3opzYUeS1A7g0v529wAAA=",
       "focal": {
         "x": 0.5,
-        "y": 0.4
+        "y": 0.45
       }
     },
     {
@@ -399,6 +405,34 @@
       "modelRelease": null,
       "aiGenerated": false,
       "usage": "Scene 01 opening, drawn dot by dot and line by line; section dividers"
+    },
+    {
+      "id": "A01",
+      "status": "built",
+      "kind": "audio",
+      "category": "audio",
+      "description": "Nadaswaram and thavil in Kappi raga — the mangala vadyam played at a Tamil muhurtham",
+      "files": {
+        "mp3": "audio/nadaswaram-thavil.mp3"
+      },
+      "bytes": 923904,
+      "source": {
+        "site": "pixabay",
+        "page": "https://pixabay.com/music/india-south-india-nadaswaram-thavil-kappi-raga-358257/",
+        "creator": "Saseendran",
+        "downloaded": "2026-09-20",
+        "licence": "Pixabay Content License",
+        "licenceUrl": "https://pixabay.com/service/license-summary/",
+        "licenceCheckedOn": "2026-09-20"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Loops under the invitation from the guest’s tap, at half volume, with a mute button",
+      "edits": [
+        "shipped as downloaded"
+      ],
+      "replaceBeforeLaunch": false
     }
   ]
 }

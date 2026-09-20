@@ -15,6 +15,7 @@
   var KEY = 'invite-' + (Invite.data.slug || 'demo') + '-music';
   var LOOP_START = music.loopStart || 0;
   var LOOP_LENGTH = music.loopLength || 0;
+  var LEVEL = music.volume != null ? music.volume : 1;
   var AudioCtx = window.AudioContext || window.webkitAudioContext;
   var useElement = !AudioCtx || !window.fetch || !window.Promise;
   var wanted = true;
@@ -41,14 +42,18 @@
     if (toggle) toggle.hidden = true;
   }
 
-  // Fetch while the cover shows; decode after the tap.
-  if (!useElement) {
+  // Fetch while the cover shows; decode after the tap. With music.fetchAfter 'opening' the fetch waits until
+  // the guest opens the invitation, so a tune never competes with the opening's own bytes.
+  function fetchMusic() {
+    if (bytes || useElement) return;
     bytes = fetch(music.src).then(function (r) {
       if (!r.ok) throw new Error('Music failed to load: HTTP ' + r.status);
       return r.arrayBuffer();
     });
     quiet(bytes);
   }
+  if (music.fetchAfter === 'opening') Invite.on('open', fetchMusic);
+  else fetchMusic();
   // iPhone: play like a music app even with the ringer switch on silent.
   try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
 
@@ -99,12 +104,12 @@
       el.muted = false;
       try { el.volume = 0; } catch (e) {}
       quiet(el.play());
-      fadeElement(1, 3000);
+      fadeElement(LEVEL, 3000);
       return;
     }
     if (!audio) return;
     if (audio.ctx.state !== 'running') quiet(audio.ctx.resume());
-    if (audio.source) { rampTo(1, 1.2); return; }
+    if (audio.source) { rampTo(LEVEL, 1.2); return; }
     decode().then(function (buf) {
       if (audio.source) return;
       var source = audio.ctx.createBufferSource();
@@ -117,7 +122,7 @@
       source.connect(audio.gain);
       source.start(0, LOOP_START);
       audio.source = source;
-      rampTo(wanted ? 1 : 0, 3);
+      rampTo(wanted ? LEVEL : 0, 3);
       if (document.hidden) quiet(audio.ctx.suspend());
     }, giveUp);
   }

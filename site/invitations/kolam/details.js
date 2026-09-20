@@ -29,7 +29,9 @@ window.INVITE = {
     invite: 'திருமண அழைப்பு',
     muhurtham: 'முகூர்த்தம்',
     blessing: 'வாழ்க வளமுடன்',
-    mangalam: 'மங்களம்'
+    mangalam: 'மங்களம்',
+    jasmine: 'மல்லிகை',
+    auspicious: 'நல்ல நேரம்'
   },
 
   wedding: {
@@ -58,7 +60,10 @@ window.INVITE = {
     ceremoniesTitle: 'Three days, each with a colour of its own.',
     wardrobeTitle: 'What to wear, day by day.',
     venueLine: 'A mandapam of old stone beside the temple tank, where the morning light arrives before the guests do.',
+    interludeTitle: 'The morning will smell of jasmine, wet earth and filter coffee.',
+    interludeLine: 'Come early. Stay late. Eat twice.',
     closingLine: 'Come, take the blessings and the first plate of the feast.',
+    sampleNote: 'A fictional wedding demo. Names, venues and photographs are placeholders, and no reply is sent to a couple.',
     studioLine: 'Sample invitation by Shaadi Saathi'
   },
 
@@ -102,6 +107,15 @@ window.INVITE = {
 
   rsvp: { deadline: '2027-01-10' },
 
+  /* Nadaswaram and thavil — the mangala vadyam played at a Tamil muhurtham. It is fetched only once the
+     guest opens the invitation, and starts from their tap, because phones allow sound only after one. */
+  music: {
+    src: 'assets/audio/nadaswaram-thavil.mp3',
+    delay: 900,
+    volume: 0.5,
+    fetchAfter: 'opening'
+  },
+
   ui: {
     openInvite: 'Open the invitation from Karthik and Meenakshi',
     tapToOpen: 'Step in',
@@ -116,7 +130,10 @@ window.INVITE = {
     chapterVenue: 'The mandapam',
     openLocation: 'Open live location',
     rsvpLabel: 'RSVP',
-    rsvpNote: 'A live guest-response form on every bespoke order.'
+    rsvpNote: 'A live guest-response form on every bespoke order.',
+    chapterInterlude: 'A Kanchipuram morning',
+    backToTop: 'Back to the threshold ↑',
+    music: 'Music'
   },
 
   assets: 'assets/manifest.json'

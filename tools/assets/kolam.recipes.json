@@ -3,33 +3,33 @@
   "notes": "How each approved original becomes web files. The same quiet midday grade on all five so the photographs read as one morning. Originals fetched from Unsplash at w=2400.",
   "assets": {
     "P01": {
-      "original": "p01-jasmine-hair-unsplash-oLeO8eLkuEs.jpg",
-      "downloaded": "2026-09-18",
+      "original": "p01-garlands-hands-unsplash-8GgBhKhmXBE.jpg",
+      "downloaded": "2026-09-20",
       "category": "photography",
-      "name": "jasmine-hair",
+      "name": "garlands-hands",
       "grade": "midday",
       "focal": {
         "x": 0.5,
-        "y": 0.4
+        "y": 0.45
       },
       "outputs": [
         {
           "width": 1080,
           "primary": true,
-          "avif": 48,
-          "webp": 70,
+          "avif": 46,
+          "webp": 68,
           "jpg": 76
         },
         {
           "width": 1440,
-          "avif": 44,
-          "webp": 66,
+          "avif": 42,
+          "webp": 64,
           "jpg": 74
         },
         {
           "width": 1920,
-          "avif": 40,
-          "webp": 62,
+          "avif": 38,
+          "webp": 60,
           "jpg": 72
         }
       ]

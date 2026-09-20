@@ -14,7 +14,7 @@ const manifestPath = path.join(outDir, 'manifest.json');
 const LATIN = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~' +
   ' ·–—‘’“”•…₹×é';
 const DEVANAGARI = '०१२३४५६७८९।॥';
-const TAMIL = 'கார்த்திக் மீனாட்சி முகூர்த்தம் திருமண அழைப்பு வாழ்க வளமுடன் மங்களம் வரவேற்பு நிச்சயதார்த்தம் நலங்கு சுபம் தை மாசி ஞாயிறு';
+const TAMIL = 'கார்த்திக் மீனாட்சி முகூர்த்தம் திருமண அழைப்பு வாழ்க வளமுடன் மங்களம் வரவேற்பு நிச்சயதார்த்தம் நலங்கு சுபம் தை மாசி ஞாயிறு மல்லிகை நல்ல நேரம்';
 
 // Axis ranges come from each design's own type tokens, so nothing unused ships.
 const FONT_SETS = {
