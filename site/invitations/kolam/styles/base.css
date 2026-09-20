@@ -1,0 +1,68 @@
+/* Kolam · base: page, type roles, kasavu paper, reveals. Shares engine.css for the scratch foil and the sales action. */
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-synthesis: none; background: var(--paper); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font: 440 16px/22px var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.js.is-open body, html.js.is-still body { overflow-x: hidden; overflow-y: auto; }
+img, svg { max-width: none; }
+p, h1, h2, h3, figure { margin: 0; }
+a { color: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Type roles. */
+.label {
+  font-family: var(--f-text);
+  font-size: var(--label);
+  line-height: 16px;
+  font-weight: 520;
+  font-stretch: 118%;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.info { font-family: var(--f-text); font-size: var(--info); line-height: 24px; font-weight: 440; color: var(--ink); }
+.soft { color: var(--ink-soft); }
+.display { font-family: var(--f-display); font-weight: 400; color: var(--ink); }
+.display em, .display i, .italic { font-family: var(--f-display); font-style: italic; }
+.tamil { font-family: var(--f-tamil); font-size: var(--tamil); line-height: 1.5; font-weight: 400; color: var(--ink-soft); }
+
+/* The sprite only holds <defs>; without this it lays out as a 150px inline SVG at the top of the page. */
+.defs-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Kasavu paper: cream cloth-paper with the zari border on the left edge (drawn down the page by scroll). */
+.paper { position: relative; background: var(--paper); }
+.kasavu {
+  position: absolute; left: calc(var(--margin) - 14px); top: 0; bottom: 0; width: 8px; pointer-events: none;
+  background: linear-gradient(90deg, var(--gold) 0 2px, transparent 2px 5px, var(--red) 5px 6px, transparent 6px 8px);
+  transform-origin: 50% 0; transform: scaleY(var(--p, 1));
+}
+
+/* Small kolams drawn by scenes/02-sections.js as dividers. */
+.kolam-divider { display: block; width: 72px; height: auto; overflow: visible; }
+.kolam-divider circle { fill: var(--gold-deep); }
+.kolam-divider path { fill: none; stroke: var(--gold); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Reveal-on-view: content is always present; motion only adds a fade and a small rise. */
+[data-reveal] { transition: opacity 1s ease, transform 1.1s var(--e-settle); transition-delay: var(--d, 0s); }
+.can-reveal [data-reveal]:not(.is-in) { opacity: 0; transform: translate3d(0, 22px, 0); }
+html.motion-reduced [data-reveal] { transition-duration: .4s; transform: none; }
+
+/* The engine's sample tag would sit on top of the cover; the cover carries its own. */
+html.js:not(.is-open) .studio-tag { display: none; }
+
+/* Every word on this page is injected from details.js, so the invitation is empty until the engine renders
+   it. It stays behind the cover and out of the layout's way until the guest has stepped in; without this the
+   injected text reflows a full screen of content and counts as a layout shift. */
+html.js:not(.is-open):not(.is-still) .invitation { visibility: hidden; }

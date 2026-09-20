@@ -1,0 +1,272 @@
+/* Kolam · scenes. */
+
+/* ───────────── Scene 01 · The threshold ───────────── */
+
+html:not(.js) #cover { position: relative; min-height: 100svh; }
+html.js #cover {
+  position: fixed; inset: 0; z-index: 20; overflow: hidden;
+  display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0;
+  background: var(--oxide-deep); color: var(--ink-on-oxide);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+html.is-open #cover { opacity: 0; pointer-events: none; transition: opacity .9s ease; }
+
+.opening-frame { position: absolute; inset: 0; overflow: hidden; background: var(--oxide-deep); }
+@media (min-width: 720px) {
+  html.js #cover { display: flex; align-items: center; justify-content: center; }
+  .opening-frame {
+    position: relative; inset: auto; width: min(440px, 92vw); aspect-ratio: 390 / 780;
+    box-shadow: 0 60px 140px -50px rgba(0, 0, 0, .7);
+  }
+}
+
+/* Layer 1 · the house beyond the threshold, seen once the floor tilts away. */
+.beyond { position: absolute; inset: 0; overflow: hidden; transform: translate3d(0, -6%, 0) scale(1.08); transform-origin: 50% 30%; }
+.beyond img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.beyond-dark { position: absolute; inset: 0; background: var(--oxide-deep); opacity: .88; }
+
+/* Layer 2 · the floor at the door, seen from above, and the kolam on it. */
+.stage { position: absolute; inset: 0; transform-origin: 50% 100%; background: var(--oxide-deep); }
+/* The washed red-oxide floor: one baked 384px tile (assets/textures), and the morning off the doorway. */
+.floor {
+  position: absolute; inset: 0; background-color: var(--oxide);
+  background-image: url('../assets/textures/t01-oxide-384.webp');
+  background-image: image-set(url('../assets/textures/t01-oxide-384.avif') type('image/avif'), url('../assets/textures/t01-oxide-384.webp') type('image/webp'));
+  background-size: 288px 288px;
+}
+.floor-sheen {
+  position: absolute; inset: 0;
+  background: radial-gradient(78% 56% at 50% 6%, rgba(255, 231, 194, .30), rgba(255, 231, 194, .06) 46%, rgba(26, 8, 5, .40) 100%);
+}
+html.motion-ok:not(.motion-reduced) .floor-sheen { animation: sheen-drift 16s ease-in-out infinite alternate; transform-origin: 50% 0; }
+@keyframes sheen-drift { from { transform: translate3d(-3%, 0, 0); } to { transform: translate3d(3%, 1.5%, 0); } }
+
+.threshold { position: absolute; left: 0; right: 0; top: 9%; display: flex; justify-content: center; }
+/* The size scenes/01-opening.js computes, declared up front so the drawing never shifts the layout. */
+.kolam { display: block; overflow: visible; width: 85%; aspect-ratio: 333 / 393; }
+.kdot { fill: var(--flour); }
+.kline { fill: none; stroke: var(--flour); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.kline-2 { stroke: #F1E6CB; }
+.ktip { opacity: 0; pointer-events: none; }
+
+.opening-words {
+  position: absolute; left: 0; right: 0; top: 63%; padding: 0 var(--margin);
+  display: grid; gap: var(--s2); justify-items: start;
+}
+.opening-tamil { color: var(--ink-on-oxide-soft); margin-bottom: var(--s1); }
+.opening-name {
+  font-size: var(--title); line-height: 1; color: var(--ink-on-oxide);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .35);
+}
+.opening-facts { margin-top: var(--s3); display: grid; gap: var(--s1); }
+.opening-facts .label, .opening-facts .info { color: var(--ink-on-oxide-soft); }
+
+.night { position: absolute; inset: 0; background: var(--oxide-deep); opacity: 0; pointer-events: none; }
+.doorlight {
+  position: absolute; left: -10%; right: -10%; top: -30%; height: 70%; opacity: 0; pointer-events: none;
+  background: radial-gradient(60% 70% at 50% 30%, rgba(255, 232, 190, .8), rgba(255, 232, 190, 0) 70%);
+}
+.bloom {
+  position: absolute; inset: 0; opacity: 0; pointer-events: none;
+  background: radial-gradient(52% 40% at 50% 20%, rgba(255, 238, 206, .92), rgba(255, 228, 186, .34) 42%, rgba(255, 228, 186, 0) 74%);
+}
+.sample-mark { position: absolute; left: var(--margin); top: calc(20px + env(safe-area-inset-top, 0px)); color: var(--ink-on-oxide-soft); }
+.opening-hint {
+  position: absolute; left: var(--margin); bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  padding: 0; font: inherit; background: none; border: 0; color: var(--ink-on-oxide-soft);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.opening-hint:focus-visible { outline: 1px solid var(--flour); outline-offset: 6px; }
+
+/* The floor itself paints straight away; only the drawing and the words wait until the policy has decided
+   whether this browser animates (kolam-ready), with a CSS failsafe if the scripts never get there. */
+html.js:not(.kolam-ready) .threshold,
+html.js:not(.kolam-ready) .opening-words,
+html.js:not(.kolam-ready) .opening-hint { visibility: hidden; animation: unhide 0s linear 3s both; }
+@keyframes unhide { to { visibility: visible; } }
+
+/* ── The opening. The kolam's dots and lines are driven by scenes/01-opening.js (a seekable timeline); the
+      light and the words are CSS, all "from" states under html.motion-ok. ── */
+html.motion-ok .night { animation: night-lift 2.6s var(--e-light) both; }
+@keyframes night-lift { from { opacity: .92; } to { opacity: 0; } }
+html.motion-ok .opening-words > * { opacity: 0; transform: translate3d(0, 10px, 0); }
+html.motion-ok.is-drawn .opening-words > * { opacity: 1; transform: none; transition: opacity 1s ease, transform 1.2s var(--e-settle); }
+html.motion-ok.is-drawn .opening-tamil { transition-delay: 0s; }
+html.motion-ok.is-drawn .opening-name { transition-delay: .15s; }
+html.motion-ok.is-drawn .opening-name--bride { transition-delay: .3s; }
+html.motion-ok.is-drawn .opening-facts { transition-delay: .6s; }
+html.motion-ok .opening-hint { opacity: 0; }
+html.motion-ok.is-drawn .opening-hint { opacity: 1; transition: opacity 1s ease 1s; }
+html.motion-ok.motion-reduced .night { animation-duration: 1s; }
+html.motion-ok.motion-reduced.is-drawn .opening-words > * { transition-duration: .4s; transition-delay: 0s; }
+html.motion-ok.motion-reduced.is-drawn .opening-hint { transition-delay: .3s; }
+
+/* ── The touch: step over the kolam. Light spills from the doorway at once; the floor tilts away under the
+      camera as it walks in, the kolam foreshortening; the room beyond brightens and comes forward. ── */
+html.is-pressing .doorlight { opacity: 1; transition: opacity .25s ease; }
+html.is-pressing .stage, html.is-pressing .beyond { will-change: transform; }
+html.is-opening .stage {
+  transform: perspective(1000px) rotateX(64deg) translate3d(0, 34%, 0) scale(1.4);
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(to top, #000 42%, rgba(0, 0, 0, 0) 92%);
+  mask-image: linear-gradient(to top, #000 42%, rgba(0, 0, 0, 0) 92%);
+  transition: transform 2.3s var(--e-camera) .05s, opacity 1s ease 1.05s;
+}
+html.is-opening .beyond { transform: none; transition: transform 2.6s var(--e-camera) .1s; }
+html.is-opening .beyond-dark { opacity: 0; transition: opacity 1.7s ease .35s; }
+html.is-opening .bloom { animation: bloom 2.6s var(--e-light) .1s both; }
+@keyframes bloom { 0% { opacity: 0; } 35% { opacity: .62; } 100% { opacity: 0; } }
+html.is-opening .opening-words, html.is-opening .threshold { opacity: 0; transition: opacity .7s ease .2s; }
+html.is-opening .opening-hint, html.is-opening .sample-mark { opacity: 0; transition: opacity .3s ease; }
+
+html.motion-reduced.is-opening .stage { transform: none; opacity: 0; transition: opacity .7s ease; }
+html.motion-reduced.is-opening .beyond { transition-duration: .8s; }
+html.motion-reduced.is-opening .beyond-dark { transition: opacity .6s ease .1s; }
+html.motion-reduced.is-opening .bloom { animation-duration: 1.2s; }
+
+/* ───────────── Scene 02 · Welcome ───────────── */
+
+.invitation { position: relative; background: var(--paper); }
+html.js .invitation { min-height: 100svh; }
+.scene { position: relative; padding: var(--s7) var(--margin); max-width: 40rem; margin: 0 auto; }
+.chapter { margin: 0 0 var(--s5); }
+.section-title { font-size: var(--title); line-height: 1.08; margin-bottom: var(--s6); text-wrap: balance; }
+
+.hero {
+  max-width: none; padding: 0; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--ink-on-oxide); background: var(--oxide-deep);
+}
+.hero-photo { position: absolute; inset: 0; overflow: hidden; }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.hero-sun { position: absolute; inset: 0; background: radial-gradient(60% 50% at 70% 15%, rgba(255, 226, 170, .22), rgba(255, 226, 170, 0) 70%); }
+html.motion-ok:not(.motion-reduced) .hero-sun { animation: sun-drift 14s ease-in-out infinite alternate; }
+@keyframes sun-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-6%, 4%, 0); } }
+.hero-shade {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(74% 46% at 34% 86%, rgba(58, 19, 14, .62), rgba(58, 19, 14, 0) 76%),
+    linear-gradient(180deg, rgba(58, 19, 14, .18) 0%, rgba(58, 19, 14, 0) 26%, rgba(58, 19, 14, .5) 52%, rgba(58, 19, 14, .84) 76%, rgba(58, 19, 14, .95) 100%);
+}
+.hero-words { position: relative; width: 100%; max-width: 40rem; margin: 0 auto; padding: 0 var(--margin) calc(var(--s8) + env(safe-area-inset-bottom, 0px)); }
+.hero .chapter { font-family: var(--f-tamil); font-size: var(--tamil); letter-spacing: 0; text-transform: none; color: var(--ink-on-oxide); opacity: .85; margin-bottom: var(--s4); }
+.couple { margin: 0 0 var(--s3); font-weight: normal; }
+.couple-line {
+  display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em;
+  font-size: var(--masthead); line-height: .96; letter-spacing: -.01em; color: var(--ink-on-oxide);
+}
+.w { display: block; overflow: hidden; padding: .02em .06em .12em; margin: -.02em -.06em -.12em; }
+.wi { display: inline-block; }
+.hero-tamil { color: var(--ink-on-oxide-soft); margin-bottom: var(--s3); }
+.welcome-lead { font-size: var(--line); line-height: 1.2; color: var(--ink-on-oxide-soft); }
+.welcome-dates { margin-top: var(--s4); color: var(--ink-on-oxide-soft); }
+
+html.js:not(.is-open):not(.is-still) .couple-line .wi { transform: translate3d(0, 112%, 0); }
+html.is-open .couple-line .wi { transform: none; transition: transform 1.5s var(--e-settle); transition-delay: calc(var(--i, 0) * 90ms + .25s); }
+html.js:not(.is-open):not(.is-still) .hero .chapter,
+html.js:not(.is-open):not(.is-still) .hero-tamil,
+html.js:not(.is-open):not(.is-still) .welcome-lead,
+html.js:not(.is-open):not(.is-still) .welcome-dates { opacity: 0; transform: translate3d(0, 14px, 0); }
+html.is-open .hero .chapter, html.is-open .hero-tamil, html.is-open .welcome-lead, html.is-open .welcome-dates { opacity: 1; transform: none; transition: opacity 1.1s ease, transform 1.3s var(--e-settle); }
+html.is-open .hero .chapter { transition-delay: .2s; }
+html.is-open .hero-tamil { transition-delay: .8s; }
+html.is-open .welcome-lead { transition-delay: .95s; }
+html.is-open .welcome-dates { transition-delay: 1.15s; }
+html.motion-reduced.is-open .couple-line .wi { transition-duration: .5s; transition-delay: .1s; }
+
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .hero { justify-content: center; }
+  .hero-photo img { object-position: 50% 30%; }
+  .hero-words { max-width: none; width: 48vw; margin: 0; padding: 0 0 0 7vw; }
+  .hero-shade { background: linear-gradient(90deg, rgba(58, 19, 14, .88) 0%, rgba(58, 19, 14, .62) 34%, rgba(58, 19, 14, .12) 62%, rgba(58, 19, 14, 0) 80%); }
+  .couple-line { font-size: clamp(76px, 7.2vw, 118px); }
+  .hero-words { padding-bottom: 0; }
+}
+
+/* ───────────── Scene 03 · With the blessings of ───────────── */
+
+.blessing-photo {
+  width: 72%; max-width: 380px; aspect-ratio: 4 / 5; overflow: hidden;
+  margin: 0 calc(-1 * var(--margin)) var(--s7) auto;
+}
+.blessing-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.blessing-words { position: relative; display: grid; gap: var(--s3); justify-items: start; }
+.blessing-words .tamil { margin-top: var(--s3); }
+.welcome-line { font-size: var(--line); line-height: 1.25; color: var(--ink); text-wrap: balance; margin-top: var(--s3); max-width: 22ch; }
+@media (min-width: 640px) {
+  .blessings { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); align-items: center; }
+  .blessing-photo { order: 2; width: auto; max-width: none; margin: 0 calc(-1 * var(--margin)) 0 0; }
+  .blessing-words { order: 1; }
+}
+
+/* ───────────── Scene 04 · The muhurtham ───────────── */
+
+.dark { background: var(--oxide-deep); color: var(--ink-on-oxide); }
+.dark .label, .dark .info, .dark .tamil { color: var(--ink-on-oxide-soft); }
+.dark .display { color: var(--ink-on-oxide); }
+.muhurtham { max-width: none; padding: 0 0 var(--s8); }
+.lamp-photo { position: relative; height: 56svh; min-height: 360px; overflow: hidden; }
+.lamp-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; }
+.lamp-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(58, 19, 14, 0) 45%, var(--oxide-deep) 100%); }
+.muhurtham-words { position: relative; max-width: 40rem; margin: -80px auto 0; padding: 0 var(--margin); }
+.muhurtham-title { font-size: var(--line); line-height: 1.25; text-wrap: balance; margin-bottom: var(--s6); }
+.save-card {
+  position: relative; padding: var(--s5) var(--s4) var(--s5); background: var(--ivory); color: var(--ink);
+  border-radius: 6px; --scratch-foil: #E1AE2E; --scratch-foil-edge: #F6D97A;
+}
+.save-card .label { color: var(--ink-soft); }
+.save-card .tamil { color: var(--ink-soft); margin-top: var(--s3); }
+.save-time { font-size: clamp(56px, 16vw, 96px); line-height: 1; color: var(--red); margin: var(--s3) 0 var(--s3); letter-spacing: -.01em; font-variant-numeric: lining-nums; }
+.dark .save-card .display { color: var(--red); }
+.save-hint { margin-top: calc(var(--s6) + 10px); }
+.scratch-reveal { color: var(--ink-on-oxide-soft); }
+
+/* ───────────── Scene 05 · Countdown ───────────── */
+
+.countdown { text-align: left; }
+.kolam-divider { margin-bottom: var(--s5); }
+.countdown-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); margin-bottom: var(--s5); }
+.countdown-grid div { display: grid; gap: var(--s2); padding: var(--s4) 0; border-top: 1px solid var(--gold); }
+.countdown-grid strong { font-size: clamp(38px, 11vw, 64px); line-height: 1; font-weight: 400; font-variant-numeric: lining-nums tabular-nums; }
+.countdown-line { font-size: var(--line); line-height: 1.25; color: var(--ink-soft); }
+
+/* ───────────── Scene 06 · Three days ───────────── */
+
+.garland-photo { width: 100%; aspect-ratio: 5 / 4; overflow: hidden; margin: 0 0 var(--s6); }
+.garland-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.ritual-list { display: grid; gap: var(--s5); }
+.ritual-card { position: relative; display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 1px solid var(--gold); }
+.ritual-number { color: var(--gold-deep); }
+.ritual-name { font-size: clamp(30px, 8.4vw, 44px); line-height: 1.05; }
+.ritual-note { font-size: var(--line); line-height: 1.25; color: var(--ink); margin-top: var(--s1); }
+.ritual-footer { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s3); margin-top: var(--s2); }
+.ritual-calendar { text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; color: var(--ink); }
+
+/* ───────────── Scene 07 · Pattu for the day ───────────── */
+
+.wardrobe-list { display: grid; gap: var(--s4); }
+.wardrobe-card { display: grid; grid-template-columns: auto 1fr; gap: var(--s4); align-items: start; padding-top: var(--s4); border-top: 1px solid var(--paper-deep); }
+.swatches { display: flex; margin-top: 4px; }
+.swatch { display: block; width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(43, 29, 20, .12); }
+.swatch-a { background: var(--a); }
+.swatch-b { background: var(--b); margin-left: -8px; }
+.wardrobe-words { display: grid; gap: var(--s1); }
+.wardrobe-colour { font-size: clamp(26px, 7vw, 36px); line-height: 1.1; }
+
+/* ───────────── Scene 08 · The mandapam ───────────── */
+
+.venue { max-width: none; padding: 0 0 var(--s8); }
+.venue-photo { height: 62svh; min-height: 380px; overflow: hidden; }
+.venue-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.venue-words { max-width: 40rem; margin: 0 auto; padding: var(--s6) var(--margin) 0; display: grid; gap: var(--s2); justify-items: start; }
+.venue-name { font-size: var(--title); line-height: 1.1; }
+.venue-line { font-size: var(--line); line-height: 1.25; color: var(--ink); text-wrap: balance; margin-top: var(--s2); }
+.venue-map { display: inline-block; margin-top: var(--s4); padding: var(--s2) var(--s4); border: 1px solid var(--red); border-radius: 999px; color: var(--red); text-decoration: none; }
+
+/* ───────────── Scene 09 · Closing ───────────── */
+
+.closing-line { font-size: var(--title); line-height: 1.1; text-wrap: balance; margin-bottom: var(--s4); }
+.closing-tamil { margin-bottom: var(--s5); }
+.rsvp-pill { display: inline-block; padding: var(--s3) var(--s5); border: 1px solid var(--red); border-radius: 999px; color: var(--red); }
+.rsvp-note { margin-top: var(--s3); max-width: 26ch; }
+.sample-mark-inline { margin-top: var(--s7); color: var(--ink-soft); }

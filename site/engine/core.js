@@ -28,7 +28,13 @@
     lang: langs[0],
     timing: { press: 420, open: 1700, done: 3400 },
     on: function (name, fn) { (listeners[name] = listeners[name] || []).push(fn); },
-    emit: function (name, detail) { (listeners[name] || []).forEach(function (fn) { fn(detail); }); }
+    // One broken listener must never stop the rest: a throw here used to abandon the whole chain, so a
+    // design could silently lose its countdown or its scratch card.
+    emit: function (name, detail) {
+      (listeners[name] || []).forEach(function (fn) {
+        try { fn(detail); } catch (error) { setTimeout(function () { throw error; }, 0); }
+      });
+    }
   };
 
   /* Text: a value is either a plain string or { en: '…', hi: '…' }. */
@@ -245,6 +251,6 @@
       try { if (button) button.focus({ preventScroll: true }); } catch (e) {}
     }
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else setTimeout(start, 0);
+  if (document.readyState === 'complete') setTimeout(start, 0);
+  else document.addEventListener('DOMContentLoaded', start);
 })();

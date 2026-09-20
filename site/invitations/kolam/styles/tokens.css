@@ -1,0 +1,85 @@
+/* Kolam · tokens. A Tamil wedding morning: red-oxide floor, rice flour, kasavu cream with a zari border,
+   temple red, banana-leaf green, turmeric. Distinct palette and type from every other world. */
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../assets/fonts/instrument-serif.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../assets/fonts/instrument-serif-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Tiro Tamil';
+  src: url('../assets/fonts/tiro-tamil.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/archivo.woff2') format('woff2');
+  font-weight: 400 520;
+  font-stretch: 100% 118%;
+  font-style: normal;
+  font-display: block;
+}
+@font-face { font-family: 'Instrument Serif Fallback'; src: local('Georgia'); size-adjust: 96%; ascent-override: 92%; descent-override: 24%; }
+@font-face { font-family: 'Archivo Fallback'; src: local('Arial'); size-adjust: 102%; }
+
+:root {
+  /* grounds */
+  --oxide: #5E2219;
+  --oxide-deep: #3A130E;
+  --paper: #F3ECD8;
+  --paper-deep: #E9DFC2;
+  --ivory: #F7F1E3;
+
+  /* materials */
+  --flour: #F7F1E3;
+  --gold: #C6A04B;
+  --gold-deep: #9A7A2C;
+  --red: #8E1B1B;
+  --green: #3C6E3A;
+  --manjal: #E4B33A;
+  --manjal-deep: #C48F1E;
+
+  /* ink */
+  --ink: #2B1D14;
+  --ink-soft: #6B5A47;
+  --ink-on-oxide: #F7F1E3;
+  --ink-on-oxide-soft: rgba(247, 241, 227, .66);
+
+  /* type families */
+  --f-display: 'Instrument Serif', 'Instrument Serif Fallback', Georgia, serif;
+  --f-tamil: 'Tiro Tamil', 'Noto Sans Tamil', serif;
+  --f-text: 'Archivo', 'Archivo Fallback', Arial, sans-serif;
+
+  /* type roles: size */
+  --masthead: clamp(62px, 17.4vw, 124px);
+  --title: clamp(36px, 10vw, 64px);
+  --line: clamp(24px, 6.4vw, 34px);
+  --info: clamp(16px, 4vw, 18px);
+  --label: clamp(11px, 2.6vw, 13px);
+  --tamil: clamp(15px, 3.8vw, 18px);
+
+  /* spacing scale */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 20px; --s5: 32px; --s6: 52px; --s7: 84px; --s8: 136px;
+  --margin: 20px;
+
+  /* motion */
+  --e-settle: cubic-bezier(.16, 1, .3, 1);
+  --e-light: cubic-bezier(.37, 0, .63, 1);
+  --e-camera: cubic-bezier(.65, 0, .35, 1);
+  --e-hand: cubic-bezier(.4, 0, .2, 1);
+}
+
+@media (min-width: 1024px) {
+  :root { --margin: 64px; }
+}

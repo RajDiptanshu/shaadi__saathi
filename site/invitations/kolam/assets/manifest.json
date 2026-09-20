@@ -1,0 +1,404 @@
+{
+  "design": "kolam",
+  "updated": "2026-09-20",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. The kolam itself is traced by code (scenes/kolam.js); the red-oxide floor is an SVG filter, not a file.",
+  "licences": {
+    "ofl": {
+      "name": "SIL Open Font License 1.1",
+      "url": "https://openfontlicense.org",
+      "checkedOn": "2026-09-18",
+      "summary": "Free to use, embed and subset; fonts may not be sold by themselves; the licence travels with the font files."
+    },
+    "unsplash": {
+      "name": "Unsplash License",
+      "url": "https://unsplash.com/license",
+      "checkedOn": "2026-09-18",
+      "summary": "Free commercial use and modification, attribution not required; no selling without significant modification, no compiling images into a similar or competing service. Unsplash+ images are excluded."
+    },
+    "in-house": {
+      "name": "Original work for Shaadi Saathi",
+      "url": null,
+      "checkedOn": "2026-09-18",
+      "summary": "Drawn or rendered for this project; no third-party rights."
+    }
+  },
+  "assets": [
+    {
+      "id": "F01",
+      "status": "built",
+      "kind": "font",
+      "description": "Display serif: Instrument Serif Regular, subset to Latin",
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/instrumentserif",
+        "creator": "Rodrigo Fuenzalida and Jordan Egstad (Instrument)",
+        "downloaded": "2026-09-18",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Display type: names, section titles, the muhurtham",
+      "files": {
+        "woff2": "fonts/instrument-serif.woff2",
+        "licence": "fonts/InstrumentSerif-OFL.txt"
+      },
+      "bytes": 15988,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to ",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F02",
+      "status": "built",
+      "kind": "font",
+      "description": "Display serif italic: Instrument Serif Italic, subset to Latin",
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/instrumentserif",
+        "creator": "Rodrigo Fuenzalida and Jordan Egstad (Instrument)",
+        "downloaded": "2026-09-18",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Italic accents: the written line under each ceremony, the closing",
+      "files": {
+        "woff2": "fonts/instrument-serif-italic.woff2",
+        "licence": "fonts/InstrumentSerif-OFL.txt"
+      },
+      "bytes": 16544,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to ",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F03",
+      "status": "built",
+      "kind": "font",
+      "description": "Tamil: Tiro Tamil Regular, subset to the Tamil strings the demo uses",
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/tirotamil",
+        "creator": "Tiro Typeworks (Fernando Mello, John Hudson)",
+        "downloaded": "2026-09-18",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Tamil lines: the names, the muhurtham, ceremony names",
+      "files": {
+        "woff2": "fonts/tiro-tamil.woff2",
+        "licence": "fonts/TiroTamil-OFL.txt"
+      },
+      "bytes": 22500,
+      "edits": [
+        "subset to 39 characters",
+        "axes limited to ",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F04",
+      "status": "built",
+      "kind": "font",
+      "description": "Body/label sans: Archivo, the same subsetted WOFF2 built and licensed for Mogra & Moti, copied here",
+      "files": {
+        "woff2": "fonts/archivo.woff2",
+        "licence": "fonts/Archivo-OFL.txt"
+      },
+      "source": {
+        "site": "google/fonts",
+        "page": "https://github.com/google/fonts/tree/main/ofl/archivo",
+        "downloaded": "2026-09-17",
+        "licence": "SIL Open Font License 1.1",
+        "licenceUrl": "https://openfontlicense.org",
+        "licenceCheckedOn": "2026-09-17"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Body copy, labels, info lines"
+    },
+    {
+      "id": "P01",
+      "status": "built",
+      "scene": "welcome",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "Long dark hair strung with jasmine, seen from behind",
+      "alt": "A long plait seen from behind, strung with fresh jasmine",
+      "opening": true,
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/oLeO8eLkuEs",
+        "creator": "Thilina Alagiyawanna",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 02 hero, revealed as the guest steps over the kolam",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "jasmine-hair": {
+          "avif": [
+            "photography/p01-jasmine-hair-1080.avif",
+            "photography/p01-jasmine-hair-1440.avif",
+            "photography/p01-jasmine-hair-1920.avif"
+          ],
+          "webp": [
+            "photography/p01-jasmine-hair-1080.webp",
+            "photography/p01-jasmine-hair-1440.webp",
+            "photography/p01-jasmine-hair-1920.webp"
+          ],
+          "jpg": [
+            "photography/p01-jasmine-hair-1080.jpg",
+            "photography/p01-jasmine-hair-1440.jpg",
+            "photography/p01-jasmine-hair-1920.jpg"
+          ]
+        }
+      },
+      "bytes": 64519,
+      "width": 2400,
+      "height": 3600,
+      "edits": [
+        "grade midday"
+      ],
+      "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADQAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdACBSrshe657hUHAA+PLIM8pfuR1X9RUUrE8RFBBTphWR7S/XdEHwTEmkTAX/YJJIkmE9Nb/PzKmziVO8+7oCKRd1WuB3P9UdzjEQmrUY0JkBOOCEqF/gDpbBkfdeFLAZOUFQI07plLf8zww7Wc0AAA==",
+      "focal": {
+        "x": 0.5,
+        "y": 0.4
+      }
+    },
+    {
+      "id": "P02",
+      "status": "built",
+      "scene": "blessings",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "Cupped hands holding blessing rice (akshathai) at a wedding",
+      "alt": "Two cupped hands holding rice for a blessing",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/0LULWuk2skc",
+        "creator": "One Horizon Productions",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 03 blessings, bleeding one edge",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "blessing-rice": {
+          "avif": [
+            "photography/p02-blessing-rice-1080.avif",
+            "photography/p02-blessing-rice-1440.avif"
+          ],
+          "webp": [
+            "photography/p02-blessing-rice-1080.webp",
+            "photography/p02-blessing-rice-1440.webp"
+          ],
+          "jpg": [
+            "photography/p02-blessing-rice-1080.jpg",
+            "photography/p02-blessing-rice-1440.jpg"
+          ]
+        }
+      },
+      "bytes": 38751,
+      "width": 2400,
+      "height": 3600,
+      "edits": [
+        "grade midday"
+      ],
+      "lqip": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JYgCdMoACDpbXZr20MjWlAAD3Njo7WG65xLUXUXgzr2+3dCw4HhinechPtRd+rZJJ5/ND3asdoHLFYm52pMt8ke2KjGxSPfPN4eN5xsm5eqW/vpH9ryK18yKemCJ6Q3soVD0xG4l/h1XqM4AHPwdyT66mcKoIfgj0YfBMmRjNMAAA",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "id": "P03",
+      "status": "built",
+      "scene": "muhurtham",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "A hand lighting a brass oil lamp in the dark",
+      "alt": "A hand lighting the wick of a brass oil lamp",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/ixWchmlx5Mw",
+        "creator": "Roshan Kumara",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 04 the muhurtham, above the turmeric scratch",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "lamp": {
+          "avif": [
+            "photography/p03-lamp-1080.avif",
+            "photography/p03-lamp-1600.avif"
+          ],
+          "webp": [
+            "photography/p03-lamp-1080.webp",
+            "photography/p03-lamp-1600.webp"
+          ],
+          "jpg": [
+            "photography/p03-lamp-1080.jpg",
+            "photography/p03-lamp-1600.jpg"
+          ]
+        }
+      },
+      "bytes": 14737,
+      "width": 2400,
+      "height": 1601,
+      "edits": [
+        "grade midday"
+      ],
+      "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAsAA4BaJYgCdADcJN5e6gAA/vDa72O13U14Ds1P9/1TBURr4zGOf+PqMQQk6peCJwLZWu67RN/24AA=",
+      "focal": {
+        "x": 0.55,
+        "y": 0.5
+      }
+    },
+    {
+      "id": "P04",
+      "status": "built",
+      "scene": "ceremonies",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "Jasmine garlands hanging from a wooden stick",
+      "alt": "White jasmine garlands hanging in a row",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/od2IVIAMIjM",
+        "creator": "Mr Catographer",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 06 ceremonies",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "garlands": {
+          "avif": [
+            "photography/p04-garlands-1080.avif"
+          ],
+          "webp": [
+            "photography/p04-garlands-1080.webp"
+          ],
+          "jpg": [
+            "photography/p04-garlands-1080.jpg"
+          ]
+        }
+      },
+      "bytes": 36368,
+      "width": 2400,
+      "height": 4273,
+      "edits": [
+        "grade midday"
+      ],
+      "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACQBACdASoQABwAPu1iqU2ppaOiMAgBMB2JYwCuV78IL4QIewAlSXHaMTNjTmAAzXTP9Oq6wCQOT2dFMo7qBiUJCXPFXawmjz2LoerAuo8fj4Nn8fPPTh9EP5dlE7MX/eVVQrjnGWoZWuHA+EzsD9gcLlCMs/2Tfrs7PYexKKuKkHVpJeMbqTTrCmPYZ8XM+WkfoZVwMSnzSX4hmW+wAAAA",
+      "focal": {
+        "x": 0.5,
+        "y": 0.45
+      }
+    },
+    {
+      "id": "P05",
+      "status": "built",
+      "scene": "venue",
+      "kind": "photograph",
+      "category": "photography",
+      "description": "A warm stone corridor of carved temple pillars",
+      "alt": "A corridor of carved stone pillars in warm light",
+      "source": {
+        "site": "unsplash",
+        "page": "https://unsplash.com/photos/dboyFJbRn_E",
+        "creator": "Navi",
+        "downloaded": "2026-09-18",
+        "licence": "Unsplash License",
+        "licenceUrl": "https://unsplash.com/license",
+        "licenceCheckedOn": "2026-09-18"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 08 venue",
+      "replaceBeforeLaunch": false,
+      "files": {
+        "pillars": {
+          "avif": [
+            "photography/p05-pillars-1080.avif",
+            "photography/p05-pillars-1440.avif"
+          ],
+          "webp": [
+            "photography/p05-pillars-1080.webp",
+            "photography/p05-pillars-1440.webp"
+          ],
+          "jpg": [
+            "photography/p05-pillars-1080.jpg",
+            "photography/p05-pillars-1440.jpg"
+          ]
+        }
+      },
+      "bytes": 101978,
+      "width": 2400,
+      "height": 3143,
+      "edits": [
+        "grade midday"
+      ],
+      "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JQBOgBFfwGUpLgd5Nsb8AAP7Qm15HQ7KG0XKRbg5SC/gs+xfr/t1QZZbWfBwtzGHktn1g7gUq4DkNHrhwdNIzTJZBMTzo6EXhmyNZlAXy3ZkXuhC0R8rdUylMe/piiwJ/Z4aMAAA=",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "id": "V01",
+      "status": "built",
+      "kind": "vector",
+      "description": "The kolam: a kambi (wire) kolam traced by code on a 5 by 6 dot grid, two unbroken lines woven through each other",
+      "files": {
+        "js": "../scenes/kolam.js"
+      },
+      "source": {
+        "site": "in-house",
+        "licence": "in-house"
+      },
+      "identifiablePeople": false,
+      "modelRelease": null,
+      "aiGenerated": false,
+      "usage": "Scene 01 opening, drawn dot by dot and line by line; section dividers"
+    }
+  ]
+}

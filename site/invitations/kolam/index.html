@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kolam · Sample invitation</title>
+  <meta name="description" content="A sample wedding invitation by Shaadi Saathi.">
+  <meta name="theme-color" content="#3A130E">
+  <meta name="robots" content="noindex">
+  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/tiro-tamil.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/scenes.css">
+  <link rel="stylesheet" href="../../engine/engine.css">
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  <script src="details.js" defer></script>
+  <script src="../../engine/strings.js" defer></script>
+  <script src="../../engine/studio.js" defer></script>
+  <script src="../../engine/core.js" defer></script>
+  <script src="../../engine/motion/policy.js" defer></script>
+  <script src="../../engine/motion/timeline.js" defer></script>
+  <script src="../../engine/scratch.js" defer></script>
+  <script src="../../engine/events.js" defer></script>
+  <script src="../../engine/sales.js" defer></script>
+  <script src="scenes/kolam.js" defer></script>
+  <script src="scenes/01-opening.js" defer></script>
+  <script src="scenes/02-sections.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <svg class="defs-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="flour-glow">
+        <stop offset="0%" stop-color="#FFF9EC" stop-opacity=".95"/>
+        <stop offset="40%" stop-color="#FFF3DA" stop-opacity=".45"/>
+        <stop offset="100%" stop-color="#FFF3DA" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+  </svg>
+
+  <!-- Scene 01 · The threshold. Before the sun is up, a kolam is drawn on the washed red-oxide floor at the
+       door: the dots go down one by one, then two unbroken lines are drawn through them. The names arrive
+       once the lines are closed. The touch steps over it into the house. -->
+  <div class="opening" id="cover" data-attr="aria-label:ui.openInvite" role="button" tabindex="-1">
+    <div class="opening-frame">
+
+      <div class="beyond" aria-hidden="true">
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p01-jasmine-hair-1080.avif 1080w, assets/photography/p01-jasmine-hair-1440.avif 1440w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p01-jasmine-hair-1080.webp 1080w, assets/photography/p01-jasmine-hair-1440.webp 1440w" sizes="100vw">
+          <img data-src="assets/photography/p01-jasmine-hair-1080.jpg" width="1080" height="1620" alt="" decoding="async">
+        </picture>
+        <div class="beyond-dark"></div>
+      </div>
+
+      <div class="stage">
+        <i class="floor" aria-hidden="true"></i>
+        <i class="floor-sheen" aria-hidden="true"></i>
+
+        <div class="threshold" aria-hidden="true">
+          <svg class="kolam" xmlns="http://www.w3.org/2000/svg">
+            <g class="kdots"></g>
+            <g class="klines">
+              <path class="kline kline-1"/>
+              <path class="kline kline-2"/>
+            </g>
+            <circle class="ktip" r="8" fill="url(#flour-glow)"/>
+          </svg>
+        </div>
+
+        <div class="opening-words">
+          <p class="opening-tamil tamil"><span data-t="tamil.groom"></span> · <span data-t="tamil.bride"></span></p>
+          <p class="opening-name display" data-t="couple.groom"></p>
+          <p class="opening-name opening-name--bride display" data-t="couple.bride"></p>
+          <p class="opening-facts">
+            <span class="label" data-date="wedding.date" data-format="weekday"></span>
+            <span class="info soft"><span data-date="wedding.date" data-format="date"></span> · <span data-t="wedding.city"></span></span>
+          </p>
+        </div>
+        <div class="night" aria-hidden="true"></div>
+      </div>
+
+      <div class="doorlight" aria-hidden="true"></div>
+      <div class="bloom" aria-hidden="true"></div>
+      <p class="sample-mark label" data-t="ui.sampleMark"></p>
+      <button class="opening-hint label" id="open-invite" type="button" data-t="ui.tapToOpen"></button>
+    </div>
+  </div>
+
+  <main class="invitation" id="invite">
+
+    <!-- Scene 02 · Welcome: inside the house. -->
+    <section class="scene hero" aria-labelledby="welcome-title">
+      <div class="hero-photo" aria-hidden="true">
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p01-jasmine-hair-1080.avif 1080w, assets/photography/p01-jasmine-hair-1440.avif 1440w, assets/photography/p01-jasmine-hair-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p01-jasmine-hair-1080.webp 1080w, assets/photography/p01-jasmine-hair-1440.webp 1440w, assets/photography/p01-jasmine-hair-1920.webp 1920w" sizes="100vw">
+          <img data-src="assets/photography/p01-jasmine-hair-1080.jpg" width="1080" height="1620" alt="" decoding="async">
+        </picture>
+        <div class="hero-sun"></div>
+        <div class="hero-shade"></div>
+      </div>
+      <div class="hero-words">
+        <p class="chapter label" data-t="tamil.invite"></p>
+        <h1 class="couple" id="welcome-title" tabindex="-1">
+          <span class="couple-line display" data-split data-t="couple.groomFull"></span>
+          <span class="couple-line display" data-split data-t="couple.brideFull"></span>
+        </h1>
+        <p class="hero-tamil tamil"><span data-t="tamil.groom"></span> · <span data-t="tamil.bride"></span></p>
+        <p class="welcome-lead display" data-t="copy.welcomeLead"></p>
+        <p class="welcome-dates label"><span data-t="wedding.datesLabel"></span> · <span data-t="wedding.city"></span></p>
+      </div>
+    </section>
+
+    <!-- Scene 03 · With the blessings of. Kasavu paper; the zari border draws down as the guest scrolls. -->
+    <section class="scene paper blessings" aria-label="With the blessings of">
+      <i class="kasavu" data-kasavu aria-hidden="true"></i>
+      <figure class="blessing-photo" data-reveal>
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p02-blessing-rice-1080.avif 1080w, assets/photography/p02-blessing-rice-1440.avif 1440w" sizes="(min-width: 640px) 360px, 60vw">
+          <source type="image/webp" data-srcset="assets/photography/p02-blessing-rice-1080.webp 1080w, assets/photography/p02-blessing-rice-1440.webp 1440w" sizes="(min-width: 640px) 360px, 60vw">
+          <img data-src="assets/photography/p02-blessing-rice-1080.jpg" width="1080" height="1620" alt="Two cupped hands holding rice for a blessing" decoding="async" loading="lazy" fetchpriority="low">
+        </picture>
+      </figure>
+      <div class="blessing-words">
+        <p class="chapter label" data-reveal data-t="ui.chapterBlessings"></p>
+        <p class="info" data-reveal><span data-t="families.groom.parents"></span><br><span class="soft" data-t="families.groom.from"></span></p>
+        <p class="info" data-reveal><span data-t="families.bride.parents"></span><br><span class="soft" data-t="families.bride.from"></span></p>
+        <p class="tamil" data-reveal data-t="tamil.blessing"></p>
+        <p class="welcome-line display" data-reveal data-t="copy.welcomeLine"></p>
+      </div>
+    </section>
+
+    <!-- Scene 04 · The muhurtham, under turmeric. -->
+    <section class="scene dark muhurtham" aria-labelledby="muhurtham-title">
+      <div class="lamp-photo" aria-hidden="true">
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p03-lamp-1080.avif 1080w, assets/photography/p03-lamp-1600.avif 1600w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p03-lamp-1080.webp 1080w, assets/photography/p03-lamp-1600.webp 1600w" sizes="100vw">
+          <img data-src="assets/photography/p03-lamp-1080.jpg" width="1080" height="720" alt="" decoding="async" loading="lazy" fetchpriority="low">
+        </picture>
+      </div>
+      <div class="muhurtham-words">
+        <p class="chapter label" data-reveal data-t="ui.chapterMuhurtham"></p>
+        <h2 class="muhurtham-title display" id="muhurtham-title" data-reveal data-t="copy.muhurthamLine"></h2>
+        <div class="save-card scratch" data-scratch data-scratch-label="Reveal the hour" data-reveal>
+          <p class="label" data-t="copy.muhurthamEyebrow"></p>
+          <p class="save-time display" data-t="copy.muhurthamTime"></p>
+          <p class="label"><span data-date="wedding.date" data-format="full"></span></p>
+          <p class="tamil" data-t="tamil.muhurtham"></p>
+        </div>
+        <p class="save-hint label" data-reveal data-t="copy.saveHint"></p>
+      </div>
+    </section>
+
+    <!-- Scene 05 · Counting to the muhurtham. -->
+    <section class="scene paper countdown" aria-label="Countdown">
+      <svg class="kolam-divider" data-kolam="3,4" aria-hidden="true"></svg>
+      <p class="chapter label" data-reveal data-t="ui.chapterCountdown"></p>
+      <div class="countdown-grid" data-countdown data-reveal>
+        <div><strong class="display" data-count="days">00</strong><span class="label" data-t="ui.days"></span></div>
+        <div><strong class="display" data-count="hours">00</strong><span class="label" data-t="ui.hours"></span></div>
+        <div><strong class="display" data-count="minutes">00</strong><span class="label" data-t="ui.minutes"></span></div>
+        <div><strong class="display" data-count="seconds">00</strong><span class="label" data-t="ui.seconds"></span></div>
+      </div>
+      <p class="countdown-line display" data-reveal data-t="copy.countdownLine"></p>
+    </section>
+
+    <!-- Scene 06 · Three days in Kanchipuram. -->
+    <section class="scene paper ceremonies" aria-labelledby="ceremonies-title">
+      <i class="kasavu" data-kasavu aria-hidden="true"></i>
+      <p class="chapter label" data-reveal data-t="ui.chapterCeremonies"></p>
+      <h2 class="section-title display" id="ceremonies-title" data-reveal data-t="copy.ceremoniesTitle"></h2>
+      <figure class="garland-photo" data-reveal>
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p04-garlands-1080.avif" sizes="(min-width: 640px) 640px, 100vw">
+          <source type="image/webp" data-srcset="assets/photography/p04-garlands-1080.webp" sizes="(min-width: 640px) 640px, 100vw">
+          <img data-src="assets/photography/p04-garlands-1080.jpg" width="1080" height="1923" alt="White jasmine garlands hanging in a row" decoding="async" loading="lazy" fetchpriority="low">
+        </picture>
+      </figure>
+      <div class="ritual-list">
+        <template data-each="events">
+          <article class="ritual-card" data-reveal>
+            <p class="ritual-number label" data-t=".number"></p>
+            <p class="ritual-tamil tamil" data-t=".tamil"></p>
+            <h3 class="ritual-name display" data-t=".name"></h3>
+            <p class="ritual-when label"><span data-date=".start" data-format="short"></span> · <span data-date=".start" data-format="time"></span></p>
+            <p class="ritual-note display italic" data-t=".note"></p>
+            <div class="ritual-footer"><span class="label" data-t=".colour"></span><a class="ritual-calendar label" data-calendar data-t="ui.addToCalendar"></a></div>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <!-- Scene 07 · Pattu for the day. -->
+    <section class="scene paper wardrobe" aria-labelledby="wardrobe-title">
+      <p class="chapter label" data-reveal data-t="ui.chapterWardrobe"></p>
+      <h2 class="section-title display" id="wardrobe-title" data-reveal data-t="copy.wardrobeTitle"></h2>
+      <div class="wardrobe-list">
+        <template data-each="events">
+          <article class="wardrobe-card" data-reveal data-attr="style:.swatchStyle">
+            <span class="swatches" aria-hidden="true"><i class="swatch swatch-a"></i><i class="swatch swatch-b"></i></span>
+            <div class="wardrobe-words">
+              <p class="label" data-t=".name"></p>
+              <p class="wardrobe-colour display" data-t=".colour"></p>
+              <p class="info soft" data-t=".dress"></p>
+            </div>
+          </article>
+        </template>
+      </div>
+    </section>
+
+    <!-- Scene 08 · The mandapam. -->
+    <section class="scene venue" aria-labelledby="venue-title">
+      <div class="venue-photo" data-reveal>
+        <picture>
+          <source type="image/avif" data-srcset="assets/photography/p05-pillars-1080.avif 1080w, assets/photography/p05-pillars-1440.avif 1440w" sizes="100vw">
+          <source type="image/webp" data-srcset="assets/photography/p05-pillars-1080.webp 1080w, assets/photography/p05-pillars-1440.webp 1440w" sizes="100vw">
+          <img data-src="assets/photography/p05-pillars-1080.jpg" width="1080" height="1414" alt="A corridor of carved stone pillars in warm light" decoding="async" loading="lazy" fetchpriority="low">
+        </picture>
+      </div>
+      <div class="venue-words">
+        <p class="chapter label" data-reveal data-t="ui.chapterVenue"></p>
+        <h2 class="venue-name display" id="venue-title" data-reveal data-t="venue.name"></h2>
+        <p class="info soft" data-reveal data-t="venue.area"></p>
+        <p class="venue-line display italic" data-reveal data-t="copy.venueLine"></p>
+        <a class="venue-map label" data-reveal data-attr="href:venue.mapUrl" target="_blank" rel="noopener" data-t="ui.openLocation"></a>
+      </div>
+    </section>
+
+    <!-- Scene 09 · Closing -->
+    <section class="scene paper closing" id="rsvp">
+      <svg class="kolam-divider" data-kolam="3,4" aria-hidden="true"></svg>
+      <p class="closing-line display italic" data-reveal data-t="copy.closingLine"></p>
+      <p class="tamil closing-tamil" data-reveal data-t="tamil.mangalam"></p>
+      <p class="rsvp-pill label" data-reveal data-t="ui.rsvpLabel"></p>
+      <p class="rsvp-note info soft" data-reveal data-t="ui.rsvpNote"></p>
+      <p class="sample-mark-inline label" data-t="copy.studioLine"></p>
+    </section>
+
+  </main>
+</body>
+</html>

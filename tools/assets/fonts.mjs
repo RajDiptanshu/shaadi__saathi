@@ -14,6 +14,7 @@ const manifestPath = path.join(outDir, 'manifest.json');
 const LATIN = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~' +
   ' ·–—‘’“”•…₹×é';
 const DEVANAGARI = '०१२३४५६७८९।॥';
+const TAMIL = 'கார்த்திக் மீனாட்சி முகூர்த்தம் திருமண அழைப்பு வாழ்க வளமுடன் மங்களம் வரவேற்பு நிச்சயதார்த்தம் நலங்கு சுபம் தை மாசி ஞாயிறு';
 
 // Axis ranges come from each design's own type tokens, so nothing unused ships.
 const FONT_SETS = {
@@ -21,6 +22,12 @@ const FONT_SETS = {
     F01: { file: 'Imbue[opsz,wght].ttf', ofl: 'Imbue-OFL.txt', out: 'imbue', text: LATIN, axes: { wght: 300, opsz: { min: 32, max: 100 } } },
     F02: { file: 'Archivo[wdth,wght].ttf', ofl: 'Archivo-OFL.txt', out: 'archivo', text: LATIN, axes: { wdth: { min: 100, max: 118 }, wght: { min: 400, max: 520 } } },
     F03: { file: 'NotoSerifDevanagari[wdth,wght].ttf', ofl: 'NotoSerifDevanagari-OFL.txt', out: 'noto-serif-devanagari', text: DEVANAGARI, axes: { wdth: 75, wght: 450 } },
+  },
+  // Kolam: Instrument Serif is static (no axes); Tiro Tamil is subset to the Tamil strings the demo uses.
+  kolam: {
+    F01: { file: 'InstrumentSerif-Regular.ttf', ofl: 'InstrumentSerif-OFL.txt', out: 'instrument-serif', text: LATIN, axes: {} },
+    F02: { file: 'InstrumentSerif-Italic.ttf', ofl: 'InstrumentSerif-OFL.txt', out: 'instrument-serif-italic', text: LATIN, axes: {} },
+    F03: { file: 'TiroTamil-Regular.ttf', ofl: 'TiroTamil-OFL.txt', out: 'tiro-tamil', text: TAMIL + ' 0123456789·', axes: {} },
   },
   // Haveli's sans (Archivo) is a copy of Mogra & Moti's already-built file, not resubset here.
   haveli: {

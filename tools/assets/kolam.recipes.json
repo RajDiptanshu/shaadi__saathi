@@ -1,0 +1,136 @@
+{
+  "design": "kolam",
+  "notes": "How each approved original becomes web files. The same quiet midday grade on all five so the photographs read as one morning. Originals fetched from Unsplash at w=2400.",
+  "assets": {
+    "P01": {
+      "original": "p01-jasmine-hair-unsplash-oLeO8eLkuEs.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "jasmine-hair",
+      "grade": "midday",
+      "focal": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "outputs": [
+        {
+          "width": 1080,
+          "primary": true,
+          "avif": 48,
+          "webp": 70,
+          "jpg": 76
+        },
+        {
+          "width": 1440,
+          "avif": 44,
+          "webp": 66,
+          "jpg": 74
+        },
+        {
+          "width": 1920,
+          "avif": 40,
+          "webp": 62,
+          "jpg": 72
+        }
+      ]
+    },
+    "P02": {
+      "original": "p02-blessing-rice-unsplash-0LULWuk2skc.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "blessing-rice",
+      "grade": "midday",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "outputs": [
+        {
+          "width": 1080,
+          "primary": true,
+          "avif": 48,
+          "webp": 70,
+          "jpg": 76
+        },
+        {
+          "width": 1440,
+          "avif": 44,
+          "webp": 66,
+          "jpg": 74
+        }
+      ]
+    },
+    "P03": {
+      "original": "p03-lamp-unsplash-ixWchmlx5Mw.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "lamp",
+      "grade": "midday",
+      "focal": {
+        "x": 0.55,
+        "y": 0.5
+      },
+      "outputs": [
+        {
+          "width": 1080,
+          "primary": true,
+          "avif": 48,
+          "webp": 70,
+          "jpg": 76
+        },
+        {
+          "width": 1600,
+          "avif": 44,
+          "webp": 66,
+          "jpg": 74
+        }
+      ]
+    },
+    "P04": {
+      "original": "p04-garlands-unsplash-od2IVIAMIjM.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "garlands",
+      "grade": "midday",
+      "focal": {
+        "x": 0.5,
+        "y": 0.45
+      },
+      "outputs": [
+        {
+          "width": 1080,
+          "primary": true,
+          "avif": 42,
+          "webp": 66,
+          "jpg": 74
+        }
+      ]
+    },
+    "P05": {
+      "original": "p05-pillars-unsplash-dboyFJbRn_E.jpg",
+      "downloaded": "2026-09-18",
+      "category": "photography",
+      "name": "pillars",
+      "grade": "midday",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "outputs": [
+        {
+          "width": 1080,
+          "primary": true,
+          "avif": 40,
+          "webp": 64,
+          "jpg": 72
+        },
+        {
+          "width": 1440,
+          "avif": 34,
+          "webp": 58,
+          "jpg": 68
+        }
+      ]
+    }
+  }
+}
