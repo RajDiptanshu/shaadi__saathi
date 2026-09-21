@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nidhi &amp; Diptanshu · 24 November 2026 · Deoghar</title>
+  <meta name="description" content="Nidhi Keshri and Diptanshu Raj invite you to their wedding at Vioray Inn, Deoghar, on Tuesday 24 November 2026.">
+  <meta name="theme-color" content="#2A0511">
+  <meta name="robots" content="noindex">
+  <link rel="preload" href="assets/fonts/italiana.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/scenes.css">
+  <link rel="stylesheet" href="../../engine/engine.css">
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+  <script src="details.js" defer></script>
+  <script src="../../engine/strings.js" defer></script>
+  <script src="../../engine/studio.js" defer></script>
+  <script src="../../engine/core.js" defer></script>
+  <script src="../../engine/motion/policy.js" defer></script>
+  <script src="../../engine/events.js" defer></script>
+  <script src="../../engine/sound.js" defer></script>
+  <script src="../../engine/sales.js" defer></script>
+  <script src="scenes/stage.js" defer></script>
+  <script src="scenes/world.js" defer></script>
+  <script src="scenes/worlds-lal.js" defer></script>
+  <script src="scenes/petals.js" defer></script>
+  <script src="scenes/ornament.js" defer></script>
+  <script src="scenes/01-opening.js" defer></script>
+  <script src="scenes/02-sections.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <!-- ══ Scene 00 · the threshold ══════════════════════════════════════════════════════════════
+       Crimson silk in two panels under a scalloped valance, garlands climbing both edges, and the
+       monogram drawing itself in gold. The touch sweeps the silk apart. -->
+  <div class="opening" id="cover" data-attr="aria-label:ui.openInvite" role="button" tabindex="-1">
+    <div class="opening-frame">
+      <div class="world-mount" id="cover-world" aria-hidden="true"></div>
+
+      <div class="vine-wrap vine-left"  id="vine-left"  aria-hidden="true"></div>
+      <div class="vine-wrap vine-right" id="vine-right" aria-hidden="true"></div>
+
+      <div class="silk" aria-hidden="true">
+        <i class="silk-panel silk-left"></i>
+        <i class="silk-panel silk-right"></i>
+      </div>
+
+      <div class="valance-wrap" id="valance-mount" aria-hidden="true"></div>
+      <div class="fall-field" id="cover-fall" aria-hidden="true"></div>
+      <div class="bloom-light" aria-hidden="true"></div>
+
+      <div class="opening-stage">
+        <div class="mono-wrap" id="mono-mount" aria-hidden="true"></div>
+        <p class="opening-eyebrow label" data-t="copy.heroEyebrow"></p>
+        <div class="opening-names">
+          <p class="opening-name foil" data-t="couple.brideFull"></p>
+          <p class="opening-join" data-t="copy.heroJoin"></p>
+          <p class="opening-name foil" data-t="couple.groomFull"></p>
+        </div>
+        <span class="opening-rule rule" aria-hidden="true"></span>
+        <p class="opening-when">
+          <span data-date="wedding.date" data-format="full"></span> · <span data-t="wedding.city"></span>
+        </p>
+        <button class="opening-hint" id="open-invite" type="button" data-t="ui.tapToOpen"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-set-lang="en" data-t="ui.langEnglish"></button>
+    <button type="button" data-set-lang="hi" data-t="ui.langHindi"></button>
+  </div>
+
+  <button class="sound" id="sound-toggle" type="button" aria-pressed="false" data-attr="aria-label:ui.music" hidden>
+    <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  </button>
+
+  <main class="invitation" id="invite">
+    <div class="fall-field" id="page-fall" aria-hidden="true"></div>
+
+    <!-- ══ Scene 01 · the hero — the names inside a drawn arch, on crimson silk ══════════════════ -->
+    <section class="scene hero stage" data-world="silk" data-range="18" aria-labelledby="hero-title">
+      <div class="stage-scrim stage-scrim--centre" aria-hidden="true"></div>
+      <div class="hero-words stage-words" data-reveal="lift">
+        <span class="hero-arch" id="hero-arch-mount" aria-hidden="true"></span>
+        <p class="hero-eyebrow label" data-reveal="wide" data-t="copy.heroEyebrow"></p>
+        <h1 id="hero-title" tabindex="-1">
+          <span class="hero-name display foil" data-chars data-reveal data-t="couple.brideFull"></span>
+          <span class="hero-join" data-reveal style="--d:.3s" data-t="copy.heroJoin"></span>
+          <span class="hero-name display foil" data-chars data-reveal style="--d:.4s" data-t="couple.groomFull"></span>
+        </h1>
+        <p class="hero-when" data-reveal="wide" style="--d:.7s">
+          <b data-date="wedding.date" data-format="full"></b>
+          <b><span data-t="wedding.city"></span>, <span data-t="wedding.region"></span></b>
+        </p>
+        <span class="hero-cue" id="hero-cue-mount" data-reveal style="--d:.9s" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <!-- ══ Scene 02 · the invocation ═══════════════════════════════════════════════════════════ -->
+    <section class="scene invocation stage" data-world="silk" data-range="12" aria-labelledby="invocation-title">
+      <div class="stage-scrim stage-scrim--even" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <div class="invocation-panel glass" data-reveal="lift">
+          <p class="sanskrit foil-gold" id="invocation-title" data-t="invocation.sanskrit"></p>
+          <p class="invocation-line" data-t="invocation.blessing"></p>
+          <span class="deco" data-deco aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Scene 03 · the card ═════════════════════════════════════════════════════════════════ -->
+    <section class="scene card stage" data-world="silk" data-range="10" aria-labelledby="card-title">
+      <div class="stage-scrim stage-scrim--even" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <div class="card-sheet sheet" id="card-sheet" data-reveal="lift">
+          <p class="card-hosts" data-t="hosts.bride.parents"></p>
+          <p class="card-invite" data-t="hosts.bride.invite"></p>
+
+          <div class="card-couple">
+            <h2 class="card-name display" id="card-title" data-t="couple.brideFull"></h2>
+            <span class="card-join" data-t="copy.heroJoin"></span>
+            <p class="card-name display" data-t="couple.groomFull"></p>
+          </div>
+
+          <p class="card-relation" data-t="hosts.groom.relation"></p>
+          <p class="card-parents" data-t="hosts.groom.parents"></p>
+
+          <span class="deco" data-deco aria-hidden="true"></span>
+
+          <p class="card-presence" data-t="hosts.presence"></p>
+
+          <p class="card-cue label" data-t="copy.occasionCue"></p>
+          <span id="card-arrow-mount" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Scene 04 · the running ribbon ═══════════════════════════════════════════════════════ -->
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon-track" id="ribbon-track"></div>
+    </div>
+
+    <!-- ══ Scene 05 · the day, on glass in the garden ══════════════════════════════════════════ -->
+    <section class="scene day stage" data-world="garland" data-range="16" aria-labelledby="day-title">
+      <div class="stage-scrim stage-scrim--centre" aria-hidden="true"></div>
+      <div class="scene-inner centred">
+        <p class="label" data-reveal="wide" data-t="copy.dayTitle"></p>
+
+        <template data-each="events">
+          <div class="day-card glass" data-reveal="lift" style="--d:.16s">
+            <p class="day-name display foil" id="day-title" data-t=".name"></p>
+            <span class="deco" data-deco aria-hidden="true"></span>
+            <p class="day-when"><span data-date=".start" data-format="full"></span></p>
+            <p class="day-when" data-t="wedding.timeLabel"></p>
+            <p class="day-venue"><strong data-t=".venue.name"></strong><br><span data-t=".venue.address"></span></p>
+            <div class="day-actions">
+              <a class="action action--solid" data-map data-t="ui.directions"></a>
+              <a class="action" data-calendar data-t="ui.addCalendar"></a>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- ══ Scene 06 · the couple, at the reception ═════════════════════════════════════════════ -->
+    <section class="film" data-film="reception" aria-label="Nidhi and Diptanshu">
+      <div class="film-media" data-parallax></div>
+      <p class="film-caption label" data-t="media.videos.0.caption"></p>
+      <span class="film-rule rule" aria-hidden="true"></span>
+      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
+      </button>
+    </section>
+
+    <!-- ══ Scene 07 · the countdown, in candlelight ════════════════════════════════════════════ -->
+    <section class="scene count stage" data-world="diya" data-range="22" aria-labelledby="count-title">
+      <div class="stage-scrim stage-scrim--centre" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <h2 class="display" id="count-title" style="font-size:var(--title)" data-reveal="wide" data-t="copy.countTitle"></h2>
+        <p class="info soft" data-reveal style="--d:.14s;margin-top:var(--s4);max-width:440px;margin-inline:auto" data-t="copy.countLine"></p>
+        <div class="count-grid" data-countdown data-reveal="lift" style="--d:.26s">
+          <div class="count-cell"><span class="count-num foil-gold" data-count="days">00</span><span class="label" data-t="ui.days"></span></div>
+          <div class="count-cell"><span class="count-num foil-gold" data-count="hours">00</span><span class="label" data-t="ui.hours"></span></div>
+          <div class="count-cell"><span class="count-num foil-gold" data-count="minutes">00</span><span class="label" data-t="ui.minutes"></span></div>
+          <div class="count-cell"><span class="count-num foil-gold" data-count="seconds">00</span><span class="label" data-t="ui.seconds"></span></div>
+        </div>
+        <span class="deco" data-deco data-reveal style="--d:.4s" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <!-- ══ Scene 08 · the couple, in red and cream ═════════════════════════════════════════════ -->
+    <section class="film" data-film="lehenga" aria-label="Nidhi and Diptanshu">
+      <div class="film-media" data-parallax></div>
+      <p class="film-caption label" data-t="media.videos.1.caption"></p>
+      <span class="film-rule rule" aria-hidden="true"></span>
+      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
+      </button>
+    </section>
+
+    <!-- ══ Scene 09 · almost time — the fourth and last photograph, full bleed ══════════════════ -->
+    <section class="film finale" data-film="finale" aria-labelledby="scatter-title">
+      <div class="film-media" data-parallax></div>
+      <h2 class="finale-title display foil" id="scatter-title" data-reveal="wide" data-t="copy.scatterTitle"></h2>
+    </section>
+
+    <!-- ══ Scene 10 · the note ═════════════════════════════════════════════════════════════════ -->
+    <section class="scene note stage" data-world="silk" data-range="10" aria-labelledby="note-title">
+      <div class="stage-scrim stage-scrim--even" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <p class="label" id="note-title" data-reveal="wide" data-t="copy.noteTitle"></p>
+        <div class="note-wrap" id="note-frame" data-reveal="lift" style="--d:.14s">
+          <div class="note-inner">
+            <span class="note-bloom" id="note-bloom" aria-hidden="true"></span>
+            <p class="note-body" data-words data-reveal data-t="copy.note"></p>
+            <p class="note-sign">
+              <span data-t="couple.brideFull"></span> <span data-t="ui.and"></span> <span data-t="couple.groomFull"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Scene 11 · the couple, in the corridor ══════════════════════════════════════════════ -->
+    <section class="film" data-film="corridor" aria-label="Nidhi and Diptanshu">
+      <div class="film-media" data-parallax></div>
+      <p class="film-caption label" data-t="media.videos.2.caption"></p>
+      <span class="film-rule rule" aria-hidden="true"></span>
+      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
+      </button>
+    </section>
+
+    <!-- ══ Scene 12 · the venue ════════════════════════════════════════════════════════════════ -->
+    <section class="scene venue stage" data-world="garland" data-range="14" aria-labelledby="venue-title">
+      <div class="stage-scrim stage-scrim--centre" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <h2 class="display" id="venue-title" style="font-size:var(--title)" data-reveal="wide" data-t="copy.venueTitle"></h2>
+        <div class="venue-panel glass" data-reveal="lift" style="--d:.16s">
+          <p class="venue-name foil" data-t="venue.name"></p>
+          <p class="venue-address info" data-t="venue.area"></p>
+          <p class="info soft" style="margin-top:var(--s3)" data-t="copy.venueLine"></p>
+          <div class="venue-actions">
+            <a class="action action--solid" id="venue-map" target="_blank" rel="noopener" data-attr="href:venue.mapUrl" data-t="ui.directions"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Scene 13 · closing ══════════════════════════════════════════════════════════════════ -->
+    <footer class="scene closing stage" data-world="haldi" data-range="10" aria-labelledby="closing-title">
+      <div class="stage-scrim stage-scrim--even" aria-hidden="true"></div>
+      <div class="scene-inner">
+        <span class="deco" data-deco data-reveal aria-hidden="true"></span>
+        <p class="closing-line" id="closing-title" data-reveal data-t="hosts.closing"></p>
+
+        <div class="closing-contact" data-reveal style="--d:.14s">
+          <p class="label" data-t="copy.contactTitle"></p>
+          <p class="closing-name foil" data-t="contact.name"></p>
+          <div class="venue-actions" style="margin-top:var(--s4)">
+            <a class="action" data-attr="href:contact.tel" id="contact-call"><span data-t="ui.callContact"></span> <span data-t="contact.display"></span></a>
+          </div>
+        </div>
+
+        <p class="credits" data-reveal style="--d:.24s" data-t="copy.creditsLine"></p>
+      </div>
+    </footer>
+  </main>
+
+</body>
+</html>

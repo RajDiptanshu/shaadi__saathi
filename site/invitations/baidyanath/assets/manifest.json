@@ -1,0 +1,263 @@
+{
+  "design": "baidyanath",
+  "updated": "2026-09-21",
+  "notes": "Single record of every file this invitation ships. Pages reference asset IDs; file paths are relative to this folder. The toran, marigold strings, bells, scalloped veil frame, arches and dividers are drawn by code (scenes/ornament.js), not files. The one temple plate is built by tools/assets/baidyanath-paint.mjs and the couple photographs by tools/assets/baidyanath-photos.mjs, both from originals in the gitignored assets-src/baidyanath/.",
+  "licences": {
+    "ofl": {
+      "name": "SIL Open Font License 1.1",
+      "url": "https://openfontlicense.org",
+      "checkedOn": "2026-09-21",
+      "summary": "Free to use, embed and subset; fonts may not be sold by themselves; the licence travels with the font files."
+    },
+    "cc-by-4.0": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "checkedOn": "2026-09-21",
+      "summary": "Free to use, adapt and redistribute commercially, provided the author is credited and changes are indicated. The credit line ships in the invitation's closing section."
+    },
+    "cc0": {
+      "name": "CC0 1.0 Universal Public Domain Dedication",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "checkedOn": "2026-09-21",
+      "summary": "No rights reserved; no attribution required. Credited anyway, because the painting deserves it."
+    },
+    "in-house": {
+      "name": "Original work for this invitation",
+      "url": null,
+      "checkedOn": "2026-09-21",
+      "summary": "Drawn, composed or rendered here, or supplied by the couple; no third-party rights."
+    }
+  },
+  "assets": [
+    {
+      "id": "F01",
+      "kind": "font",
+      "name": "Cormorant Garamond",
+      "role": "display — names, section titles",
+      "licence": "ofl",
+      "source": {
+        "where": "github.com/google/fonts",
+        "path": "ofl/cormorantgaramond",
+        "downloaded": "2026-09-21"
+      },
+      "status": "built",
+      "files": {
+        "woff2": "fonts/cormorant-garamond.woff2",
+        "licence": "fonts/CormorantGaramond-OFL.txt"
+      },
+      "bytes": 40516,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to wght 400–600",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F02",
+      "kind": "font",
+      "name": "Cormorant Garamond Italic",
+      "role": "display italic — the joining words",
+      "licence": "ofl",
+      "source": {
+        "where": "github.com/google/fonts",
+        "path": "ofl/cormorantgaramond",
+        "downloaded": "2026-09-21"
+      },
+      "status": "built",
+      "files": {
+        "woff2": "fonts/cormorant-garamond-italic.woff2",
+        "licence": "fonts/CormorantGaramond-OFL.txt"
+      },
+      "bytes": 29012,
+      "edits": [
+        "subset to 108 characters",
+        "axes limited to wght 400–500",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F03",
+      "kind": "font",
+      "name": "Noto Serif Devanagari",
+      "role": "the Sanskrit invocation and the whole Hindi page",
+      "licence": "ofl",
+      "source": {
+        "where": "github.com/google/fonts",
+        "path": "ofl/notoserifdevanagari",
+        "downloaded": "2026-09-21"
+      },
+      "status": "built",
+      "files": {
+        "woff2": "fonts/noto-serif-devanagari.woff2",
+        "licence": "fonts/NotoSerifDevanagari-OFL.txt"
+      },
+      "bytes": 72220,
+      "edits": [
+        "subset to 144 characters",
+        "axes limited to wdth 100, wght 400–600",
+        "WOFF2"
+      ]
+    },
+    {
+      "id": "F04",
+      "kind": "font",
+      "name": "Archivo",
+      "role": "information and controls",
+      "licence": "ofl",
+      "source": {
+        "where": "copied from the mogra-moti build",
+        "downloaded": "2026-09-17"
+      }
+    },
+    {
+      "id": "A01",
+      "kind": "art",
+      "name": "shikhara-dawn",
+      "role": "hero — the Baidyanath spire rising out of mist; the only temple frame on the page",
+      "licence": "cc-by-4.0",
+      "credit": "Pinakpani",
+      "source": {
+        "where": "Wikimedia Commons",
+        "file": "Baidyanath temple and temple complex, Deoghar 17.jpg",
+        "page": "https://commons.wikimedia.org/wiki/File:Baidyanath_temple_and_temple_complex,_Deoghar_17.jpg",
+        "original": "3060x3650",
+        "downloaded": "2026-09-21"
+      },
+      "edits": [
+        "cropped above the street clutter",
+        "median-flattened into gouache",
+        "lower edge faded into a mist ground",
+        "light repainted for dawn"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "art/a01-shikhara-dawn-{w}.{ext}"
+      }
+    },
+    {
+      "id": "P01",
+      "kind": "photograph",
+      "name": "reception",
+      "role": "Reception portrait, used full-bleed after the ribbon",
+      "licence": "in-house",
+      "credit": "The couple",
+      "source": {
+        "where": "supplied by the couple",
+        "added": "2026-09-21"
+      },
+      "edits": [
+        "warm grade to sit on the page stock",
+        "no painting: these are photographs and stay photographs"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "photography/p01-reception-{w}.{ext}"
+      }
+    },
+    {
+      "id": "P02",
+      "kind": "photograph",
+      "name": "corridor",
+      "role": "Laughing in the corridor; the closing frame before the venue",
+      "licence": "in-house",
+      "credit": "The couple",
+      "source": {
+        "where": "supplied by the couple",
+        "added": "2026-09-21"
+      },
+      "edits": [
+        "warm grade to sit on the page stock",
+        "no painting: these are photographs and stay photographs"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "photography/p02-corridor-{w}.{ext}"
+      }
+    },
+    {
+      "id": "P03",
+      "kind": "photograph",
+      "name": "sindoor-box",
+      "role": "The sindoor dani; used in the scatter",
+      "licence": "in-house",
+      "credit": "The couple",
+      "source": {
+        "where": "supplied by the couple",
+        "added": "2026-09-21"
+      },
+      "edits": [
+        "warm grade to sit on the page stock",
+        "no painting: these are photographs and stay photographs"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "photography/p03-sindoor-box-{w}.{ext}"
+      }
+    },
+    {
+      "id": "P04",
+      "kind": "photograph",
+      "name": "red-lehenga",
+      "role": "Red lehenga and cream sherwani; the frame after the countdown",
+      "licence": "in-house",
+      "credit": "The couple",
+      "source": {
+        "where": "supplied by the couple",
+        "added": "2026-09-21"
+      },
+      "edits": [
+        "warm grade to sit on the page stock",
+        "no painting: these are photographs and stay photographs"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "photography/p04-red-lehenga-{w}.{ext}"
+      }
+    }
+  ]
+}

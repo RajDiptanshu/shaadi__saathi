@@ -8,7 +8,6 @@
   var M = Invite.motion = Invite.motion || {};
   var root = document.documentElement;
   var params = Invite.params || new URLSearchParams(location.search);
-  var query = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 
   var DURATIONS = {
     normal: { instant: 0.12, quick: 0.28, object: 0.9, silk: 1.6, camera: 2.0, light: 2.6, draw: 0.45 },
@@ -16,7 +15,10 @@
   };
 
   var policy = M.policy = {
-    reduced: params.get('rm') === '1' || (params.get('rm') !== '0' && !!(query && query.matches)),
+    /* Studio rule: every guest gets the full motion, on every phone. Budget Androids report
+       prefers-reduced-motion from battery saver rather than a deliberate choice, and a still
+       invitation reads as broken. Reduced motion is a TEST switch only: ?rm=1 */
+    reduced: params.get('rm') === '1',
     still: params.has('still'),
     test: params.has('test'),
     ok: false,

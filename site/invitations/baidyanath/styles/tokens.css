@@ -1,0 +1,141 @@
+/* Lal & Sona · tokens.
+
+   A North Indian Hindu wedding palette: oxblood and crimson grounds, marigold and turmeric, magenta,
+   and gold over all of it. An earlier pass was built on emerald and rose gold and read as the wrong
+   celebration entirely — green as the dominant ground is not what a Hindu wedding looks like. Red is
+   the ground here, gold is the only metal, and marigold and magenta are what make it loud.
+
+   The dark grounds are kept, because metal, glow and motion all need darkness to work against — but
+   the dark is oxblood now, not forest.
+
+   Four faces carry it:
+     Italiana            the names and every heading. High-contrast, letterspaced, all in caps.
+     Cormorant italic    the connective words — "weds", the signature, the pull quotes.
+     Cormorant roman     anything that has to be read in a paragraph.
+     Jost                labels, dates, numerals, buttons. Geometric, quiet, modern.
+*/
+
+@font-face {
+  font-family: 'Italiana';
+  src: url('../assets/fonts/italiana.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../assets/fonts/cormorant-garamond.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../assets/fonts/cormorant-garamond-italic.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Jost';
+  src: url('../assets/fonts/jost.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Jost';
+  src: url('../assets/fonts/jost-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* Devanagari carries the whole page in Hindi, but English loads first, so it swaps rather than blocks. */
+@font-face {
+  font-family: 'Noto Serif Devanagari';
+  src: url('../assets/fonts/noto-serif-devanagari.woff2') format('woff2');
+  font-weight: 400 600;
+  font-display: swap;
+}
+@font-face { font-family: 'Italiana Fallback'; src: local('Didot'), local('Bodoni MT'), local('Georgia'); size-adjust: 104%; ascent-override: 88%; }
+@font-face { font-family: 'Cormorant Fallback'; src: local('Georgia'); size-adjust: 88%; ascent-override: 92%; descent-override: 26%; }
+@font-face { font-family: 'Jost Fallback'; src: local('Futura'), local('Century Gothic'), local('Arial'); size-adjust: 96%; }
+
+:root {
+  /* ---- grounds. The page is deep red; cream is a material laid on top of it. ---- */
+  --night:       #2A0511;   /* deepest, behind everything */
+  --maroon:      #5E0B1F;
+  --maroon-lit:  #7C1330;
+  --crimson:     #B31331;
+  --vermilion:   #E0342B;
+  --cream:       #FDF3E3;   /* the paper panels */
+  --cream-warm:  #FFFAF1;
+  --cream-deep:  #F4E3C8;
+
+  /* ---- metal. Gold is the primary and only metal. ---- */
+  --gold:        #D4A017;
+  --gold-light:  #F4D06F;
+  --gold-pale:   #FBE9B6;
+  --gold-deep:   #8F6B10;
+
+  /* The foil gradients. A flat metallic colour always reads as a beige — it is the gradient running
+     across the letterform, and the highlight travelling along it, that reads as metal. */
+  --foil-gold: linear-gradient(104deg, #8F6B10 0%, #D4A017 18%, #F4D06F 38%, #FFF8DC 48%, #F0C75E 58%, #D4A017 78%, #8F6B10 100%);
+  --foil-rose: linear-gradient(104deg, #8E0F2A 0%, #C41E3A 18%, #FF6B8A 38%, #FFE3EA 48%, #FF4E88 58%, #C41E3A 78%, #8E0F2A 100%);
+
+  /* ---- the loud accents ---- */
+  --marigold:    #F79F1A;
+  --saffron:     #FFB627;
+  --turmeric:    #FFC93C;
+  --magenta:     #D81B60;
+  --pink:        #FF4E88;
+  --leaf:        #3E7D4F;    /* the green of a garland's leaves — an accent, never a ground */
+  --leaf-deep:   #245036;
+
+  /* ---- ink ---- */
+  --ink:         #3A0D18;            /* on cream */
+  --ink-soft:    #7A4A50;
+  --on-dark:     #FFF3E0;            /* on red */
+  --on-dark-soft: rgba(255, 243, 224, .70);
+
+  /* ---- families ---- */
+  --f-display: 'Italiana', 'Italiana Fallback', Didot, 'Bodoni MT', Georgia, serif;
+  --f-serif:   'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
+  --f-text:    'Jost', 'Jost Fallback', Futura, 'Century Gothic', Arial, sans-serif;
+  --f-deva:    'Noto Serif Devanagari', 'Noto Serif', Georgia, serif;
+
+  /* ---- type roles.
+     Italiana is drawn to be set large, wide and in caps; at small sizes it collapses. So it sets only
+     the masthead and the section titles, and everything else is Cormorant or Jost. ---- */
+  /* Sized from the longest name: "DIPTANSHU RAJ" is 13 caps and must hold one line inside a 375px
+     gutter, so this comes from measurement rather than from a pleasing number. */
+  --masthead: clamp(30px, 10.4vw, 100px);
+  --title:    clamp(27px, 8vw, 54px);
+  --line:     clamp(20px, 5.4vw, 30px);
+  --info:     clamp(15px, 3.9vw, 17px);
+  --label:    clamp(10px, 2.5vw, 12px);
+  --numeral:  clamp(40px, 12.5vw, 72px);
+
+  /* ---- spacing ---- */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 20px; --s5: 32px; --s6: 52px; --s7: 84px; --s8: 132px;
+  --margin: 24px;
+
+  /* ---- motion ---- */
+  --e-settle: cubic-bezier(.16, 1, .3, 1);
+  --e-light:  cubic-bezier(.37, 0, .63, 1);
+  --e-camera: cubic-bezier(.65, 0, .35, 1);
+  --e-silk:   cubic-bezier(.45, .05, .25, 1);
+}
+
+/* Italiana has no Devanagari, so Hindi moves onto the serif that does — and loses the wide caps
+   tracking, which destroys Devanagari conjuncts. */
+html[data-lang="hi"] {
+  --f-display: 'Noto Serif Devanagari', 'Cormorant Garamond', Georgia, serif;
+  --f-text: 'Noto Serif Devanagari', 'Jost', Arial, sans-serif;
+  --masthead: clamp(34px, 10vw, 84px);
+  --title: clamp(24px, 6.4vw, 42px);
+  --line: clamp(18px, 4.6vw, 25px);
+}
+
+@media (min-width: 1024px) {
+  :root { --margin: 80px; }
+}
