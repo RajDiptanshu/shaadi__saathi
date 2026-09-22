@@ -116,15 +116,19 @@
       g.appendChild(lg);
     });
 
-    /* The two letters overlap so the D's bowl passes through the N's last stroke. They are separate
-       <text> nodes rather than one string, because the overlap has to be set in ems of the display
-       size and no pair kerning in the face will produce it. */
-    var letters = el('g', { class: 'mono-letters' });
-    var L = el('text', { class: 'mono-letter mono-letter--l', x: -22, y: 0, 'text-anchor': 'middle' });
+    /* N & D, plainly. A copperplate script version with the two letters interlocked was tried and
+       read as one unidentifiable glyph — a monogram that has to be decoded is not doing its job on a
+       cover. The letters are set in the display face with the ampersand between them, sized to sit
+       well inside the ring rather than crowding it. */
+    var letters = el('text', { class: 'mono-letters', x: 0, y: 0, 'text-anchor': 'middle' });
+    var L = el('tspan', { class: 'mono-letter' });
     L.textContent = left || 'N';
-    var R = el('text', { class: 'mono-letter mono-letter--r', x: 22, y: 0, 'text-anchor': 'middle' });
+    var amp = el('tspan', { class: 'mono-amp' });
+    amp.textContent = '&';
+    var R = el('tspan', { class: 'mono-letter' });
     R.textContent = right || 'D';
     letters.appendChild(L);
+    letters.appendChild(amp);
     letters.appendChild(R);
     g.appendChild(letters);
 
