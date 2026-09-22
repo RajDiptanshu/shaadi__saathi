@@ -56,6 +56,13 @@
   font-weight: 400 600;
   font-display: swap;
 }
+/* The monogram only, subset to N, D and the ampersand — 3.6 KB for two letters. */
+@font-face {
+  font-family: 'Pinyon Script';
+  src: url('../assets/fonts/pinyon-script.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
 @font-face { font-family: 'Italiana Fallback'; src: local('Didot'), local('Bodoni MT'), local('Georgia'); size-adjust: 104%; ascent-override: 88%; }
 @font-face { font-family: 'Cormorant Fallback'; src: local('Georgia'); size-adjust: 88%; ascent-override: 92%; descent-override: 26%; }
 @font-face { font-family: 'Jost Fallback'; src: local('Futura'), local('Century Gothic'), local('Arial'); size-adjust: 96%; }
@@ -102,6 +109,7 @@
   --f-serif:   'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
   --f-text:    'Jost', 'Jost Fallback', Futura, 'Century Gothic', Arial, sans-serif;
   --f-deva:    'Noto Serif Devanagari', 'Noto Serif', Georgia, serif;
+  --f-script:  'Pinyon Script', 'Snell Roundhand', 'Apple Chancery', cursive;
 
   /* ---- type roles.
      Italiana is drawn to be set large, wide and in caps; at small sizes it collapses. So it sets only

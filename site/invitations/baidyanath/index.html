@@ -29,6 +29,7 @@
   <script src="scenes/ornament.js" defer></script>
   <script src="scenes/01-opening.js" defer></script>
   <script src="scenes/02-sections.js" defer></script>
+  <script src="scenes/gallery.js" defer></script>
   <script src="main.js" defer></script>
 </head>
 <body>
@@ -167,14 +168,16 @@
       </div>
     </section>
 
-    <!-- ══ Scene 06 · the couple, at the reception ═════════════════════════════════════════════ -->
-    <section class="film" data-film="reception" aria-label="Nidhi and Diptanshu">
-      <div class="film-media" data-parallax></div>
-      <p class="film-caption label" data-t="media.videos.0.caption"></p>
-      <span class="film-rule rule" aria-hidden="true"></span>
-      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
-      </button>
+
+    <!-- ══ Scene 06 · the photo gallery — every photograph, in one place ══════════════════════ -->
+    <section class="scene gallery-scene stage" data-world="haldi" data-range="12" aria-labelledby="gallery-title">
+      <div class="stage-scrim stage-scrim--even" aria-hidden="true"></div>
+      <div class="scene-inner centred">
+        <p class="label" data-reveal="wide" data-t="copy.galleryEyebrow"></p>
+        <h2 class="gallery-title display foil" id="gallery-title" data-reveal="wide" style="--d:.1s" data-t="copy.galleryTitle"></h2>
+        <span class="deco" data-deco data-reveal style="--d:.18s" aria-hidden="true"></span>
+        <div class="gallery" id="gallery" data-reveal="lift" style="--d:.26s" tabindex="0" role="group" aria-roledescription="carousel"></div>
+      </div>
     </section>
 
     <!-- ══ Scene 07 · the countdown, in candlelight ════════════════════════════════════════════ -->
@@ -193,21 +196,7 @@
       </div>
     </section>
 
-    <!-- ══ Scene 08 · the couple, in red and cream ═════════════════════════════════════════════ -->
-    <section class="film" data-film="lehenga" aria-label="Nidhi and Diptanshu">
-      <div class="film-media" data-parallax></div>
-      <p class="film-caption label" data-t="media.videos.1.caption"></p>
-      <span class="film-rule rule" aria-hidden="true"></span>
-      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
-      </button>
-    </section>
 
-    <!-- ══ Scene 09 · almost time — the fourth and last photograph, full bleed ══════════════════ -->
-    <section class="film finale" data-film="finale" aria-labelledby="scatter-title">
-      <div class="film-media" data-parallax></div>
-      <h2 class="finale-title display foil" id="scatter-title" data-reveal="wide" data-t="copy.scatterTitle"></h2>
-    </section>
 
     <!-- ══ Scene 10 · the note ═════════════════════════════════════════════════════════════════ -->
     <section class="scene note stage" data-world="silk" data-range="10" aria-labelledby="note-title">
@@ -226,15 +215,6 @@
       </div>
     </section>
 
-    <!-- ══ Scene 11 · the couple, in the corridor ══════════════════════════════════════════════ -->
-    <section class="film" data-film="corridor" aria-label="Nidhi and Diptanshu">
-      <div class="film-media" data-parallax></div>
-      <p class="film-caption label" data-t="media.videos.2.caption"></p>
-      <span class="film-rule rule" aria-hidden="true"></span>
-      <button class="film-sound" type="button" aria-pressed="false" aria-label="Sound" hidden>
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/></svg>
-      </button>
-    </section>
 
     <!-- ══ Scene 12 · the venue ════════════════════════════════════════════════════════════════ -->
     <section class="scene venue stage" data-world="garland" data-range="14" aria-labelledby="venue-title">
@@ -245,9 +225,6 @@
           <p class="venue-name foil" data-t="venue.name"></p>
           <p class="venue-address info" data-t="venue.area"></p>
           <p class="info soft" style="margin-top:var(--s3)" data-t="copy.venueLine"></p>
-          <div class="venue-actions">
-            <a class="action action--solid" id="venue-map" target="_blank" rel="noopener" data-attr="href:venue.mapUrl" data-t="ui.directions"></a>
-          </div>
         </div>
       </div>
     </section>

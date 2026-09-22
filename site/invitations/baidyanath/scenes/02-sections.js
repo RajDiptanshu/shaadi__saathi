@@ -1,6 +1,6 @@
 /* Lal & Sona · the invitation's own behaviour.
-   Background mounting, ornament, the letter and word reveals, the running ribbon, the couple's frames,
-   scroll drift, and the deferred loading of every image behind the silk. */
+   Background mounting, ornament, the letter and word reveals, the running ribbon, and the deferred
+   loading of every image behind the silk. The gallery has its own module. */
 (function () {
   var Invite = window.Invite;
   var Orn = window.Ornament;
@@ -168,85 +168,6 @@
     track.appendChild(run());
   }
 
-  /* ---- the couple's frames ---------------------------------------------------------------------- */
-
-  /* Each frame shows the couple's photograph today and takes their film later: adding one is a single
-     `src` in details.js, and the photograph then becomes the poster. */
-  function buildFrames() {
-    (data.media && data.media.videos || []).forEach(function (spec) {
-      var slot = document.querySelector('[data-film="' + spec.id + '"]');
-      if (!slot) return;
-      var media = slot.querySelector('.film-media');
-      if (!media || media.firstChild) return;
-      if (spec.ratio) media.style.setProperty('--ratio', spec.ratio);
-      if (spec.focal) media.style.setProperty('--focal', spec.focal);
-
-      if (!spec.src) {
-        media.appendChild(picture(spec.poster, spec.alt || ''));
-        return;
-      }
-      var video = document.createElement('video');
-      video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
-      video.preload = 'none';
-      video.poster = spec.poster + '-1080.jpg';
-      video.src = spec.src;
-      media.appendChild(video);
-
-      // Plays only while it is on screen, so a page with three films never has three decoding at once.
-      if ('IntersectionObserver' in window && !Invite.still) {
-        new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) { video.preload = 'auto'; var p = video.play(); if (p && p.catch) p.catch(function () {}); }
-            else video.pause();
-          });
-        }, { threshold: 0.25 }).observe(video);
-      }
-
-      var button = slot.querySelector('.film-sound');
-      if (button) {
-        button.hidden = false;
-        button.addEventListener('click', function (event) {
-          event.stopPropagation();
-          video.muted = !video.muted;
-          button.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
-        });
-      }
-    });
-  }
-
-  /* ---- the frames drift too ---------------------------------------------------------------------- */
-
-  /* The couple's photographs get the same treatment as a world layer, on the same scroll read — the
-     page has exactly one rAF loop and this subscribes to it rather than starting a second. Layout is
-     cached on resize; reading it inside the loop would force a synchronous reflow every frame. */
-  function driftFrames() {
-    document.querySelectorAll('[data-parallax]').forEach(function (node) {
-      var img = node.querySelector('img, video');
-      if (!img || node.hasAttribute('data-drifting')) return;
-      node.setAttribute('data-drifting', '');
-
-      var top = 0, height = 1, last = null;
-      window.Stage.onMeasure(function () {
-        var box = node.getBoundingClientRect();
-        top = box.top + (window.pageYOffset || 0);
-        height = box.height || 1;
-      });
-      window.Stage.add(function () {
-        var h = window.Stage.vh, y = window.Stage.scrollY;
-        if (top - y > h * 1.2 || top + height - y < -h * 0.2) return;
-        var p = (y + h - top) / (h + height);
-        var shift = Math.round((p - 0.5) * -10 * 100) / 100;
-        if (last === shift) return;
-        last = shift;
-        img.style.transform = 'translate3d(0,' + shift + '%,0) scale(1.14)';
-      });
-    });
-  }
-
   /* ---- wiring ------------------------------------------------------------------------------------ */
 
   /* The foil gradients are clipped to the glyphs, so the text is invisible until the face has decoded.
@@ -260,7 +181,6 @@
 
   Invite.on('ready', function () {
     buildWorlds();
-    buildFrames();
     watchFonts();
   });
 
@@ -276,7 +196,6 @@
   Invite.on('opening', function () { hydrate(document); });
   Invite.on('opened', function () {
     hydrate(document);
-    driftFrames();
     window.Stage.settle();
   });
 
@@ -284,7 +203,6 @@
   if (Invite.still) {
     Invite.on('ready', function () {
       hydrate(document);
-      driftFrames();
       window.Stage.settle();
     });
   }

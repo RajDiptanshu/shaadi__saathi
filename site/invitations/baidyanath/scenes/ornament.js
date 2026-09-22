@@ -84,11 +84,18 @@
 
   /* ---- the monogram ------------------------------------------------------------------------------ */
 
-  /* A rose-gold ring with the couple's initials inside it. The ring is two arcs rather than one circle
-     so the two halves can draw towards each other and meet at the top, which is a better opening beat
-     than a circle unspooling from one point.
+  /* A gold ring with the couple's initials interlocked inside it, in copperplate script. The ring is
+     two arcs rather than one circle so the halves draw towards each other and meet at the top, which
+     is a better opening beat than a circle unspooling from one point.
 
-     The letters are real type, not paths, so a change of initials is a change of text. */
+     The letters are real type, not paths, so a change of initials is a change of text.
+
+     **Centring is measured, never assumed.** An earlier version placed the letters with `text-anchor:
+     middle` and `dominant-baseline: central` and trusted the result; it sat visibly off centre inside
+     the ring, because the two glyphs have different side bearings, a script `N` carries a long entry
+     swash on its left, and `central` resolves against the font's own metrics rather than the ink. The
+     fix is to render first and then measure: `centre()` reads the drawn bounding box and translates
+     the group so the *ink* is centred, which is what the eye is actually judging. */
   Orn.monogram = function (left, right) {
     var s = svg('0 0 200 200', 'monogram');
     var g = el('g', {});
@@ -109,17 +116,43 @@
       g.appendChild(lg);
     });
 
-    var text = el('text', { class: 'mono-letters', x: 100, y: 100, 'text-anchor': 'middle', 'dominant-baseline': 'central' });
-    text.appendChild(el('tspan', { class: 'mono-letter' })).textContent = left || 'N';
-    var amp = el('tspan', { class: 'mono-amp' });
-    amp.textContent = '&';
-    text.appendChild(amp);
-    text.appendChild(el('tspan', { class: 'mono-letter' })).textContent = right || 'D';
-    g.appendChild(text);
+    /* The two letters overlap so the D's bowl passes through the N's last stroke. They are separate
+       <text> nodes rather than one string, because the overlap has to be set in ems of the display
+       size and no pair kerning in the face will produce it. */
+    var letters = el('g', { class: 'mono-letters' });
+    var L = el('text', { class: 'mono-letter mono-letter--l', x: -22, y: 0, 'text-anchor': 'middle' });
+    L.textContent = left || 'N';
+    var R = el('text', { class: 'mono-letter mono-letter--r', x: 22, y: 0, 'text-anchor': 'middle' });
+    R.textContent = right || 'D';
+    letters.appendChild(L);
+    letters.appendChild(R);
+    g.appendChild(letters);
 
     s.appendChild(g);
+    centre(s, letters, 100, 100);
     return s;
   };
+
+  /* Translates `node` so the centre of its rendered ink sits at (cx, cy) in the SVG's own units.
+     getBBox only returns anything once the node is laid out and the webfont has decoded, so this
+     re-runs on fonts.ready and once more on the next frame; both are cheap and idempotent. */
+  function centre(svgRoot, node, cx, cy) {
+    function apply() {
+      if (!node.isConnected) return;
+      node.removeAttribute('transform');
+      var b;
+      try { b = node.getBBox(); } catch (e) { return; }
+      if (!b || !b.width) return;
+      var dx = cx - (b.x + b.width / 2);
+      var dy = cy - (b.y + b.height / 2);
+      node.setAttribute('transform', 'translate(' + f(dx) + ',' + f(dy) + ')');
+    }
+    requestAnimationFrame(apply);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply).catch(function () {});
+    setTimeout(apply, 600);
+    svgRoot.addEventListener('mono-recentre', apply);
+  }
+  Orn.centre = centre;
 
   /* ---- vines ------------------------------------------------------------------------------------- */
 
@@ -242,6 +275,14 @@
     c.style.setProperty('--o', 0.75);
     bloom(c, 0, 0, 8);
     s.appendChild(c);
+    return s;
+  };
+
+  /* A sideways chevron, for the gallery's arrows. */
+  Orn.chevron = function (dir) {
+    var s = svg('0 0 24 24', 'chev');
+    var d = dir === 'right' ? 'M9,4 L17,12 L9,20' : 'M15,4 L7,12 L15,20';
+    s.appendChild(el('path', { class: 'chev-line', d: d, fill: 'none' }));
     return s;
   };
 

@@ -105,7 +105,8 @@ window.INVITE = {
       hi: 'कुछ बातें महीनों की तैयारी माँगती हैं, और कुछ मन बस जान लेता है। यह दोनों है। चौबीस तारीख़ को हम चाहते हैं कि हमारी कहानी का हिस्सा रहा हर व्यक्ति हमारे साथ इस कमरे में हो — जल्दी आइए, देर तक रुकिए, और सोच से कहीं ज़्यादा खाइए।'
     },
 
-    scatterTitle: { en: 'Almost time to celebrate', hi: 'उत्सव का समय निकट है' },
+    galleryEyebrow: { en: 'Memories', hi: 'यादें' },
+    galleryTitle: { en: 'Photo Gallery', hi: 'तस्वीरें' },
 
     venueTitle: { en: 'Looking forward to seeing you', hi: 'आपकी प्रतीक्षा में' },
     venueLine: { en: 'Vioray Inn is on Netaji Subash Road, a few minutes from Tower Chowk.', hi: 'वियोरे इन नेताजी सुभाष रोड पर, टावर चौक से कुछ ही मिनट की दूरी पर है।' },
@@ -117,42 +118,42 @@ window.INVITE = {
     }
   },
 
+  /* engine/sound.js reads this. `src` is deliberately empty: no licensed audio file has been chosen
+     yet, and the player stays hidden until one is. Drop an mp3 in assets/audio/ and set the path. */
+  music: { src: '', volume: 0.5, loopStart: 0, loopLength: 0 },
+
   contact: {
     name: { en: 'Sagar', hi: 'सागर' },
     tel: 'tel:+918603751674',
     display: '+91 86037 51674'
   },
 
-  /* The couple's four photographs, and each one appears exactly once. An earlier pass showed three of
-     them as full-bleed frames and then tiled all four again in a scatter, so most of the page was the
-     same pictures twice. Each frame takes a film later without any other change: put the file in
-     assets/film/ and set `src`; the photograph stays on as its poster.
-     `focal` is where the faces are, because a phone crops a landscape frame hard. */
+  /* The couple's four photographs, in the order they asked for them, each appearing exactly once and
+     all of them in a single gallery rather than scattered down the page.
+     No `focal` here: the gallery mounts each picture whole inside a square mat instead of cropping it,
+     because p03 has the bride standing at the left and the groom sitting at the right and no portrait
+     crop holds both. */
   media: {
-    videos: [
+    gallery: [
       {
-        id: 'reception', src: '', poster: 'assets/photography/p01-reception',
-        ratio: '2 / 3', focal: '50% 26%',
-        alt: 'Nidhi and Diptanshu at their reception',
+        src: 'assets/photography/p01-reception',
+        alt: { en: 'Nidhi and Diptanshu standing together under the flowers at their reception.', hi: 'रिसेप्शन पर फूलों के नीचे साथ खड़े निधि और दीप्तांशु।' },
         caption: { en: 'The two of us', hi: 'हम दोनों' }
       },
       {
-        id: 'lehenga', src: '', poster: 'assets/photography/p04-red-lehenga',
-        ratio: '4 / 5', focal: '54% 38%',
-        alt: 'Nidhi in a red lehenga, Diptanshu in cream',
+        src: 'assets/photography/p03-sindoor-box',
+        alt: { en: 'A decorated kalash held between two pairs of hands.', hi: 'दो जोड़ी हाथों में सजा हुआ कलश।' },
+        caption: { en: 'Blessings in hand', hi: 'हाथों में आशीर्वाद' }
+      },
+      {
+        src: 'assets/photography/p04-red-lehenga',
+        alt: { en: 'Nidhi in a red lehenga, Diptanshu seated beside her in cream.', hi: 'लाल लहंगे में निधि, पास बैठे क्रीम शेरवानी में दीप्तांशु।' },
         caption: { en: 'Getting ready', hi: 'तैयारी' }
       },
       {
-        id: 'corridor', src: '', poster: 'assets/photography/p02-corridor',
-        ratio: '4 / 5', focal: '64% 32%',
-        alt: 'Nidhi and Diptanshu laughing together',
+        src: 'assets/photography/p02-corridor',
+        alt: { en: 'Nidhi and Diptanshu laughing together in a corridor.', hi: 'गलियारे में साथ हँसते निधि और दीप्तांशु।' },
         caption: { en: 'Still laughing', hi: 'अब भी हँसते हुए' }
-      },
-      {
-        id: 'finale', src: '', poster: 'assets/photography/p03-sindoor-box',
-        ratio: '3 / 4', focal: '50% 46%',
-        alt: 'The sindoor box, held between them',
-        caption: { en: '', hi: '' }
       }
     ]
   },
