@@ -66,7 +66,9 @@ html:not(.motion-ok) .arch-key, html:not(.motion-ok) .deco-key, html:not(.motion
 .world { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .world-layer {
   position: absolute;
-  left: -8%; top: -12%; width: 116%; height: 128%;
+  /* Travel is vertical only (stage.js writes translate3d(0, y, 0)), so the extra width was pure
+     backing store — 14% of every promoted layer, for nothing. Height keeps its margin for the slide. */
+  left: 0; top: -12%; width: 100%; height: 128%;
   /* engine.css carries `img, svg { max-width: 100% }` and loads after base.css, which silently clamped
      every layer back to the width of its scene and cancelled the horizontal travel. */
   max-width: none;
@@ -74,9 +76,15 @@ html:not(.motion-ok) .arch-key, html:not(.motion-ok) .deco-key, html:not(.motion
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 }
-/* will-change is granted only to the scene on screen; applied to every layer of every world at once it
-   exhausts GPU memory and makes the page slower, not faster. */
-.world.is-live .world-layer { will-change: transform; }
+/* will-change goes to the one scene nearest the middle of the screen — never to every live scene.
+   Each layer is 116% x 128% of a full-screen section, so at DPR 3 one costs about 16 MB of backing
+   store; twenty at once came to roughly 250 MB, and iOS answers that by discarding the tab and
+   reloading. The neighbours still move, they are just not held in video memory while they do. */
+.world.is-front .world-layer { will-change: transform; }
+
+/* Offscreen scenes skip rendering entirely. Each carries an intrinsic size so the scrollbar and the
+   scroll position stay honest while their contents are not being laid out. */
+.stage:not(.is-near) { content-visibility: auto; contain-intrinsic-size: auto 100svh; }
 
 .stage { position: relative; overflow: hidden; isolation: isolate; }
 .stage > .scene-inner, .stage > .stage-words { position: relative; z-index: 3; }

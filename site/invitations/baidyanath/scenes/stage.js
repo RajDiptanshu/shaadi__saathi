@@ -147,6 +147,7 @@
       mount: mount,
       layers: layers,
       range: opts.range == null ? 14 : opts.range,  // per cent of the scene's own height
+      section: mount.closest ? mount.closest('.stage') : null,
       top: 0, height: 1, visible: false
     };
     scenes.push(entry);
@@ -159,23 +160,40 @@
     return entry;
   };
 
+  /* Only the scene nearest the middle of the screen keeps its layers on the compositor.
+
+     This is the fix for a reload loop on iOS. Each layer is 116% × 128% of a full-screen section, so
+     at DPR 3 one promoted layer costs roughly 16 MB of backing store. Promoting every *live* scene
+     meant up to twenty at once — about 250 MB — and iOS answers that by discarding the tab and
+     reloading it, which looked like the page refreshing itself every time you reached the note.
+     One scene's worth is five layers, and the neighbours still move; they are just not held in
+     video memory while they do it. */
   function drive() {
-    var y = Stage.scrollY, h = Stage.vh;
-    for (var i = 0; i < scenes.length; i++) {
-      var s = scenes[i];
-      /* Cheap cull: nothing is written for a scene more than half a screen away. */
-      var near = s.top - y < h * 1.5 && s.top + s.height - y > -h * 0.5;
+    var y = Stage.scrollY, h = Stage.vh, i, s;
+    var mid = y + h / 2;
+    var front = null, bestDist = Infinity;
+
+    for (i = 0; i < scenes.length; i++) {
+      s = scenes[i];
+      /* Cheap cull: a scene more than three-quarters of a screen away is not touched at all. */
+      var near = s.top - y < h * 0.75 && s.top + s.height - y > -h * 0.25;
       if (!near) {
         if (s.visible) {
           s.visible = false;
-          s.mount.classList.remove('is-live');
+          s.mount.classList.remove('is-live', 'is-front');
+          if (s.section) s.section.classList.remove('is-near');
         }
         continue;
       }
       if (!s.visible) {
         s.visible = true;
         s.mount.classList.add('is-live');
+        if (s.section) s.section.classList.add('is-near');
       }
+
+      var dist = Math.abs(s.top + s.height / 2 - mid);
+      if (dist < bestDist) { bestDist = dist; front = s; }
+
       /* 0 as the scene's top reaches the bottom of the screen, 1 as its bottom leaves the top. */
       var p = (y + h - s.top) / (h + s.height);
       p = p < 0 ? 0 : p > 1 ? 1 : p;
@@ -187,6 +205,12 @@
         L.last = shift;
         L.node.style.transform = 'translate3d(0,' + shift + '%,0)';
       }
+    }
+
+    if (front !== Stage._front) {
+      if (Stage._front) Stage._front.mount.classList.remove('is-front');
+      if (front) front.mount.classList.add('is-front');
+      Stage._front = front;
     }
   }
 
