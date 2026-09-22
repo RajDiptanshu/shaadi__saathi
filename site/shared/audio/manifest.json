@@ -1,0 +1,42 @@
+{
+  "_comment": [
+    "The studio's shared audio library. Every invitation reads its loop from here rather than carrying",
+    "its own copy, so a track is encoded once and reused.",
+    "",
+    "`clearedForClientWork` is the field that matters. A track is only true when its licence actually",
+    "permits use in a product sold to a third party — Pixabay Content License, CC0, or something bought",
+    "outright. A track licensed for nothing, or licensed only for the couple's own personal page, is",
+    "false, and must not be put on an invitation built for a paying client.",
+    "",
+    "Encoding target: 57-90 s, MP3, under 650 KB, no leading or trailing silence, short fade into the",
+    "loop point. tools/audio-loop.mjs does this."
+  ],
+  "tracks": [
+    {
+      "id": "sai-pallavi-intro-amaran",
+      "file": "sai-pallavi-intro-amaran.mp3",
+      "title": "Sai Pallavi's Intro (From \"Amaran\")",
+      "composer": "G. V. Prakash Kumar",
+      "rightsHolder": "Sony Music Entertainment India",
+      "source": "Supplied by the couple, 2026-09-22",
+      "licence": "None held. Commercial recording, all rights reserved.",
+      "clearedForClientWork": false,
+      "clearedForClientWorkReason": [
+        "No licence is held for this recording. It is on Nidhi and Diptanshu's own invitation at their",
+        "explicit request and on their own decision — a private page shared by link with their own",
+        "guests. That is their call to make about their own wedding.",
+        "",
+        "It must not be reused on an invitation sold to a client. That would be redistributing a",
+        "commercial recording as part of a paid product, which is a different act with a different",
+        "exposure: the client carries the risk, and the studio put it there.",
+        "",
+        "For client work, use a track with clearedForClientWork: true, or licence this one from the",
+        "publisher."
+      ],
+      "durationSec": 57.3,
+      "bytes": 573440,
+      "encoded": "88 kbps joint stereo, trailing 3.4 s of silence trimmed, 0.5 s fade into the loop",
+      "usedBy": ["baidyanath"]
+    }
+  ]
+}

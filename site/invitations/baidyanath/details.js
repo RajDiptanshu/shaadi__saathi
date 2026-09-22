@@ -118,9 +118,11 @@ window.INVITE = {
     }
   },
 
-  /* engine/sound.js reads this. `src` is deliberately empty: no licensed audio file has been chosen
-     yet, and the player stays hidden until one is. Drop an mp3 in assets/audio/ and set the path. */
-  music: { src: '', volume: 0.5, loopStart: 0, loopLength: 0 },
+  /* engine/sound.js reads this. The file lives in the studio's shared audio library rather than in
+     this invitation, so one encode serves every design; tools/deploy-<slug>.mjs stages it alongside.
+     Supplied by the couple and used at their request — see the licence note against this track in
+     site/shared/audio/manifest.json before reusing it anywhere else. */
+  music: { src: '../../shared/audio/sai-pallavi-intro-amaran.mp3', volume: 0.45, loopStart: 0, loopLength: 0 },
 
   contact: {
     name: { en: 'Sagar', hi: 'सागर' },

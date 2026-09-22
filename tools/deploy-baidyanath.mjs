@@ -7,6 +7,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const design = path.join(root, 'site', 'invitations', 'baidyanath');
 const engine = path.join(root, 'site', 'engine');
+const shared = path.join(root, 'site', 'shared');
 const out = path.join(root, 'vercel-baidyanath');
 
 // The staging folder is rebuilt every time, but .vercel (the project link) is kept.
@@ -18,13 +19,21 @@ for (const entry of await fs.readdir(out)) {
 
 await fs.cp(design, out, { recursive: true });
 await fs.cp(engine, path.join(out, 'engine'), { recursive: true });
+// The shared audio library, so a track is encoded once and every invitation reads the same file.
+await fs.cp(shared, path.join(out, 'shared'), { recursive: true });
 
-// The design sits two levels down in the repo and at the root here, so the engine path changes.
-const indexPath = path.join(out, 'index.html');
-const html = await fs.readFile(indexPath, 'utf8');
-const fixed = html.replace(/\.\.\/\.\.\/engine\//g, 'engine/');
-if (/\.\.\//.test(fixed)) throw new Error('index.html still points outside the site root');
-await fs.writeFile(indexPath, fixed);
+// The design sits two levels down in the repo and at the root here, so both the engine path and the
+// shared-library path change. details.js is rewritten too, because that is where the music loop's
+// path lives.
+for (const file of ['index.html', 'details.js']) {
+  const p = path.join(out, file);
+  const text = await fs.readFile(p, 'utf8');
+  const fixed = text
+    .replace(/\.\.\/\.\.\/engine\//g, 'engine/')
+    .replace(/\.\.\/\.\.\/shared\//g, 'shared/');
+  if (/\.\.\//.test(fixed)) throw new Error(`${file} still points outside the site root`);
+  await fs.writeFile(p, fixed);
+}
 
 await fs.writeFile(path.join(out, 'vercel.json'), JSON.stringify({
   cleanUrls: true,
