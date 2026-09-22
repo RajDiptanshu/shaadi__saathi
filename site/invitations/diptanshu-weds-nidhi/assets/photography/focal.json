@@ -27,11 +27,25 @@
       "y": 0.42
     }
   },
-  "P05": {
-    "name": "engagement-glimpse",
+  "P06": {
+    "name": "mehndi-ring",
+    "focal": {
+      "x": 0.55,
+      "y": 0.45
+    }
+  },
+  "P07": {
+    "name": "groom-tilak",
     "focal": {
       "x": 0.5,
-      "y": 0.42
+      "y": 0.4
+    }
+  },
+  "P08": {
+    "name": "ring-rose",
+    "focal": {
+      "x": 0.55,
+      "y": 0.45
     }
   }
 }

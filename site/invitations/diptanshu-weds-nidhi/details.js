@@ -110,7 +110,6 @@ window.INVITE = {
       hi: 'कुछ बातें महीनों की तैयारी माँगती हैं, और कुछ मन बस जान लेता है। यह दोनों है। चौबीस तारीख़ को हम चाहते हैं कि हमारी कहानी का हिस्सा रहा हर व्यक्ति हमारे साथ इस कमरे में हो — जल्दी आइए, देर तक रुकिए, और सोच से कहीं ज़्यादा खाइए।'
     },
 
-    galleryEyebrow: { en: 'Memories', hi: 'यादें' },
     galleryTitle: { en: 'Engagement Glimpse', hi: 'सगाई की झलक' },
 
     venueTitle: { en: 'Looking forward to seeing you', hi: 'आपकी प्रतीक्षा में' },
@@ -130,12 +129,17 @@ window.INVITE = {
   music: { src: '../../shared/audio/sai-pallavi-intro-amaran.mp3', volume: 0.45, loopStart: 0, loopLength: 0 },
 
   contact: {
+    name: { en: 'Mukul', hi: 'मुकुल' },
+    tel: 'tel:+918210264373',
+    display: '+91 82102 64373'
+  },
+  contact2: {
     name: { en: 'Sagar', hi: 'सागर' },
     tel: 'tel:+917045352214',
     display: '+91 70453 52214'
   },
 
-  /* The couple's five photographs, in the order they asked for them, each appearing exactly once and
+  /* The couple's seven photographs, in the order they asked for them, each appearing exactly once and
      all of them in a single gallery rather than scattered down the page.
      No `focal` here: the gallery mounts each picture whole inside a square mat instead of cropping it,
      because p03 has the bride standing at the left and the groom sitting at the right and no portrait
@@ -163,9 +167,19 @@ window.INVITE = {
         caption: { en: 'Still laughing', hi: 'अब भी हँसते हुए' }
       },
       {
-        src: 'assets/photography/p05-engagement-glimpse',
-        alt: { en: 'Nidhi and Diptanshu lying close together and laughing, seen through blurred fingers held up to the camera.', hi: 'कैमरे के सामने धुंधली उँगलियों से झलकते, पास लेटे हँसते हुए निधि और दीप्तांशु।' },
-        caption: { en: 'Close and laughing', hi: 'पास, हँसते हुए' }
+        src: 'assets/photography/p06-mehndi-ring',
+        alt: { en: "Nidhi's mehndi-covered hands folded together, the ring and watch caught in the pattern.", hi: 'मेहंदी रचे हाथ, अंगूठी और घड़ी के साथ एक-दूसरे में जुड़े हुए।' },
+        caption: { en: 'The ring', hi: 'अंगूठी' }
+      },
+      {
+        src: 'assets/photography/p07-groom-tilak',
+        alt: { en: 'Diptanshu with the tilak, eyes lowered in a quiet moment.', hi: 'तिलक लगाए, आँखें झुकाए एक शांत पल में दीप्तांशु।' },
+        caption: { en: 'A quiet moment', hi: 'एक शांत पल' }
+      },
+      {
+        src: 'assets/photography/p08-ring-rose',
+        alt: { en: 'The engagement ring resting inside a red rose.', hi: 'एक लाल गुलाब के भीतर रखी सगाई की अंगूठी।' },
+        caption: { en: 'Where it began', hi: 'जहाँ से शुरुआत हुई' }
       }
     ]
   },
