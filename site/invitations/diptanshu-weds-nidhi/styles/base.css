@@ -1,0 +1,160 @@
+/* Lal & Sona · base: page, type roles, metal, reveals. */
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; font-synthesis: none; background: var(--night); }
+body {
+  margin: 0;
+  color: var(--on-dark);
+  background: var(--night);
+  font: 400 16px/25px var(--f-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html.js.is-open body, html.js.is-still body { overflow-x: hidden; overflow-y: auto; }
+img, svg { max-width: none; }
+p, h1, h2, h3, figure, blockquote { margin: 0; }
+a { color: inherit; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── type roles ─────────────────────────────────────────────────────────────────────────────────
+   Italiana is drawn for large wide caps and collapses below about 24px, so it never sets anything
+   small. Cormorant reads the paragraphs, Jost does the work of labels and numbers. */
+
+.display {
+  font-family: var(--f-display);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+}
+html[data-lang="hi"] .display { text-transform: none; letter-spacing: 0; line-height: 1.24; }
+
+.script { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: .01em; }
+
+.label {
+  font-family: var(--f-text);
+  font-size: var(--label);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+html[data-lang="hi"] .label { letter-spacing: .08em; text-transform: none; }
+
+.info { font-family: var(--f-text); font-size: var(--info); font-weight: 400; line-height: 1.7; }
+.prose { font-family: var(--f-serif); font-size: clamp(17px, 4.4vw, 22px); line-height: 1.58; }
+.soft { color: var(--on-dark-soft); }
+.deva { font-family: var(--f-deva); font-weight: 500; }
+
+/* ── metal ──────────────────────────────────────────────────────────────────────────────────────
+   A flat metallic colour always reads as beige. What reads as metal is the gradient running across
+   the letterform, and the highlight travelling along it. */
+.foil, .foil-gold {
+  background-size: 260% 100%;
+  background-position: 12% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* Gold is the metal on this page, so both foils are gold. --foil-rose is kept for anything set on
+   a cream panel, where a crimson foil reads and a gold one goes muddy — but on the red grounds that
+   carry most of the page a rose foil simply disappears into the cloth. */
+.foil, .foil-gold { background-image: var(--foil-gold); }
+.sheet .foil { background-image: var(--foil-rose); }
+html.motion-ok .foil, html.motion-ok .foil-gold { animation: foil-sweep 7s var(--e-light) infinite; }
+@keyframes foil-sweep {
+  0%   { background-position: 6% 0; }
+  50%  { background-position: 94% 0; }
+  100% { background-position: 6% 0; }
+}
+/* Safari drops the fill to transparent before the webfont has decoded, which flashes an empty
+   heading. Holding the real colour until the face is ready costs nothing. */
+html:not(.fonts-ready) .foil, html:not(.fonts-ready) .foil-gold {
+  -webkit-text-fill-color: currentColor; color: var(--gold-light);
+}
+
+/* A hairline in metal, used to separate and to frame. */
+.rule { display: block; height: 1px; border: 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .8; }
+.rule--gold { background: linear-gradient(90deg, transparent, var(--marigold), transparent); }
+.rule--v { width: 1px; height: var(--s6); background: linear-gradient(180deg, var(--gold), transparent); margin-inline: auto; }
+
+/* ── paper laid on the dark ─────────────────────────────────────────────────────────────────── */
+.sheet {
+  position: relative;
+  background: linear-gradient(168deg, var(--cream-warm), var(--cream) 52%, var(--cream-deep));
+  color: var(--ink);
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .7), 0 2px 0 rgba(255, 255, 255, .5) inset;
+}
+.sheet .label { color: var(--gold-deep); }
+.sheet .soft { color: var(--ink-soft); }
+.sheet .display { color: var(--maroon); }
+
+/* Frosted glass, for panels that must sit over photography or a live background. */
+.glass {
+  background: rgba(42, 5, 17, .52);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(244, 208, 111, .26);
+}
+
+/* ── reveals ────────────────────────────────────────────────────────────────────────────────────
+   Content is always in the DOM and readable without motion; motion adds the fade and the rise.
+   House rule: every guest gets the full motion, so there is no prefers-reduced-motion branch here —
+   ?rm=1 is a test switch only. */
+[data-reveal] { transition: opacity 1s ease, transform 1.15s var(--e-settle), filter 1s ease; transition-delay: var(--d, 0s); }
+.can-reveal [data-reveal]:not(.is-in) { opacity: 0; transform: translate3d(0, 34px, 0); }
+html.motion-reduced [data-reveal] { transition-duration: .45s; }
+html.motion-reduced .can-reveal [data-reveal]:not(.is-in) { transform: none; }
+
+/* A heavier entrance for the things that should feel like they arrive. */
+.can-reveal [data-reveal="lift"]:not(.is-in) { opacity: 0; transform: translate3d(0, 56px, 0) scale(.96); filter: blur(6px); }
+.can-reveal [data-reveal="wide"]:not(.is-in) { opacity: 0; transform: none; letter-spacing: .34em; filter: blur(4px); }
+[data-reveal="wide"] { transition: opacity 1.3s ease, letter-spacing 1.5s var(--e-settle), filter 1.1s ease; }
+
+/* Word-by-word. scenes/02-sections.js splits [data-words] into spans. */
+.word { display: inline-block; }
+.can-reveal [data-words]:not(.is-in) .word { opacity: 0; transform: translate3d(0, .6em, 0); }
+[data-words] .word {
+  transition: opacity .8s ease, transform .9s var(--e-settle);
+  transition-delay: calc(var(--w, 0) * 46ms);
+}
+html.motion-reduced [data-words] .word { transition-delay: calc(var(--w, 0) * 14ms); transform: none; }
+
+/* Letters, for the masthead only — one element per letter so the names assemble rather than fade. */
+.char { display: inline-block; white-space: pre; }
+.can-reveal [data-chars]:not(.is-in) .char { opacity: 0; transform: translate3d(0, .5em, 0) rotate(3deg); }
+[data-chars] .char {
+  transition: opacity .7s ease, transform 1s var(--e-settle);
+  transition-delay: calc(var(--c, 0) * 34ms);
+}
+
+/* The page is injected from details.js, so it stays hidden until the guest steps in; otherwise a
+   full screen of text arrives at once and is scored as a layout shift. */
+html.js:not(.is-open):not(.is-still) .invitation { visibility: hidden; }
+html.js:not(.is-open) .studio-tag { display: none; }
+
+/* ── the two floating controls ──────────────────────────────────────────────────────────────── */
+.lang {
+  background: rgba(42, 5, 17, .72);
+  border: 1px solid rgba(244, 208, 111, .32);
+  backdrop-filter: blur(10px);
+}
+.lang button {
+  font-family: var(--f-text); font-size: 12px; font-weight: 500; letter-spacing: .1em;
+  color: var(--on-dark-soft);
+}
+.lang button[aria-pressed="true"] { background: var(--gold); color: #2A0511; }
+.sound {
+  color: var(--night);
+  background: linear-gradient(140deg, var(--gold-light), var(--gold));
+  border: 1px solid rgba(255, 243, 224, .4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+}

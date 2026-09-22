@@ -1,0 +1,495 @@
+/* Lal & Sona · scenes.
+
+   The page alternates: a built full-bleed background, then a panel of cream or glass laid on top of it,
+   then the next background. The dark ground is what makes the gold and the light read as expensive;
+   the panels are where anything long enough to actually read gets set. */
+
+.scene { position: relative; padding: var(--s7) var(--margin); }
+.scene-inner { position: relative; z-index: 2; max-width: 660px; margin: 0 auto; }
+.centred { text-align: center; }
+
+/* ══ the drawn ornament ════════════════════════════════════════════════════════════════════════
+   Anything with pathLength="1" draws over the same normalised 0 → 1, so a 40px flourish and a 900px
+   vine take the same time without either being hand-tuned. --o staggers a shape against its siblings. */
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+html.motion-ok .is-in .draw,
+html.motion-ok .drawn .draw { animation: draw-on 1.7s var(--e-settle) forwards; animation-delay: calc(var(--o, 0) * .2s); }
+@keyframes draw-on { to { stroke-dashoffset: 0; } }
+/* Without frames the final state must still be the drawn one, or the page arrives with no ornament. */
+html:not(.motion-ok) .draw { stroke-dashoffset: 0; }
+
+/* Leaves and blossoms are filled, not stroked, so they fade and settle rather than draw. */
+.leaf, .bloom, .arch-sprig, .mono-sprig, .vine-leaf, .vine-bloom, .arch-key, .deco-key, .valance-tassel {
+  opacity: 0;
+  transition: opacity .9s ease, transform 1s var(--e-settle);
+  transition-delay: calc(var(--o, 0) * .2s + .35s);
+}
+.is-in .leaf, .is-in .bloom, .is-in .arch-sprig, .is-in .mono-sprig,
+.is-in .vine-leaf, .is-in .vine-bloom, .is-in .arch-key, .is-in .deco-key, .is-in .valance-tassel,
+.drawn .leaf, .drawn .bloom, .drawn .arch-sprig, .drawn .mono-sprig,
+.drawn .vine-leaf, .drawn .vine-bloom, .drawn .arch-key, .drawn .deco-key, .drawn .valance-tassel { opacity: 1; }
+html:not(.motion-ok) .leaf, html:not(.motion-ok) .bloom, html:not(.motion-ok) .arch-sprig,
+html:not(.motion-ok) .mono-sprig, html:not(.motion-ok) .vine-leaf, html:not(.motion-ok) .vine-bloom,
+html:not(.motion-ok) .arch-key, html:not(.motion-ok) .deco-key, html:not(.motion-ok) .valance-tassel { opacity: 1; }
+
+/* Ornament colours. Gold is the metal. Marigold and magenta are the accents, held back for the
+   invocation, the numerals and the flower hearts so they still mean something when they appear. */
+.mono-ring        { stroke: var(--gold-light); stroke-width: 1.6; }
+.mono-ring--inner { stroke: var(--gold); stroke-width: .8; opacity: .72; }
+/* Placed by measurement (Orn.centre), so nothing here tries to centre them. Sized so the pair sits
+   well inside the ring — the previous mark filled it edge to edge and looked cramped. */
+.mono-letters     { font-family: var(--f-display); font-size: 58px; fill: var(--gold-light); letter-spacing: .02em; }
+.mono-amp         { font-family: var(--f-serif); font-style: italic; font-size: 30px; fill: var(--gold); }
+.leaf-blade       { fill: var(--gold); }
+.leaf-rib         { stroke: rgba(42, 5, 17, .42); stroke-width: 1; }
+.leaf--mono .leaf-blade { fill: var(--gold-light); }
+.bloom-petal      { fill: var(--gold-pale); }
+.bloom-heart      { fill: var(--turmeric); }
+.vine-stem        { stroke: var(--gold); stroke-width: 2.2; stroke-linecap: round; }
+.arch-line        { stroke: var(--gold-light); stroke-width: 1.6; }
+.arch-line--thin  { stroke: var(--gold); stroke-width: .8; opacity: .6; }
+.arch-diamond, .deco-diamond { fill: var(--turmeric); }
+.deco-line        { stroke: var(--gold); stroke-width: 1; opacity: .8; }
+.corner-line      { stroke: var(--gold); stroke-width: 1.2; }
+.cue-line         { stroke: var(--gold-light); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* On a cream sheet the metal has to darken or it disappears. */
+.sheet .leaf-blade { fill: var(--gold-deep); }
+.sheet .bloom-petal { fill: var(--gold); }
+.sheet .bloom-heart { fill: var(--magenta); }
+.sheet .corner-line, .sheet .deco-line { stroke: var(--gold-deep); }
+.sheet .deco-diamond { fill: var(--magenta); }
+
+/* ══ the built backgrounds ═════════════════════════════════════════════════════════════════════
+   Layers are stacked and each is slid by its own depth as the page scrolls (scenes/stage.js). They are
+   oversized so travel never drags an edge into frame. */
+.world { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.world-layer {
+  position: absolute;
+  /* Travel is vertical only (stage.js writes translate3d(0, y, 0)), so the extra width was pure
+     backing store — 14% of every promoted layer, for nothing. Height keeps its margin for the slide. */
+  left: 0; top: -12%; width: 100%; height: 128%;
+  /* engine.css carries `img, svg { max-width: 100% }` and loads after base.css, which silently clamped
+     every layer back to the width of its scene and cancelled the horizontal travel. */
+  max-width: none;
+  display: block;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+/* will-change goes to the one scene nearest the middle of the screen — never to every live scene.
+   Each layer is 116% x 128% of a full-screen section, so at DPR 3 one costs about 16 MB of backing
+   store; twenty at once came to roughly 250 MB, and iOS answers that by discarding the tab and
+   reloading. The neighbours still move, they are just not held in video memory while they do. */
+.world.is-front .world-layer { will-change: transform; }
+
+/* Offscreen scenes skip rendering entirely. Each carries an intrinsic size so the scrollbar and the
+   scroll position stay honest while their contents are not being laid out. */
+.stage:not(.is-near) { content-visibility: auto; contain-intrinsic-size: auto 100svh; }
+
+.stage { position: relative; overflow: hidden; isolation: isolate; }
+.stage > .scene-inner, .stage > .stage-words { position: relative; z-index: 3; }
+.stage-scrim { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.stage-scrim--foot   { background: linear-gradient(0deg, rgba(42, 5, 17, .94) 2%, rgba(42, 5, 17, .55) 30%, transparent 62%); }
+.stage-scrim--centre { background: radial-gradient(70% 50% at 50% 50%, rgba(42, 5, 17, .82), rgba(42, 5, 17, .42) 60%, transparent 86%); }
+.stage-scrim--even   { background: linear-gradient(180deg, rgba(42, 5, 17, .7), rgba(42, 5, 17, .35) 40%, rgba(42, 5, 17, .78)); }
+
+/* The falling petals, leaves and dust. One canvas per field. */
+.fall-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.opening .fall-field { z-index: 6; }
+.fall-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.invitation > .fall-field { position: fixed; z-index: 4; opacity: .9; }
+
+/* ══ Scene 00 · the threshold ═══════════════════════════════════════════════════════════════════
+   Two panels of crimson silk meet in the middle under a scalloped valance, vines climb both edges, and
+   the monogram draws itself in rose gold. The touch sweeps the silk apart and walks the camera through. */
+.opening {
+  position: fixed; inset: 0; z-index: 60;
+  display: grid; place-items: center; overflow: hidden;
+  background: #2A0511;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: opacity .8s ease;
+}
+html.is-open .opening { opacity: 0; pointer-events: none; }
+.opening-frame { position: relative; width: 100%; height: 100%; overflow: hidden; }
+
+/* the two panels of silk */
+.silk { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.silk-panel {
+  position: absolute; top: 0; bottom: 0; width: 51.5%;
+  background:
+    repeating-linear-gradient(94deg, rgba(0, 0, 0, .16) 0 2px, rgba(255, 255, 255, .05) 2px 5px, transparent 5px 46px),
+    linear-gradient(102deg, #3A0713 0%, #67142B 26%, #A31A35 46%, #5B1124 64%, #33060F 100%);
+  box-shadow: 0 0 90px -10px rgba(0, 0, 0, .8);
+  transition: transform 2.2s var(--e-camera);
+}
+.silk-left  { left: 0;  transform-origin: left center; }
+.silk-right { right: 0; transform-origin: right center; }
+/* the seam where they meet, and the light behind it */
+.silk-left::after, .silk-right::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 70px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .34) 60%, rgba(0, 0, 0, .6));
+}
+.silk-left::after  { right: 0; }
+.silk-right::after { left: 0; transform: scaleX(-1); }
+html.is-pressing .silk-left  { transform: translate3d(-104%, 0, 0) skewY(1.4deg); }
+html.is-pressing .silk-right { transform: translate3d(104%, 0, 0) skewY(-1.4deg); }
+
+/* the scalloped valance across the top */
+.valance-wrap {
+  position: absolute; top: 0; left: -1%; width: 102%; height: clamp(136px, 33vw, 230px);
+  z-index: 5; pointer-events: none; transform-origin: 50% 0;
+  transition: transform 2s var(--e-camera), opacity 1.2s ease;
+}
+html.is-pressing .valance-wrap { transform: translate3d(0, -72%, 0) scale(1.08); opacity: 0; }
+.valance { width: 100%; height: 100%; }
+.valance-cloth { fill: url(#valance-grad); }
+.valance-hem   { stroke: var(--gold-light); stroke-width: 2.5; opacity: .9; }
+.tassel-cord   { stroke: var(--gold); stroke-width: 2; }
+.tassel-head   { fill: var(--gold); }
+.tassel-bead   { fill: var(--gold-light); }
+html.motion-ok .valance-tassel { animation: tassel-sway 4.6s ease-in-out infinite alternate; transform-origin: 50% 0; }
+.valance-tassel:nth-child(even) { animation-delay: -2.1s; }
+@keyframes tassel-sway { from { transform: rotate(-2.4deg); } to { transform: rotate(2.6deg); } }
+
+/* vines climbing both edges, behind the silk */
+.vine-wrap {
+  position: absolute; top: 0; bottom: 0; width: clamp(80px, 22vw, 150px);
+  z-index: 4; pointer-events: none;
+  transition: transform 2s var(--e-camera), opacity 1.4s ease;
+}
+.vine-wrap .vine { width: 100%; height: 100%; }
+.vine-left  { left: 0; }
+.vine-right { right: 0; }
+html.is-pressing .vine-left  { transform: translate3d(-60%, 0, 0); opacity: 0; }
+html.is-pressing .vine-right { transform: translate3d(60%, 0, 0); opacity: 0; }
+
+/* the light that blooms through the parting silk */
+.bloom-light {
+  position: absolute; inset: 0; z-index: 7; pointer-events: none; opacity: 0;
+  background: radial-gradient(46% 34% at 50% 46%, rgba(255, 244, 232, .92), rgba(244, 208, 111, .32) 44%, transparent 76%);
+  transition: opacity 1.6s var(--e-light);
+}
+html.is-pressing .bloom-light { opacity: 1; }
+
+.opening-stage {
+  position: absolute; inset: 0; z-index: 8;
+  display: grid; align-content: center; justify-items: center; gap: var(--s4);
+  padding: calc(var(--s8) + env(safe-area-inset-top, 0px)) var(--margin) calc(var(--s7) + env(safe-area-inset-bottom, 0px));
+  /* The ring is drawn to the edge of its box and its sprigs overflow it, so the eyebrow below needs
+     clearance from the *drawing*, not from the element. */
+  text-align: center;
+  transition: transform 2.2s var(--e-camera), opacity 1.2s ease .4s;
+}
+html.is-opening .opening-stage { transform: scale(1.22); opacity: 0; }
+
+.mono-wrap {
+  width: clamp(146px, 42vw, 228px); height: clamp(146px, 42vw, 228px);
+  opacity: 0; transform: scale(.82);
+  transition: opacity 1.1s ease, transform 1.4s var(--e-settle);
+}
+html.threshold-drawn .mono-wrap { opacity: 1; transform: none; }
+.monogram { width: 100%; height: 100%; }
+html.motion-ok .mono-wrap { animation: mono-breathe 6s ease-in-out 2s infinite; }
+@keyframes mono-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+
+.opening-eyebrow { margin-top: var(--s4); color: var(--gold-light); opacity: 0; transition: opacity 1s ease .5s; }
+.opening-names { display: grid; justify-items: center; gap: 4px; }
+.opening-name {
+  font-family: var(--f-display); font-size: var(--title); line-height: 1;
+  letter-spacing: .06em; text-transform: uppercase;
+  opacity: 0; transform: translate3d(0, 20px, 0);
+  transition: opacity 1.2s ease, transform 1.3s var(--e-settle);
+}
+.opening-join { font-family: var(--f-serif); font-style: italic; font-size: var(--line); color: var(--gold-light); opacity: 0; transition: opacity 1s ease .8s; }
+.opening-when { max-width: 30ch; color: var(--on-dark-soft); letter-spacing: .11em; font-size: clamp(10px, 2.9vw, 12px); line-height: 1.7; text-transform: uppercase; opacity: 0; transition: opacity 1s ease .95s; }
+.opening-rule { width: 120px; opacity: 0; transition: opacity 1s ease .7s; }
+
+html.threshold-drawn .opening-eyebrow,
+html.threshold-drawn .opening-join,
+html.threshold-drawn .opening-rule,
+html.threshold-drawn .opening-when { opacity: 1; }
+html.threshold-drawn .opening-name { opacity: 1; transform: none; }
+html.threshold-drawn .opening-name:nth-of-type(1) { transition-delay: .5s; }
+html.threshold-drawn .opening-name:nth-of-type(2) { transition-delay: .68s; }
+
+.opening-hint {
+  margin-top: var(--s4);
+  padding: 15px 34px;
+  font-family: var(--f-text); font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+  color: #2A0511;
+  background: linear-gradient(120deg, var(--gold-light), var(--gold-pale) 40%, var(--gold) 100%);
+  border: 0; border-radius: 999px; cursor: pointer;
+  opacity: 0; transform: translate3d(0, 12px, 0);
+  transition: opacity .8s ease 1.1s, transform .8s var(--e-settle) 1.1s;
+  animation: hint-breathe 2.9s ease-in-out 2.4s infinite;
+}
+html.threshold-drawn .opening-hint { opacity: 1; transform: none; }
+@keyframes hint-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 208, 111, .46); }
+  60%      { box-shadow: 0 0 0 20px rgba(244, 208, 111, 0); }
+}
+html.is-pressing .opening-hint { animation: none; }
+.opening-hint:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+.opening-hint:focus:not(:focus-visible) { outline: none; }
+
+@media (max-height: 740px) {
+  .opening-stage { gap: var(--s3); padding-top: var(--s7); }
+  .mono-wrap { width: clamp(112px, 30vw, 156px); height: clamp(112px, 30vw, 156px); }
+  .opening-hint { margin-top: var(--s3); padding: 13px 28px; }
+  .valance-wrap { height: clamp(112px, 26vw, 168px); }
+}
+
+/* ══ Scene 01 · the hero ════════════════════════════════════════════════════════════════════════ */
+.hero { min-height: 100svh; padding: 0; display: grid; align-items: center; }
+.hero-words {
+  position: relative; z-index: 3;
+  width: 100%; max-width: 640px; margin: 0 auto;
+  padding: var(--s8) var(--margin) calc(var(--s7) + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+}
+/* The arch is drawn around the names rather than behind a picture — it is the frame the couple stand in. */
+/* The arch frames the whole block of names rather than sitting behind one line of it, so it is sized
+   from the words and pinned to their centre. Its legs run off the bottom of the scene on purpose. */
+/* Anchored from the foot of the block rather than the top: the arch is only a little wider than the
+   longest name, so its crown has to clear the names rather than pass through them. Measured at 375px,
+   this puts the apex just above the eyebrow and the springing points beside the second name. */
+.hero-arch {
+  position: absolute; left: 50%; top: auto; bottom: 9%; transform: translateX(-50%);
+  width: min(94vw, 440px); height: auto; z-index: -1; pointer-events: none;
+}
+/* The arch is only about 90px of half-width at the height the eyebrow sits at, so the eyebrow has to
+   be narrower than that or the curve runs straight through the lettering. Tracking, not position, is
+   what was wrong: moving it down only pushed the arch down with it. */
+.hero-eyebrow { margin-top: var(--s4); margin-bottom: var(--s5); font-size: 11px; letter-spacing: .2em; }
+.hero-name { display: block; font-size: var(--masthead); white-space: nowrap; }
+html[data-lang="hi"] .hero-name { white-space: normal; }
+.hero-join {
+  display: block; margin: var(--s2) 0;
+  font-family: var(--f-serif); font-style: italic; font-size: var(--line); color: var(--gold-light);
+}
+.hero-when { margin-top: var(--s5); display: grid; gap: 6px; letter-spacing: .2em; font-size: 12px; text-transform: uppercase; color: var(--on-dark-soft); }
+.hero-when b { font-weight: 400; }
+html[data-lang="hi"] .hero-when { letter-spacing: .04em; text-transform: none; }
+.hero-cue { display: block; width: 22px; height: 34px; margin: var(--s6) auto 0; }
+html.motion-ok .hero-cue { animation: cue-nudge 2.6s ease-in-out 2s infinite; }
+@keyframes cue-nudge { 0%, 100% { transform: translateY(0); opacity: .75; } 55% { transform: translateY(9px); opacity: 1; } }
+
+/* ══ Scene 02 · the invocation ═════════════════════════════════════════════════════════════════ */
+.invocation { padding-top: var(--s8); padding-bottom: var(--s8); }
+.invocation-panel {
+  max-width: 520px; margin: 0 auto; padding: var(--s7) var(--s5);
+  border-radius: 4px; text-align: center;
+}
+.sanskrit { font-family: var(--f-deva); font-size: clamp(22px, 5.6vw, 32px); font-weight: 600; line-height: 1.66; }
+.invocation-line { margin-top: var(--s4); font-family: var(--f-serif); font-style: italic; font-size: var(--line); color: var(--on-dark-soft); }
+.invocation .deco { display: block; width: 190px; margin: var(--s5) auto 0; }
+
+/* ══ Scene 03 · the card ═══════════════════════════════════════════════════════════════════════ */
+.card { padding-top: var(--s7); padding-bottom: var(--s8); }
+.card-sheet {
+  position: relative; max-width: 600px; margin: 0 auto; padding: var(--s8) var(--s5);
+  text-align: center; border-radius: 3px;
+}
+.card-corner { position: absolute; width: 58px; height: 58px; }
+.card-corner.tl { top: 14px; left: 14px; }
+.card-corner.tr { top: 14px; right: 14px; transform: scaleX(-1); }
+.card-corner.bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
+.card-corner.br { bottom: 14px; right: 14px; transform: scale(-1); }
+
+.card-hosts   { font-family: var(--f-serif); font-size: var(--line); color: var(--maroon); font-weight: 600; }
+.card-invite  { margin-top: var(--s3); font-family: var(--f-serif); font-size: clamp(16px, 4.2vw, 19px); line-height: 1.6; color: var(--ink-soft); }
+.card-couple  { margin: var(--s6) 0; }
+.card-name    { font-size: var(--title); }
+.card-join    { display: block; margin: var(--s2) 0; font-family: var(--f-serif); font-style: italic; font-size: var(--line); color: var(--gold); }
+.card-relation{ margin-top: var(--s5); font-family: var(--f-serif); font-size: clamp(15px, 4vw, 18px); color: var(--ink-soft); }
+.card-parents { margin-top: var(--s1); font-family: var(--f-serif); font-size: var(--line); font-weight: 600; color: var(--maroon); }
+.card-presence{ margin-top: var(--s5); font-family: var(--f-serif); font-size: clamp(16px, 4.2vw, 19px); line-height: 1.6; color: var(--ink); }
+.card-cue     { margin-top: var(--s6); }
+.card .deco   { display: block; width: 200px; margin: var(--s5) auto; }
+.cue-arrow    { display: block; width: 22px; height: 34px; margin: var(--s3) auto 0; }
+.sheet .cue-line { stroke: var(--gold-deep); }
+html.motion-ok .cue-arrow { animation: cue-nudge 2.6s ease-in-out infinite; }
+
+/* ══ Scene 04 · the ribbon ═════════════════════════════════════════════════════════════════════ */
+.ribbon {
+  position: relative; z-index: 2;
+  padding: var(--s4) 0; overflow: hidden;
+  background: linear-gradient(90deg, #2A0511, #67142B 50%, #2A0511);
+  border-top: 1px solid rgba(244, 208, 111, .34);
+  border-bottom: 1px solid rgba(244, 208, 111, .34);
+}
+.ribbon-track { display: flex; width: max-content; will-change: transform; }
+html.motion-ok .ribbon-track { animation: ribbon 38s linear infinite; }
+@keyframes ribbon { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+.ribbon-item {
+  display: flex; align-items: center; gap: var(--s4); padding-right: var(--s4);
+  font-family: var(--f-display); font-size: clamp(18px, 4.6vw, 26px);
+  letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  color: var(--gold-light);
+}
+html[data-lang="hi"] .ribbon-item { text-transform: none; letter-spacing: .02em; font-family: var(--f-deva); }
+.ribbon-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--turmeric); flex: none; }
+
+/* ══ Scene 05 · the day ════════════════════════════════════════════════════════════════════════ */
+.day { min-height: 104svh; display: grid; align-content: center; padding-top: var(--s8); padding-bottom: var(--s8); }
+.day-card { max-width: 480px; margin: var(--s5) auto 0; padding: var(--s7) var(--s5); border-radius: 4px; text-align: center; }
+.day-name  { font-family: var(--f-display); font-size: clamp(26px, 7vw, 44px); letter-spacing: .05em; text-transform: uppercase; line-height: 1.05; }
+html[data-lang="hi"] .day-name { text-transform: none; letter-spacing: 0; }
+.day-when  { margin-top: var(--s2); font-family: var(--f-serif); font-size: var(--line); }
+.day-venue { margin-top: var(--s4); font-family: var(--f-text); font-size: var(--info); line-height: 1.7; color: var(--on-dark-soft); }
+.day-venue strong { color: var(--on-dark); font-weight: 500; }
+.day-card .deco { display: block; width: 180px; margin: var(--s4) auto; }
+.day-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s6); }
+
+.action {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 50px; padding: 0 24px;
+  font-family: var(--f-text); font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-light); text-decoration: none;
+  background: transparent; border: 1px solid rgba(244, 208, 111, .5); border-radius: 999px; cursor: pointer;
+  transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s var(--e-settle);
+}
+html[data-lang="hi"] .action { letter-spacing: .04em; text-transform: none; }
+.action:hover, .action:focus-visible { background: var(--gold); color: #2A0511; border-color: var(--gold); transform: translateY(-2px); }
+.action--solid {
+  color: #2A0511; border-color: transparent;
+  background: linear-gradient(120deg, var(--gold-light), var(--gold-pale) 40%, var(--gold));
+}
+.action--solid:hover, .action--solid:focus-visible { filter: brightness(1.08); }
+
+/* ══ Scene 07 · the countdown ══════════════════════════════════════════════════════════════════ */
+.count { min-height: 100svh; display: grid; align-content: center; padding-top: var(--s8); padding-bottom: var(--s8); text-align: center; }
+.count-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s2); max-width: 540px; margin: var(--s7) auto 0; }
+.count-cell { display: grid; gap: var(--s3); }
+.count-num {
+  font-family: var(--f-display); font-size: var(--numeral); line-height: 1; letter-spacing: .02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+}
+.count-cell + .count-cell { border-left: 1px solid rgba(244, 208, 111, .26); }
+.count-grid .label { font-size: 10px; letter-spacing: .2em; color: var(--on-dark-soft); }
+.count .deco { display: block; width: 200px; margin: var(--s6) auto 0; }
+
+/* ══ Scene 10 · the note ═══════════════════════════════════════════════════════════════════════ */
+.note { padding-top: var(--s8); padding-bottom: var(--s8); text-align: center; }
+.note-wrap { position: relative; width: min(92vw, 520px); margin: var(--s5) auto 0; }
+.scallop { display: block; width: 100%; height: auto; }
+.scallop-face  { fill: var(--cream); }
+.scallop-edge  { stroke: var(--gold); stroke-width: 1.6; }
+.scallop-inner { stroke: var(--gold-deep); stroke-width: .8; opacity: .45; }
+.note-inner { position: absolute; inset: 13% 15%; display: grid; align-content: center; gap: var(--s4); }
+.note-bloom { display: block; width: 44px; height: 44px; margin: 0 auto; }
+.note-bloom .bloom-petal { fill: var(--marigold); }
+.note-bloom .bloom-heart { fill: var(--magenta); }
+.note-body { font-family: var(--f-serif); font-size: clamp(16px, 4.2vw, 21px); line-height: 1.52; color: var(--ink); }
+.note-sign { font-family: var(--f-serif); font-style: italic; font-size: clamp(15px, 3.9vw, 19px); color: var(--gold-deep); }
+
+/* ══ Scene 12 · the venue ══════════════════════════════════════════════════════════════════════ */
+.venue { min-height: 92svh; display: grid; align-content: center; padding-top: var(--s8); padding-bottom: var(--s8); text-align: center; }
+.venue-panel { max-width: 540px; margin: var(--s5) auto 0; padding: var(--s7) var(--s5); border-radius: 4px; }
+.venue-name { font-family: var(--f-display); font-size: var(--title); letter-spacing: .05em; text-transform: uppercase; }
+html[data-lang="hi"] .venue-name { text-transform: none; letter-spacing: 0; }
+.venue-address { margin-top: var(--s3); color: var(--on-dark-soft); }
+.venue-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s6); }
+
+/* ══ Scene 13 · closing ════════════════════════════════════════════════════════════════════════ */
+.closing {
+  position: relative; overflow: hidden;
+  padding-top: var(--s8); padding-bottom: calc(var(--s8) + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+}
+.closing-line { max-width: 520px; margin: 0 auto; font-family: var(--f-serif); font-style: italic; font-size: var(--line); line-height: 1.5; color: var(--on-dark); }
+.closing-contact { margin-top: var(--s7); }
+.closing-name { margin-top: var(--s2); font-family: var(--f-display); font-size: var(--line); letter-spacing: .08em; text-transform: uppercase; }
+html[data-lang="hi"] .closing-name { text-transform: none; letter-spacing: 0; }
+.closing .deco { display: block; width: 210px; margin: 0 auto var(--s6); }
+.credits { margin-top: var(--s8); font-size: 11px; line-height: 18px; letter-spacing: .04em; color: rgba(255, 243, 224, .42); }
+
+/* ══ the seams between scenes ══════════════════════════════════════════════════════════════════
+   Each background is clipped to its own section, so two different worlds meeting produced a hard
+   horizontal line across the page. A short fade to the page's own ground at the top and foot of every
+   stage dissolves the join without dimming the middle of the scene. */
+.stage::before, .stage::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 88px; z-index: 2; pointer-events: none;
+}
+.stage::before { top: 0; background: linear-gradient(180deg, #2A0511, rgba(42, 5, 17, 0)); }
+.stage::after  { bottom: 0; background: linear-gradient(0deg, #2A0511, rgba(42, 5, 17, 0)); }
+/* The hero opens the page and the closing ends it, so neither needs a join painted above it. */
+.hero::before, .closing::after { display: none; }
+
+/* ══ the photo gallery ═════════════════════════════════════════════════════════════════════════
+   One matted card at a time with its neighbours peeking in, a counter on the mount, and a pill of
+   arrows and dots below.
+
+   The mount is square and the photograph sits inside it with `contain`. The couple's set is three
+   landscapes and one portrait, and the widest has the bride standing left and the groom sitting far
+   right — any crop tight enough to make a consistent portrait card loses one of them. A fixed mount
+   with the picture whole inside it is how a mounted print actually behaves, and it is the mount, not
+   the crop, that makes four photographs from four different rooms look like one set. */
+.gallery { position: relative; margin-top: var(--s6); }
+
+/* The stage is wider than a slide, so the cards either side show at the edges. */
+.gal-stage { overflow: hidden; padding: 0 7%; margin: 0 -7%; }
+.gal-track {
+  display: flex;
+  transition: transform .82s var(--e-settle);
+  will-change: transform;
+  touch-action: pan-y;            /* the carousel takes sideways drags, the page keeps vertical ones */
+}
+.gal-slide {
+  flex: 0 0 100%; margin: 0; padding: 0 5px;
+  opacity: .34; transform: scale(.9);
+  transition: opacity .7s ease, transform .82s var(--e-settle);
+}
+.gal-slide.is-on { opacity: 1; transform: none; }
+
+.gal-mat {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: grid; place-items: center;
+  padding: 14px 14px 38px;
+  background: linear-gradient(168deg, var(--cream-warm), var(--cream) 54%, var(--cream-deep));
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .8);
+}
+/* The hairline inside the mount, which is what makes it read as a mount rather than a white box. */
+.gal-mat::before {
+  content: ''; position: absolute; inset: 8px 8px 32px; border: 1px solid rgba(212, 160, 23, .55); pointer-events: none;
+}
+.gal-frame { width: 100%; height: 100%; display: grid; place-items: center; overflow: hidden; }
+.gal-frame picture { display: contents; }
+.gal-frame img {
+  max-width: 100%; max-height: 100%; width: auto; height: auto; display: block;
+  object-fit: contain;
+  /* the same grade the rest of the page puts on photographs */
+  filter: saturate(1.12) contrast(1.05) brightness(1.02);
+}
+.gal-count {
+  position: absolute; left: 0; right: 0; bottom: 11px; z-index: 2; text-align: center;
+  font-family: var(--f-text); font-size: 10px; font-weight: 500; letter-spacing: .3em;
+  color: var(--gold-deep);
+}
+.gal-caption { margin-top: var(--s4); text-align: center; min-height: 1.5em; color: var(--gold-light); }
+
+/* the pill of arrows and dots */
+.gal-nav { display: flex; align-items: center; justify-content: center; gap: var(--s4); margin-top: var(--s5); }
+.gal-arrow {
+  display: grid; place-items: center; width: 46px; height: 46px; padding: 0; flex: none;
+  color: var(--gold-light); background: rgba(42, 5, 17, .5);
+  border: 1px solid rgba(244, 208, 111, .42); border-radius: 50%; cursor: pointer;
+  transition: background .3s ease, color .3s ease, transform .3s var(--e-settle);
+}
+.gal-arrow:hover, .gal-arrow:focus-visible { background: var(--gold); color: var(--night); transform: translateY(-2px); }
+.chev { width: 17px; height: 17px; }
+.chev-line { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.gal-dots { display: flex; align-items: center; gap: 9px; }
+.gal-dot {
+  width: 7px; height: 7px; padding: 0; flex: none;
+  background: rgba(244, 208, 111, .34); border: 0; border-radius: 99px; cursor: pointer;
+  transition: width .4s var(--e-settle), background .4s ease;
+}
+.gal-dot.is-on { width: 26px; background: var(--gold-light); }
+
+@media (min-width: 720px) {
+  .gal-stage { padding: 0 16%; margin: 0 -16%; }
+  .gal-mat { padding: 20px 20px 44px; }
+}
