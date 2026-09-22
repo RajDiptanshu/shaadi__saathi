@@ -258,6 +258,35 @@
         ],
         "pattern": "photography/p04-red-lehenga-{w}.{ext}"
       }
+    },
+    {
+      "id": "P05",
+      "kind": "photograph",
+      "name": "engagement-glimpse",
+      "role": "Close-up through blurred fingers; the gallery's fifth frame",
+      "licence": "in-house",
+      "credit": "The couple",
+      "source": {
+        "where": "supplied by the couple",
+        "added": "2026-09-23"
+      },
+      "edits": [
+        "warm grade to sit on the page stock",
+        "no painting: these are photographs and stay photographs"
+      ],
+      "files": {
+        "widths": [
+          1080,
+          1440,
+          1920
+        ],
+        "formats": [
+          "avif",
+          "webp",
+          "jpg"
+        ],
+        "pattern": "photography/p05-engagement-glimpse-{w}.{ext}"
+      }
     }
   ]
 }

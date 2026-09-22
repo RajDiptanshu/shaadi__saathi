@@ -106,7 +106,7 @@ window.INVITE = {
     },
 
     galleryEyebrow: { en: 'Memories', hi: 'यादें' },
-    galleryTitle: { en: 'Photo Gallery', hi: 'तस्वीरें' },
+    galleryTitle: { en: 'Engagement Glimpse', hi: 'सगाई की झलक' },
 
     venueTitle: { en: 'Looking forward to seeing you', hi: 'आपकी प्रतीक्षा में' },
     venueLine: { en: 'Vioray Inn is on Netaji Subash Road, a few minutes from Tower Chowk.', hi: 'वियोरे इन नेताजी सुभाष रोड पर, टावर चौक से कुछ ही मिनट की दूरी पर है।' },
@@ -125,12 +125,12 @@ window.INVITE = {
   music: { src: '../../shared/audio/sai-pallavi-intro-amaran.mp3', volume: 0.45, loopStart: 0, loopLength: 0 },
 
   contact: {
-    name: { en: 'Sagar', hi: 'सागर' },
-    tel: 'tel:+918603751674',
-    display: '+91 86037 51674'
+    name: { en: 'Mukul', hi: 'मुकुल' },
+    tel: 'tel:+918210264373',
+    display: '+91 82102 64373'
   },
 
-  /* The couple's four photographs, in the order they asked for them, each appearing exactly once and
+  /* The couple's five photographs, in the order they asked for them, each appearing exactly once and
      all of them in a single gallery rather than scattered down the page.
      No `focal` here: the gallery mounts each picture whole inside a square mat instead of cropping it,
      because p03 has the bride standing at the left and the groom sitting at the right and no portrait
@@ -156,6 +156,11 @@ window.INVITE = {
         src: 'assets/photography/p02-corridor',
         alt: { en: 'Nidhi and Diptanshu laughing together in a corridor.', hi: 'गलियारे में साथ हँसते निधि और दीप्तांशु।' },
         caption: { en: 'Still laughing', hi: 'अब भी हँसते हुए' }
+      },
+      {
+        src: 'assets/photography/p05-engagement-glimpse',
+        alt: { en: 'Nidhi and Diptanshu lying close together and laughing, seen through blurred fingers held up to the camera.', hi: 'कैमरे के सामने धुंधली उँगलियों से झलकते, पास लेटे हँसते हुए निधि और दीप्तांशु।' },
+        caption: { en: 'Close and laughing', hi: 'पास, हँसते हुए' }
       }
     ]
   },
