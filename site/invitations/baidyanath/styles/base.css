@@ -33,7 +33,12 @@ a { color: inherit; }
   text-transform: uppercase;
   color: var(--on-dark);
 }
-html[data-lang="hi"] .display { text-transform: none; letter-spacing: 0; line-height: 1.24; }
+/* 1.24 was tuned for Latin caps' tight vertical rhythm and clips the top of a Devanagari matra
+   (ि ी ॅ ौ …) — worse still where .display is also .foil, because background-clip: text bounds its
+   fill to the line box, so the clipped-off matra ink doesn't even show through as overflow the way
+   plain-coloured text's does. 1.35 is the floor for display-sized Devanagari; see
+   devanagari-web-typography. */
+html[data-lang="hi"] .display { text-transform: none; letter-spacing: 0; line-height: 1.4; }
 
 .script { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: .01em; }
 

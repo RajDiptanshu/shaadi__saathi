@@ -117,7 +117,15 @@
       node.setAttribute('data-split-of', text);
       node.textContent = '';
 
-      var parts = cls === 'word' ? text.split(/\s+/) : text.split('');
+      /* A per-character span breaks Devanagari: a matra (ि ी ॅ ौ …) only shapes correctly attached
+         to the consonant before it, and `.char` is `display: inline-block` (base.css) so that
+         attachment cannot happen across two boxes — the mark renders alone, against the wrong base,
+         which is wrong text on the page rather than merely a lost flourish. So in Hindi a "letter"
+         reveal falls back to one span for the whole name, same as `[data-words]` falls back to a
+         whole word: the browser's own shaper keeps every conjunct intact because nothing has cut the
+         run apart. See devanagari-web-typography. */
+      var perChar = cls === 'char' && Invite.lang !== 'hi';
+      var parts = cls === 'word' ? text.split(/\s+/) : perChar ? text.split('') : [text];
       parts.forEach(function (part, i) {
         var span = document.createElement('span');
         span.className = cls;
@@ -129,8 +137,8 @@
     });
   }
   function splitWords() { splitInto('[data-words]', 'word', '--w'); }
-  /* Letters only on the masthead. Splitting a paragraph per character would put a thousand nodes on a
-     phone for no visible gain. */
+  /* Letters only on the masthead, and only in scripts a per-letter split does not corrupt. Splitting a
+     paragraph per character would also put a thousand nodes on a phone for no visible gain. */
   function splitChars() { splitInto('[data-chars]', 'char', '--c'); }
 
   /* ---- the running ribbon ---------------------------------------------------------------------- */

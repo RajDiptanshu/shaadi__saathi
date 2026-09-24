@@ -129,8 +129,10 @@ window.INVITE = {
     display: '+91 86037 51674'
   },
 
-  /* The couple's seven photographs, in the order they asked for them, each appearing exactly once and
-     all of them in a single gallery rather than scattered down the page.
+  /* The couple's photographs, each appearing exactly once and all of them in a single gallery rather
+     than scattered down the page. Kept to the first three of the seven originally supplied — a longer
+     carousel was adding weight (more originals staged into the build, more slides for the drag/keys
+     logic to track) for photographs past the ones the couple actually wanted to lead with.
      No `focal` here: the gallery mounts each picture whole inside a square mat instead of cropping it,
      because p03 has the bride standing at the left and the groom sitting at the right and no portrait
      crop holds both. */
@@ -150,26 +152,6 @@ window.INVITE = {
         src: 'assets/photography/p04-red-lehenga',
         alt: { en: 'Nidhi in a red lehenga, Diptanshu seated beside her in cream.', hi: 'लाल लहंगे में निधि, पास बैठे क्रीम शेरवानी में दीप्तांशु।' },
         caption: { en: 'Getting ready', hi: 'तैयारी' }
-      },
-      {
-        src: 'assets/photography/p02-corridor',
-        alt: { en: 'Nidhi and Diptanshu laughing together in a corridor.', hi: 'गलियारे में साथ हँसते निधि और दीप्तांशु।' },
-        caption: { en: 'Still laughing', hi: 'अब भी हँसते हुए' }
-      },
-      {
-        src: 'assets/photography/p06-mehndi-ring',
-        alt: { en: "Nidhi's mehndi-covered hands folded together, the ring and watch caught in the pattern.", hi: 'मेहंदी रचे हाथ, अंगूठी और घड़ी के साथ एक-दूसरे में जुड़े हुए।' },
-        caption: { en: 'The ring', hi: 'अंगूठी' }
-      },
-      {
-        src: 'assets/photography/p07-groom-tilak',
-        alt: { en: 'Diptanshu with the tilak, eyes lowered in a quiet moment.', hi: 'तिलक लगाए, आँखें झुकाए एक शांत पल में दीप्तांशु।' },
-        caption: { en: 'A quiet moment', hi: 'एक शांत पल' }
-      },
-      {
-        src: 'assets/photography/p08-ring-rose',
-        alt: { en: 'The engagement ring resting inside a red rose.', hi: 'एक लाल गुलाब के भीतर रखी सगाई की अंगूठी।' },
-        caption: { en: 'Where it began', hi: 'जहाँ से शुरुआत हुई' }
       }
     ]
   },

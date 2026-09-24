@@ -17,19 +17,26 @@
 
   /* ---- a marigold ----------------------------------------------------------------------------------
      Concentric rings of small petals rather than a flat disc. At the sizes these are drawn a disc reads
-     as a dot, and the whole garland turns into a string of beads. */
+     as a dot, and the whole garland turns into a string of beads.
+
+     6 + 4 + 1 rather than 11 + 7 + 1: GARLAND hangs about 330 of these down the frame (five far strings
+     alone are ~200), so this one shape count is multiplied into several thousand SVG circles for a
+     single world — the heaviest of the four backgrounds by a wide margin, and content-visibility only
+     asks a budget phone's GPU to rasterise all of it at once when the "day" scene comes near. Fewer
+     petals per flower still reads as a marigold at these sizes; it is the flower COUNT that carries the
+     garland, not the petal count. See budget-phone-invite-performance. */
   function marigold(g, c, cx, cy, r, tone) {
     var outer = tone[0], inner = tone[1], heart = tone[2];
     var i, a;
-    for (i = 0; i < 11; i++) {
-      a = (Math.PI * 2 * i) / 11;
+    for (i = 0; i < 6; i++) {
+      a = (Math.PI * 2 * i) / 6;
       g.appendChild(c.el('circle', {
         cx: c.f1(cx + Math.cos(a) * r * 0.66), cy: c.f1(cy + Math.sin(a) * r * 0.66),
         r: c.f1(r * 0.40), fill: outer
       }));
     }
-    for (i = 0; i < 7; i++) {
-      a = (Math.PI * 2 * i) / 7 + 0.4;
+    for (i = 0; i < 4; i++) {
+      a = (Math.PI * 2 * i) / 4 + 0.4;
       g.appendChild(c.el('circle', {
         cx: c.f1(cx + Math.cos(a) * r * 0.34), cy: c.f1(cy + Math.sin(a) * r * 0.34),
         r: c.f1(r * 0.34), fill: inner
@@ -105,12 +112,17 @@
         }
       },
       /* Gold zari caught in the light. Static, and part of the cloth — the dust that moves is on the
-         canvas in scenes/petals.js and falls in front of everything. */
+         canvas in scenes/petals.js and falls in front of everything.
+
+         26 rather than 52: two radial-gradient circles per speck, four instances of this layer on the
+         page (hero, invocation, card, note), so the count is what a budget phone's GPU has to
+         rasterise in one pass the moment content-visibility lifts on each. Halved, the density still
+         reads as caught light — see budget-phone-invite-performance. */
       {
         depth: 0.44, build: function (g, defs, c) {
           var r = c.rng(31);
           var halo = c.radial([[0, '#F4D06F', 0.9], [1, '#F4D06F', 0]]);
-          for (var i = 0; i < 52; i++) {
+          for (var i = 0; i < 26; i++) {
             var x = 120 + r() * 760, y = 200 + r() * 1180, s = 1.4 + r() * 4.6;
             g.appendChild(c.el('circle', { cx: c.f1(x), cy: c.f1(y), r: c.f1(s * 3.4), fill: halo, opacity: c.f1(0.12 + r() * 0.18) }));
             g.appendChild(c.el('circle', { cx: c.f1(x), cy: c.f1(y), r: c.f1(s), fill: '#FFF0C2', opacity: c.f1(0.26 + r() * 0.46) }));
@@ -220,10 +232,13 @@
           }));
         }
       },
-      { depth: 0.18, build: orbs(120, 5, 16, 0.18, 0.34, '#F4D06F', 9) },
-      { depth: 0.40, build: orbs(52, 14, 34, 0.16, 0.30, '#FFC93C', 23) },
-      { depth: 0.64, build: orbs(22, 34, 76, 0.12, 0.24, '#FFB627', 51) },
-      { depth: 0.88, build: orbs(9, 80, 165, 0.06, 0.14, '#FFDD9E', 87) }
+      /* Counts halved from the first pass (120/52/22/9): four bands of overlapping radial-gradient
+         orbs over a full-bleed canvas is the heaviest fill-rate cost of any world here, and DIYA only
+         needs to read as lamplight, not be counted. See budget-phone-invite-performance. */
+      { depth: 0.18, build: orbs(60, 5, 16, 0.18, 0.34, '#F4D06F', 9) },
+      { depth: 0.40, build: orbs(28, 14, 34, 0.16, 0.30, '#FFC93C', 23) },
+      { depth: 0.64, build: orbs(14, 34, 76, 0.12, 0.24, '#FFB627', 51) },
+      { depth: 0.88, build: orbs(6, 80, 165, 0.06, 0.14, '#FFDD9E', 87) }
     ]
   };
 
@@ -294,12 +309,12 @@
           });
         }
       },
-      /* Gold dust through the middle distance. */
+      /* Gold dust through the middle distance. 24 rather than 44 — see the SILK zari layer above. */
       {
         depth: 0.5, build: function (g, defs, c) {
           var r = c.rng(61);
           var halo = c.radial([[0, '#F4D06F', 0.85], [1, '#F4D06F', 0]]);
-          for (var i = 0; i < 44; i++) {
+          for (var i = 0; i < 24; i++) {
             var x = 60 + r() * 880, y = 120 + r() * 1300, sz = 1.2 + r() * 4;
             g.appendChild(c.el('circle', { cx: c.f1(x), cy: c.f1(y), r: c.f1(sz * 3.6), fill: halo, opacity: c.f1(0.10 + r() * 0.16) }));
             g.appendChild(c.el('circle', { cx: c.f1(x), cy: c.f1(y), r: c.f1(sz), fill: '#FFF0C2', opacity: c.f1(0.24 + r() * 0.42) }));

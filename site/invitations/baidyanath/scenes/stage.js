@@ -175,8 +175,17 @@
 
     for (i = 0; i < scenes.length; i++) {
       s = scenes[i];
-      /* Cheap cull: a scene more than three-quarters of a screen away is not touched at all. */
-      var near = s.top - y < h * 0.75 && s.top + s.height - y > -h * 0.25;
+      /* Cheap cull: a scene more than two screens away is not touched at all.
+
+         Ahead is two full screens, not one — because "near" is also what lifts a scene's
+         content-visibility: auto (base.css, `.stage:not(.is-near)`), and that is the switch that
+         makes the browser lay out and rasterise the scene's SVG background for the first time. Each
+         background is 100–200 overlapping gradient shapes; on a modern GPU that is unmeasurable, but
+         on the weak fill-rate of a budget Android GPU it can take seconds. At a screen of lead time
+         that cost lands in the middle of the user's swipe and reads as the page freezing. Two screens
+         of lead time moves it earlier, while the guest is still reading the previous scene, so the
+         browser has idle frames to spend it in rather than paying it all at once mid-gesture. */
+      var near = s.top - y < h * 2 && s.top + s.height - y > -h * 0.25;
       if (!near) {
         if (s.visible) {
           s.visible = false;
