@@ -172,6 +172,7 @@
     var y = Stage.scrollY, h = Stage.vh, i, s;
     var mid = y + h / 2;
     var front = null, bestDist = Infinity;
+    var resync = false;   // a scene's real height just changed under it — see below
 
     for (i = 0; i < scenes.length; i++) {
       s = scenes[i];
@@ -191,13 +192,29 @@
           s.visible = false;
           s.mount.classList.remove('is-live', 'is-front');
           if (s.section) s.section.classList.remove('is-near');
+          resync = true;   // collapsing back to contain-intrinsic-size changes this scene's height
         }
         continue;
       }
       if (!s.visible) {
         s.visible = true;
         s.mount.classList.add('is-live');
-        if (s.section) s.section.classList.add('is-near');
+        resync = true;   // expanding out of content-visibility changes this scene's height
+        if (s.section) {
+          s.section.classList.add('is-near');
+          /* `.stage:not(.is-near)` (base.css) collapses to `contain-intrinsic-size: auto 100svh` — one
+             generic estimate for eight scenes whose real heights range from about .7 to 1.4 screens.
+             Reading the true height right after lifting content-visibility (this classList.add just
+             forced it) and pinning that as the collapse size means the *next* time this same scene
+             scrolls behind and re-collapses, the document does not change height at all. Without this,
+             every scene a guest scrolls past keeps shrinking out from under them by however wrong the
+             100svh guess was for it — which is the page "snapping" or being "pushed" while scrolling
+             that was reported after the tier-cull margin widened (more scenes now cross this boundary
+             behind the reader instead of only ahead of them). One forced layout read per scene's first
+             reveal, not per frame. */
+          var trueHeight = s.section.getBoundingClientRect().height;
+          if (trueHeight) s.section.style.containIntrinsicSize = 'auto ' + Math.round(trueHeight) + 'px';
+        }
       }
 
       var dist = Math.abs(s.top + s.height / 2 - mid);
@@ -220,6 +237,22 @@
       if (Stage._front) Stage._front.mount.classList.remove('is-front');
       if (front) front.mount.classList.add('is-front');
       Stage._front = front;
+    }
+
+    /* A scene that just crossed the near/not-near boundary changed its own height (a fresh
+       content-visibility reveal grows to its real size before contain-intrinsic-size has been pinned
+       above; a collapse this same frame, on a scene whose height was never pinned, shrinks). That
+       shifts the document position of every scene below it — so `top`, cached once by Stage.onMeasure
+       and otherwise only refreshed on resize, is now wrong for all of them, and would misjudge the
+       near boundary for scenes further down until the next resize happened to fix it by accident.
+       Re-reading every scene's box now, once, keeps that cache honest without forcing a layout on
+       frames where nothing toggled. */
+    if (resync) {
+      for (i = 0; i < scenes.length; i++) {
+        var box = scenes[i].mount.getBoundingClientRect();
+        scenes[i].top = box.top + y;
+        scenes[i].height = box.height || 1;
+      }
     }
   }
 
